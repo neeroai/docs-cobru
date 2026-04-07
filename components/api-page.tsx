@@ -1,6 +1,9 @@
 import { openapi } from "@/lib/openapi";
 import { createAPIPage } from "fumadocs-openapi/ui";
 
-// APIPage renders the interactive OpenAPI reference
-// Initialized at module level — requires fumadocs-openapi + shiki
-export const APIPage = createAPIPage(openapi);
+const RawAPIPage = createAPIPage(openapi);
+
+// Wraps RawAPIPage with the default document so MDX can call <APIPage /> without props
+export function APIPage() {
+  return <RawAPIPage document="./openapi/cobru.yaml" />;
+}

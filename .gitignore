@@ -12,6 +12,9 @@ dist/
 # Fumadocs generated
 .source/
 
+# External symlink — outside project root, breaks Tailwind v4 source scanning
+docs-global
+
 # Environment
 .env
 .env.local
