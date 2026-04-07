@@ -7,5 +7,6 @@ export const source = loader({
   i18n: {
     defaultLanguage: "en",
     languages: ["en", "es"],
+    parser: "dir", // content lives in en/ and es/ subdirectories
   },
 });

@@ -203,9 +203,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaymentResponse'
         '400':
-          description: |
-            Validation error. Common cause: `payment_method_enabled` sent as object instead of JSON string.
+          description: Validation error. Common cause — `payment_method_enabled` sent as object instead of JSON string.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: payment_method_enabled must be a JSON string
         '403':
-          description: |
-            Auth error OR validation error (misleading HTTP code).
-            Common causes: missing `payer_redirect_url`, missing `callback`, invalid `payment_method_enabled`.
+          description: Auth error or validation error (misleading HTTP code). Common causes — missing `payer_redirect_url`, missing `callback`, invalid `payment_method_enabled`.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: Authentication credentials were not provided.

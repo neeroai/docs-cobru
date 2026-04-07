@@ -4,7 +4,7 @@ import { getLLMText } from "@/lib/llm-text";
 export const dynamic = "force-dynamic";
 
 export function GET() {
-  const pages = source.getPages();
+  const pages = source.getPages("en");
   const sections = pages.map((page) => getLLMText(page));
 
   const header = `# Cobru API Documentation\n\nComplete documentation for the Cobru payment API.\nGenerated: ${new Date().toISOString()}\n\n`;

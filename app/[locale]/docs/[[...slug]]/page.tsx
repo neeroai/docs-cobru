@@ -7,6 +7,7 @@ import {
   DocsTitle,
 } from "fumadocs-ui/layouts/docs/page";
 import { createRelativeLink } from "fumadocs-ui/mdx";
+import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -16,6 +17,7 @@ interface Props {
 
 export default async function Page({ params }: Props) {
   const { locale, slug } = await params;
+  setRequestLocale(locale);
   const page = source.getPage(slug, locale);
   if (!page) notFound();
 
@@ -37,11 +39,16 @@ export default async function Page({ params }: Props) {
 }
 
 export async function generateStaticParams() {
-  return source.generateParams();
+  // generateParams with i18n returns { slug, locale } for all locales.
+  // Exclude api/reference — APIPage (OpenAPI playground) must render dynamically.
+  return source
+    .generateParams("slug", "locale")
+    .filter((p) => (p.slug as string[])?.join("/") !== "api/reference");
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
+  setRequestLocale(locale);
   const page = source.getPage(slug, locale);
   if (!page) notFound();
 
