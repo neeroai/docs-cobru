@@ -1,87 +1,171 @@
 # AGENTS.md - docs-cobru
 
-Version: 1.0 | Date: 2026-04-07
+Version: 2.0 | Date: 2026-04-07
 
 ---
 
-## SESSION_START
+## SESSION START
 
-Al iniciar sesión en este repo:
+When starting work in this repo, read in this order:
 
-1. Leer `.claude/status.md` — estado actual del sistema
-2. Leer `.claude/session.md` — contexto de la sesión anterior
-3. Leer `.claude/plan.md` — fase activa y bloqueantes
-4. Leer `CLAUDE.md` — stack, gotchas, estructura
+1. `.claude/status.md`
+2. `.claude/session.md`
+3. `.claude/plan.md`
+4. `CLAUDE.md`
 
----
-
-## Stack
-
-| Layer           | Tool                 | Version | Notas                                       |
-| --------------- | -------------------- | ------- | ------------------------------------------- |
-| Framework       | Next.js              | ^16.0.0 | Turbopack por defecto en dev y build        |
-| Docs UI         | fumadocs-ui          | 16.7.10 | Peer dep exige Next.js 16.x                 |
-| i18n routing    | next-intl            | ^4.0.0  | Middleware en `proxy.ts` (no middleware.ts) |
-| OpenAPI         | fumadocs-openapi     | 10.6.6  |                                             |
-| CSS             | Tailwind v4          | ^4.2.2  | Requiere postcss.config.mjs                 |
-| CSS processor   | @tailwindcss/postcss | ^4.2.2  | devDependency — imprescindible              |
-| Package manager | bun                  | 1.x     | `bun run dev` / `bun run build`             |
-| Deploy          | Vercel               | -       | región gru1, buildCommand `bun run build`   |
-| Linter          | Biome                | ^1.9.0  | `bun run lint`                              |
+Do not skip this sequence. It contains the active system status, previous-session continuity, active plan, and technical invariants.
 
 ---
 
-## Fuentes de verdad
+## Repo Intent
 
-| Contenido                | Ubicación                              |
-| ------------------------ | -------------------------------------- |
-| OpenAPI spec             | `openapi/cobru.yaml`                   |
-| Learnings de integración | `docs/cobru-api-learnings.md`          |
-| Guía BRE-B / QR          | `docs/cobru-breb-qr-integration.md`    |
-| Research QR/BRE-B        | `docs/cobru-qr-bre-b-deep-research.md` |
-| Design tokens            | `tokens/source/primitives.tokens.json` |
-| Docs content EN          | `content/docs/en/`                     |
-| Docs content ES          | `content/docs/es/`                     |
+This repo powers the public Cobru developer docs at `docs.cobru.co`.
 
----
-
-## Comandos
-
-| Acción    | Comando                                            |
-| --------- | -------------------------------------------------- |
-| Dev       | `bun run dev`                                      |
-| Build     | `bun run build` (`NODE_ENV=production next build`) |
-| Typecheck | `bun run typecheck`                                |
-| Lint      | `bun run lint`                                     |
+Goals:
+- bilingual docs (`en` / `es`)
+- API developer-first information architecture
+- interactive OpenAPI reference
+- LLM-friendly outputs (`/llms.txt`, `/llms-full.txt`)
+- stable Fumadocs core usage without unsupported layout hacks
 
 ---
 
-## Rutas del proyecto
+## Current Architecture
 
-| Ruta                         | Tipo                        | Archivo                                  |
-| ---------------------------- | --------------------------- | ---------------------------------------- |
-| `/[locale]`                  | SSG                         | `app/[locale]/page.tsx`                  |
-| `/[locale]/docs/[[...slug]]` | SSG (excepto api/reference) | `app/[locale]/docs/[[...slug]]/page.tsx` |
-| `/api/search`                | Dynamic                     | `app/api/search/route.ts`                |
-| `/llms.txt`                  | Dynamic                     | `app/llms.txt/route.ts`                  |
-| `/llms-full.txt`             | Dynamic                     | `app/llms-full.txt/route.ts`             |
-
----
-
-## Invariantes críticas
-
-- `lib/source.ts` debe tener `parser: "dir"` — sin esto fumadocs no encuentra el contenido
-- `components/api-page.tsx` debe pasar `document="./openapi/cobru.yaml"` a `RawAPIPage`
-- `app/globals.css` debe tener `@source not "./docs-global/**"` — symlink local apunta fuera del project root
-- `app/[locale]/docs/[[...slug]]/page.tsx` debe excluir `api/reference` de `generateStaticParams`
-- `postcss.config.mjs` es requerido — Turbopack no procesa Tailwind v4 de forma nativa
+| Area | Implementation |
+| ---- | -------------- |
+| App framework | Next.js 16 App Router |
+| Docs layout | Fumadocs Notebook Layout |
+| Content source | `content/docs` via `fumadocs-mdx` |
+| Locale model | `next-intl` with `proxy.ts` |
+| Search | static search endpoint at `/api/search` |
+| API reference | `fumadocs-openapi` over `openapi/cobru.yaml` |
+| Tokens | CSS vars + token JSON under `styles/tokens` and `tokens/source` |
 
 ---
 
-## Git / GitHub
+## Commands
 
-| Campo              | Valor                         |
-| ------------------ | ----------------------------- |
-| Repo               | `neeroai/docs-cobru` (public) |
-| Rama principal     | `main`                        |
-| Vercel integration | Auto-deploy en push a main    |
+| Action | Command |
+| ------ | ------- |
+| Dev | `bun run dev` |
+| Build | `bun run build` |
+| Start | `bun run start` |
+| Typecheck | `bun run typecheck` |
+| Lint | `bun run lint` |
+| Format | `bun run format` |
+| Validate OpenAPI | `bun run openapi:validate` |
+| Strict OpenAPI validation | `bun run openapi:validate:strict` |
+| Sync Stoplight export | `bun run openapi:sync` |
+
+---
+
+## Routing
+
+| Route | Type | Notes |
+| ----- | ---- | ----- |
+| `/[locale]` | SSG | locale landing redirect/entry |
+| `/[locale]/docs/[[...slug]]` | SSG except API playground | docs pages |
+| `/[locale]/docs/api/reference` | dynamic at runtime path level | excluded from `generateStaticParams` |
+| `/api/search` | dynamic route returning static search index | `staticGET` |
+| `/llms.txt` | static with revalidation | 1 hour |
+| `/llms-full.txt` | static with revalidation | 1 hour |
+
+---
+
+## Directory Map
+
+| Path | Purpose |
+| ---- | ------- |
+| `app/` | Next.js routes, layouts, metadata routes |
+| `components/` | MDX registry, API reference wrapper |
+| `content/docs/` | public docs content in English and Spanish |
+| `docs/` | internal research and source materials |
+| `.captures/` | screenshots of Cobru menu/UI used to infer product scope |
+| `lib/` | source loader, layout config, OpenAPI setup, site config |
+| `openapi/` | local spec + operational README |
+| `scripts/` | scraping, compiling, syncing, and validating support scripts |
+| `styles/tokens/` | CSS token layers |
+| `tokens/source/` | token source JSON |
+
+---
+
+## Content Model Rules
+
+- Public docs content lives under `content/docs/en` and `content/docs/es`.
+- Route groups are intentional:
+  - `(01-introduction)`
+  - `(02-api)`
+  - `(03-guides)`
+- Keep English and Spanish structures aligned.
+- Prefer adding `meta.json` for grouping, order, and icons rather than depending on implicit folder order.
+- Use official Fumadocs MDX components where possible; avoid custom content widgets unless necessary.
+
+---
+
+## OpenAPI Rules
+
+- `openapi/cobru.yaml` is a curated working spec, not yet the final official export.
+- Every new endpoint added to the spec should carry honest verification context where useful.
+- Do not silently upgrade a `legacy-doc` or `menu-only` contract to “verified” without fresh evidence.
+- Run `bun run openapi:validate` after modifying the spec.
+- Run `bun run build` after modifying the spec because the OpenAPI UI must still render.
+
+---
+
+## Critical Invariants
+
+- `lib/source.ts` must keep `parser: "dir"`.
+- `components/api-page.tsx` must bind the document path explicitly.
+- `app/[locale]/docs/[[...slug]]/page.tsx` must continue excluding `api/reference` from static params.
+- `proxy.ts` is the correct filename for `next-intl` in Next.js 16.
+- `postcss.config.mjs` must remain present.
+- `app/globals.css` must keep the `@source not "./docs-global/**"` exclusion.
+- Do not replace the Notebook layout shell with unsupported CSS structure overrides.
+
+---
+
+## Preferred Documentation Style
+
+- Lead with working code when the contract is known.
+- Show expected responses directly below request examples.
+- Put quirks in warnings, not hidden prose.
+- Be explicit about verification state.
+- Avoid marketing copy inside API pages.
+- Cross-link related pages aggressively:
+  - quickstart → auth → webhooks → reference
+  - payments ↔ BRE-B guide
+  - errors/testing from every risky integration path
+
+---
+
+## Safe Working Defaults
+
+- If a request changes docs content only, keep implementation within `content/docs`, `openapi`, `README.md`, `CLAUDE.md`, `AGENTS.md`, or supporting docs unless code changes are required.
+- If a request touches layout, prefer supported Fumadocs APIs first:
+  - layout props
+  - `meta.json`
+  - MDX components
+  - tokens / CSS variables
+- Treat `.captures/` and `docs/` as internal source material, not public truth by themselves.
+
+---
+
+## Git / Deployment
+
+| Field | Value |
+| ----- | ----- |
+| Repo | `neeroai/docs-cobru` |
+| Default branch | `main` |
+| Deployment target | Vercel |
+| Region | `gru1` |
+| Build command | `bun run build` |
+
+---
+
+## High-Value Next Steps
+
+- Replace curated spec with official Stoplight export
+- Re-verify endpoint families beyond core payments
+- Improve public API changelog/versioning story
+- Add deeper operational/testing examples for webhook flows
