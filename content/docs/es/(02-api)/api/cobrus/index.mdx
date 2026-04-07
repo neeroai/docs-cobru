@@ -1,0 +1,29 @@
+---
+title: Cobrus
+description: Crea, inspecciona, cotiza y edita links de pago de Cobru.
+icon: Wallet
+---
+
+Un "cobru" es el objeto de pago hosted de Cobru. Combina monto, descripción, métodos habilitados, expiración, URLs de retorno y el callback que reporta cambios de estado.
+
+## Endpoints de esta sección
+
+| Familia de endpoint | Método | Estado de verificación |
+|---------------------|--------|------------------------|
+| Crear un cobru | `POST` | verificado |
+| Generar detalles de pago | `POST` | documentado en materiales legacy de Cobru |
+| Consultar un cobru | `GET` | documentado en materiales legacy de Cobru |
+| Bancos PSE | `GET` | documentado en materiales legacy de Cobru |
+| Cotizar un cobru | `POST` | documentado en materiales legacy de Cobru |
+| Editar un cobru | `POST` | documentado en materiales legacy de Cobru |
+
+## Estados comunes
+
+| Estado | Significado |
+|--------|-------------|
+| `0` | Creado |
+| `1` | En proceso |
+| `2` | No pagado / rechazado |
+| `3` | Pagado |
+| `4` | Reembolsado |
+| `5` | Expirado |

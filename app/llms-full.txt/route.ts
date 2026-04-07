@@ -1,15 +1,22 @@
-import { source } from "@/lib/source";
-import { getLLMText } from "@/lib/llm-text";
+import { getLLMText } from '@/lib/llm-text';
+import { source } from '@/lib/source';
 
-export const dynamic = "force-dynamic";
+const locales = ['en', 'es'] as const;
+
+export const revalidate = 3600;
 
 export function GET() {
-  const pages = source.getPages("en");
-  const sections = pages.map((page) => getLLMText(page));
+  const sections = locales.flatMap((locale) =>
+    source.getPages(locale).map((page) => getLLMText(page, locale))
+  );
 
-  const header = `# Cobru API Documentation\n\nComplete documentation for the Cobru payment API.\nGenerated: ${new Date().toISOString()}\n\n`;
+  const header = [
+    '# Cobru API Documentation',
+    'Complete bilingual documentation for the Cobru payment API.',
+    'Locales: en, es',
+  ].join('\n\n');
 
-  return new Response(header + sections.join("\n\n---\n\n"), {
-    headers: { "Content-Type": "text/plain; charset=utf-8" },
+  return new Response(header + sections.join('\n\n---\n\n'), {
+    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
   });
 }

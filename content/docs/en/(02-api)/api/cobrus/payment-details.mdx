@@ -1,0 +1,40 @@
+---
+title: Generate payment details
+description: Submit payer information and payment-method-specific details for a hosted Cobru payment.
+icon: ReceiptText
+---
+
+## Endpoint
+
+`POST /{url}`
+
+<Callout type="warn">
+  This contract comes from legacy Cobru API materials and deep BRE-B research. Re-verify the exact behavior in sandbox before building a production dependency on it.
+</Callout>
+
+## Purpose
+
+After a cobru exists, this endpoint appears to receive payer details and payment-method-specific fields such as PSE bank code, Nequi phone, or card data.
+
+## Path parameter
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `url` | string | the cobru slug returned by `POST /cobru/` |
+
+## Request body shape seen in legacy materials
+
+```json
+{
+  "name": "Juan Perez",
+  "payment": "efecty",
+  "cc": "1140867070",
+  "email": "juan@cobru.co",
+  "document_type": "CC",
+  "phone": "3002794981"
+}
+```
+
+## Important note for BRE-B
+
+Deep research indicates the field name is `payment`, not `payment_method`. If you send the wrong field name, Cobru may reject the request.

@@ -1,0 +1,44 @@
+---
+title: Error Reference
+description: Known Cobru error patterns, misleading status codes, and troubleshooting guidance.
+icon: CircleAlert
+---
+
+Cobru's current error model is functional but not yet ergonomic. Some validation failures show up as `403 Forbidden`, and the response shape is not consistently descriptive.
+
+## Current response formats
+
+You will most often see one of these:
+
+```json
+{ "error": "Error en la creacion del cobru." }
+```
+
+```json
+{ "payment_method_enabled": ["Not a valid string."] }
+```
+
+## Known quirks
+
+| Symptom | HTTP code | Actual cause | Fix |
+|---------|-----------|--------------|-----|
+| `payment_method_enabled` sent as object | `400` | Cobru expects a JSON string | `JSON.stringify()` before sending |
+| Missing `payer_redirect_url` or `callback` | `403` | request validation failure | send both fields on payment creation |
+| Credentials are present but create payment still fails | `403` | body shape may be invalid, not auth | verify `payment_method_enabled`, redirect URLs, and content type |
+| `refresh_token` body field fails | `400` or auth failure | wrong field name | use `refresh` |
+| Payment URL does not open | client bug | using `pk` path instead of `url` slug | build `{baseUrl}/{url}` |
+
+## Troubleshooting checklist
+
+1. Confirm you are hitting the right base URL.
+2. Confirm all three credentials are present.
+3. Log the exact JSON body before sending.
+4. Verify `payment_method_enabled` is serialized as a string.
+5. Confirm `callback` and `payer_redirect_url` are valid HTTPS URLs.
+6. Keep raw responses from Cobru in logs during integration.
+
+## Desired future model
+
+<Callout type="info">
+  A future Cobru error model should move to `application/problem+json` with stable machine-readable error types. Until then, your integration should normalize Cobru responses into your own internal error format.
+</Callout>

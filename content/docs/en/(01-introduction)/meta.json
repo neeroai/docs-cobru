@@ -1,0 +1,14 @@
+{
+  "title": "Introduction",
+  "icon": "BookOpen",
+  "defaultOpen": true,
+  "pages": [
+    "index",
+    "getting-started",
+    "authentication",
+    "webhooks",
+    "errors",
+    "testing",
+    "external:[Github][GitHub](https://github.com/neeroai/docs-cobru)"
+  ]
+}

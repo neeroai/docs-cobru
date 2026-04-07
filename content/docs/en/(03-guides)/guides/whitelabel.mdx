@@ -1,0 +1,15 @@
+---
+title: White-label
+description: Guidance for embedding Cobru in your own product experience with minimal end-user confusion.
+icon: Paintbrush
+---
+
+Cobru's hosted payment flows can still feel integrated into your own product if you design the handoff carefully.
+
+## Recommendations
+
+- always describe the next step before redirecting the user
+- use your own reference ID in the `callback` URL
+- store Cobru's `pk`, `url`, and `idempotency_key`
+- design a return URL that confirms status and next actions
+- document payment-method-specific UX, especially for BRE-B and QR

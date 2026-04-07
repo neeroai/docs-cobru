@@ -1,0 +1,47 @@
+---
+title: Pruebas
+description: Uso de sandbox, pruebas de webhooks y checklist de salida a producción para integraciones Cobru.
+icon: FlaskConical
+---
+
+## Sandbox
+
+| Propiedad | Valor |
+|-----------|-------|
+| URL base | `https://dev.cobru.co` |
+| Propósito | desarrollo, QA y debugging de integración |
+| Credenciales | separadas de producción |
+| Fees | no representan la economía real de producción |
+
+## Flujo recomendado de prueba
+
+1. Refresca un access token.
+2. Crea un pago en sandbox.
+3. Construye la URL hosted usando el slug `url` retornado.
+4. Completa el flujo manualmente desde la página de Cobru.
+5. Confirma que tu webhook recibe el cambio de estado esperado.
+
+## Pruebas locales de webhook
+
+```bash
+ngrok http 3000
+```
+
+Usa la URL HTTPS generada como campo `callback` en la request de creación del pago.
+
+## Qué conviene loguear durante la integración
+
+- body enviado a Cobru
+- body raw de la respuesta de Cobru
+- URL de pago generada
+- cada payload de webhook
+- tu propio resultado de reconciliación
+
+## Checklist de producción
+
+- cambiar `COBRU_BASE_URL` a `https://prod.cobru.co`
+- reemplazar credenciales sandbox por credenciales productivas
+- verificar que la URL del callback sea pública y HTTPS
+- mantener un handler webhook idempotente
+- normalizar errores de Cobru dentro de tu pipeline de monitoreo
+- confirmar fees reales con Cobru antes de mostrarlos al usuario final

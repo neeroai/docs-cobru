@@ -1,0 +1,23 @@
+---
+title: PSE bank codes
+description: Retrieve the list of banks available for PSE payments.
+icon: Landmark
+---
+
+## Endpoint
+
+`GET /get_banks/1/`
+
+<Callout type="info">
+  This endpoint appears in legacy Cobru materials and is a common dependency when presenting PSE options to users.
+</Callout>
+
+## Example response
+
+```json
+[
+  { "bankName": "BANCO AGRARIO", "bankCode": "1040" },
+  { "bankName": "BANCO AV VILLAS", "bankCode": "1052" },
+  { "bankName": "BANCO BBVA COLOMBIA S.A.", "bankCode": "1013" }
+]
+```

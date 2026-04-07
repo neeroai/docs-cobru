@@ -1,0 +1,37 @@
+---
+title: Retirar efectivo
+description: Crea una solicitud de retiro en efectivo, hoy documentada para Efecty.
+icon: BanknoteArrowUp
+---
+
+## Endpoint
+
+`POST /cashwithdraw/`
+
+<Callout type="info">
+  Documentado en materiales legacy de Cobru para retiros por Efecty.
+</Callout>
+
+## Ejemplo de body
+
+```json
+{
+  "amount": 10000,
+  "document": "213232323",
+  "estimate": false,
+  "exp_days": 30,
+  "method": "efecty",
+  "name": "Testeo efecty"
+}
+```
+
+## Ejemplo de respuesta
+
+```json
+{
+  "status": "ok",
+  "document": "213232323",
+  "ref": 123456,
+  "amount": 9700
+}
+```

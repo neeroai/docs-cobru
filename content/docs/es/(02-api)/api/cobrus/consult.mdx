@@ -1,0 +1,41 @@
+---
+title: Consultar un cobru
+description: Obtén los detalles actuales de un objeto de pago Cobru.
+icon: Search
+---
+
+## Endpoint
+
+`GET /cobru_detail/{url}`
+
+<Callout type="warn">
+  Este endpoint está documentado en materiales legacy de Cobru. Antes se creía que no existía, así que conviene revalidarlo en tu propia cuenta sandbox antes de usarlo como dependencia crítica.
+</Callout>
+
+## Campos observados en la documentación legacy
+
+- identidad del pagador
+- `payment_method`
+- `state`
+- `payment_method_enabled`
+- `amount`
+- `description`
+- `payed_amount`
+- fees y fechas
+
+## Ejemplo de respuesta
+
+```json
+{
+  "fee_amount": 6383,
+  "payer_id": "10000000",
+  "payer_name": "Juan Plata",
+  "payment_method": "efecty",
+  "state": 1,
+  "payer_email": "juan@cobru.com",
+  "url": "ufa8q176",
+  "amount": 107595,
+  "description": "description",
+  "payed_amount": 100000
+}
+```

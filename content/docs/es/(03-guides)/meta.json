@@ -1,0 +1,6 @@
+{
+  "title": "Guías",
+  "icon": "Waypoints",
+  "defaultOpen": true,
+  "pages": ["...guides"]
+}

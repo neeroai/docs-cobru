@@ -1,0 +1,5 @@
+{
+  "title": "Cash Withdrawals",
+  "icon": "Banknote",
+  "pages": ["index", "create", "list", "cancel", "details"]
+}

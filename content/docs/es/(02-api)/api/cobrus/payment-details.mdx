@@ -1,0 +1,40 @@
+---
+title: Generar detalles de pago
+description: Envía datos del pagador y detalles específicos del método de pago para un cobru hosted.
+icon: ReceiptText
+---
+
+## Endpoint
+
+`POST /{url}`
+
+<Callout type="warn">
+  Este contrato viene de materiales API legacy y de research técnico sobre BRE-B. Revalida el comportamiento exacto en sandbox antes de construir una dependencia productiva sobre él.
+</Callout>
+
+## Propósito
+
+Después de crear un cobru, este endpoint parece recibir datos del pagador y campos específicos por método, como banco PSE, teléfono Nequi o datos de tarjeta.
+
+## Parámetro de path
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `url` | string | slug del cobru retornado por `POST /cobru/` |
+
+## Forma del body observada en materiales legacy
+
+```json
+{
+  "name": "Juan Perez",
+  "payment": "efecty",
+  "cc": "1140867070",
+  "email": "juan@cobru.co",
+  "document_type": "CC",
+  "phone": "3002794981"
+}
+```
+
+## Nota importante para BRE-B
+
+El research profundo indica que el campo correcto es `payment`, no `payment_method`. Si envías el nombre incorrecto, Cobru puede rechazar el request.

@@ -1,0 +1,80 @@
+---
+title: Introduction
+description: Cobru for developers. Build payment flows for Colombia with PSE, Nequi, BRE-B, cards, transfers, and operational APIs.
+icon: Sparkles
+---
+
+import { ArrowLeftRight, CreditCard, Rocket, Webhook } from "lucide-react";
+
+Cobru is a Colombian payments platform for teams that need to create payment links, accept local methods, automate collections, and operate money movement flows from one API.
+
+This docs site is being rebuilt from verified sandbox learnings, legacy Cobru technical materials, and the product surface visible in Cobru's own API references. When a contract is not yet verified against a live integration, the page says so explicitly.
+
+## Choose a path
+
+<Cards>
+  <Card
+    icon={<Rocket />}
+    title="Accept payments"
+    href="/en/docs/getting-started"
+    description="Get an access token, create your first payment, and share the hosted payment URL."
+  />
+  <Card
+    icon={<Webhook />}
+    title="Handle webhooks"
+    href="/en/docs/webhooks"
+    description="Process asynchronous payment updates safely and design idempotent handlers."
+  />
+  <Card
+    icon={<ArrowLeftRight />}
+    title="Send and withdraw"
+    href="/en/docs/api/envios"
+    description="Explore transfers, cash withdrawals, bank withdrawals, and BRE-B transfer operations."
+  />
+  <Card
+    icon={<CreditCard />}
+    title="Cards and services"
+    href="/en/docs/api/cards"
+    description="Understand Cobru's virtual cards and digital services surfaces now exposed in the API menu."
+  />
+</Cards>
+
+## What Cobru covers
+
+Cobru's public developer surface goes beyond payment creation. The API menu captured from Cobru's own references includes payments, transfers, cash withdrawals, bank withdrawals, digital services, and virtual cards.
+
+### Product areas
+
+| Area | What developers use it for |
+|------|-----------------------------|
+| Cobrus | Create hosted payment links, calculate fees, inspect payment details, and edit existing payment links |
+| Webhooks | Receive asynchronous payment state updates in your own backend |
+| Transfers | Move balance between Cobru users |
+| Cash withdrawals | Send funds to cash pickup flows such as Efecty |
+| Bank withdrawals | Push funds to banks in Colombia and other supported countries |
+| Services | Sell digital products such as recharges and PIN-based services |
+| Cards | Create and operate virtual cards from your own product workflows |
+
+### Environments
+
+| Environment | Base URL |
+|-------------|----------|
+| Sandbox | `https://dev.cobru.co` |
+| Production | `https://prod.cobru.co` |
+
+## Recommended reading order
+
+1. [Quickstart](/en/docs/getting-started)
+2. [Authentication](/en/docs/authentication)
+3. [Webhooks](/en/docs/webhooks)
+4. [API Reference](/en/docs/api/reference)
+5. [BRE-B + QR guide](/en/docs/guides/qr-breb)
+
+## Support and source quality
+
+| Source | Role |
+|--------|------|
+| `dev.cobru.co` sandbox | Primary verification source for live behavior |
+| Cobru legacy API materials | Secondary source for endpoints not yet re-verified |
+| Cobru API menu captures | Scope source for families still pending contract extraction |
+| `soporte@cobru.co` | Escalation path when a contract must be confirmed before production |

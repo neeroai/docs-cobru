@@ -1,0 +1,82 @@
+---
+title: Autenticación
+description: Modelo de credenciales, flujo de refresh del token y guía de seguridad para la API de Cobru.
+icon: ShieldCheck
+---
+
+Cobru usa un modelo de autenticación por capas:
+
+- `Api-Token`: tu key de integración publicable
+- `Api-Secret-Key`: tu key privada de backend
+- `Authorization: Bearer {access}`: token de acceso de corta duración obtenido desde `/token/refresh/`
+
+## Rol de cada credencial
+
+| Credencial | Dónde usarla | Notas |
+|------------|--------------|-------|
+| `Api-Token` | requests backend | Trátala como credencial de integración, no como key segura para navegador hasta que Cobru publique un modelo de confianza más estricto |
+| `Api-Secret-Key` | solo backend | Nunca la expongas en frontend, apps móviles o bundles client-side |
+| token `refresh` | solo almacenamiento secreto backend | Se usa únicamente para emitir access tokens temporales |
+| token `access` | requests backend | Cachearlo agresivamente y rotarlo con frecuencia |
+
+## Flujo de refresh del token
+
+```bash
+curl -X POST https://dev.cobru.co/token/refresh/ \
+  -H "Api-Token: $COBRU_API_TOKEN" \
+  -H "Api-Secret-Key: $COBRU_API_SECRET" \
+  -H "Content-Type: application/json" \
+  -d '{"refresh":"'"$COBRU_REFRESH_TOKEN"'"}'
+```
+
+**Respuesta esperada**
+
+```json
+{ "access": "eyJ0eXAi..." }
+```
+
+<Callout type="warn">
+  El campo del body es `refresh`, no `refresh_token`. Esta discrepancia es uno de los quirks más importantes de Cobru y debe quedar muy visible para el equipo.
+</Callout>
+
+## Headers requeridos para requests API
+
+```http
+Api-Token: {tu_api_token}
+Api-Secret-Key: {tu_api_secret}
+Authorization: Bearer {access}
+Accept: application/json
+Content-Type: application/json
+```
+
+## Vida útil del token y caché
+
+| Propiedad | Recomendación |
+|-----------|---------------|
+| vida útil observada del token | cerca de 60 minutos |
+| TTL seguro de caché | 50 minutos |
+| caveat en Edge runtime | los caches en memoria no persisten entre invocaciones |
+| fix de producción | guardar el token en Redis, Vercel KV u otro caché compartido |
+
+## Variables de entorno
+
+```bash
+COBRU_BASE_URL=https://dev.cobru.co
+COBRU_API_TOKEN=...
+COBRU_API_SECRET=...
+COBRU_REFRESH_TOKEN=...
+```
+
+## Checklist de seguridad
+
+- Mantén todas las credenciales Cobru solo en variables de entorno del servidor.
+- Nunca envíes `Api-Secret-Key` al navegador ni a clientes móviles.
+- Refresca el access token desde el servidor, no desde el frontend.
+- Rota credenciales cuando cambie el equipo con acceso.
+- Usa URLs `callback` con HTTPS en producción.
+
+## Siguiente lectura
+
+- `/docs/getting-started`
+- `/docs/webhooks`
+- `/docs/api/authentication/refresh`

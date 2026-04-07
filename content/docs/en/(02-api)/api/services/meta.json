@@ -1,0 +1,5 @@
+{
+  "title": "Services",
+  "icon": "Smartphone",
+  "pages": ["index", "cell-recharge", "pins-list", "pins-buy"]
+}

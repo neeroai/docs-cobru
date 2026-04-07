@@ -1,0 +1,29 @@
+---
+title: Cobrus
+description: Create, inspect, quote, and edit Cobru payment links.
+icon: Wallet
+---
+
+A "cobru" is Cobru's hosted payment object. It combines amount, description, enabled payment methods, expiration, redirect URLs, and the callback that reports payment state changes.
+
+## Endpoints in this section
+
+| Endpoint family | Method | Verification status |
+|-----------------|--------|---------------------|
+| Create a cobru | `POST` | verified |
+| Generate payment details | `POST` | documented in legacy Cobru materials |
+| Consult a cobru | `GET` | documented in legacy Cobru materials |
+| PSE banks | `GET` | documented in legacy Cobru materials |
+| Quote a cobru | `POST` | documented in legacy Cobru materials |
+| Edit a cobru | `POST` | documented in legacy Cobru materials |
+
+## Common state values
+
+| State | Meaning |
+|-------|---------|
+| `0` | Created |
+| `1` | In process |
+| `2` | Not paid / rejected |
+| `3` | Paid |
+| `4` | Refunded |
+| `5` | Expired |

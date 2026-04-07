@@ -1,0 +1,128 @@
+---
+title: Quickstart
+description: Pasa de credenciales a un payment link funcional de Cobru en menos de cinco minutos.
+icon: Rocket
+---
+
+## Prerrequisitos
+
+- Cuenta Cobru con credenciales desde [panel.cobru.co](https://panel.cobru.co)
+- Tres valores de credenciales: `Api-Token`, `Api-Secret-Key`, `refresh_token`
+- URL base sandbox: `https://dev.cobru.co`
+
+<Callout type="info">
+  Esta página cubre solo el camino más corto a una integración funcional. Para el modelo completo de autenticación, caché del token y seguridad, sigue con `/docs/authentication`.
+</Callout>
+
+## Paso 1. Obtener un access token
+
+```bash
+curl -X POST https://dev.cobru.co/token/refresh/ \
+  -H "Api-Token: $COBRU_API_TOKEN" \
+  -H "Api-Secret-Key: $COBRU_API_SECRET" \
+  -H "Content-Type: application/json" \
+  -d '{"refresh":"'"$COBRU_REFRESH_TOKEN"'"}'
+```
+
+<Callout type="warn">
+  El campo es `refresh`, **no** `refresh_token`. La documentación del plugin WooCommerce es incorrecta en este punto.
+</Callout>
+
+**Respuesta `200`:**
+```json
+{ "access": "eyJ0eXAi..." }
+```
+
+El token `access` tiene un TTL de ~60 minutos. Guárdalo en caché máximo 50 minutos.
+
+## Paso 2. Crear un pago
+
+```bash
+curl -X POST https://dev.cobru.co/cobru/ \
+  -H "Api-Token: $COBRU_API_TOKEN" \
+  -H "Api-Secret-Key: $COBRU_API_SECRET" \
+  -H "Authorization: Bearer $COBRU_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "amount": 50000,
+    "description": "Orden #123",
+    "expiration_days": 1,
+    "client_assume_costs": false,
+    "iva": 0,
+    "payment_method_enabled": "{\"Bre-B\":true,\"bancolombia_qr\":true,\"pse\":true}",
+    "payer_redirect_url": "https://tuapp.com/pago-exitoso",
+    "callback": "https://tuapp.com/api/cobru/webhook"
+  }'
+```
+
+<Callout type="warn">
+  `payment_method_enabled` debe ser un **string JSON serializado** — ejecuta `JSON.stringify({...})` antes de incluirlo.
+  Enviarlo como objeto plano devuelve HTTP 400.
+</Callout>
+
+<Callout type="warn">
+  Incluye siempre `payer_redirect_url` y `callback`. Si falta alguno, Cobru puede responder con HTTP `403` aunque el problema real sea validación del request.
+</Callout>
+
+**Respuesta `201`:**
+```json
+{
+  "pk": 27150,
+  "url": "3gofdf6f",
+  "amount": "50000.00",
+  "state": 0,
+  "fee_amount": 2395,
+  "currency_code": "COP",
+  "idempotency_key": "3114242222_8de7c88b84..."
+}
+```
+
+## Paso 3. Compartir la URL de pago
+
+```typescript
+// CORRECTO
+const paymentUrl = `${COBRU_BASE_URL}/${response.url}`;
+// Ejemplo: https://dev.cobru.co/3gofdf6f
+
+// INCORRECTO (patrón del plugin WooCommerce — NO funciona)
+const paymentUrl = `${COBRU_BASE_URL}/pay/${response.pk}`;
+```
+
+Desde aquí puedes:
+
+- enviar el link directamente por email, SMS o chat
+- convertirlo en un PNG QR usando `api.qrserver.com`
+- usar el flujo BRE-B + QR documentado en `/docs/guides/qr-breb`
+
+## Paso 4. Recibir el webhook
+
+```ts
+export async function POST(request: Request) {
+  const payload = await request.json();
+
+  // Primero persistir, luego procesar.
+  console.log('Cobru webhook:', payload);
+
+  return new Response('ok', { status: 200 });
+}
+```
+
+<Callout type="info">
+  Los webhooks de Cobru no están firmados hoy. Trata el callback como un trigger, no como fuente única de verdad para operaciones de alto riesgo.
+</Callout>
+
+## Variables de entorno
+
+```bash
+COBRU_BASE_URL=https://dev.cobru.co   # sandbox
+COBRU_API_TOKEN=tu_api_token
+COBRU_API_SECRET=tu_api_secret_key
+COBRU_REFRESH_TOKEN=tu_refresh_token
+NEXT_PUBLIC_APP_URL=https://tuapp.com
+```
+
+## Siguientes pasos
+
+1. Lee `/docs/authentication` para el caché del token y límites de seguridad.
+2. Lee `/docs/webhooks` para idempotencia y patrones de validación.
+3. Lee `/docs/api/cobrus/create` para el contrato completo de creación de pagos.

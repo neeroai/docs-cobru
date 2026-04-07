@@ -1,0 +1,5 @@
+{
+  "title": "Retiros a bancos",
+  "icon": "Building2",
+  "pages": ["index", "banks-list", "list", "create", "details", "create-brazil", "create-mexico", "create-argentina", "bre-b"]
+}

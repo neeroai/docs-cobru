@@ -1,0 +1,47 @@
+---
+title: Testing
+description: Sandbox usage, webhook testing, and production-readiness checks for Cobru integrations.
+icon: FlaskConical
+---
+
+## Sandbox
+
+| Property | Value |
+|----------|-------|
+| Base URL | `https://dev.cobru.co` |
+| Purpose | development, QA, integration debugging |
+| Credentials | separate from production |
+| Fees | not representative of production economics |
+
+## Recommended test flow
+
+1. Refresh an access token.
+2. Create a payment in sandbox.
+3. Build the hosted payment URL from the returned `url` slug.
+4. Complete the flow manually through Cobru's page.
+5. Confirm your webhook receives the expected state update.
+
+## Local webhook testing
+
+```bash
+ngrok http 3000
+```
+
+Use the generated HTTPS URL as your `callback` field in the payment creation request.
+
+## What to log during integration
+
+- request body sent to Cobru
+- raw Cobru response body
+- generated payment URL
+- every webhook payload
+- your own reconciliation result
+
+## Production checklist
+
+- switch `COBRU_BASE_URL` to `https://prod.cobru.co`
+- replace sandbox credentials with production credentials
+- verify the callback URL is public and HTTPS
+- keep an idempotent webhook handler
+- normalize Cobru errors into your own monitoring pipeline
+- confirm real fees with Cobru before exposing them to end users

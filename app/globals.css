@@ -22,9 +22,9 @@
 @import "fumadocs-ui/css/preset.css";
 @import "fumadocs-openapi/css/preset.css";
 
-/* ── DARK MODE: map Tailwind `dark:` → data-theme attribute ── */
-/* fumadocs-ui / next-themes sets data-theme on <html> */
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+/* ── DARK MODE: map Tailwind `dark:` → next-themes class ── */
+/* fumadocs-ui RootProvider uses attribute="class" */
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* ── TAILWIND v4: expose tokens as utilities ── */
 @theme inline {
@@ -71,7 +71,103 @@ body {
   outline-offset: 2px;
 }
 
+::placeholder {
+  color: var(--color-text-tertiary);
+}
+
 ::selection {
   background-color: var(--color-brand-subtle);
   color: var(--color-text-brand);
+}
+
+.prose {
+  color: var(--color-text-secondary);
+}
+
+.prose :where(h1, h2, h3, h4) {
+  color: var(--color-text-primary);
+}
+
+.prose p,
+.prose li {
+  color: var(--color-text-secondary);
+}
+
+.prose a {
+  color: var(--color-text-brand);
+  text-decoration-color: color-mix(in oklab, var(--brand-500) 42%, transparent);
+  text-underline-offset: 0.22em;
+}
+
+.prose strong {
+  color: var(--color-text-primary);
+}
+
+.prose hr {
+  border-color: var(--fd-border);
+}
+
+.prose table {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--fd-card);
+}
+
+.prose :where(th, td) {
+  border-color: var(--fd-border);
+}
+
+.prose pre {
+  border-radius: var(--radius-xl);
+}
+
+.prose code {
+  border-radius: var(--radius-sm);
+}
+
+.prose .grid {
+  gap: 0.875rem;
+}
+
+.prose .grid > a {
+  border-color: var(--fd-border);
+  background-color: var(--fd-card);
+  box-shadow: var(--shadow-xs);
+}
+
+.prose .grid > a:hover {
+  border-color: color-mix(in oklab, var(--brand-500) 30%, var(--fd-border));
+  background-color: color-mix(in oklab, var(--fd-card) 94%, var(--brand-50));
+}
+
+.prose [data-card] {
+  border-color: color-mix(in oklab, var(--fd-border) 92%, transparent);
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.03);
+}
+
+.prose [data-card] h3 {
+  color: var(--color-text-primary);
+  font-size: 1.125rem;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+}
+
+.prose [data-card] p {
+  color: var(--color-text-secondary);
+}
+
+.prose [data-card] > .not-prose:first-child {
+  border-color: color-mix(in oklab, var(--fd-border) 88%, transparent);
+  background-color: color-mix(in oklab, var(--fd-muted) 80%, var(--fd-card));
+  box-shadow: 0 4px 12px rgb(15 23 42 / 0.06);
+}
+
+.dark .prose [data-card] {
+  background-color: color-mix(in oklab, var(--fd-card) 94%, white 2%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.02);
+}
+
+.dark .prose [data-card] > .not-prose:first-child {
+  background-color: color-mix(in oklab, var(--fd-muted) 72%, var(--fd-card));
+  box-shadow: 0 6px 14px rgb(0 0 0 / 0.22);
 }

@@ -27,6 +27,18 @@
     }
   },
   "files": {
-    "ignore": ["node_modules", ".next", ".source", "dist", "build"]
+    "ignore": [
+      "node_modules",
+      ".next",
+      ".source",
+      "dist",
+      "build",
+      ".claude",
+      ".vercel",
+      "docs-global",
+      "../docs-global",
+      "app/globals.css",
+      "styles"
+    ]
   }
 }

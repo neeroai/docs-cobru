@@ -1,0 +1,5 @@
+{
+  "title": "Retiros en efectivo",
+  "icon": "Banknote",
+  "pages": ["index", "create", "list", "cancel", "details"]
+}

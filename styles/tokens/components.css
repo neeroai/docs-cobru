@@ -50,7 +50,7 @@
 .card {
   --card-bg: var(--color-bg-raised);
   --card-border: var(--color-border-default);
-  --card-radius: var(--radius-xl);
+  --card-radius: var(--radius-2xl);
   --card-shadow: var(--shadow-sm);
   --card-px: var(--space-6);
   --card-py: var(--space-5);

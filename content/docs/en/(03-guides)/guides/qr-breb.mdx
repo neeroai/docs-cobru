@@ -1,0 +1,95 @@
+---
+title: BRE-B + QR Integration
+description: How to generate BRE-B payment QR codes and send them via WhatsApp using the Cobru API.
+icon: QrCode
+---
+
+## What is BRE-B?
+
+Sistema de Pagos Inmediatos operated by Redeban (Banco de la República de Colombia). Enables instant bank transfers between Colombian accounts via interoperable QR. Launched March 2024.
+
+## Payment flow
+
+```
+User → App → Cobru API → QR generator → User receives QR
+                ↓
+         Webhook callback on payment
+```
+
+1. App calls Cobru API to create payment with `"Bre-B": true` in `payment_method_enabled`
+2. Cobru returns `pk` (integer) and `url` (short slug)
+3. App constructs payment URL: `{COBRU_BASE_URL}/{url}`
+4. App generates QR PNG from the payment URL
+5. App sends QR to user (e.g., via WhatsApp image message)
+6. User scans QR → Cobru handles payment
+7. Cobru POSTs to your `callback` with `state: 3` on success
+
+## Generate QR PNG
+
+Cobru does not expose a QR image endpoint. Use an external QR generator:
+
+```typescript
+const paymentUrl = `${COBRU_BASE_URL}/${cobruResponse.url}`;
+const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=512x512&data=${encodeURIComponent(paymentUrl)}&margin=10`;
+```
+
+`api.qrserver.com` returns `200 image/png` in under 100ms, no auth required.
+
+<Callout type="info">
+  The QR points to Cobru's payment page — users see the native Bre-B QR plus all other enabled methods.
+  For EMV-native QR directly in your app, contact soporte@cobru.co — not exposed in the current API.
+</Callout>
+
+## Enable BRE-B in a payment
+
+```typescript
+const body = {
+  amount: 50000,
+  description: 'Bre-B payment',
+  expiration_days: 1,
+  client_assume_costs: false,
+  iva: 0,
+  // Must be JSON.stringify'd
+  payment_method_enabled: JSON.stringify({
+    'Bre-B': true,
+    bancolombia_qr: true,
+  }),
+  payer_redirect_url: 'https://yourapp.com/payment-success',
+  callback: `https://yourapp.com/api/cobru/webhook?ref=${referenceId}`,
+};
+```
+
+## Send QR via WhatsApp
+
+```typescript
+// WhatsApp Cloud API image message
+const payload = {
+  messaging_product: 'whatsapp',
+  to: '573001234567',
+  type: 'image',
+  image: {
+    link: qrUrl, // api.qrserver.com URL — WhatsApp downloads it directly
+    caption: `Bre-B/QR Payment - $${amount.toLocaleString('es-CO')}\nOpen: ${paymentUrl}`,
+  },
+};
+```
+
+WhatsApp Cloud API downloads the PNG directly — no prior upload needed.
+
+## Token caching
+
+| Property | Value |
+|----------|-------|
+| Cobru token TTL | ~60 min (inferred) |
+| Recommended cache TTL | 50 min |
+| Edge Runtime caveat | In-memory cache doesn't persist between invocations — causes 1 refresh/request |
+| Production fix | Store token in Vercel KV / Redis with 50-min TTL |
+
+## Known limitations
+
+| Limitation | Impact | Workaround |
+|------------|--------|------------|
+| No EMV-native QR | User sees Cobru web page, not direct bank QR | Acceptable for MVP |
+| No webhook signature | Anyone could POST to your callback | Validate via IP allowlist or secret in query param |
+| No payment status endpoint | Cannot poll for state | Rely on webhook; use `idempotency_key` from response for deduplication |
+| `amount` in response is a string | Parsing required | `parseFloat(response.amount)` |

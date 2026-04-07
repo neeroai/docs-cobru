@@ -1,5 +1,13 @@
 # CHANGELOG — docs-cobru
 
+## [unreleased] 2026-04-07 — chore
+
+- Añadida validación operativa del spec OpenAPI en `scripts/validate-openapi.mjs`
+- Añadido `scripts/fetch-stoplight-openapi.mjs` para sincronizar el spec con token + export URI de Stoplight
+- Nuevos comandos: `bun run openapi:validate` y `bun run openapi:validate:strict`
+- Nuevo comando: `bun run openapi:sync`
+- Documentado el flujo de export desde Stoplight en `openapi/README.md`
+
 ## [bb4c41e] 2026-04-07 — chore
 
 - Eliminados 13 archivos JSON legacy de `docs/content/` (industries, products, sot)

@@ -1,0 +1,27 @@
+---
+title: Send money
+description: Send Cobru balance to another Cobru user.
+icon: Send
+---
+
+## Endpoint
+
+`POST /send/`
+
+<Callout type="info">
+  Documented in legacy Cobru materials.
+</Callout>
+
+## Requirements
+
+- the sender must have verified email and phone
+- the recipient is identified by phone number
+
+## Example body
+
+```json
+{
+  "amount": 99000,
+  "to_user": "3001234567"
+}
+```

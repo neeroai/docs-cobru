@@ -1,0 +1,77 @@
+---
+title: Webhooks
+description: Diseña un handler seguro para webhooks de Cobru y entiende las limitaciones actuales del callback.
+icon: Webhook
+---
+
+Cobru envía un `POST` a la URL `callback` que incluyes al crear un pago. Hoy esta es la vía principal para reaccionar a actualizaciones de pago desde tu propio backend.
+
+## Modelo de confianza actual
+
+<Callout type="warn">
+  Los webhooks de Cobru no están firmados hoy. No existe un contrato público de HMAC header o verificación JWT. Trata el webhook como notificación, no como prueba definitiva.
+</Callout>
+
+## Payload típico
+
+```json
+{
+  "orderId": "123",
+  "state": 3,
+  "payment_method": "Bre-B",
+  "amount": "50000.00",
+  "url": "3gofdf6f"
+}
+```
+
+## Estados de pago
+
+| Estado | Significado | Notas |
+|--------|-------------|-------|
+| `0` | Creado / pendiente | el objeto de pago existe |
+| `1` | Procesando | el usuario inició o Cobru espera confirmación final |
+| `2` | No pagado / rechazado | el resultado depende del método |
+| `3` | Pagado / aprobado | el estado que la mayoría de equipos trata como settlement exitoso |
+| `4` | Reembolsado | reembolso aplicado |
+| `5` | Expirado | aparece en materiales históricos de Cobru; confírmalo antes de depender de él |
+
+## Patrón recomendado para el handler
+
+1. Parsea el payload.
+2. Persiste el evento inmediatamente.
+3. Responde HTTP `200` lo más rápido posible.
+4. Procesa reconciliación y side effects de forma asincrónica.
+5. Protege acciones downstream con idempotencia usando `orderId` o tu propia referencia.
+
+```ts
+export async function POST(request: Request) {
+  const payload = await request.json();
+
+  await saveWebhookEvent(payload);
+
+  return new Response('ok', { status: 200 });
+}
+```
+
+## Opciones de hardening disponibles hoy
+
+| Riesgo | Workaround actual |
+|--------|-------------------|
+| cualquiera puede golpear tu callback | incluye tu propio secreto en el query string del callback |
+| entregas duplicadas | guarda `orderId` y salta eventos ya procesados |
+| spoofing del callback | vuelve a consultar detalles del pago con Cobru antes de liberar valor |
+| puntos ciegos operativos | loguea todos los callbacks y expón una herramienta interna de replay |
+
+## Pruebas locales
+
+```bash
+ngrok http 3000
+```
+
+Luego usa esa URL pública HTTPS como tu valor `callback` en sandbox.
+
+## Páginas relacionadas
+
+- `/docs/errors`
+- `/docs/testing`
+- `/docs/api/cobrus/create`

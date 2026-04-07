@@ -1,0 +1,27 @@
+---
+title: Enviar dinero
+description: Envía saldo Cobru a otro usuario Cobru.
+icon: Send
+---
+
+## Endpoint
+
+`POST /send/`
+
+<Callout type="info">
+  Documentado en materiales legacy de Cobru.
+</Callout>
+
+## Requisitos
+
+- el emisor debe tener email y teléfono verificados
+- el destinatario se identifica por número de teléfono
+
+## Ejemplo de body
+
+```json
+{
+  "amount": 99000,
+  "to_user": "3001234567"
+}
+```

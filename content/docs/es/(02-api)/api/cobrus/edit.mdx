@@ -1,0 +1,35 @@
+---
+title: Editar un cobru
+description: Actualiza campos mutables en un link de pago Cobru existente.
+icon: Pencil
+---
+
+## Endpoint
+
+`POST /edit_cobru/`
+
+<Callout type="info">
+  Documentado en materiales legacy de Cobru. Verifica en sandbox qué campos siguen siendo editables después de compartir o usar un pago.
+</Callout>
+
+## Campos vistos en documentación legacy
+
+| Campo | Requerido | Propósito |
+|-------|-----------|-----------|
+| `url` | sí | identificar el cobru a editar |
+| `description` | no | actualizar descripción |
+| `amount` | no | cambiar monto |
+| `expiration_days` | no | cambiar expiración |
+| `payment_methods` | no | actualizar métodos permitidos |
+| `fee_iva` | no | actualizar porcentaje de impuesto |
+
+## Ejemplo de request
+
+```json
+{
+  "url": "xx17elpi",
+  "description": "descripción actualizada",
+  "amount": 80000,
+  "expiration_days": 10
+}
+```

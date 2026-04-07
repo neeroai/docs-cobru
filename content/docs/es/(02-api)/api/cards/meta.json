@@ -1,0 +1,5 @@
+{
+  "title": "Tarjetas",
+  "icon": "CreditCard",
+  "pages": ["index", "create", "topup", "details", "movements", "freeze"]
+}

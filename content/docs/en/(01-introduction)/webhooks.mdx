@@ -1,0 +1,77 @@
+---
+title: Webhooks
+description: Design a safe Cobru webhook handler and understand the current callback limitations.
+icon: Webhook
+---
+
+Cobru sends a `POST` request to the `callback` URL you include when creating a payment. This is currently the main way to react to payment updates from your own backend.
+
+## Current trust model
+
+<Callout type="warn">
+  Cobru webhooks are not signed today. There is no public HMAC header or JWT verification contract. Treat the webhook as a notification, not as definitive proof.
+</Callout>
+
+## Typical payload
+
+```json
+{
+  "orderId": "123",
+  "state": 3,
+  "payment_method": "Bre-B",
+  "amount": "50000.00",
+  "url": "3gofdf6f"
+}
+```
+
+## Payment states
+
+| State | Meaning | Notes |
+|-------|---------|-------|
+| `0` | Created / pending | payment object exists |
+| `1` | Processing | user has started or Cobru is awaiting final confirmation |
+| `2` | Unpaid / rejected | outcome depends on payment method |
+| `3` | Paid / approved | the state most teams treat as successful settlement |
+| `4` | Refunded | refund applied |
+| `5` | Expired | appears in older Cobru materials; confirm before depending on it |
+
+## Recommended handler pattern
+
+1. Parse the payload.
+2. Persist the event immediately.
+3. Return HTTP `200` as fast as possible.
+4. Process reconciliation and side effects asynchronously.
+5. Protect downstream actions with idempotency on `orderId` or your own reference.
+
+```ts
+export async function POST(request: Request) {
+  const payload = await request.json();
+
+  await saveWebhookEvent(payload);
+
+  return new Response('ok', { status: 200 });
+}
+```
+
+## Hardening options available today
+
+| Risk | Workaround today |
+|------|------------------|
+| Anyone can hit your callback URL | include your own secret in the callback query string |
+| Duplicate deliveries | store `orderId` and skip already-processed events |
+| Callback spoofing | re-check payment details with Cobru before shipping goods or unlocking value |
+| Operational blind spots | log every callback and expose an internal replay tool |
+
+## Local testing
+
+```bash
+ngrok http 3000
+```
+
+Then use the public HTTPS URL as your Cobru `callback` value in sandbox.
+
+## Related pages
+
+- `/docs/errors`
+- `/docs/testing`
+- `/docs/api/cobrus/create`

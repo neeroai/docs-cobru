@@ -1,0 +1,44 @@
+---
+title: Referencia de errores
+description: Patrones de error conocidos en Cobru, status codes engañosos y guía de troubleshooting.
+icon: CircleAlert
+---
+
+El modelo actual de errores de Cobru funciona, pero todavía no es ergonómico. Algunas fallas de validación aparecen como `403 Forbidden`, y la forma de la respuesta no siempre es descriptiva.
+
+## Formatos de respuesta actuales
+
+Lo más común es ver una de estas respuestas:
+
+```json
+{ "error": "Error en la creacion del cobru." }
+```
+
+```json
+{ "payment_method_enabled": ["Not a valid string."] }
+```
+
+## Quirks conocidos
+
+| Síntoma | HTTP code | Causa real | Fix |
+|---------|-----------|------------|-----|
+| `payment_method_enabled` enviado como objeto | `400` | Cobru espera un string JSON | ejecutar `JSON.stringify()` antes de enviar |
+| falta `payer_redirect_url` o `callback` | `403` | falla de validación del request | enviar ambos campos al crear el pago |
+| hay credenciales pero falla la creación del pago | `403` | la forma del body puede ser inválida, no auth | revisar `payment_method_enabled`, redirect URLs y content type |
+| falla el campo `refresh_token` | `400` o auth failure | nombre de campo incorrecto | usar `refresh` |
+| la URL de pago no abre | bug cliente | se está usando `pk` en vez del slug `url` | construir `{baseUrl}/{url}` |
+
+## Checklist de troubleshooting
+
+1. Confirma que estás usando la base URL correcta.
+2. Confirma que las tres credenciales están presentes.
+3. Loguea el JSON exacto antes de enviarlo.
+4. Verifica que `payment_method_enabled` vaya serializado como string.
+5. Confirma que `callback` y `payer_redirect_url` sean URLs HTTPS válidas.
+6. Conserva las respuestas raw de Cobru en logs durante la integración.
+
+## Modelo deseable a futuro
+
+<Callout type="info">
+  Un modelo futuro de errores en Cobru debería migrar a `application/problem+json` con tipos de error estables y legibles por máquina. Hasta entonces, conviene normalizar las respuestas de Cobru a tu propio formato interno.
+</Callout>

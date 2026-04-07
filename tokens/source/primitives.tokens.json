@@ -1,92 +1,64 @@
 {
   "$description": "Cobru primitive design tokens — OKLCH v2.0",
   "brand": {
-    "50": { "$value": "oklch(0.97 0.02 210)", "$type": "color" },
-    "100": { "$value": "oklch(0.93 0.05 210)", "$type": "color" },
-    "200": { "$value": "oklch(0.87 0.09 210)", "$type": "color" },
-    "300": { "$value": "oklch(0.78 0.13 210)", "$type": "color" },
-    "400": { "$value": "oklch(0.70 0.15 210)", "$type": "color" },
+    "50": { "$value": "oklch(0.98 0.02 150)", "$type": "color" },
+    "100": { "$value": "oklch(0.95 0.05 150)", "$type": "color" },
+    "200": { "$value": "oklch(0.90 0.09 150)", "$type": "color" },
+    "300": { "$value": "oklch(0.84 0.13 150)", "$type": "color" },
+    "400": { "$value": "oklch(0.74 0.16 150)", "$type": "color" },
     "500": {
-      "$value": "oklch(0.67 0.17 210)",
+      "$value": "oklch(0.63 0.17 150)",
       "$type": "color",
-      "$description": "#2ea3f2 — base brand blue"
+      "$description": "#2fe26d — base brand green"
     },
     "600": {
-      "$value": "oklch(0.57 0.17 210)",
+      "$value": "oklch(0.56 0.16 150)",
       "$type": "color",
-      "$description": "#1e7fc4 — hover"
+      "$description": "#21c95f — hover"
     },
-    "700": { "$value": "oklch(0.47 0.15 210)", "$type": "color" },
-    "800": { "$value": "oklch(0.38 0.12 210)", "$type": "color" },
-    "900": { "$value": "oklch(0.28 0.08 210)", "$type": "color" },
-    "950": { "$value": "oklch(0.18 0.05 210)", "$type": "color" }
-  },
-  "accent": {
-    "200": { "$value": "oklch(0.93 0.07 200)", "$type": "color" },
-    "300": { "$value": "oklch(0.88 0.11 200)", "$type": "color" },
-    "400": { "$value": "oklch(0.85 0.13 200)", "$type": "color" },
-    "500": {
-      "$value": "oklch(0.82 0.14 200)",
-      "$type": "color",
-      "$description": "#19d6ff — cyan accent"
-    },
-    "600": { "$value": "oklch(0.72 0.13 200)", "$type": "color" }
-  },
-  "purple": {
-    "400": { "$value": "oklch(0.55 0.22 275)", "$type": "color" },
-    "500": {
-      "$value": "oklch(0.44 0.26 275)",
-      "$type": "color",
-      "$description": "#5a3cf0 — secondary purple"
-    },
-    "600": { "$value": "oklch(0.36 0.22 275)", "$type": "color" }
+    "700": { "$value": "oklch(0.44 0.14 150)", "$type": "color" },
+    "800": { "$value": "oklch(0.34 0.11 150)", "$type": "color" },
+    "900": { "$value": "oklch(0.24 0.08 150)", "$type": "color" },
+    "950": { "$value": "oklch(0.18 0.05 150)", "$type": "color" }
   },
   "neutral": {
     "0": { "$value": "oklch(1 0 0)", "$type": "color" },
     "50": {
-      "$value": "oklch(0.97 0.01 220)",
-      "$type": "color",
-      "$description": "#f7fbff"
+      "$value": "oklch(0.985 0.002 220)",
+      "$type": "color"
     },
     "100": {
-      "$value": "oklch(0.93 0.02 220)",
-      "$type": "color",
-      "$description": "#e8f0fa"
+      "$value": "oklch(0.965 0.004 220)",
+      "$type": "color"
     },
     "200": {
-      "$value": "oklch(0.85 0.02 220)",
-      "$type": "color",
-      "$description": "#d0dded"
+      "$value": "oklch(0.92 0.006 220)",
+      "$type": "color"
     },
     "300": {
-      "$value": "oklch(0.74 0.04 220)",
-      "$type": "color",
-      "$description": "#a8bee0"
+      "$value": "oklch(0.85 0.008 220)",
+      "$type": "color"
     },
-    "400": { "$value": "oklch(0.64 0.04 220)", "$type": "color" },
+    "400": { "$value": "oklch(0.72 0.01 220)", "$type": "color" },
     "500": {
-      "$value": "oklch(0.52 0.04 220)",
-      "$type": "color",
-      "$description": "#4b647f"
+      "$value": "oklch(0.58 0.012 220)",
+      "$type": "color"
     },
-    "600": { "$value": "oklch(0.42 0.05 220)", "$type": "color" },
+    "600": { "$value": "oklch(0.47 0.012 220)", "$type": "color" },
     "700": {
-      "$value": "oklch(0.40 0.05 220)",
-      "$type": "color",
-      "$description": "#35527c"
+      "$value": "oklch(0.37 0.012 220)",
+      "$type": "color"
     },
-    "800": { "$value": "oklch(0.28 0.05 220)", "$type": "color" },
+    "800": { "$value": "oklch(0.27 0.01 220)", "$type": "color" },
     "900": {
-      "$value": "oklch(0.22 0.06 220)",
-      "$type": "color",
-      "$description": "#0b1f44"
+      "$value": "oklch(0.21 0.008 220)",
+      "$type": "color"
     },
     "950": {
-      "$value": "oklch(0.14 0.04 220)",
-      "$type": "color",
-      "$description": "#050d1a"
+      "$value": "oklch(0.145 0.006 220)",
+      "$type": "color"
     },
-    "1000": { "$value": "oklch(0.08 0.02 220)", "$type": "color" }
+    "1000": { "$value": "oklch(0.09 0.004 220)", "$type": "color" }
   },
   "green": {
     "300": { "$value": "oklch(0.80 0.14 150)", "$type": "color" },

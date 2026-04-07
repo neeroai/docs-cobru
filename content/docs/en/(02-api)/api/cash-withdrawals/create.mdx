@@ -1,0 +1,37 @@
+---
+title: Withdraw cash
+description: Create a cash withdrawal request, currently documented for Efecty.
+icon: BanknoteArrowUp
+---
+
+## Endpoint
+
+`POST /cashwithdraw/`
+
+<Callout type="info">
+  Documented in legacy Cobru materials for Efecty withdrawals.
+</Callout>
+
+## Example body
+
+```json
+{
+  "amount": 10000,
+  "document": "213232323",
+  "estimate": false,
+  "exp_days": 30,
+  "method": "efecty",
+  "name": "Testeo efecty"
+}
+```
+
+## Example response
+
+```json
+{
+  "status": "ok",
+  "document": "213232323",
+  "ref": 123456,
+  "amount": 9700
+}
+```

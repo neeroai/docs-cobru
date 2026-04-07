@@ -21,7 +21,7 @@ stack: "Next.js 16 · TypeScript · Tailwind CSS v4 · fumadocs-ui"
 | Attribute | Value                                                        |
 | --------- | ------------------------------------------------------------ |
 | Product   | docs.cobru.co — Cobru API documentation                      |
-| Aesthetic | Clean, professional, fintech — trustworthy but approachable  |
+| Aesthetic | Clean, professional, fintech — trustworthy, structured, dark-capable |
 | Audience  | Developers integrating Cobru payments (B2B)                  |
 | UI layer  | fumadocs-ui (not shadcn/ui) — docs-specific component system |
 
@@ -29,26 +29,33 @@ stack: "Next.js 16 · TypeScript · Tailwind CSS v4 · fumadocs-ui"
 
 ## Brand Color Scale — OKLCH
 
-Primary hue: **H=210** (Cobru blue)
+Primary hue: **H=150** (Cobru green `#2fe26d`)
 
 | Token         | OKLCH                  | Hex approx | Use                  |
 | ------------- | ---------------------- | ---------- | -------------------- |
-| `--brand-50`  | `oklch(0.97 0.02 210)` | #f0f8ff    | subtle bg tint       |
-| `--brand-100` | `oklch(0.93 0.05 210)` | #daf0fd    | brand-tinted surface |
-| `--brand-200` | `oklch(0.87 0.09 210)` | #b5e0fa    | muted interactive    |
-| `--brand-300` | `oklch(0.78 0.13 210)` | #80c8f7    | dark mode text       |
-| `--brand-400` | `oklch(0.70 0.15 210)` | #55b5f4    | dark mode primary    |
-| `--brand-500` | `oklch(0.67 0.17 210)` | #2ea3f2    | **base brand**       |
-| `--brand-600` | `oklch(0.57 0.17 210)` | #1e7fc4    | hover states         |
-| `--brand-700` | `oklch(0.47 0.15 210)` | #155f9a    | active / pressed     |
-| `--brand-800` | `oklch(0.38 0.12 210)` | #0e4372    | dark emphasis        |
-| `--brand-900` | `oklch(0.28 0.08 210)` | #082b4a    | near-black           |
-| `--brand-950` | `oklch(0.18 0.05 210)` | #041a2e    | deepest              |
+| `--brand-50`  | `oklch(0.98 0.02 150)` | #f4fff7    | subtle bg tint       |
+| `--brand-100` | `oklch(0.95 0.05 150)` | #defde9    | brand-tinted surface |
+| `--brand-200` | `oklch(0.90 0.09 150)` | #bff8d2    | muted interactive    |
+| `--brand-300` | `oklch(0.84 0.13 150)` | #93f3b6    | dark mode text       |
+| `--brand-400` | `oklch(0.74 0.16 150)` | #57eb8d    | dark mode primary    |
+| `--brand-500` | `oklch(0.63 0.17 150)` | #2fe26d    | **base brand**       |
+| `--brand-600` | `oklch(0.56 0.16 150)` | #21c95f    | hover states         |
+| `--brand-700` | `oklch(0.44 0.14 150)` | #16a34a    | active / pressed     |
+| `--brand-800` | `oklch(0.34 0.11 150)` | #0d7a36    | dark emphasis        |
+| `--brand-900` | `oklch(0.24 0.08 150)` | #0a5427    | near-black           |
+| `--brand-950` | `oklch(0.18 0.05 150)` | #082c18    | deepest              |
+
+Support hue: **H=210** (Cobru blue)
+| Token | OKLCH | Use |
+| ----- | ----- | --- |
+| `--blue-300` | `oklch(0.78 0.13 210)` | Informational text and highlights |
+| `--blue-500` | `oklch(0.67 0.17 210)` | API accents and info states |
+| `--blue-700` | `oklch(0.47 0.15 210)` | Dark emphasis for info blocks |
 
 Accent hue: **H=200** (Cobru cyan `#19d6ff`)
 | Token | OKLCH | Use |
 | ----- | ----- | --- |
-| `--accent-500` | `oklch(0.82 0.14 200)` | Accent highlights, gradients |
+| `--accent-500` | `oklch(0.82 0.14 200)` | Accent highlights, gradients, shell glows |
 | `--accent-300` | `oklch(0.88 0.11 200)` | Light accent tints |
 
 Purple: **H=275** (secondary `#5a3cf0`)
@@ -131,7 +138,7 @@ tokens/source/       ← DTCG JSON source (primitives, semantic, motion)
 | ---------------------------------- | ----- | -------- |
 | `text-primary` on `bg-base`        | 7:1   | AAA      |
 | `text-secondary` on `bg-base`      | 4.5:1 | AA       |
-| `brand-primary` (#2ea3f2) on white | 3:1   | AA UI    |
+| `brand-primary` (#2fe26d) on white | 3:1   | AA UI    |
 | Text on `brand-primary` bg         | 4.5:1 | AA       |
 
 Verify: https://oklch.com

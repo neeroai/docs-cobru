@@ -8,7 +8,10 @@
     "build": "NODE_ENV=production next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "lint": "biome check .",
+    "lint": "biome check app components i18n lib next.config.mjs postcss.config.mjs proxy.ts source.config.ts package.json tsconfig.json biome.json vercel.json",
+    "openapi:sync": "node scripts/fetch-stoplight-openapi.mjs",
+    "openapi:validate": "node scripts/validate-openapi.mjs",
+    "openapi:validate:strict": "node scripts/validate-openapi.mjs --require-non-placeholder",
     "format": "biome format --write ."
   },
   "dependencies": {
@@ -30,6 +33,7 @@
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "playwright": "^1.59.1",
     "typescript": "^5.8.0"
   }
 }

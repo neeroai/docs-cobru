@@ -1,0 +1,33 @@
+---
+title: Cotizar un cobru
+description: Estima fees y valor neto recibido antes de crear un pago.
+icon: Calculator
+---
+
+## Endpoint
+
+`POST /cobru/estimate/`
+
+<Callout type="info">
+  Documentado en materiales legacy de Cobru. Útil para previsualizaciones de carrito y estimación merchant-side.
+</Callout>
+
+## Ejemplo de request
+
+```json
+{
+  "amount": "5000",
+  "client_assume_costs": true
+}
+```
+
+## Ejemplo de response
+
+```json
+{
+  "cobru_amount": 5000,
+  "cobru_fee": 295,
+  "iva": 56.05,
+  "cobru_payed_amount": 4700
+}
+```

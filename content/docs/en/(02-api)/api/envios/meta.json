@@ -1,0 +1,5 @@
+{
+  "title": "Envios",
+  "icon": "ArrowLeftRight",
+  "pages": ["index", "send", "list"]
+}

@@ -1,0 +1,80 @@
+---
+title: Refresh token
+description: Intercambia el refresh token de Cobru por un access token de corta duración.
+icon: KeyRound
+---
+
+## Endpoint
+
+`POST /token/refresh/`
+
+<Callout type="info">
+  Verificado contra sandbox y contra los learnings internos de integración.
+</Callout>
+
+## Headers
+
+```http
+Api-Token: {tu_api_token}
+Api-Secret-Key: {tu_api_secret}
+Content-Type: application/json
+```
+
+## Body
+
+```json
+{ "refresh": "tu_refresh_token" }
+```
+
+## Response
+
+```json
+{ "access": "eyJ0eXAi..." }
+```
+
+## curl
+
+```bash
+curl -X POST https://dev.cobru.co/token/refresh/ \
+  -H "Api-Token: $COBRU_API_TOKEN" \
+  -H "Api-Secret-Key: $COBRU_API_SECRET" \
+  -H "Content-Type: application/json" \
+  -d '{"refresh":"'"$COBRU_REFRESH_TOKEN"'"}'
+```
+
+## Node.js
+
+```ts
+const response = await fetch('https://dev.cobru.co/token/refresh/', {
+  method: 'POST',
+  headers: {
+    'Api-Token': process.env.COBRU_API_TOKEN!,
+    'Api-Secret-Key': process.env.COBRU_API_SECRET!,
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    refresh: process.env.COBRU_REFRESH_TOKEN,
+  }),
+});
+
+const data = await response.json();
+```
+
+## Python
+
+```python
+import os
+import requests
+
+response = requests.post(
+    "https://dev.cobru.co/token/refresh/",
+    headers={
+        "Api-Token": os.environ["COBRU_API_TOKEN"],
+        "Api-Secret-Key": os.environ["COBRU_API_SECRET"],
+        "Content-Type": "application/json",
+    },
+    json={"refresh": os.environ["COBRU_REFRESH_TOKEN"]},
+)
+
+data = response.json()
+```

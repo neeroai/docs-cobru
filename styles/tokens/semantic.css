@@ -9,26 +9,28 @@
    ============================================================ */
 
 /* ── LIGHT THEME ── */
-[data-theme="light"],
-:root {
+:root,
+.light {
   /* Backgrounds */
-  --color-bg-base: var(--neutral-50); /* page canvas */
+  --color-bg-base: var(--neutral-0); /* page canvas */
   --color-bg-raised: var(--neutral-0); /* cards, panels */
-  --color-bg-overlay: var(--neutral-100); /* subtle containers */
+  --color-bg-overlay: var(--neutral-50); /* subtle containers */
   --color-bg-float: var(--neutral-0); /* modals, dropdowns */
   --color-bg-inverted: var(--neutral-900); /* inverted sections */
+  --color-bg-shell: var(--neutral-0);
+  --color-bg-shell-elevated: var(--neutral-0);
 
   /* Text */
   --color-text-primary: var(--neutral-950);
-  --color-text-secondary: var(--neutral-700);
+  --color-text-secondary: var(--neutral-600);
   --color-text-tertiary: var(--neutral-500);
   --color-text-disabled: var(--neutral-400);
   --color-text-inverse: var(--neutral-50);
-  --color-text-brand: var(--brand-600);
+  --color-text-brand: var(--brand-700);
   --color-text-success: var(--green-700);
   --color-text-warning: var(--amber-700);
   --color-text-error: var(--red-700);
-  --color-text-info: var(--blue-700);
+  --color-text-info: var(--neutral-700);
 
   /* Borders */
   --color-border-default: var(--neutral-200);
@@ -60,37 +62,39 @@
   --color-error-text: var(--red-700);
 
   /* Feedback — Info */
-  --color-info-bg: oklch(0.95 0.04 210);
-  --color-info-border: var(--brand-300);
-  --color-info-text: var(--brand-700);
+  --color-info-bg: var(--neutral-50);
+  --color-info-border: var(--neutral-200);
+  --color-info-text: var(--neutral-700);
 
   /* ── fumadocs-ui bridge — light ── */
-  --fd-background: var(--neutral-0);
+  --fd-background: var(--color-bg-shell);
   --fd-foreground: var(--neutral-950);
-  --fd-muted: var(--neutral-100);
+  --fd-muted: var(--neutral-50);
   --fd-muted-foreground: var(--neutral-500);
   --fd-popover: var(--neutral-0);
   --fd-popover-foreground: var(--neutral-950);
-  --fd-card: var(--neutral-50);
+  --fd-card: var(--neutral-0);
   --fd-card-foreground: var(--neutral-950);
   --fd-border: var(--neutral-200);
   --fd-primary: var(--brand-500);
-  --fd-primary-foreground: oklch(1 0 0);
-  --fd-secondary: var(--neutral-100);
+  --fd-primary-foreground: var(--neutral-950);
+  --fd-secondary: var(--neutral-50);
   --fd-secondary-foreground: var(--neutral-950);
-  --fd-accent: var(--brand-100);
+  --fd-accent: color-mix(in oklab, var(--brand-100) 60%, white);
   --fd-accent-foreground: var(--brand-700);
   --fd-ring: var(--brand-400);
 }
 
 /* ── DARK THEME ── */
-[data-theme="dark"] {
+.dark {
   /* Backgrounds */
   --color-bg-base: var(--neutral-950);
   --color-bg-raised: var(--neutral-900);
-  --color-bg-overlay: oklch(0.21 0.03 220);
-  --color-bg-float: oklch(0.25 0.03 220);
+  --color-bg-overlay: var(--neutral-900);
+  --color-bg-float: var(--neutral-900);
   --color-bg-inverted: var(--neutral-100);
+  --color-bg-shell: var(--neutral-950);
+  --color-bg-shell-elevated: var(--neutral-900);
 
   /* Text */
   --color-text-primary: var(--neutral-50);
@@ -102,7 +106,7 @@
   --color-text-success: var(--green-300);
   --color-text-warning: var(--amber-300);
   --color-text-error: var(--red-300);
-  --color-text-info: var(--brand-300);
+  --color-text-info: var(--neutral-300);
 
   /* Borders */
   --color-border-default: oklch(0.25 0.02 220);
@@ -115,8 +119,8 @@
   --color-brand-primary: var(--brand-400);
   --color-brand-hover: var(--brand-300);
   --color-brand-active: var(--brand-500);
-  --color-brand-subtle: oklch(0.21 0.05 210);
-  --color-brand-muted: oklch(0.25 0.07 210);
+  --color-brand-subtle: color-mix(in oklab, var(--brand-950) 84%, var(--brand-500));
+  --color-brand-muted: color-mix(in oklab, var(--brand-950) 70%, var(--brand-500));
 
   /* Feedback — Success */
   --color-success-bg: oklch(0.2 0.04 150);
@@ -134,25 +138,25 @@
   --color-error-text: var(--red-300);
 
   /* Feedback — Info */
-  --color-info-bg: oklch(0.2 0.04 210);
-  --color-info-border: var(--brand-700);
-  --color-info-text: var(--brand-300);
+  --color-info-bg: var(--neutral-900);
+  --color-info-border: var(--neutral-700);
+  --color-info-text: var(--neutral-300);
 
   /* ── fumadocs-ui bridge — dark ── */
-  --fd-background: var(--neutral-950);
+  --fd-background: var(--color-bg-shell);
   --fd-foreground: var(--neutral-50);
-  --fd-muted: oklch(0.21 0.03 220);
+  --fd-muted: var(--neutral-900);
   --fd-muted-foreground: var(--neutral-500);
-  --fd-popover: oklch(0.21 0.03 220);
+  --fd-popover: var(--neutral-900);
   --fd-popover-foreground: var(--neutral-50);
-  --fd-card: var(--neutral-900);
+  --fd-card: var(--color-bg-shell-elevated);
   --fd-card-foreground: var(--neutral-50);
   --fd-border: oklch(0.25 0.02 220);
   --fd-primary: var(--brand-400);
-  --fd-primary-foreground: oklch(1 0 0);
-  --fd-secondary: oklch(0.21 0.03 220);
+  --fd-primary-foreground: var(--neutral-950);
+  --fd-secondary: var(--neutral-900);
   --fd-secondary-foreground: var(--neutral-50);
-  --fd-accent: oklch(0.21 0.05 210);
+  --fd-accent: color-mix(in oklab, var(--brand-950) 82%, var(--brand-500));
   --fd-accent-foreground: var(--brand-300);
   --fd-ring: var(--brand-500);
 }

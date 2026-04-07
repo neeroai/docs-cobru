@@ -1,5 +1,5 @@
-import { createOpenAPI } from "fumadocs-openapi/server";
+import { createOpenAPI } from 'fumadocs-openapi/server';
 
 export const openapi = createOpenAPI({
-  input: ["./openapi/cobru.yaml"],
+  input: ['./openapi/cobru.yaml'],
 });

@@ -4,52 +4,38 @@
    Source: tokens/source/primitives.tokens.json
    Standard: docs-global/standards/design-tokens.md
 
-   Brand hue: 210 (Cobru blue)
-   Accent hue: 200 (Cobru cyan)
-   Purple hue: 275 (Cobru secondary)
+   Brand hue: 150 (Cobru green)
    Neutral hue: 220 (navy-tinted ink)
    ============================================================ */
 
 :root {
-  /* ── BRAND — Cobru Blue (H=210) ── */
-  --brand-50: oklch(0.97 0.02 210);
-  --brand-100: oklch(0.93 0.05 210);
-  --brand-200: oklch(0.87 0.09 210);
-  --brand-300: oklch(0.78 0.13 210);
-  --brand-400: oklch(0.7 0.15 210);
-  --brand-500: oklch(0.67 0.17 210); /* #2ea3f2 */
-  --brand-600: oklch(0.57 0.17 210); /* #1e7fc4 */
-  --brand-700: oklch(0.47 0.15 210);
-  --brand-800: oklch(0.38 0.12 210);
-  --brand-900: oklch(0.28 0.08 210);
-  --brand-950: oklch(0.18 0.05 210);
-
-  /* ── ACCENT — Cobru Cyan (H=200) ── */
-  --accent-200: oklch(0.93 0.07 200);
-  --accent-300: oklch(0.88 0.11 200);
-  --accent-400: oklch(0.85 0.13 200);
-  --accent-500: oklch(0.82 0.14 200); /* #19d6ff */
-  --accent-600: oklch(0.72 0.13 200);
-
-  /* ── PURPLE — Cobru Secondary (H=275) ── */
-  --purple-400: oklch(0.55 0.22 275);
-  --purple-500: oklch(0.44 0.26 275); /* #5a3cf0 */
-  --purple-600: oklch(0.36 0.22 275);
+  /* ── BRAND — Cobru Green (H=150) ── */
+  --brand-50: oklch(0.98 0.02 150);
+  --brand-100: oklch(0.95 0.05 150);
+  --brand-200: oklch(0.9 0.09 150);
+  --brand-300: oklch(0.84 0.13 150);
+  --brand-400: oklch(0.74 0.16 150);
+  --brand-500: oklch(0.63 0.17 150); /* #2fe26d */
+  --brand-600: oklch(0.56 0.16 150); /* #21c95f */
+  --brand-700: oklch(0.44 0.14 150); /* #16a34a */
+  --brand-800: oklch(0.34 0.11 150);
+  --brand-900: oklch(0.24 0.08 150);
+  --brand-950: oklch(0.18 0.05 150);
 
   /* ── NEUTRAL — Cobru Ink (navy-tinted, H=220) ── */
   --neutral-0: oklch(1 0 0);
-  --neutral-50: oklch(0.97 0.01 220); /* #f7fbff */
-  --neutral-100: oklch(0.93 0.02 220); /* #e8f0fa */
-  --neutral-200: oklch(0.85 0.02 220); /* #d0dded */
-  --neutral-300: oklch(0.74 0.04 220); /* #a8bee0 */
-  --neutral-400: oklch(0.64 0.04 220);
-  --neutral-500: oklch(0.52 0.04 220); /* #4b647f */
-  --neutral-600: oklch(0.42 0.05 220);
-  --neutral-700: oklch(0.4 0.05 220); /* #35527c */
-  --neutral-800: oklch(0.28 0.05 220);
-  --neutral-900: oklch(0.22 0.06 220); /* #0b1f44 */
-  --neutral-950: oklch(0.14 0.04 220); /* #050d1a */
-  --neutral-1000: oklch(0.08 0.02 220);
+  --neutral-50: oklch(0.985 0.002 220);
+  --neutral-100: oklch(0.965 0.004 220);
+  --neutral-200: oklch(0.92 0.006 220);
+  --neutral-300: oklch(0.85 0.008 220);
+  --neutral-400: oklch(0.72 0.01 220);
+  --neutral-500: oklch(0.58 0.012 220);
+  --neutral-600: oklch(0.47 0.012 220);
+  --neutral-700: oklch(0.37 0.012 220);
+  --neutral-800: oklch(0.27 0.01 220);
+  --neutral-900: oklch(0.21 0.008 220);
+  --neutral-950: oklch(0.145 0.006 220);
+  --neutral-1000: oklch(0.09 0.004 220);
 
   /* ── STATUS: Green (success) ── */
   --green-300: oklch(0.8 0.14 150);
@@ -67,8 +53,4 @@
   --red-500: oklch(0.6 0.18 25); /* #dc2626 */
   --red-700: oklch(0.44 0.16 25);
 
-  /* ── STATUS: Blue (info) — same as brand ── */
-  --blue-300: var(--brand-300);
-  --blue-500: var(--brand-500);
-  --blue-700: var(--brand-700);
 }

@@ -1,0 +1,33 @@
+---
+title: Quote a cobru
+description: Estimate Cobru fees and net received amount before creating a payment.
+icon: Calculator
+---
+
+## Endpoint
+
+`POST /cobru/estimate/`
+
+<Callout type="info">
+  Documented in legacy Cobru materials. Useful for cart previews and merchant-side fee estimation.
+</Callout>
+
+## Example request
+
+```json
+{
+  "amount": "5000",
+  "client_assume_costs": true
+}
+```
+
+## Example response
+
+```json
+{
+  "cobru_amount": 5000,
+  "cobru_fee": 295,
+  "iva": 56.05,
+  "cobru_payed_amount": 4700
+}
+```

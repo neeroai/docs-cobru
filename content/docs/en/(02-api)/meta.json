@@ -1,0 +1,6 @@
+{
+  "title": "API",
+  "icon": "Braces",
+  "defaultOpen": true,
+  "pages": ["...api"]
+}

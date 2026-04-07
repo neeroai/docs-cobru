@@ -1,7 +1,7 @@
-import { source } from "@/lib/source";
-import { baseOptions } from "@/lib/layout.shared";
-import { DocsLayout } from "fumadocs-ui/layouts/docs";
-import type { ReactNode } from "react";
+import { getDocsLayoutOptions } from '@/lib/layout.shared';
+import { source } from '@/lib/source';
+import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
+import type { ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
@@ -12,7 +12,7 @@ export default async function DocsRootLayout({ children, params }: Props) {
   const { locale } = await params;
 
   return (
-    <DocsLayout tree={source.getPageTree(locale)} {...baseOptions(locale)}>
+    <DocsLayout tree={source.getPageTree(locale)} {...getDocsLayoutOptions(locale)}>
       {children}
     </DocsLayout>
   );

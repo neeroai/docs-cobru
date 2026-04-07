@@ -1,0 +1,89 @@
+---
+title: Create a cobru
+description: Create a hosted Cobru payment link.
+icon: PlusCircle
+---
+
+## Endpoint
+
+`POST /cobru/`
+
+<Callout type="info">
+  Verified in sandbox. This is the best-documented and most production-ready Cobru flow today.
+</Callout>
+
+## Required fields
+
+```json
+{
+  "amount": 50000,
+  "description": "Order #123",
+  "expiration_days": 1,
+  "client_assume_costs": false,
+  "iva": 0,
+  "payment_method_enabled": "{\"Bre-B\":true,\"pse\":true,\"NEQUI\":true}",
+  "payer_redirect_url": "https://yourapp.com/payment-success",
+  "callback": "https://yourapp.com/api/cobru/webhook"
+}
+```
+
+## Known quirks
+
+| Quirk | Detail | Fix |
+|-------|--------|-----|
+| `payment_method_enabled` type | must be a JSON string | use `JSON.stringify()` |
+| missing redirect URLs | returns misleading `403` | always send `payer_redirect_url` and `callback` |
+| response `url` | short slug only | build `{baseUrl}/{url}` yourself |
+| response `amount` | string with decimals | parse before doing math |
+
+## Common payment method flags
+
+```json
+{
+  "cobru": true,
+  "pse": true,
+  "bancolombia_transfer": true,
+  "credit_card": true,
+  "NEQUI": true,
+  "dale": true,
+  "efecty": true,
+  "corresponsal_bancolombia": true,
+  "BTC": false,
+  "CUSD": false
+}
+```
+
+## Response example
+
+```json
+{
+  "pk": 27150,
+  "amount": "50000.00",
+  "state": 0,
+  "url": "3gofdf6f",
+  "payed_amount": "47605.00",
+  "fee_amount": 2395,
+  "idempotency_key": "3114242222_8de7c88b84...",
+  "currency_code": "COP"
+}
+```
+
+## curl
+
+```bash
+curl -X POST https://dev.cobru.co/cobru/ \
+  -H "Api-Token: $COBRU_API_TOKEN" \
+  -H "Api-Secret-Key: $COBRU_API_SECRET" \
+  -H "Authorization: Bearer $COBRU_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "amount": 50000,
+    "description": "Order #123",
+    "expiration_days": 1,
+    "client_assume_costs": false,
+    "iva": 0,
+    "payment_method_enabled": "{\"Bre-B\":true,\"pse\":true}",
+    "payer_redirect_url": "https://yourapp.com/payment-success",
+    "callback": "https://yourapp.com/api/cobru/webhook"
+  }'
+```

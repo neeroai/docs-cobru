@@ -1,0 +1,82 @@
+---
+title: Authentication
+description: Credential model, token refresh flow, and security guidance for the Cobru API.
+icon: ShieldCheck
+---
+
+Cobru uses a layered authentication model:
+
+- `Api-Token`: your publishable integration key
+- `Api-Secret-Key`: your private backend key
+- `Authorization: Bearer {access}`: a short-lived access token from `/token/refresh/`
+
+## Credential roles
+
+| Credential | Where to use it | Notes |
+|------------|-----------------|-------|
+| `Api-Token` | backend requests | Treat as integration credential, not as a browser-safe key until Cobru publishes a stricter trust model |
+| `Api-Secret-Key` | backend requests only | Never expose in frontend code, mobile apps, or client-side bundles |
+| `refresh` token | backend secret storage only | Used only to mint short-lived access tokens |
+| `access` token | backend requests | Cache aggressively, rotate often |
+
+## Token refresh flow
+
+```bash
+curl -X POST https://dev.cobru.co/token/refresh/ \
+  -H "Api-Token: $COBRU_API_TOKEN" \
+  -H "Api-Secret-Key: $COBRU_API_SECRET" \
+  -H "Content-Type: application/json" \
+  -d '{"refresh":"'"$COBRU_REFRESH_TOKEN"'"}'
+```
+
+**Expected response**
+
+```json
+{ "access": "eyJ0eXAi..." }
+```
+
+<Callout type="warn">
+  The body field is `refresh`, not `refresh_token`. This discrepancy is one of the most important Cobru quirks to document internally.
+</Callout>
+
+## Required headers for API requests
+
+```http
+Api-Token: {your_api_token}
+Api-Secret-Key: {your_api_secret}
+Authorization: Bearer {access}
+Accept: application/json
+Content-Type: application/json
+```
+
+## Token lifetime and caching
+
+| Property | Recommendation |
+|----------|----------------|
+| Observed token lifetime | about 60 minutes |
+| Safe cache TTL | 50 minutes |
+| Edge runtime caveat | in-memory caches do not persist between invocations |
+| Production fix | keep the token in Redis, Vercel KV, or another shared cache |
+
+## Environment variables
+
+```bash
+COBRU_BASE_URL=https://dev.cobru.co
+COBRU_API_TOKEN=...
+COBRU_API_SECRET=...
+COBRU_REFRESH_TOKEN=...
+```
+
+## Security checklist
+
+- Keep all Cobru credentials in server-side environment variables only.
+- Never send `Api-Secret-Key` to browsers or mobile clients.
+- Refresh the access token from the server, not from the frontend.
+- Rotate credentials when team membership changes.
+- Use HTTPS-only callback URLs in production.
+
+## Next reading
+
+- `/docs/getting-started`
+- `/docs/webhooks`
+- `/docs/api/authentication/refresh`

@@ -1,110 +1,33 @@
 {
-  "$description": "Cobru semantic tokens",
+  "$description": "Cobru semantic tokens — Fumadocs-compatible docs system",
   "color": {
     "text": {
-      "primary": { "$value": "{color.ink.900}", "$type": "color" },
-      "secondary": { "$value": "{color.ink.700}", "$type": "color" },
-      "muted": { "$value": "{color.ink.500}", "$type": "color" },
-      "inverse": { "$value": "#ffffff", "$type": "color" },
-      "on-dark": { "$value": "rgba(255, 255, 255, 0.85)", "$type": "color" },
-      "on-brand": { "$value": "#042313", "$type": "color" }
+      "primary": { "$value": "{neutral.950}", "$type": "color" },
+      "secondary": { "$value": "{neutral.600}", "$type": "color" },
+      "muted": { "$value": "{neutral.500}", "$type": "color" },
+      "inverse": { "$value": "{neutral.0}", "$type": "color" },
+      "brand": { "$value": "{brand.700}", "$type": "color" }
     },
-    "success": { "$value": "{color.status.success}", "$type": "color" },
-    "success-bg": { "$value": "{color.status.success-bg}", "$type": "color" },
-    "warning": { "$value": "{color.status.warning}", "$type": "color" },
-    "warning-bg": { "$value": "{color.status.warning-bg}", "$type": "color" },
-    "info": { "$value": "{color.status.info}", "$type": "color" },
-    "eyebrow": { "$value": "{color.green.200}", "$type": "color" },
     "bg": {
-      "page": { "$value": "#eef4fb", "$type": "color" },
-      "cream": { "$value": "{color.surface.cream}", "$type": "color" },
-      "soft": { "$value": "{color.ink.50}", "$type": "color" },
-      "band": { "$value": "{color.ink.100}", "$type": "color" },
-      "card": { "$value": "#ffffff", "$type": "color" },
-      "dark": { "$value": "{color.ink.900}", "$type": "color" },
-      "dark-secondary": { "$value": "#0f2a5c", "$type": "color" }
+      "base": { "$value": "{neutral.0}", "$type": "color" },
+      "muted": { "$value": "{neutral.50}", "$type": "color" },
+      "raised": { "$value": "{neutral.0}", "$type": "color" },
+      "dark": { "$value": "{neutral.950}", "$type": "color" },
+      "dark-raised": { "$value": "{neutral.900}", "$type": "color" }
     },
     "border": {
-      "default": { "$value": "{color.ink.200}", "$type": "color" },
-      "strong": { "$value": "{color.ink.300}", "$type": "color" },
-      "subtle": { "$value": "rgba(255, 255, 255, 0.1)", "$type": "color" },
-      "focus": { "$value": "{color.cobru.blue}", "$type": "color" }
+      "default": { "$value": "{neutral.200}", "$type": "color" },
+      "strong": { "$value": "{neutral.300}", "$type": "color" },
+      "focus": { "$value": "{brand.500}", "$type": "color" }
     },
-    "error": { "$value": "#dc2626", "$type": "color" },
-    "error-ring-focus": {
-      "$value": "rgba(220, 38, 38, 0.35)",
-      "$type": "color"
+    "brand": {
+      "primary": { "$value": "{brand.500}", "$type": "color" },
+      "hover": { "$value": "{brand.600}", "$type": "color" },
+      "active": { "$value": "{brand.700}", "$type": "color" },
+      "subtle": { "$value": "{brand.100}", "$type": "color" }
     },
-    "selection": { "$value": "rgba(69, 199, 240, 0.18)", "$type": "color" }
-  },
-  "gradient": {
-    "blue": {
-      "$value": "linear-gradient(135deg, #2ea3f2, #19d6ff)",
-      "$type": "gradient"
-    },
-    "green": {
-      "$value": "linear-gradient(135deg, #2fe26d, #9afdbf)",
-      "$type": "gradient"
-    },
-    "purple": {
-      "$value": "linear-gradient(135deg, #5a3cf0, #8a56ff)",
-      "$type": "gradient"
-    },
-    "cyan": {
-      "$value": "linear-gradient(135deg, #19d6ff, #2ea3f2)",
-      "$type": "gradient"
-    },
-    "cta": {
-      "$value": "linear-gradient(120deg, #9afdbf, #2fe26d)",
-      "$type": "gradient"
-    },
-    "dark": {
-      "$value": "linear-gradient(160deg, #0b1f44, #0f2a5c)",
-      "$type": "gradient"
-    },
-    "hero": {
-      "$value": "linear-gradient(-210deg, #07578c 27%, #0e94d8 59%, #42f0cd 92%)",
-      "$type": "gradient"
-    },
-    "text-blue": {
-      "$value": "linear-gradient(135deg, #2ea3f2, #42f0cd)",
-      "$type": "gradient"
-    },
-    "text-green": {
-      "$value": "linear-gradient(135deg, #2fe26d, #9afdbf)",
-      "$type": "gradient"
-    },
-    "service-1": {
-      "$value": "linear-gradient(140deg, #2ea3f2, #19d6ff)",
-      "$type": "gradient"
-    },
-    "service-2": {
-      "$value": "linear-gradient(140deg, #1788a8, #20c8ae)",
-      "$type": "gradient"
-    },
-    "service-3": {
-      "$value": "linear-gradient(140deg, #4e6dff, #6d8dff)",
-      "$type": "gradient"
-    },
-    "service-4": {
-      "$value": "linear-gradient(140deg, #5a3cf0, #8b54ff)",
-      "$type": "gradient"
-    },
-    "service-5": {
-      "$value": "linear-gradient(140deg, #0d4f8d, #2ea3f2)",
-      "$type": "gradient"
-    },
-    "service-6": {
-      "$value": "linear-gradient(140deg, #1180b0, #19d6ff)",
-      "$type": "gradient"
-    },
-    "card-stories-dark": {
-      "$value": "linear-gradient(135deg, color-mix(in srgb, #5a3cf0 15%, transparent) 0%, color-mix(in srgb, #2ea3f2 12%, transparent) 50%, color-mix(in srgb, #19d6ff 10%, transparent) 100%)",
-      "$type": "gradient"
-    },
-    "card-stories-light": {
-      "$value": "linear-gradient(135deg, color-mix(in srgb, #5a3cf0 32%, white) 0%, color-mix(in srgb, #2ea3f2 28%, white) 55%, color-mix(in srgb, #19d6ff 18%, white) 100%)",
-      "$type": "gradient"
-    }
+    "success": { "$value": "{green.700}", "$type": "color" },
+    "warning": { "$value": "{amber.700}", "$type": "color" },
+    "error": { "$value": "{red.700}", "$type": "color" }
   }
 }

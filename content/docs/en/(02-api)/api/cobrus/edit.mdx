@@ -1,0 +1,35 @@
+---
+title: Edit a cobru
+description: Update mutable fields on an existing Cobru payment link.
+icon: Pencil
+---
+
+## Endpoint
+
+`POST /edit_cobru/`
+
+<Callout type="info">
+  Documented in legacy Cobru materials. Verify in sandbox which fields remain editable after a payment has been shared or partially used.
+</Callout>
+
+## Fields seen in legacy documentation
+
+| Field | Required | Purpose |
+|-------|----------|---------|
+| `url` | yes | identify the cobru to edit |
+| `description` | no | update the description |
+| `amount` | no | change the amount |
+| `expiration_days` | no | change expiration |
+| `payment_methods` | no | update allowed methods |
+| `fee_iva` | no | update tax percentage |
+
+## Example request
+
+```json
+{
+  "url": "xx17elpi",
+  "description": "updated description",
+  "amount": 80000,
+  "expiration_days": 10
+}
+```

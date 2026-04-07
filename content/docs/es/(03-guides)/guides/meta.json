@@ -1,0 +1,6 @@
+{
+  "title": "Guías",
+  "icon": "Waypoints",
+  "defaultOpen": true,
+  "pages": ["qr-breb", "balances", "movements", "whitelabel"]
+}

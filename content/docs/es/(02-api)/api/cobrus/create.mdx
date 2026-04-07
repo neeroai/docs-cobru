@@ -1,0 +1,89 @@
+---
+title: Crear un cobru
+description: Crea un link de pago hosted de Cobru.
+icon: PlusCircle
+---
+
+## Endpoint
+
+`POST /cobru/`
+
+<Callout type="info">
+  Verificado en sandbox. Hoy es el flujo Cobru mejor entendido y más cercano a producción.
+</Callout>
+
+## Campos requeridos
+
+```json
+{
+  "amount": 50000,
+  "description": "Orden #123",
+  "expiration_days": 1,
+  "client_assume_costs": false,
+  "iva": 0,
+  "payment_method_enabled": "{\"Bre-B\":true,\"pse\":true,\"NEQUI\":true}",
+  "payer_redirect_url": "https://tuapp.com/pago-exitoso",
+  "callback": "https://tuapp.com/api/cobru/webhook"
+}
+```
+
+## Quirks conocidos
+
+| Quirk | Detalle | Fix |
+|-------|---------|-----|
+| tipo de `payment_method_enabled` | debe ser un string JSON | usar `JSON.stringify()` |
+| faltan redirect URLs | devuelve `403` engañoso | enviar siempre `payer_redirect_url` y `callback` |
+| `url` en response | solo slug corto | construir `{baseUrl}/{url}` manualmente |
+| `amount` en response | string con decimales | parsearlo antes de operar |
+
+## Flags comunes de métodos de pago
+
+```json
+{
+  "cobru": true,
+  "pse": true,
+  "bancolombia_transfer": true,
+  "credit_card": true,
+  "NEQUI": true,
+  "dale": true,
+  "efecty": true,
+  "corresponsal_bancolombia": true,
+  "BTC": false,
+  "CUSD": false
+}
+```
+
+## Ejemplo de respuesta
+
+```json
+{
+  "pk": 27150,
+  "amount": "50000.00",
+  "state": 0,
+  "url": "3gofdf6f",
+  "payed_amount": "47605.00",
+  "fee_amount": 2395,
+  "idempotency_key": "3114242222_8de7c88b84...",
+  "currency_code": "COP"
+}
+```
+
+## curl
+
+```bash
+curl -X POST https://dev.cobru.co/cobru/ \
+  -H "Api-Token: $COBRU_API_TOKEN" \
+  -H "Api-Secret-Key: $COBRU_API_SECRET" \
+  -H "Authorization: Bearer $COBRU_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "amount": 50000,
+    "description": "Orden #123",
+    "expiration_days": 1,
+    "client_assume_costs": false,
+    "iva": 0,
+    "payment_method_enabled": "{\"Bre-B\":true,\"pse\":true}",
+    "payer_redirect_url": "https://tuapp.com/pago-exitoso",
+    "callback": "https://tuapp.com/api/cobru/webhook"
+  }'
+```

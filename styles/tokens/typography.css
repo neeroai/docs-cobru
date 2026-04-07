@@ -21,11 +21,11 @@
   --text-lg: 1.125rem; /* 18px */
 
   /* Fluid — headings */
-  --text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
-  --text-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 1.875rem);
-  --text-3xl: clamp(1.875rem, 1.65rem + 1.1vw, 2.25rem);
-  --text-4xl: clamp(2.25rem, 1.95rem + 1.5vw, 3rem);
-  --text-5xl: clamp(3rem, 2.5rem + 2.5vw, 4rem);
+  --text-xl: clamp(1.25rem, 1.12rem + 0.6vw, 1.56rem);
+  --text-2xl: clamp(1.56rem, 1.34rem + 0.95vw, 2rem);
+  --text-3xl: clamp(1.95rem, 1.7rem + 1.25vw, 2.5rem);
+  --text-4xl: clamp(2.35rem, 2rem + 1.8vw, 3.35rem);
+  --text-5xl: clamp(3rem, 2.5rem + 2.7vw, 4.5rem);
 
   /* ── FONT WEIGHT ── */
   --weight-regular: 400;
@@ -61,12 +61,12 @@
 
   /* Headings */
   --type-h1-size: var(--text-4xl);
-  --type-h1-weight: var(--weight-bold);
+  --type-h1-weight: var(--weight-semibold);
   --type-h1-leading: var(--leading-tight);
   --type-h1-tracking: var(--tracking-tighter);
 
   --type-h2-size: var(--text-3xl);
-  --type-h2-weight: var(--weight-semibold);
+  --type-h2-weight: var(--weight-medium);
   --type-h2-leading: var(--leading-tight);
   --type-h2-tracking: var(--tracking-tight);
 

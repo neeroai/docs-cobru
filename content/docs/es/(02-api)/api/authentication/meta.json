@@ -1,0 +1,5 @@
+{
+  "title": "Autenticación",
+  "icon": "ShieldCheck",
+  "pages": ["index", "refresh"]
+}
