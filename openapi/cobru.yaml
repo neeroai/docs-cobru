@@ -3,20 +3,37 @@ info:
   title: Cobru API
   version: 1.0.0
   description: |
-    API de Cobru para procesar pagos en Colombia.
-    Plataforma regulada por la SFC — acepta PSE, Nequi, Daviplata, Bre-B, tarjetas.
+    Cobru API for payments and operational money movement in Colombia.
 
-    > **PLACEHOLDER**: Reemplazar con el spec exportado desde https://cobru.stoplight.io/
-    > Exportar desde tu cuenta Stoplight → Export → OpenAPI 3.1 YAML → guardar aquí.
+    This OpenAPI file is currently a curated working spec built from:
+    - live sandbox verification on `dev.cobru.co`
+    - Cobru legacy API materials
+    - Cobru API menu captures
 
+    Verification model:
+    - `x-verification-status: verified` means behavior has been validated against sandbox or first-hand integration learnings.
+    - `x-verification-status: legacy-doc` means the contract comes from older Cobru materials and should be re-validated before production dependence.
+    - `x-verification-status: menu-only` means the capability is visible in Cobru's API surface but the contract is still pending extraction.
+
+    This file should still be replaced by the official Stoplight export when available.
   contact:
     email: soporte@cobru.co
 
 servers:
   - url: https://prod.cobru.co
-    description: Producción
+    description: Production
   - url: https://dev.cobru.co
     description: Sandbox
+
+tags:
+  - name: Authentication
+  - name: Cobrus
+  - name: Transfers
+  - name: Cash Withdrawals
+  - name: Bank Withdrawals
+  - name: Services
+  - name: Cards
+  - name: Webhooks
 
 security:
   - ApiToken: []
@@ -38,13 +55,39 @@ components:
       scheme: bearer
 
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Error en la creacion del cobru.
+        detail:
+          type: string
+          example: payment_method_enabled must be a JSON string
+      additionalProperties: true
+
+    TokenRefreshRequest:
+      type: object
+      required: [refresh]
+      properties:
+        refresh:
+          type: string
+          description: Refresh token issued by Cobru
+
     TokenResponse:
       type: object
       properties:
         access:
           type: string
-          description: JWT access token (TTL ~60 min)
+          description: Short-lived JWT access token
       required: [access]
+
+    PaymentMethodsString:
+      type: string
+      description: |
+        JSON-serialized object of enabled payment methods.
+        Cobru expects this field as a string, not as a nested JSON object.
+      example: '{"Bre-B":true,"pse":true,"NEQUI":true}'
 
     CreatePaymentRequest:
       type: object
@@ -58,11 +101,11 @@ components:
       properties:
         amount:
           type: integer
-          description: Amount in COP (integer)
+          description: Amount in COP
           example: 50000
         description:
           type: string
-          example: Pago de servicio
+          example: Order #123
         expiration_days:
           type: integer
           example: 1
@@ -73,59 +116,267 @@ components:
           type: number
           default: 0
         payment_method_enabled:
-          type: string
-          description: |
-            JSON-serialized object of enabled payment methods.
-            Must be JSON.stringify'd before sending.
-          example: '{"Bre-B":true,"bancolombia_qr":true}'
+          $ref: '#/components/schemas/PaymentMethodsString'
         payer_redirect_url:
           type: string
           format: uri
-          description: Redirect URL after payment
         callback:
           type: string
           format: uri
-          description: Webhook URL for payment state updates
         platform:
           type: string
-          description: Platform identifier (optional)
+          example: API
 
     PaymentResponse:
       type: object
       properties:
         pk:
           type: integer
-          description: Internal numeric ID
           example: 27150
-        url:
-          type: string
-          description: |
-            Short slug. Payment URL = {base_url}/{url}
-            NOT a full URL — construct as: https://prod.cobru.co/{url}
-          example: 3gofdf6f
         amount:
           type: string
-          description: Amount as decimal string
           example: '50000.00'
         state:
           type: integer
-          enum: [0, 1, 2, 3, 4]
-          description: |
-            0=pending, 1=processing, 2=rejected, 3=approved, 4=refunded
-        fee_amount:
-          type: integer
-          description: Fee in COP
+          enum: [0, 1, 2, 3, 4, 5]
+        date_created:
+          type: string
+          format: date-time
+        payment_method:
+          type: string
+          nullable: true
+        url:
+          type: string
+          description: Short slug. Final payment URL is `{baseUrl}/{url}`.
+          example: 3gofdf6f
+        owner:
+          type: string
+        name:
+          type: string
         payed_amount:
           type: string
-          description: Net amount received by merchant after fees
-        currency_code:
-          type: string
-          example: COP
-        idempotency_key:
+          example: '47605.00'
+        client_assume_costs:
+          type: boolean
+        payment_method_enabled:
+          $ref: '#/components/schemas/PaymentMethodsString'
+        expiration_days:
+          type: integer
+        fee_amount:
+          type: integer
+        fee_iva_amount:
+          type: integer
+        platform:
           type: string
         callback:
           type: string
+        fee_iva:
+          type: number
+        iva_amount:
+          type: number
+        not_send_email:
+          type: boolean
+        by_topup:
+          type: boolean
+        bank_withdraw:
+          type: string
+          nullable: true
         payer_redirect_url:
+          type: string
+        franchise:
+          type: string
+          nullable: true
+        idempotency_key:
+          type: string
+        wallet_bitcoin:
+          type: string
+          nullable: true
+        amount_bitcoin:
+          type: string
+          nullable: true
+        currency:
+          type: string
+          nullable: true
+        currency_code:
+          type: string
+          example: COP
+
+    PaymentDetailsRequest:
+      type: object
+      required: [name, payment, cc, email, document_type, phone]
+      properties:
+        name:
+          type: string
+        payment:
+          type: string
+          description: |
+            Payment method selector.
+            Deep research suggests Cobru expects `payment`, not `payment_method`.
+        cc:
+          type: string
+          description: Payer document number
+        email:
+          type: string
+          format: email
+        document_type:
+          type: string
+          enum: [CC, TI, CE, PAN, NIT, PASAPORTE]
+        phone:
+          type: string
+        phone_nequi:
+          type: string
+        push:
+          type: boolean
+          default: true
+        bank:
+          type: string
+        address:
+          type: string
+        credit_card:
+          type: string
+        expiration_date:
+          type: string
+        cvv:
+          type: string
+        dues:
+          type: integer
+        json:
+          type: boolean
+          default: true
+
+    CobruDetailResponse:
+      type: object
+      properties:
+        fee_amount:
+          type: integer
+        payer_id:
+          type: string
+        payer_name:
+          type: string
+        payment_method:
+          type: string
+        state:
+          type: integer
+          enum: [0, 1, 2, 3, 4, 5]
+        payer_email:
+          type: string
+        payment_method_enabled:
+          $ref: '#/components/schemas/PaymentMethodsString'
+        date_payed:
+          type: string
+        url:
+          type: string
+        amount:
+          type: integer
+        expiration_days:
+          type: integer
+        payer_phone:
+          type: string
+        iva_amount:
+          type: number
+        date_expired:
+          type: integer
+        date_created:
+          type: integer
+        images:
+          type: string
+          nullable: true
+        description:
+          type: string
+        payed_amount:
+          type: integer
+
+    EstimateRequest:
+      type: object
+      required: [amount]
+      properties:
+        amount:
+          type: string
+          example: '5000'
+        client_assume_costs:
+          type: boolean
+
+    EstimateResponse:
+      type: object
+      properties:
+        cobru_amount:
+          type: integer
+        cobru_fee:
+          type: integer
+        iva:
+          type: number
+        cobru_payed_amount:
+          type: integer
+
+    EditCobruRequest:
+      type: object
+      required: [url]
+      properties:
+        url:
+          type: string
+        description:
+          type: string
+        amount:
+          type: integer
+        expiration_days:
+          type: integer
+        payment_methods:
+          type: string
+        fee_iva:
+          type: string
+
+    TransferRequest:
+      type: object
+      required: [to_user, amount]
+      properties:
+        to_user:
+          type: string
+          description: Recipient phone number
+        amount:
+          type: integer
+
+    CashWithdrawalRequest:
+      type: object
+      required: [method, document, amount, exp_days, name]
+      properties:
+        method:
+          type: string
+          example: efecty
+        document:
+          type: string
+        amount:
+          type: string
+        exp_days:
+          type: string
+        name:
+          type: string
+        coupon:
+          type: string
+        callback:
+          type: string
+          format: uri
+        estimate:
+          type: boolean
+
+    CashWithdrawalResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+        document:
+          type: string
+        ref:
+          type: integer
+        amount:
+          type: integer
+
+    BankCode:
+      type: object
+      properties:
+        bankName:
+          type: string
+        bankCode:
           type: string
 
     WebhookPayload:
@@ -135,7 +386,7 @@ components:
           type: string
         state:
           type: integer
-          enum: [0, 1, 2, 3, 4]
+          enum: [0, 1, 2, 3, 4, 5]
         payment_method:
           type: string
           nullable: true
@@ -144,15 +395,43 @@ components:
         url:
           type: string
 
+  responses:
+    GenericError:
+      description: Cobru error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+webhooks:
+  paymentStateChanged:
+    post:
+      tags: [Webhooks]
+      summary: Payment state callback
+      description: |
+        Cobru sends a POST request to the callback URL provided when creating a payment.
+        Webhooks are not signed today, so consumers should treat them as notifications and re-check state for sensitive flows.
+      x-verification-status: verified
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookPayload'
+      responses:
+        '200':
+          description: Callback received successfully
+
 paths:
   /token/refresh/:
     post:
       operationId: refreshToken
-      summary: Get access token
-      description: |
-        Exchange refresh token for a short-lived access token.
-        Note: field name is `refresh` (NOT `refresh_token` — the WooCommerce plugin is wrong).
       tags: [Authentication]
+      summary: Refresh access token
+      x-verification-status: verified
+      description: |
+        Exchange a Cobru refresh token for a short-lived access token.
+        The request body field is `refresh`, not `refresh_token`.
       security:
         - ApiToken: []
           ApiSecretKey: []
@@ -161,34 +440,30 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required: [refresh]
-              properties:
-                refresh:
-                  type: string
-                  description: Refresh token from Cobru dashboard
+              $ref: '#/components/schemas/TokenRefreshRequest'
       responses:
         '200':
-          description: Access token
+          description: Access token issued
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TokenResponse'
+        default:
+          $ref: '#/components/responses/GenericError'
 
   /cobru/:
     post:
-      operationId: createPayment
-      summary: Create a payment
+      operationId: createCobru
+      tags: [Cobrus]
+      summary: Create a cobru
+      x-verification-status: verified
       description: |
-        Creates a new payment link. Returns a short URL slug — not a full URL.
-        Construct the payment URL as: `{base_url}/{url}`.
+        Create a hosted Cobru payment object.
 
-        **Critical**: `payment_method_enabled` must be a JSON-serialized string.
-      tags: [Payments]
-      security:
-        - ApiToken: []
-          ApiSecretKey: []
-          BearerAuth: []
+        Important quirks:
+        - `payment_method_enabled` must be a JSON string.
+        - `payer_redirect_url` and `callback` should always be included.
+        - the response field `url` is a short slug, not a full URL.
       requestBody:
         required: true
         content:
@@ -197,28 +472,418 @@ paths:
               $ref: '#/components/schemas/CreatePaymentRequest'
       responses:
         '201':
-          description: Payment created
+          description: Cobru created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PaymentResponse'
         '400':
-          description: Validation error. Common cause — `payment_method_enabled` sent as object instead of JSON string.
+          description: Validation error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  detail:
-                    type: string
-                    example: payment_method_enabled must be a JSON string
+                $ref: '#/components/schemas/ErrorResponse'
         '403':
-          description: Auth error or validation error (misleading HTTP code). Common causes — missing `payer_redirect_url`, missing `callback`, invalid `payment_method_enabled`.
+          description: Authentication error or misleading validation failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        default:
+          $ref: '#/components/responses/GenericError'
+
+  /{url}:
+    post:
+      operationId: submitPaymentDetails
+      tags: [Cobrus]
+      summary: Generate payment details
+      x-verification-status: legacy-doc
+      description: |
+        Submit payer and payment-method-specific details for an existing cobru.
+        This contract comes from Cobru legacy API materials and deep BRE-B research.
+      parameters:
+        - in: path
+          name: url
+          required: true
+          schema:
+            type: string
+          description: Cobru slug returned by `POST /cobru/`
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentDetailsRequest'
+      responses:
+        '200':
+          description: Payment details accepted
           content:
             application/json:
               schema:
                 type: object
-                properties:
-                  detail:
-                    type: string
-                    example: Authentication credentials were not provided.
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+
+  /cobru_detail/{url}:
+    get:
+      operationId: consultCobru
+      tags: [Cobrus]
+      summary: Consult a cobru
+      x-verification-status: legacy-doc
+      parameters:
+        - in: path
+          name: url
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cobru details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CobruDetailResponse'
+        default:
+          $ref: '#/components/responses/GenericError'
+
+  /get_banks/1/:
+    get:
+      operationId: listPseBanks
+      tags: [Cobrus]
+      summary: List PSE banks
+      x-verification-status: legacy-doc
+      description: Retrieve available PSE bank codes.
+      security: []
+      responses:
+        '200':
+          description: PSE bank list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BankCode'
+        default:
+          $ref: '#/components/responses/GenericError'
+
+  /cobru/estimate/:
+    post:
+      operationId: estimateCobru
+      tags: [Cobrus]
+      summary: Quote a cobru
+      x-verification-status: legacy-doc
+      description: Estimate fees and net received amount before creating a cobru.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateRequest'
+      responses:
+        '200':
+          description: Fee quote
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EstimateResponse'
+        default:
+          $ref: '#/components/responses/GenericError'
+
+  /edit_cobru/:
+    post:
+      operationId: editCobru
+      tags: [Cobrus]
+      summary: Edit a cobru
+      x-verification-status: legacy-doc
+      description: Update mutable fields on an existing cobru.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditCobruRequest'
+      responses:
+        '200':
+          description: Cobru updated
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+
+  /send/:
+    post:
+      operationId: sendBalance
+      tags: [Transfers]
+      summary: Send balance to another user
+      x-verification-status: legacy-doc
+      description: Transfer Cobru balance to another Cobru user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferRequest'
+      responses:
+        '200':
+          description: Transfer created
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+
+  /cashwithdraw/:
+    post:
+      operationId: createCashWithdrawal
+      tags: [Cash Withdrawals]
+      summary: Withdraw cash
+      x-verification-status: legacy-doc
+      description: Create a cash withdrawal, documented in legacy materials for Efecty.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CashWithdrawalRequest'
+      responses:
+        '200':
+          description: Cash withdrawal created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CashWithdrawalResponse'
+        default:
+          $ref: '#/components/responses/GenericError'
+
+  /balance/:
+    get:
+      operationId: getBalance
+      tags: [Transfers]
+      summary: Get balance
+      x-verification-status: legacy-doc
+      description: Retrieve account balance.
+      responses:
+        '200':
+          description: Account balance
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+
+  /withdrawals/banks/:
+    get:
+      operationId: listBankWithdrawalBanks
+      tags: [Bank Withdrawals]
+      summary: List available banks for withdrawals
+      x-verification-status: menu-only
+      description: |
+        Capability visible in Cobru's API menu.
+        Exact path and schema still pending official confirmation.
+      responses:
+        '200':
+          description: Placeholder success response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /withdrawals/banks/colombia:
+    post:
+      operationId: createBankWithdrawalColombia
+      tags: [Bank Withdrawals]
+      summary: Create bank withdrawal to Colombia
+      x-verification-status: menu-only
+      responses:
+        '200':
+          description: Placeholder success response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /withdrawals/banks/brazil:
+    post:
+      operationId: createBankWithdrawalBrazil
+      tags: [Bank Withdrawals]
+      summary: Create bank withdrawal to Brazil
+      x-verification-status: menu-only
+      responses:
+        '200':
+          description: Placeholder success response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /withdrawals/banks/mexico:
+    post:
+      operationId: createBankWithdrawalMexico
+      tags: [Bank Withdrawals]
+      summary: Create bank withdrawal to Mexico
+      x-verification-status: menu-only
+      responses:
+        '200':
+          description: Placeholder success response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /withdrawals/banks/argentina:
+    post:
+      operationId: createBankWithdrawalArgentina
+      tags: [Bank Withdrawals]
+      summary: Create bank withdrawal to Argentina
+      x-verification-status: menu-only
+      responses:
+        '200':
+          description: Placeholder success response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /withdrawals/banks/bre-b:
+    post:
+      operationId: createBreBWithdrawal
+      tags: [Bank Withdrawals]
+      summary: Create BRE-B transfer
+      x-verification-status: menu-only
+      responses:
+        '200':
+          description: Placeholder success response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /services/cell-recharge:
+    post:
+      operationId: rechargeCellPhone
+      tags: [Services]
+      summary: Recharge cell phone
+      x-verification-status: menu-only
+      responses:
+        '200':
+          description: Placeholder success response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /services/pins:
+    get:
+      operationId: listPinProducts
+      tags: [Services]
+      summary: List PIN products
+      x-verification-status: menu-only
+      responses:
+        '200':
+          description: Placeholder success response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+    post:
+      operationId: buyPinProduct
+      tags: [Services]
+      summary: Buy PIN product
+      x-verification-status: menu-only
+      responses:
+        '200':
+          description: Placeholder success response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /cards:
+    get:
+      operationId: listCards
+      tags: [Cards]
+      summary: List cards
+      x-verification-status: menu-only
+      responses:
+        '200':
+          description: Placeholder success response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+    post:
+      operationId: createCard
+      tags: [Cards]
+      summary: Create card
+      x-verification-status: menu-only
+      responses:
+        '200':
+          description: Placeholder success response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /cards/topup:
+    post:
+      operationId: topupCard
+      tags: [Cards]
+      summary: Top up card
+      x-verification-status: menu-only
+      responses:
+        '200':
+          description: Placeholder success response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /cards/movements:
+    get:
+      operationId: listCardMovements
+      tags: [Cards]
+      summary: List card movements
+      x-verification-status: menu-only
+      responses:
+        '200':
+          description: Placeholder success response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /cards/freeze:
+    post:
+      operationId: freezeCard
+      tags: [Cards]
+      summary: Freeze card
+      x-verification-status: menu-only
+      responses:
+        '200':
+          description: Placeholder success response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
