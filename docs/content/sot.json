@@ -1,0 +1,1378 @@
+{
+  "version": 1,
+  "updatedAt": "2026-03-26T19:30:00.000Z",
+  "pages": {
+    "home": {
+      "metadata": {
+        "title": "Cobru - Infraestructura de Pagos para Empresas Colombia",
+        "description": "Pasarela, cobranza, dispersión y pagos internacionales en una sola plataforma. Activación en 24 horas."
+      },
+      "hero": {
+        "eyebrow": "MENOS CAOS OPERATIVO",
+        "title": "Tu operación de pagos, por fin bajo control.",
+        "lead": "Cobru unifica cobros, conciliación y pagos para que tu equipo deje de perseguir procesos manuales y vuelva a operar con claridad.",
+        "trust": [
+          "SFC regulado",
+          "Activación guiada en días",
+          "Soporte humano en español"
+        ],
+        "primaryCta": {
+          "label": "Agendar demo",
+          "href": "/agendar-demo"
+        },
+        "secondaryCta": {
+          "label": "Ver precios",
+          "href": "/precios"
+        }
+      },
+      "stats": [
+        {
+          "value": "3B COP+",
+          "label": "Volumen procesado"
+        },
+        {
+          "value": "+40K",
+          "label": "Usuarios"
+        },
+        {
+          "value": "+5M",
+          "label": "Transacciones gestionadas"
+        },
+        {
+          "value": "2019",
+          "label": "Operando desde 2019"
+        }
+      ],
+      "problem": {
+        "eyebrow": "El diagnóstico",
+        "title": "Tu operación creció. Tus herramientas, no.",
+        "lead": "Conciliar pagos, perseguir cartera vencida, subir archivos planos, cruzar Exceles. A tu equipo le lleva horas lo que un sistema debería resolver solo.",
+        "items": [
+          {
+            "pain": "La conciliación consume el cierre de mes",
+            "detail": "Cada canal de pago vive en un lugar distinto. Tu equipo cierra cada período cruzando información manualmente."
+          },
+          {
+            "pain": "Los cobros vencidos crecen sin seguimiento sistemático",
+            "detail": "Sin automatización, la cartera vencida se acumula. El equipo persigue deuda caso por caso y sin visibilidad."
+          },
+          {
+            "pain": "Los pagos masivos generan reprocesos y reclamos",
+            "detail": "Subir planos bancarios, resolver rechazados y confirmar acreditaciones consume horas que deberían ser minutos."
+          }
+        ]
+      },
+      "solutions": [
+        {
+          "eyebrow": "Pasarela de Pagos",
+          "title": "Consolidar tus cobros en un solo tablero.",
+          "lead": "Hoy recibes pagos de múltiples canales pero cada uno vive en un lugar distinto. Cobru unifica tus cobros con visibilidad centralizada sin que cambies de banco.",
+          "bullets": [
+            "Todos los medios locales (PSE, Nequi, Daviplata, tarjetas) en un solo checkout",
+            "Conciliación automática — finanzas ve cada transacción sin recurrir a extractos",
+            "Implementación en días, tu banco actual sigue siendo tu banco"
+          ],
+          "href": "/productos/pasarela-pagos",
+          "hrefLabel": "Ver Pasarela de Pagos",
+          "imageSrc": "/illustrations/pasarela_v2.webp",
+          "imageAlt": "Pasarela de pagos Cobru",
+          "tone": "cream",
+          "visualPosition": "left"
+        },
+        {
+          "eyebrow": "Gestión de Cobranza",
+          "title": "Reducir cartera vencida sin perseguir manualmente.",
+          "lead": "La cobranza por WhatsApp y correo no escala. Configura tus flujos una sola vez y deja que el sistema ejecute recordatorios en el momento correcto por el canal que funciona.",
+          "bullets": [
+            "Recordatorios multicanal escalonados según antigüedad de deuda",
+            "El cliente paga desde el mensaje — sin redireccionamientos",
+            "Historial exportable por deudor para auditoría y contabilidad"
+          ],
+          "href": "/productos/cobranza-automatizada",
+          "hrefLabel": "Ver Cobranza Automatizada",
+          "imageSrc": "/illustrations/cobranza_v3.webp",
+          "imageAlt": "Cobranza digital Cobru",
+          "tone": "blue-dark",
+          "visualPosition": "right"
+        },
+        {
+          "eyebrow": "Pagos Masivos",
+          "title": "Dispersar pagos sin burocracia bancaria.",
+          "lead": "Carga tu archivo, validamos datos y tienes estado individual por beneficiario en un panel único.",
+          "bullets": [
+            "Validación previa que reduce rechazos y reproceso",
+            "Estado visible por beneficiario — sin llamadas para confirmar qué llegó",
+            "Carga en Excel/CSV o integración por API a tu nómina o ERP"
+          ],
+          "href": "/productos/pagos-masivos",
+          "hrefLabel": "Ver Pagos Masivos",
+          "imageSrc": "/illustrations/pagos_masivos_vertical_v1.webp",
+          "imageAlt": "Pagos masivos Cobru",
+          "tone": "ink-50",
+          "visualPosition": "left"
+        }
+      ],
+      "industries": {
+        "eyebrow": "Industrias",
+        "title": "Construido cómo opera tu empresa.",
+        "lead": "No es lo mismo cobrar cuotas de administración que dispersar pagos a 300 promotores en campo. Cobru tiene la configuración lista para cada caso."
+      },
+      "differentiators": {
+        "items": [
+          {
+            "title": "Activación en 24-48h",
+            "desc": "Onboarding guiado sin burocracia. La mayoría de empresas operan al día siguiente."
+          },
+          {
+            "title": "Sin cambio de banco",
+            "desc": "Cobru opera como capa sobre tu cuenta actual. Cero fricción de onboarding bancario."
+          },
+          {
+            "title": "Soporte humano en español",
+            "desc": "Equipo en Colombia que entiende tu contexto operativo. Sin tickets en inglés."
+          },
+          {
+            "title": "API documentada y lista",
+            "desc": "Integración en días con SDKs, webhooks, y equipo técnico disponible."
+          }
+        ]
+      },
+      "gettingStarted": {
+        "eyebrow": "Primeros pasos",
+        "title": "El primer paso no obliga a nada.",
+        "lead": "Una llamada de 30 minutos. Revisamos tu operación, identificamos el producto de mayor impacto y definimos cuándo y cómo empezar.",
+        "steps": [
+          {
+            "step": "01",
+            "title": "Sesión comercial",
+            "desc": "Revisamos tu flujo, volumen y caso de uso en 30 minutos. Sin pitch genérico."
+          },
+          {
+            "step": "02",
+            "title": "Validación y configuración",
+            "desc": "Validación bancaria y configuración guiada del producto con tu equipo."
+          },
+          {
+            "step": "03",
+            "title": "Primer pago vivo",
+            "desc": "Activo en 24-48 horas. Tu banco no cambia. El equipo no necesita formación extensa."
+          }
+        ],
+        "primaryCta": {
+          "label": "Agendar demo",
+          "href": "/agendar-demo"
+        }
+      },
+      "security": {
+        "eyebrow": "Protegido por estándares globales",
+        "title": "El área legal y de cumplimiento lo aprueba.",
+        "lead": "Cada transacción se evalúa en milisegundos con detección de anomalías. Tu área legal y cumplimiento confían en certificaciones que superan los requisitos locales.",
+        "certifications": [
+          {
+            "cert": "ISO 27001:2022",
+            "desc": "Gestión integral de seguridad de la información"
+          },
+          {
+            "cert": "SOC 2 Type II",
+            "desc": "Control riguroso sobre datos sensibles en entornos cloud"
+          },
+          {
+            "cert": "PCI DSS v4.0.1",
+            "desc": "Estándar global de protección de datos de tarjeta"
+          }
+        ],
+        "pillars": [
+          {
+            "title": "Modelo predictivo 24/7",
+            "desc": "Evalúa cada transacción en tiempo real, analiza anomalías sin frenar operaciones legítimas."
+          },
+          {
+            "title": "Cumplimiento proactivo",
+            "desc": "SAGRILAFT activo, reportes automáticos a autoridades, alertas claras a tu equipo de cumplimiento."
+          },
+          {
+            "title": "Decisión dinámica",
+            "desc": "El sistema aprende de tu flujo y ajusta umbrales según volumen y segmento."
+          }
+        ]
+      },
+      "faq": {
+        "eyebrow": "Dudas frecuentes",
+        "title": "Respuestas claras a lo que importa.",
+        "items": [
+          {
+            "q": "¿Cómo funciona la pasarela de pagos de Cobru?",
+            "a": "Cobru integra múltiples métodos de pago colombianos (PSE, tarjetas, efectivo, billeteras) en una sola API. Las transacciones se procesan en tiempo real y los fondos se acreditan según el método elegido."
+          },
+          {
+            "q": "¿Cuánto tiempo toma la activación de la cuenta?",
+            "a": "El proceso de activación toma entre 24 y 72 horas hábiles. Solo necesitas subir la documentación legal de tu empresa y completar el formulario de vinculación."
+          },
+          {
+            "q": "¿Qué métodos de pago acepta Cobru?",
+            "a": "Aceptamos PSE, tarjetas crédito y débito (Visa, Mastercard), Nequi, Daviplata, efectivo (Efecty, Baloto), transferencias bancarias y pagos internacionales en USD/EUR."
+          },
+          {
+            "q": "¿Cómo funciona la cobranza automatizada?",
+            "a": "Configuras las reglas de cobro una sola vez. Cobru genera y envía los links de pago automáticamente y registra cada transacción en tu dashboard."
+          },
+          {
+            "q": "¿Es seguro procesar pagos con Cobru?",
+            "a": "Sí. Cobru está regulado por la Superintendencia Financiera de Colombia como SEDPE desde 2019. Cumplimos PCI DSS y cifrado TLS en todas las transacciones."
+          },
+          {
+            "q": "¿Ofrecen soporte técnico para la integración API?",
+            "a": "Sí. Contamos con documentación completa, SDKs en varios lenguajes, y equipo técnico disponible para acompañar tu integración."
+          }
+        ]
+      },
+      "finalCta": {
+        "eyebrow": "Hablemos",
+        "title": "Hablemos sobre cómo ordenar tu operación de pagos.",
+        "lead": "En 30 minutos revisamos tu flujo, el producto de mayor impacto para tu caso y el siguiente paso real. Sin pitch genérico y sin compromisos innecesarios.",
+        "proofs": [
+          {
+            "value": "+200",
+            "label": "empresas activas"
+          },
+          {
+            "value": "24-48h",
+            "label": "activación promedio"
+          },
+          {
+            "value": "SFC",
+            "label": "regulado desde 2019"
+          }
+        ],
+        "cardTitle": "Una conversación útil en 30 minutos",
+        "cardLead": "Entendemos tu operación y te dejamos un siguiente paso claro.",
+        "primaryCta": {
+          "label": "Agendar demo",
+          "href": "/agendar-demo"
+        },
+        "secondaryCta": {
+          "label": "Ver estructura comercial",
+          "href": "/precios"
+        }
+      }
+    },
+    "pricing": {
+      "hero": {
+        "eyebrow": "TARIFAS",
+        "title": "Estructuras de precio claras para operaciones que ya necesitan control",
+        "lead": "Te mostramos cómo se arma la propuesta, qué cambia según volumen y cuándo conviene una ruta asistida.",
+        "pricingBadge": "Cotización según volumen, canales y complejidad",
+        "trust": [
+          "Regulado por SFC desde 2019",
+          "+200 empresas confían en nosotros",
+          "Soporte humano en español"
+        ]
+      },
+      "plans": [
+        {
+          "name": "Starter",
+          "price": "Personalizado",
+          "features": [
+            "Para empresas que inician con pasarela o links de pago",
+            "Self-service y soporte vía email",
+            "Dashboard base y trazabilidad"
+          ],
+          "cta": "Habla con nosotros"
+        },
+        {
+          "name": "Business",
+          "price": "Personalizado",
+          "features": [
+            "Para operaciones con cobranza, masivos o múltiples módulos",
+            "Acompañamiento comercial dedicado",
+            "Mayor visibilidad operativa y reportería avanzada"
+          ],
+          "cta": "Habla con nosotros"
+        },
+        {
+          "name": "Enterprise",
+          "price": "Personalizado",
+          "features": [
+            "Para volumen alto y operaciones complejas",
+            "Implementación asistida y equipo técnico dedicado",
+            "Integraciones customizadas y SLA garantizado"
+          ],
+          "cta": "Habla con nosotros"
+        }
+      ],
+      "roi": {
+        "eyebrow": "Calculadora",
+        "title": "¿Dónde se te está yendo hoy el costo operativo?",
+        "copy": "Estima el ahorro potencial en tiempo, seguimiento manual y conciliación frente a procesos dispersos.",
+        "bullets": [
+          "Menos comisiones que la banca tradicional",
+          "Conciliación automática — sin horas manuales",
+          "Cobranza sin seguimiento manual"
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Por qué no publicamos precios exactos?",
+          "answer": "Nuestros precios se ajustan según volumen, productos y rutas (self-serve vs asistido). Una conversación de 15 minutos nos permite proponer algo real para tu caso."
+        },
+        {
+          "question": "¿Qué incluye cada plan?",
+          "answer": "Starter incluye pasarela base. Business agrega cobranza y pagos masivos. Enterprise suma internacionales, BRE-B y stablecoins. Todos con API documentada y soporte humano."
+        },
+        {
+          "question": "¿Cómo se define el precio final?",
+          "answer": "Validamos: volumen mensual estimado, productos requeridos, canales de pago, reportería necesaria y si requiere asistencia. Luego cotizamos estructura clara."
+        },
+        {
+          "question": "¿Hay costo de activación?",
+          "answer": "No. Cero costo de activación en rutas self-serve. Rutas asistidas pueden incluir implementación coordinada sin costo adicional en muchos casos."
+        },
+        {
+          "question": "¿Puedo cambiar de plan?",
+          "answer": "Sí. Tu plan escala con tu operación. Si el volumen baja o sube, podemos ajustar la estructura en cualquier momento."
+        }
+      ],
+      "notes": {
+        "title": "Notas comerciales",
+        "paragraphs": [
+          "Las tarifas finales dependen de volumen, riesgo, canales activos y requisitos de cumplimiento.",
+          "La propuesta incluye una recomendación de implementación y el camino más razonable para tu operación actual."
+        ],
+        "cta": "Agenda demo para cotización final"
+      },
+      "cta": {
+        "title": "¿Quieres una propuesta aterrizada a tu caso?",
+        "copy": "Agenda una demo y sal con una recomendación clara de estructura comercial, alcance y siguiente paso.",
+        "label": "Agenda demo para cotización final"
+      }
+    },
+    "demo": {
+      "hero": {
+        "eyebrow": "AGENDAR DEMO",
+        "title": "Agenda una demo útil para tu operación, no una llamada genérica.",
+        "lead": "En 30 minutos revisamos tu caso, identificamos el flujo de mayor impacto y te dejamos claro el siguiente paso comercial y operativo.",
+        "trust": [
+          "Sin compromiso",
+          "Enfocada en tu operación",
+          "Con siguiente paso claro"
+        ]
+      },
+      "form": {
+        "title": "Agendar una demo personalizada",
+        "description": "En 30 minutos revisamos tu caso, identificamos el flujo de mayor impacto y te dejamos claro el siguiente paso comercial y operativo.",
+        "labels": [
+          "Nombre",
+          "Apellidos",
+          "Cargo",
+          "Correo empresarial",
+          "Celular",
+          "Empresa",
+          "Tipo de empresa",
+          "Volumen mensual estimado",
+          "¿Cómo prefieres empezar?"
+        ],
+        "submitLabel": "Agendar mi demo"
+      },
+      "postSubmit": {
+        "confirmation": "Recibimos tu solicitud. Te contactaremos por correo o WhatsApp para preparar una demo útil según tu caso.",
+        "nextStep": "Antes de la llamada revisaremos tu producto, industria y volumen para empezar por lo importante."
+      },
+      "faq": [
+        {
+          "question": "¿La demo tiene costo?",
+          "answer": "No. Es una conversación comercial para entender si Cobru encaja en tu operación."
+        },
+        {
+          "question": "¿Necesito equipo técnico en la llamada?",
+          "answer": "No siempre. La primera llamada sirve para entender negocio, prioridades y alcance."
+        },
+        {
+          "question": "¿Cuánto tarda la activación?",
+          "answer": "Depende del producto, el volumen y las validaciones aplicables a tu caso."
+        }
+      ],
+      "asideCards": [
+        {
+          "title": "Qué revisamos en la demo",
+          "body": "Entendemos tu operación actual y el flujo más relevante para tu caso."
+        },
+        {
+          "title": "Qué recibes al finalizar",
+          "body": "Antes de la llamada revisaremos tu producto, industria y volumen para empezar por lo importante."
+        },
+        {
+          "title": "Antes de la llamada",
+          "body": "Te contactaremos para confirmar horario, participantes y el enfoque correcto de la sesión."
+        }
+      ]
+    }
+  },
+  "decisions": {
+    "/productos/bre-b::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"BRE-B Empresas\"\nH1: \"Activa pagos inmediatos para tu empresa\"\nLead: \"BRE-B Empresas abre una ruta para operar pagos inmediatos con una experiencia empresarial mas clara y conectada con tu operacion.\"\nCTA primario: \"Agendar demo\"\nCTA secundario: \"Ver precios\"",
+      "updatedAt": "2026-03-09T11:18:45.159Z",
+      "decisionNotes": ""
+    },
+    "/productos/bre-b::pain-points": {
+      "status": "approved",
+      "finalCopy": "P1 H3: \"Pagos que no pueden esperar\"\nP1 copy: \"Hay operaciones que necesitan inmediatez y confirmacion clara.\"\nP2 H3: \"Procesos separados\"\nP2 copy: \"La operacion pierde tiempo cuando cobros y pagos viven en flujos distintos.\"\nP3 H3: \"Baja claridad para negocio\"\nP3 copy: \"El equipo necesita entender rapido cuando aplicar esta ruta.\"",
+      "updatedAt": "2026-03-09T14:43:27.246Z",
+      "decisionNotes": ""
+    },
+    "/productos/bre-b::features": {
+      "status": "approved",
+      "finalCopy": "F1 H3: \"Pagos inmediatos\"\nF1 copy: \"Acortas el tiempo entre decision y ejecucion.\"\nF2 H3: \"Mas visibilidad\"\nF2 copy: \"Tu equipo gana trazabilidad sobre el movimiento.\"\nF3 H3: \"Mejor integracion operativa\"\nF3 copy: \"La ruta se conecta con el resto del portafolio.\"\nF4 H3: \"Implementacion guiada\"\nF4 copy: \"Se define segun tu empresa y el caso de uso real.\"",
+      "updatedAt": "2026-03-09T11:19:00.226Z",
+      "decisionNotes": ""
+    },
+    "/productos/bre-b::faq": {
+      "status": "approved",
+      "finalCopy": "Grupo: Cobru\nPregunta: \"Tiempos de activacion\"\nRespuesta: \"Generalmente entre 3 a 5 dias habiles.\"\nGrupo: Cobru\nPregunta: \"Necesidad de cambiar banco\"\nRespuesta: \"No es necesario para empezar, depende del producto.\"\nGrupo: Producto\nPregunta: \"Limites y montos\"\nRespuesta: \"Se configuran en la sesion comercial segun el flujo.\"\nGrupo: Producto\nPregunta: \"Integracion tecnica\"\nRespuesta: \"Usa metodos listos o integra mediante API desde cero.\"\n\n---",
+      "updatedAt": "2026-03-09T11:19:04.996Z",
+      "decisionNotes": ""
+    },
+    "/::cta-final": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"HABLEMOS\"\nH2: \"Hablemos sobre como ordenar tu operacion de pagos.\"\nLead: \"Completa el formulario y te contactamos para revisar el flujo, el producto de mayor impacto y el siguiente paso real.\"\nProof 1 valor: \"+200\"\nProof 1 label: \"empresas activas en Colombia\"\nProof 2 valor: \"24 a 48 horas\"\nProof 2 label: \"de activacion promedio para rutas simples\"\nProof 3 valor: \"SFC\"\nProof 3 label: \"ruta regulada y soporte humano en espanol\"\nForm label 1: \"Nombre\"\nForm label 2: \"Apellidos\"\nForm label 3: \"Correo empresarial\"\nForm label 4: \"Celular\"\nForm label 5: \"Empresa\"\nForm label 6: \"Sitio web\"\nForm select 1 label: \"Que solucion te interesa explorar?\"\nForm select 1 options: \"Pasarela de Pagos, Cobranza Automatizada, Pagos Masivos, Pagos Internacionales, No estoy seguro todavia\"\nForm select 2 label: \"Como prefieres empezar?\"\nForm select 2 options: \"Quiero una demo comercial, Quiero revisar tarifas primero, Necesito orientacion por industria\"\nForm note: \"Al enviar este formulario, tu equipo recibe una respuesta inicial con la ruta recomendada segun tu caso.\"\nForm CTA: \"Hablar con ventas\"",
+      "updatedAt": "2026-03-09T12:43:54.006Z",
+      "decisionNotes": ""
+    },
+    "/::logo-band": {
+      "status": "approved",
+      "finalCopy": "Copy: \"Empresas lideres confían en la infraestructura de Cobru\"\nLogo 1\nLogo 2\nLogo 3\nLogo 4\nLogo 5",
+      "updatedAt": "2026-03-09T12:34:28.075Z",
+      "decisionNotes": "hay que enviar el correo a juan guillermo para solicitar los clientes y los logos"
+    },
+    "/::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"PLATAFORMA DE PAGOS · COLOMBIA\"\nH1: \"Cobra, concilia y paga desde una sola plataforma.\"\nLead: \"Pasarela, cobranza, dispersión y pagos internacionales en una sola plataforma. Activación en 24 horas.\"\nCTA primario: \"Agendar demo\"\nCTA secundario: \"Ver precios\"\nMicro badge 1: \"SFC regulado\"\nMicro badge 2: \"Activación en días\"\nMicro badge 3: \"Soporte humano en español\"",
+      "updatedAt": "2026-03-14T12:00:00.000Z",
+      "decisionNotes": ""
+    },
+    "/::3-pasarela-de-pagos": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Pasarela de Pagos\"\nH2: \"Acepta pagos online con menos friccion\"\nLead: \"Conciliacion mas clara para ecommerce, ventas asistidas y recaudo digital. Centraliza la informacion de tus ventas en un solo tablero, sea cual sea el metodo de pago utilizado.\"\nCTA: \"Explorar Pasarela\"",
+      "updatedAt": "2026-03-09T12:37:23.048Z",
+      "decisionNotes": ""
+    },
+    "/::4-cobranza-automatizada": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Gestion de Cobranza\"\nH2: \"Haz seguimiento y cobra sin perseguir clientes\"\nLead: \"Automatiza recordatorios y facilita el pago desde el mensaje para que el seguimiento deje de depender del equipo. Reduce tu cartera vencida con logicas de facturacion y cobranza programada.\"\nCTA: \"Explorar Cobranza\"",
+      "updatedAt": "2026-03-09T12:37:56.751Z",
+      "decisionNotes": ""
+    },
+    "/::5-pagos-masivos": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Pagos Masivos\"\nH2: \"Dispersa lotes con más control y menos reproceso\"\nLead: \"Coordina pagos a terceros con estado por beneficiario y menos trabajo manual para operaciones que dependen de volumen. Libera a tu equipo de subir planos bancarios repetitivos.\"\nCTA: \"Explorar Dispersion\"",
+      "updatedAt": "2026-03-09T12:38:33.113Z",
+      "decisionNotes": ""
+    },
+    "/::6-bre-b": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Integracion BRE-B\"\nH2: \"Activa pagos inmediatos para tu empresa\"\nLead: \"BRE-B Empresas abre una ruta para operar pagos inmediatos con una experiencia empresarial mas clara y conectada con tu operacion. Transacciones 24/7 sin las demoras de las redes tradicionales.\"\nCTA: \"Conocer BRE-B\"",
+      "updatedAt": "2026-03-09T12:38:49.655Z",
+      "decisionNotes": ""
+    },
+    "/::differentiators": {
+      "status": "approved",
+      "finalCopy": "H2: \"Cobru se elige por claridad operativa, no por promesas vagas.\"\nLead: \"Menos complejidad para cobrar y mover dinero, con una experiencia que tu equipo puede entender y activar sin depender de soporte externo.\"\nMetrica 1 valor: \"3 billones COP+\"\nMetrica 1 label: \"Volumen procesado\"\nMetrica 1 copy: \"Dinamica operativa de +200 empresas activas en Colombia con resiliencia probada.\"\nMetrica 2 valor: \"+2 millones\"\nMetrica 2 label: \"Transacciones procesadas\"\nMetrica 2 copy: \"Seguridad operativa comprobada con cada transaccion validada y auditable.\"",
+      "updatedAt": "2026-03-09T12:40:59.765Z",
+      "decisionNotes": ""
+    },
+    "/::metadata": {
+      "status": "approved",
+      "finalCopy": "title: \"Cobru - Infraestructura de Pagos para Empresas Colombia\"\ndescription: \"Pasarela de pagos, cobranza automatizada, pagos masivos y pagos internacionales. Setup 25 min, costos transparentes. Demo gratis.\"",
+      "updatedAt": "2026-03-09T12:44:14.512Z",
+      "decisionNotes": ""
+    },
+    "/precios::faq": {
+      "status": "approved",
+      "finalCopy": "FAQ 1 Q: \"Por que no publicamos precios exactos?\"\nFAQ 1 A: \"Nuestros precios se ajustan segun volumen, productos y rutas (self-serve vs asistido). Una conversacion de 15 minutos nos permite proponer algo real para tu caso.\"\nFAQ 2 Q: \"Que incluye cada plan?\"\nFAQ 2 A: \"Starter incluye pasarela base. Business agrega cobranza y pagos masivos. Enterprise suma internacionales, BRE-B y stablecoins. Todos con API documentada y soporte humano.\"\nFAQ 3 Q: \"Como se define el precio final?\"\nFAQ 3 A: \"Validamos: volumen mensual estimado, productos requeridos, canales de pago, reporteria necesaria y si requiere asistencia. Luego cotizamos estructura clara.\"\nFAQ 4 Q: \"Hay costo de activacion?\"\nFAQ 4 A: \"No. Cero costo de activacion en rutas self-serve. Rutas asistidas pueden incluir implementacion coordinada sin costo adicional en muchos casos.\"\nFAQ 5 Q: \"Puedo cambiar de plan?\"\nFAQ 5 A: \"Si. Tu plan escala con tu operacion. Si el volumen baja o sube, podemos ajustar la estructura en cualquier momento.\"",
+      "updatedAt": "2026-03-09T12:48:42.377Z",
+      "decisionNotes": ""
+    },
+    "/precios::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"TARIFAS\"\nH1: \"Precios claros para equipos que necesitan operar con control\"\nSubheadline: \"Te mostramos como se cobra, cuando aplica cada plan y cuando conviene pasar a una ruta asistida.\"\nPricing badge: \"Desde 2.5% + $500 por transaccion\"\nTrust badge 1: \"Regulado por SFC desde 2019\"\nTrust badge 2: \"+200 empresas confian en nosotros\"\nTrust badge 3: \"Soporte humano en espanol\"",
+      "updatedAt": "2026-03-09T12:49:20.324Z",
+      "decisionNotes": ""
+    },
+    "/precios::notas-comerciales": {
+      "status": "approved",
+      "finalCopy": "H3: \"Notas comerciales\"\nP1: \"Las tarifas finales dependen de volumen, riesgo, canales activos y requisitos de cumplimiento.\"\nP2: \"Incluimos acompanamiento de implementacion y configuracion por servicio.\"\nCTA: \"Agenda demo para cotizacion final\"",
+      "updatedAt": "2026-03-09T12:49:58.712Z",
+      "decisionNotes": ""
+    },
+    "/precios::pricing-plans": {
+      "status": "approved",
+      "finalCopy": "Card 1 H3: \"Starter\"\nCard 1 precio: \"Personalizado\"\nCard 1 feature 1: \"Para empresas que inician con pasarela o links de pago\"\nCard 1 feature 2: \"Self-service y soporte via email\"\nCard 1 feature 3: \"Dashboard base y trazabilidad\"\nCard 1 CTA: \"Habla con nosotros\"\nCard 2 H3: \"Business\"\nCard 2 precio: \"Personalizado\"\nCard 2 feature 1: \"Para operaciones con cobranza, masivos o multiples modulos\"\nCard 2 feature 2: \"Acompanamiento comercial dedicado\"\nCard 2 feature 3: \"Mayor visibilidad operativa y reporteria avanzada\"\nCard 2 CTA: \"Habla con nosotros\"\nCard 3 H3: \"Enterprise\"\nCard 3 precio: \"Personalizado\"\nCard 3 feature 1: \"Para volumen alto y operaciones complejas\"\nCard 3 feature 2: \"Implementacion asistida y equipo tecnico dedicado\"\nCard 3 feature 3: \"Integraciones customizadas y SLA garantizado\"\nCard 3 CTA: \"Habla con nosotros\"",
+      "updatedAt": "2026-03-09T12:50:28.842Z",
+      "decisionNotes": ""
+    },
+    "/precios::calculadora-roi": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Calculadora\"\nH2: \"Cuanto puedes ahorrar con Cobru\"\nCopy: \"Estima tu ahorro en comisiones y tiempo vs la banca tradicional.\"\nBullet 1: \"Menos comisiones que la banca tradicional\"\nBullet 2: \"Conciliacion automatica -- sin horas manuales\"\nBullet 3: \"Cobranza sin seguimiento manual\"",
+      "updatedAt": "2026-03-09T12:55:29.642Z",
+      "decisionNotes": ""
+    },
+    "/precios::cta-final": {
+      "status": "approved",
+      "finalCopy": "H3: \"Listo para una propuesta personalizada?\"\nCopy: \"Agenda una demo. Analizamos tu operacion y te damos la tarifa real segun tu volumen y canales activos.\"\nCTA: \"Agenda demo para cotizacion final\"\n\n---",
+      "updatedAt": "2026-03-09T12:55:52.246Z",
+      "decisionNotes": ""
+    },
+    "/agendar-demo::faq": {
+      "status": "approved",
+      "finalCopy": "\"La demo tiene costo?\": \"No. Es una conversacion comercial para entender si Cobru encaja en tu operacion.\"\n\"Necesito equipo tecnico en la llamada?\": \"No siempre. La primera llamada sirve para entender negocio, prioridades y alcance.\"\n\"Cuanto tarda la activacion?\": \"Depende del producto, el volumen y las validaciones aplicables a tu caso.\"\n\n---",
+      "updatedAt": "2026-03-09T13:00:41.774Z",
+      "decisionNotes": "hay que ampliar esta seccion FAQ de agendar-demo"
+    },
+    "/agendar-demo::post-submit": {
+      "status": "approved",
+      "finalCopy": "Confirmacion: \"Recibimos tu solicitud. Te contactamos por correo o WhatsApp para preparar la demo segun tu caso.\"\nSiguiente paso: \"Revisaremos el producto, la industria y el volumen para que la llamada empiece por lo importante.\"",
+      "updatedAt": "2026-03-09T13:01:06.518Z",
+      "decisionNotes": ""
+    },
+    "/agendar-demo::formulario": {
+      "status": "approved",
+      "finalCopy": "Nombre\nApellidos\nCargo\nCorreo empresarial\nCelular\nEmpresa\nTipo Empresa: select (6 industrias canonicas)\nProducto de Interés: select (6 productos canonicos)\nComo prefieres empezar?",
+      "updatedAt": "2026-03-09T13:05:23.163Z",
+      "decisionNotes": "no todos estos campos son requeridos"
+    },
+    "/agendar-demo::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"AGENDAR DEMO\"\nH1: \"Agenda tu demo. Te mostramos cómo Cobru resuelve tu dolor específico.\"\nSubheadline: \"En 30 minutos revisamos tu caso, el producto que mas sentido tiene y el siguiente paso real para implementarlo.\"\nTrust line: \"Sin compromiso · Sin pitch genérico · Solo una conversación util\"",
+      "updatedAt": "2026-03-09T13:08:27.510Z",
+      "decisionNotes": ""
+    },
+    "/::faq": {
+      "status": "approved",
+      "finalCopy": "Como funciona la pasarela de pagos de Cobru?\n+\nCobru integra multiples metodos de pago colombianos (PSE, tarjetas, efectivo, billeteras) en una sola API. Las transacciones se procesan en tiempo real y los fondos se acreditan segun el metodo elegido.\nCuanto tiempo toma la activacion de la cuenta?\n+\nEl proceso de activacion toma entre 24 y 72 horas habiles. Solo necesitas subir la documentacion legal de tu empresa y completar el formulario de vinculacion.\nQue metodos de pago acepta Cobru?\n+\nAceptamos PSE, tarjetas credito y debito (Visa, Mastercard), Nequi, Daviplata, efectivo (Efecty, Baloto), transferencias bancarias y pagos internacionales en USD/EUR.\nComo funciona la cobranza automatizada?\n+\nConfiguras las reglas de cobro una sola vez — monto, periodicidad, metodo de pago. Cobru genera y envia los links de pago automaticamente y registra cada transaccion en tu dashboard.\nEs seguro procesar pagos con Cobru?\n+\nSi. Cobru esta regulado por la Superintendencia Financiera de Colombia como SEDPE desde 2019. Cumplimos PCI DSS y cifrado TLS en todas las transacciones.\nOfrecen soporte tecnico para la integracion API?\n+\nSi. Contamos con documentacion completa, SDKs en varios lenguajes, y equipo tecnico disponible por Slack, email y videoconferencia para acompanar tu integracion.",
+      "updatedAt": "2026-03-09T13:12:43.540Z",
+      "decisionNotes": ""
+    },
+    "/productos/pasarela-pagos::hero": {
+      "status": "approved",
+      "finalCopy": "H1: \"Tu checkout no debería perder ventas por falta de medios locales.\"\nSubheadline: \"Activa PSE, Nequi, Daviplata y tarjetas en una sola capa de cobro. Empieza por checkout, links o QR según tu operación y deja a finanzas con un estado más claro de cada pago.\"\nTrust: \"Checkout, links y QR en la misma operación\" · \"PSE, Nequi, Daviplata y tarjetas\" · \"Conversión primero. Orden operativo después.\"\nCTA primario: \"Auditar mi checkout\" -> /agendar-demo\nCTA secundario: \"Ver precios\" -> /precios",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/pasarela-pagos::pain-points": {
+      "status": "approved",
+      "finalCopy": "H2: \"Problemas que resuelve\"\nP1 H3: \"Checkout fragmentado por medio de pago\"\nP1 copy: \"Tu cliente llega al pago y no encuentra PSE o Nequi. Cada medio faltante es una venta perdida. En Colombia, la tasa de abandono supera el 70% cuando el checkout no incluye los metodos locales.\"\nP2 H3: \"Conciliacion manual canal por canal\"\nP2 copy: \"Revisar transferencias, tarjetas y billeteras en sistemas distintos consume horas del equipo de finanzas. Sin un tablero central, cuadrar el dia es trabajo manual todos los dias.\"\nP3 H3: \"Visibilidad limitada sobre lo cobrado\"\nP3 copy: \"Sin un flujo centralizado, es dificil saber que se cobro, cuando acredita y que esta pendiente. La operacion avanza a ciegas.\"",
+      "updatedAt": "2026-03-09T15:20:50.423Z",
+      "decisionNotes": ""
+    },
+    "/productos/pasarela-pagos::features": {
+      "status": "approved",
+      "finalCopy": "H2: \"Lo que tu equipo gana\"\nF1 H3: \"Medios locales en un solo checkout\"\nF1 copy: \"PSE, Nequi, Daviplata, tarjetas debito y credito. El cliente paga con el medio que ya usa sin fricciones adicionales.\"\nF2 H3: \"Dashboard centralizado\"\nF2 copy: \"El estado de cada pago -- exitoso, pendiente o fallido -- visible en un solo lugar para tu equipo de finanzas y operaciones.\"\nF3 H3: \"Sin cambio de banco\"\nF3 copy: \"Cobru conecta con tu cuenta bancaria actual. No necesitas abrir nuevas cuentas ni cambiar de entidad financiera para empezar.\"\nF4 H3: \"Implementacion segun tu caso\"\nF4 copy: \"Checkout embebido, link de pago o QR. Empieza con el formato que encaja mejor con tu flujo y crece desde ahi.\"",
+      "updatedAt": "2026-03-09T15:21:10.510Z",
+      "decisionNotes": ""
+    },
+    "/productos/pasarela-pagos::how-it-works": {
+      "status": "approved",
+      "finalCopy": "Paso: 1\nAccion: \"Genera un link\"\nDetalle: \"2 clics desde tu dashboard o WhatsApp. Con monto, descripcion y fecha limite.\"\nPaso: 2\nAccion: \"Lo envias por WhatsApp\"\nDetalle: \"El cliente lo recibe, hace clic, y paga con el metodo que prefiere.\"\nPaso: 3\nAccion: \"Sabes cuando te pagan\"\nDetalle: \"Notificacion instantanea. Dashboard actualizado. Sin revisar el banco.\"",
+      "updatedAt": "2026-03-09T15:21:20.561Z",
+      "decisionNotes": ""
+    },
+    "/productos/pasarela-pagos::case-studies": {
+      "status": "approved",
+      "finalCopy": "OMITIR por ahora. No usar caso de éxito ni métricas sin evidencia verificable para esta página.",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/pasarela-pagos::industries": {
+      "status": "approved",
+      "finalCopy": "1. Ecommerce y Retail\nCheckout mas claro y menos duplicidad entre online y punto fisico.\nHref: /industrias/ecommerce-retail\n\n2. Salud\nLinks de pago y copagos digitales para reducir filas y friccion de caja.\nHref: /industrias/salud\n\n3. Marketplaces\nCobro a compradores con una capa lista para integrarse al resto de la operacion.\nHref: /industrias/marketplaces-plataformas",
+      "updatedAt": "2026-03-09T15:21:44.797Z",
+      "decisionNotes": ""
+    },
+    "/productos/pasarela-pagos::faq": {
+      "status": "approved",
+      "finalCopy": "Grupo: Sobre Cobru\nPregunta: \"Cuanto tarda activar la pasarela?\"\nRespuesta: \"Entre 24 y 48 horas desde la sesion comercial. Sin burocracia ni semanas de espera.\"\nGrupo: Sobre Cobru\nPregunta: \"Tengo que cambiar de banco?\"\nRespuesta: \"No. Cobru opera como capa de pagos sobre tu cuenta bancaria actual. No se requiere cambio de entidad.\"\nGrupo: Sobre Cobru\nPregunta: \"Que tan visible queda la conciliacion?\"\nRespuesta: \"Cada transaccion tiene estado en tiempo real. Tu equipo de finanzas puede ver lo cobrado, lo acreditado y lo pendiente desde el dashboard.\"\nGrupo: Sobre la Pasarela\nPregunta: \"Que medios de pago acepta?\"\nRespuesta: \"PSE, Nequi, Daviplata, tarjetas debito y credito Visa/Mastercard y mas medios locales colombianos.\"\nGrupo: Sobre la Pasarela\nPregunta: \"Funciona con Shopify o VTEX?\"\nRespuesta: \"Si. Disponemos de integraciones directas con las principales plataformas de ecommerce y tambien por API para plataformas propias.\"\nGrupo: Sobre la Pasarela\nPregunta: \"Que pasa con una transaccion fallida?\"\nRespuesta: \"El cliente ve el error y puede reintentar de inmediato. Tu ves el estado de falla en el dashboard con el motivo del rechazo.\"\nGrupo: Sobre la Pasarela\nPregunta: \"Necesito equipo tecnico para integrar?\"\nRespuesta: \"Depende del formato. Links de pago y QR no requieren desarrollo. El checkout embebido o via API si requiere integracion tecnica -- te acompanamos en el proceso.\"\n\n---",
+      "updatedAt": "2026-03-09T15:21:53.252Z",
+      "decisionNotes": ""
+    },
+    "/productos/pasarela-pagos::cta-final": {
+      "status": "approved",
+      "finalCopy": "Title: \"Si tu checkout está frenando ventas, la siguiente conversación no debería ser una demo genérica.\"\nLead: \"Revisamos tu flujo actual, los medios activos, la plataforma y el punto donde se enfría la conversión.\"\nBullets:\n• Recomendación concreta de formato\n• Revisión de medios y fricción real\n• Siguiente paso útil para ecommerce, operaciones y finanzas",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/cobranza-automatizada::hero": {
+      "status": "approved",
+      "finalCopy": "H1: \"Tu equipo de cartera no debería perseguir pagos caso por caso.\"\nSubheadline: \"Configura recordatorios, seguimiento y cobro desde el mensaje para que cartera y finanzas dejen de depender de hojas de cálculo, llamadas repetidas y control manual de la mora.\"\nTrust: \"Seguimiento, pago y trazabilidad en una misma capa\" · \"Cartera y finanzas\" · \"Cobro desde el mensaje\"\nCTA primario: \"Revisar mi proceso de cobranza\" -> /agendar-demo\nCTA secundario: \"Ver precios\" -> /precios",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/cobranza-automatizada::pain-points": {
+      "status": "approved",
+      "finalCopy": "H2: \"Problemas que resuelve\"\nP1 H3: \"Cartera vencida que crece sin accion sistematica\"\nP1 copy: \"Sin un sistema de seguimiento, los clientes con deuda pasan semanas sin recordatorio. La cartera vencida se acumula y el equipo no tiene capacidad de perseguir caso por caso.\"\nP2 H3: \"Recordatorios manuales que dependen de una persona\"\nP2 copy: \"Enviar mensajes uno a uno por WhatsApp o email no escala. Si la persona encargada falta, la cobranza se detiene. Y cuando el volumen crece, el proceso colapsa.\"\nP3 H3: \"Sin historial exportable por deudor\"\nP3 copy: \"Sin trazabilidad por cliente, es dificil presentar un informe de cartera a gerencia o auditoria. El equipo trabaja con hojas de calculo que se desactualizan constantemente.\"",
+      "updatedAt": "2026-03-09T15:23:39.812Z",
+      "decisionNotes": ""
+    },
+    "/productos/cobranza-automatizada::features": {
+      "status": "approved",
+      "finalCopy": "H2: \"Lo que tu equipo gana\"\nF1 H3: \"Notificaciones multicanal\"\nF1 copy: \"Email, SMS y WhatsApp configurables por regla y por antiguedad de deuda. El recordatorio llega por el canal donde el cliente responde.\"\nF2 H3: \"Pagos parciales con saldo automatico\"\nF2 copy: \"El cliente abona lo que puede y el sistema actualiza el saldo pendiente automaticamente. Sin reconciliacion manual por tu parte.\"\nF3 H3: \"Historial exportable para contabilidad\"\nF3 copy: \"Descarga el historial de cobros por cliente en formato estandar para informes de cartera, auditoria y contabilidad.\"\nF4 H3: \"Logica por antiguedad de deuda\"\nF4 copy: \"Configura cadencias distintas segun el tiempo de mora: recordatorio suave a los 3 dias, escalamiento a los 15, gestion diferenciada a los 30.\"",
+      "updatedAt": "2026-03-09T15:23:50.788Z",
+      "decisionNotes": ""
+    },
+    "/productos/cobranza-automatizada::how-it-works": {
+      "status": "approved",
+      "finalCopy": "Paso: 1\nAccion: \"Configura tu politica de cobro\"\nDetalle: \"Define plazos, tonos y canales (WhatsApp, SMS, correo)\"\nPaso: 2\nAccion: \"Cobru ejecuta automaticamente\"\nDetalle: \"Recordatorio amistoso -> con urgencia -> con consecuencias. Escalamiento progresivo.\"\nPaso: 3\nAccion: \"El cliente paga desde el mensaje\"\nDetalle: \"Link de pago integrado en cada recordatorio. Un clic y listo.\"",
+      "updatedAt": "2026-03-09T15:23:59.231Z",
+      "decisionNotes": ""
+    },
+    "/productos/cobranza-automatizada::case-studies": {
+      "status": "approved",
+      "finalCopy": "OMITIR por ahora. No usar caso de éxito ni métricas sin evidencia verificable para esta página.",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/cobranza-automatizada::industries": {
+      "status": "approved",
+      "finalCopy": "1. Propiedad Horizontal\nCuotas mensuales y morosos con seguimiento automatico.\nHref: /industrias/propiedad-horizontal\n\n2. Salud\nCartera de pacientes y empresas sin dejar todo al equipo de caja.\nHref: /industrias/salud\n\n3. Marketplaces\nGestiona cartera de sellers y cuentas por cobrar en crecimiento.\nHref: /industrias/marketplaces-plataformas",
+      "updatedAt": "2026-03-09T15:24:15.614Z",
+      "decisionNotes": ""
+    },
+    "/productos/cobranza-automatizada::faq": {
+      "status": "approved",
+      "finalCopy": "Grupo: Sobre Cobru\nPregunta: \"Cuanto tarda activar la cobranza?\"\nRespuesta: \"Entre 24 y 48 horas. La configuracion de reglas y plantillas se hace en la sesion de implementacion.\"\nGrupo: Sobre Cobru\nPregunta: \"Necesito cambiar de banco?\"\nRespuesta: \"No. Cobru conecta con tu operacion actual sin requerir cambio de entidad financiera.\"\nGrupo: Sobre Cobru\nPregunta: \"Que pasa si el cliente ya pago por otro canal?\"\nRespuesta: \"Puedes marcar el pago como recibido manualmente o via conciliacion y el sistema deja de enviar recordatorios automaticamente.\"\nGrupo: Sobre Cobranza\nPregunta: \"Que canales de notificacion usa?\"\nRespuesta: \"Email, SMS y WhatsApp. Los canales activos y la cadencia se configuran por regla en la sesion de implementacion.\"\nGrupo: Sobre Cobranza\nPregunta: \"Maneja pagos parciales?\"\nRespuesta: \"Si. El cliente paga lo que puede, el sistema actualiza el saldo y sigue el seguimiento por el monto restante.\"\nGrupo: Sobre Cobranza\nPregunta: \"Puedo exportar el historial de cobros?\"\nRespuesta: \"Si, en formato estandar (CSV/Excel) para informes de cartera, contabilidad y auditoria.\"\nGrupo: Sobre Cobranza\nPregunta: \"Como se configura la cadencia de recordatorios?\"\nRespuesta: \"En la sesion de implementacion defines dias de espera entre mensajes, canales y textos. Podemos ajustarlo por tipo de deuda o producto.\"\n\n---",
+      "updatedAt": "2026-03-09T15:24:29.429Z",
+      "decisionNotes": ""
+    },
+    "/productos/cobranza-automatizada::cta-final": {
+      "status": "approved",
+      "finalCopy": "Title: \"Si la mora te obliga a perseguir personas y archivos, el siguiente paso no debería ser otra demo genérica.\"\nLead: \"Revisamos cómo sigue hoy tu equipo las deudas, dónde se rompe la secuencia y qué parte de la cobranza conviene ordenar primero.\"\nBullets:\n• Política, canal y pago en el mismo flujo\n• Visibilidad útil para cartera y finanzas\n• Siguiente paso aterrizado a la operación",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/pagos-masivos::hero": {
+      "status": "approved",
+      "finalCopy": "H1: \"Tu equipo no debería ejecutar un lote grande sin saber quién cobró y quién no.\"\nSubheadline: \"Dispersa pagos con validación previa, trazabilidad por beneficiario y menos reproceso para operaciones, tesorería y finanzas. El objetivo no es solo mover dinero: es cerrar el lote con control.\"\nTrust: \"Ejecución por lote con estado por beneficiario\" · \"Validación previa\" · \"Cierre operativo con control\"\nCTA primario: \"Revisar mi operación de pagos\" -> /agendar-demo\nCTA secundario: \"Ver precios\" -> /precios",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/pagos-masivos::pain-points": {
+      "status": "approved",
+      "finalCopy": "H2: \"Problemas que resuelve\"\nP1 H3: \"Subir planos bancarios consume horas del equipo\"\nP1 copy: \"Formatear y cargar archivos planos en el portal bancario, resolver errores de estructura y verificar que todos los pagos salieron bien puede tomar medio dia de trabajo.\"\nP2 H3: \"Sin visibilidad por beneficiario del estado del pago\"\nP2 copy: \"Una vez que sale el lote, no sabes cuales acreditaron, cuales fueron rechazados y por que. El seguimiento se hace por telefono o email.\"\nP3 H3: \"Rechazos masivos sin diagnostico claro\"\nP3 copy: \"Cuando un lote tiene 30% de rechazos por cuentas inactivas o datos incorrectos, no hay una vista que diga cual fallo ni te permita corregir y reintentar sin rehacer todo.\"",
+      "updatedAt": "2026-03-09T15:27:15.487Z",
+      "decisionNotes": ""
+    },
+    "/productos/pagos-masivos::features": {
+      "status": "approved",
+      "finalCopy": "H2: \"Lo que tu equipo gana\"\nF1 H3: \"Validacion bancaria previa al desembolso\"\nF1 copy: \"El sistema verifica las cuentas antes de ejecutar el lote. Menos rechazos, menos reproceso, menos llamadas para confirmar datos.\"\nF2 H3: \"Estado individual por beneficiario\"\nF2 copy: \"Cada pago del lote tiene su propio estado: acreditado, pendiente o rechazado. Puedes ver quien recibio y quien no sin revisar el extracto bancario.\"\nF3 H3: \"Reenvio de rechazados sin rehacer el lote\"\nF3 copy: \"Los pagos rechazados se marcan automaticamente y puedes reenviarlos de forma individual o en sub-lote sin afectar los que ya acreditaron.\"\nF4 H3: \"Carga en CSV/Excel y via API\"\nF4 copy: \"Sube tu lista en el formato que ya usas o integralo directamente desde tu sistema de nomina o ERP via API.\"",
+      "updatedAt": "2026-03-09T15:27:21.189Z",
+      "decisionNotes": ""
+    },
+    "/productos/pagos-masivos::how-it-works": {
+      "status": "approved",
+      "finalCopy": "Paso: 1\nAccion: \"Sube tu archivo\"\nDetalle: \"Excel o CSV con nombres, documentos y montos\"\nPaso: 2\nAccion: \"Validacion previa\"\nDetalle: \"Validacion de datos para reducir devoluciones y pagos fallidos\"\nPaso: 3\nAccion: \"Ejecucion por lote\"\nDetalle: \"Procesas el lote y sigues el estado por beneficiario\"\nPaso: 4\nAccion: \"Reporte y evidencia\"\nDetalle: \"Reportes operativos y evidencia cuando aplica\"",
+      "updatedAt": "2026-03-09T15:27:26.451Z",
+      "decisionNotes": ""
+    },
+    "/productos/pagos-masivos::case-studies": {
+      "status": "approved",
+      "finalCopy": "OMITIR por ahora. No usar caso de éxito ni métricas sin evidencia verificable para esta página.",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/pagos-masivos::industries": {
+      "status": "approved",
+      "finalCopy": "1. Logistica y BTL\nPagos operativos en fin de semana y por volumen.\nHref: /industrias/logistica-btl\n\n2. Marketplaces\nDispersión a sellers y prestadores con trazabilidad por beneficiario.\nHref: /industrias/marketplaces-plataformas\n\n3. Fintechs\nPagos a usuarios finales dentro de productos financieros propios.\nHref: /industrias/fintechs",
+      "updatedAt": "2026-03-09T15:27:36.394Z",
+      "decisionNotes": ""
+    },
+    "/productos/pagos-masivos::faq": {
+      "status": "approved",
+      "finalCopy": "CTA H2: \"Te mostramos como aplicarlo a tu operacion\"\nFAQ: Cuanto tarda activar?: \"Entre 24 y 48 horas. El volumen maximo y las validaciones se configuran en la sesion comercial.\"\nFAQ: Necesito cambiar de banco?: \"No. Cobru opera como capa de dispersion sobre tu operacion bancaria actual.\"\nFAQ: Funciona con cualquier banco colombiano?: \"Si, cubre el sistema bancario colombiano completo incluyendo Bancolombia, Davivienda, BBVA y demas entidades con operacion ACH.\"\nFAQ: Cuantos beneficiarios por lote?: \"El sistema esta disenado para lotes grandes -- el limite maximo se define por plan en la sesion comercial.\"\nFAQ: Que pasa si un pago es rechazado?: \"Se marca individualmente con el motivo del rechazo. Puedes corregir el dato y reintentar sin rehacer el lote completo.\"\nFAQ: Acepta validacion bancaria previa?: \"Si. Verificamos la cuenta destino antes de ejecutar para reducir rechazos por cuentas inactivas o datos incorrectos.\"\nFAQ: Que formatos de carga acepta?: \"CSV y Excel estandar para carga manual. Tambien disponible via API para integracion directa desde tu ERP o sistema de nomina.\"\n\n---",
+      "updatedAt": "2026-03-09T15:27:43.055Z",
+      "decisionNotes": ""
+    },
+    "/productos/pagos-masivos::cta-final": {
+      "status": "approved",
+      "finalCopy": "Title: \"Si cada lote te deja validando, corrigiendo y respondiendo reclamos, el siguiente paso no debería ser otra demo genérica.\"\nLead: \"Revisamos cómo ejecuta hoy tu equipo los pagos, dónde aparecen rechazados y qué parte del flujo conviene ordenar primero.\"\nBullets:\n• Validación, ejecución y seguimiento en el mismo flujo\n• Estado por beneficiario y manejo de rechazados\n• Ruta útil para operaciones, tesorería y finanzas",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/pagos-internacionales::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Pagos Internacionales\"\nH1: \"Tu producto financiero no debería separar recepción, envío y payout internacional en procesos distintos.\"\nSubheadline: \"Integra una capa híbrida para recibir, mover y pagar dinero internacional con trazabilidad, cumplimiento y visibilidad dentro del mismo producto para fintechs, PSP y remesadoras.\"\nTrust: \"Recepción, envío y payout en una sola capa\" · \"Cumplimiento dentro del flujo\" · \"Trazabilidad por operación\"\nCTA primario: \"Revisar mi flujo internacional\" -> /agendar-demo\nCTA secundario: \"Ver precios\" -> /precios",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/pagos-internacionales::pain-points": {
+      "status": "approved",
+      "finalCopy": "P1. Cada tramo del flujo internacional termina en una herramienta distinta\nRecepción, envío y payout en proveedores separados rompen la continuidad operativa.\n\nP2. Cumplimiento y operación corren por carriles distintos\nSi compliance valida por fuera del flujo híbrido, el producto pierde continuidad frente al cliente o beneficiario.\n\nP3. La trazabilidad se rompe entre recepción, movimiento y payout\nEl equipo no puede responder con claridad qué entró, qué salió y dónde quedó detenido el flujo.",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/pagos-internacionales::features": {
+      "status": "approved",
+      "finalCopy": "F1. Una vista más completa de la operación internacional\nLa operación debe leerse desde la recepción o instrucción inicial hasta el payout final.\n\nF2. Cumplimiento dentro del flujo\nLa validación regulatoria y documental acompaña la operación en vez de frenarla desde otra herramienta.\n\nF3. Más continuidad entre producto y operación\nEl usuario final no debería sentir que recepción, envío y payout son productos distintos.\n\nF4. Una base más usable para soporte y conciliación\nCuando el estado y la evidencia de cada operación híbrida están ordenados, soporte responde mejor y finanzas cierra con menos fricción.",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/pagos-internacionales::how-it-works": {
+      "status": "approved",
+      "finalCopy": "1. Leemos tu producto y el flujo internacional actual\nRevisamos cómo entra hoy el dinero, cómo sale, cuándo aparece payout a beneficiario y dónde se rompe la continuidad.\n\n2. Definimos integración y controles\nAterrizamos cómo debe verse la capa híbrida dentro del producto y qué validaciones deben vivir en el mismo flujo.\n\n3. Activamos la primera operación híbrida con trazabilidad\nLa primera ejecución comprueba continuidad entre recepción, movimiento, payout, soporte y cumplimiento.\n\n4. Escalas sin crear otra operación manual\nEl objetivo es operar esta ruta con la misma disciplina y visibilidad del resto del producto.",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/pagos-internacionales::case-studies": {
+      "status": "approved",
+      "finalCopy": "OMITIR por ahora. No usar caso de éxito ni métricas sin evidencia verificable para esta página.",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/pagos-internacionales::industries": {
+      "status": "approved",
+      "finalCopy": "1. Fintechs\nCuando el producto financiero necesita recibir, mover y pagar internacional dentro de la misma lógica operativa.\nHref: /industrias/fintechs\n\n2. Marketplaces y Plataformas\nCuando la plataforma necesita cobrar, enviar o hacer payout cross-border con visibilidad operativa suficiente.\nHref: /industrias/marketplaces-plataformas\n\n3. Logística y BTL\nCuando existen pagos a proveedores o contrapartes externas que no pueden operarse con opacidad ni seguimiento manual.\nHref: /industrias/logistica-btl",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/pagos-internacionales::faq": {
+      "status": "approved",
+      "finalCopy": "FAQ 1: \"¿Esto está pensado para fintechs y remesadoras o para exportadores tradicionales?\"\nRespuesta: \"La narrativa está priorizada para fintechs, PSP y remesadoras que necesitan integrar este flujo dentro de su producto.\"\n\nFAQ 2: \"¿Aquí estamos hablando de recibir, enviar o hacer payout internacional?\"\nRespuesta: \"De una capa híbrida donde recepción, envío y payout pueden convivir dentro del mismo producto.\"\n\nFAQ 3: \"¿El cumplimiento se resuelve dentro del flujo o queda como una capa separada?\"\nRespuesta: \"La promesa del producto es incorporar validación y cumplimiento dentro de la operación.\"\n\nFAQ 4: \"¿Qué gana producto además de habilitar otra ruta internacional?\"\nRespuesta: \"Gana continuidad operativa, menos excepciones manuales y mejor trazabilidad para soporte.\"\n\nFAQ 5: \"¿Necesito cambiar de banco para empezar?\"\nRespuesta: \"No. La propuesta sigue siendo integrar la capa internacional a la operación existente sin exigir cambio de banco.\"",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/pagos-internacionales::cta-final": {
+      "status": "approved",
+      "finalCopy": "Title: \"Si hoy recepción, envío y payout internacional viven como procesos aparte, la siguiente conversación no debería ser otra demo genérica.\"\nLead: \"Revisamos cómo opera hoy tu producto la capa internacional, dónde se rompe la continuidad entre entrada, salida y beneficiario final, y qué parte conviene integrar primero.\"\nBullets:\n• Lectura de cómo hoy se separan recepción, envío y payout\n• Definición de integración, trazabilidad y controles necesarios\n• Ruta híbrida útil para fintechs y remesadoras",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/tarjetas-tokenizadas::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Tarjetas Tokenizadas\"\nH1: \"Tus pagos recurrentes en dólares no deberían depender de exponer la tarjeta principal de la empresa.\"\nSubheadline: \"Usa tarjetas tokenizadas para delegar pagos de nube, licencias y servicios internacionales sin compartir la tarjeta central, con control por proveedor, servicio contratado y continuidad operativa.\"\nTrust: \"Delegación operativa sin compartir la tarjeta central\" · \"Control por proveedor y servicio\" · \"Pagos recurrentes a servicios internacionales\"\nCTA primario: \"Revisar mis pagos recurrentes\" -> /agendar-demo\nCTA secundario: \"Ver precios\" -> /precios",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/tarjetas-tokenizadas::pain-points": {
+      "status": "approved",
+      "finalCopy": "P1. Todo depende de una sola tarjeta o de una sola persona\nCuando nube, licencias o plataformas globales se montan sobre una única tarjeta corporativa, cualquier bloqueo o rotación del responsable pone en riesgo servicios críticos.\n\nP2. Delegar el pago implica compartir una tarjeta que la empresa no quiere exponer\nLa solución improvisada suele ser compartir datos de la tarjeta principal con equipos o proveedores.\n\nP3. El gasto por proveedor y servicio se vuelve opaco y difícil de gobernar\nFinanzas termina viendo cargos dispersos sin estructura clara para controlar qué servicio contratado está consumiendo gasto.",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/tarjetas-tokenizadas::features": {
+      "status": "approved",
+      "finalCopy": "F1. Delegación operativa más segura\nLos equipos pueden operar renovaciones y pagos recurrentes sin tener acceso directo a la tarjeta principal.\n\nF2. Más control por proveedor y servicio\nFinanzas y operaciones pueden ordenar mejor qué proveedor se paga y dónde conviene poner límites o seguimiento.\n\nF3. Más continuidad para pagos críticos\nLas renovaciones dejan de depender de perseguir tarjetas, cupos o responsables internos.\n\nF4. Una base más clara para gobernanza interna\nEl pago recurrente deja de verse como una colección de cargos sueltos y pasa a tener una narrativa clara para finanzas y operaciones.",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/tarjetas-tokenizadas::how-it-works": {
+      "status": "approved",
+      "finalCopy": "1. Leemos qué pagos recurrentes hoy son críticos\nIdentificamos qué servicios internacionales dependen hoy de la tarjeta principal, pagos manuales o responsables concretos.\n\n2. Definimos qué parte conviene tokenizar y delegar\nAterrizamos qué proveedores y servicios deben vivir en esta capa y cómo delegar sin abrir nuevos puntos de exposición.\n\n3. Activamos la operación recurrente\nEl flujo empieza a sostener pagos periódicos sin depender del mismo nivel de intervención manual ni de la tarjeta central.\n\n4. Ganas lectura, control y continuidad\nEl equipo responde mejor qué proveedor, licencia o cargo presenta incidencia.",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/tarjetas-tokenizadas::industries": {
+      "status": "approved",
+      "finalCopy": "1. Fintechs\nCuando el stack del producto depende de servicios cloud, vendors globales y herramientas recurrentes que no pueden caer por un problema de tarjeta.\nHref: /industrias/fintechs\n\n2. Marketplaces y Plataformas\nCuando el negocio opera sobre infraestructura, ads, software o licencias globales con renovación periódica.\nHref: /industrias/marketplaces-plataformas\n\n3. Logística y BTL\nCuando campañas, software operativo o herramientas internacionales dependen de pagos recurrentes bien mantenidos.\nHref: /industrias/logistica-btl",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/tarjetas-tokenizadas::faq": {
+      "status": "approved",
+      "finalCopy": "FAQ 1: \"¿Esto está pensado para pagos recurrentes de empresa o para otro tipo de uso?\"\nRespuesta: \"El foco está en pagos recurrentes de empresa para nube, licencias, herramientas SaaS y plataformas internacionales.\"\n\nFAQ 2: \"¿Por qué esto importa tanto en Colombia?\"\nRespuesta: \"Porque para muchas empresas no es trivial obtener y operar una tarjeta en dólares con suficiente continuidad, control y gobernanza.\"\n\nFAQ 3: \"¿Esto sirve si no quiero exponer la tarjeta principal de la empresa?\"\nRespuesta: \"Sí. La narrativa central es delegar pagos sin convertir la tarjeta principal en un secreto compartido.\"\n\nFAQ 4: \"¿Qué gana finanzas además de poder pagar?\"\nRespuesta: \"Más claridad sobre proveedor, servicio contratado, continuidad y responsabilidad interna.\"\n\nFAQ 5: \"¿Qué pasa si uno de estos pagos críticos falla?\"\nRespuesta: \"La idea es convertir ese fallo en algo gobernable y visible para el equipo, no descubrirlo tarde cuando ya afectó la operación.\"",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/tarjetas-tokenizadas::case-studies": {
+      "status": "approved",
+      "finalCopy": "OMITIR por ahora. No usar caso de éxito ni métricas sin evidencia verificable para esta página.",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/tarjetas-tokenizadas::cta-final": {
+      "status": "approved",
+      "finalCopy": "Title: \"Si hoy tu nube, licencias o herramientas internacionales dependen de compartir la tarjeta principal, la siguiente conversación no debería ser una demo genérica.\"\nLead: \"Revisamos qué pagos recurrentes internacionales hoy exponen la tarjeta central, dónde hace falta delegación operativa y qué parte conviene ordenar primero para ganar control por proveedor y servicio.\"\nBullets:\n• Identificación de pagos que hoy exponen la tarjeta principal\n• Definición de qué parte conviene delegar y controlar primero\n• Ruta útil para nube, licencias y SaaS internacional",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/entrega-efectivo::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Entrega en Efectivo\"\nH1: \"Cuando el beneficiario no tiene cuenta, la operación no debería romperse.\"\nSubheadline: \"Activa retiros en efectivo con cobertura física, trazabilidad y confirmación de retiro para logística, programas de dispersión y remeseras que necesitan pagar a personas fuera del sistema bancario tradicional.\"\nTrust: \"Cobertura en puntos físicos\" · \"Tu empresa no transporta efectivo\" · \"Estado y evidencia por beneficiario\"\nCTA primario: \"Revisar mi operación de dispersión\" -> /agendar-demo\nCTA secundario: \"Ver precios\" -> /precios",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/entrega-efectivo::pain-points": {
+      "status": "approved",
+      "finalCopy": "P1. El canal bancario simplemente no resuelve todos los casos\nParte de la población no tiene cuenta activa o no puede recibir por canales digitales habituales.\n\nP2. Tu empresa termina absorbiendo el riesgo físico y operativo del efectivo\nCuando la organización arma caja o improvisa retiros manuales, el riesgo ya no es solo financiero.\n\nP3. Sin evidencia clara, cada pago se convierte en una posible disputa\nSin trazabilidad, auditoría y operaciones terminan resolviendo con llamadas, planillas o versiones cruzadas.",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/entrega-efectivo::features": {
+      "status": "approved",
+      "finalCopy": "F1. Cobertura donde la banca no alcanza\nEl beneficiario puede retirar sin depender de cuenta bancaria activa o billetera.\n\nF2. Menos riesgo operativo para tu organización\nLa empresa deja de resolver este tipo de pagos con caja propia o procesos informales.\n\nF3. Más claridad sobre cada retiro\nOperaciones puede leer mejor quién retiró, en qué punto y en qué momento.\n\nF4. Una misma operación puede mezclar canales\nEl flujo puede convivir con pagos bancarios o digitales cuando la base es mixta.",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/entrega-efectivo::how-it-works": {
+      "status": "approved",
+      "finalCopy": "1. Leemos tu población y tu cobertura\nRevisamos quiénes son los beneficiarios, dónde están y por qué no reciben por banca tradicional.\n\n2. Definimos la ruta de habilitación\nAterrizamos cómo se registra el beneficiario y cómo se habilita el retiro.\n\n3. El beneficiario retira en punto físico\nLa operación permite el retiro sin que tu empresa tenga que mover efectivo.\n\n4. La operación cierra con mejor evidencia\nEl equipo puede ver mejor qué retiro sí ocurrió y qué sigue pendiente.",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/entrega-efectivo::industries": {
+      "status": "approved",
+      "finalCopy": "1. Logística y BTL\nCuando hay equipos de campo o activaciones donde no todos los beneficiarios operan con cuenta bancaria.\nHref: /industrias/logistica-btl\n\n2. Fintechs y remeseras\nCuando la operación necesita pagar a personas sin cuenta o habilitar retiro físico como parte de su red de servicio.\nHref: /industrias/fintechs\n\n3. Programas de dispersión\nCuando el objetivo es llegar a beneficiarios dispersos, rurales o fuera del sistema bancario sin improvisar el efectivo.\nHref: /industrias/logistica-btl",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/entrega-efectivo::faq": {
+      "status": "approved",
+      "finalCopy": "FAQ 1: \"¿En qué puntos puede retirar el beneficiario?\"\nRespuesta: \"La cobertura depende de la red habilitada y de la geografía objetivo.\"\n\nFAQ 2: \"¿Qué documento necesita el beneficiario?\"\nRespuesta: \"Depende del esquema operativo, pero la habilitación del retiro requiere identificación válida y reglas de control definidas.\"\n\nFAQ 3: \"¿Qué gana la empresa además de llegar al beneficiario?\"\nRespuesta: \"Una forma de resolver pagos donde la banca no alcanza, sin asumir directamente el riesgo físico del efectivo.\"\n\nFAQ 4: \"¿Puedo mezclar efectivo con pagos bancarios o digitales?\"\nRespuesta: \"Sí. Puedes enrutar cada beneficiario por el canal que sí le sirve.\"\n\nFAQ 5: \"¿Cómo ayuda esto a auditoría y seguimiento?\"\nRespuesta: \"Deja evidencia más clara sobre habilitación, retiro y estado por beneficiario.\"",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/entrega-efectivo::case-studies": {
+      "status": "approved",
+      "finalCopy": "OMITIR por ahora. No usar caso de éxito ni métricas sin evidencia verificable para esta página.",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/entrega-efectivo::cta-final": {
+      "status": "approved",
+      "finalCopy": "Title: \"Si hoy el efectivo es la excepción que desordena todo, la siguiente conversación no debería ser una demo genérica.\"\nLead: \"Revisamos dónde hoy no llega la banca, qué nivel de cobertura y evidencia necesita tu operación y qué parte del flujo conviene ordenar primero.\"\nBullets:\n• Lectura de dónde hoy se rompe la última milla del pago\n• Definición de cobertura, habilitación y seguimiento correctos\n• Ruta útil para logística, dispersión y remesas",
+      "updatedAt": "2026-03-26T19:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/productos/bre-b::how-it-works": {
+      "status": "approved",
+      "finalCopy": "1. Activa tu alias\nPrepara la entrada al nuevo rail sin complejidad innecesaria.\n\n2. Comparte con tus pagadores\nUsa una clave simple para empezar a recibir o cobrar.\n\n3. Confirma en segundos\nLa velocidad debe traducirse en decisiones operativas reales.",
+      "updatedAt": "2026-03-11T06:33:29.806Z",
+      "decisionNotes": ""
+    },
+    "/productos/bre-b::case-studies": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Early access\"\n\nTitle: \"Primeras empresas operando pagos en fin de semana sin espera al lunes.\"\n\nSummary: \"El caso debe enfocarse en urgencia legitima y ventaja operativa, no solo en novedad tecnologica.\"\n\nHighlight: \"Confirmacion inmediata fuera de horario bancario\"\n\nBullets:\n• Menos espera para caja y operaciones\n• Menos reclamos por pagos sin confirmar\n• Ventaja temprana en un rail nuevo",
+      "updatedAt": "2026-03-11T06:33:36.133Z",
+      "decisionNotes": ""
+    },
+    "/productos/bre-b::cta-final": {
+      "status": "approved",
+      "finalCopy": "Title: \"La infraestructura instantanea ya existe. La pregunta es cuando la vas a activar.\"\n\nBullets:\n• Evaluacion temprana para tu operacion\n• Casos de cobro o pago 24/7\n• Ruta de activacion segun madurez y volumen",
+      "updatedAt": "2026-03-11T06:33:53.458Z",
+      "decisionNotes": ""
+    },
+    "/productos/fiat-stablecoins::hero": {
+      "status": "approved",
+      "finalCopy": "Hero eyebrow: \"Fiat y Stablecoins\"\nH1: \"Opera flujos fiat y stablecoins desde una sola capa.\"\nSubheadline: \"USDT, USDC y COP para equipos que necesitan conectar tesoreria tradicional y flujos cripto sin perder control regulatorio.\"\nBadge: \"Cumplimiento y tesoreria\"\nTrust: SEDPE regulada por la SFC · Activacion en 24 a 72 horas · Soporte humano para implementacion · USDT · USDC · Cumplimiento UIAF\nCTA primario: \"Agendar demo\" -> /agendar-demo\nCTA secundario: \"Ver industria\" -> /industrias/fintechs\nVisual label: \"Puente fiat y stablecoins\"",
+      "updatedAt": "2026-03-11T06:34:04.134Z",
+      "decisionNotes": ""
+    },
+    "/productos/fiat-stablecoins::pain-points": {
+      "status": "approved",
+      "finalCopy": "P1. Operacion fiat y cripto separadas\nSin una capa de union, el equipo trabaja dos mundos paralelos sin visibilidad completa.\n\nP2. Volatilidad y cobertura\nLa preocupacion no es solo tecnica. Tambien es de tesoreria y proteccion operativa.\n\nP3. Compliance cripto ambiguo\nSin una narrativa seria de cumplimiento, el producto no es confiable para compradores empresariales.",
+      "updatedAt": "2026-03-11T06:34:09.631Z",
+      "decisionNotes": ""
+    },
+    "/productos/fiat-stablecoins::features": {
+      "status": "approved",
+      "finalCopy": "F1. Conversion en tiempo real\nEl valor no es solo mover activos, sino hacerlo dentro del flujo operativo.\n\nF2. Stablecoins concretas\nNombrar USDT y USDC reduce ambiguedad y ayuda a calificar interes.\n\nF3. Cumplimiento regulatorio\nLa pagina debe sonar a infraestructura seria, no a experimento.\n\nF4. Sin cambiar el stack bancario\nReducir friccion de implementacion es central para este buyer.",
+      "updatedAt": "2026-03-11T06:34:14.017Z",
+      "decisionNotes": ""
+    },
+    "/productos/fiat-stablecoins::how-it-works": {
+      "status": "approved",
+      "finalCopy": "1. Conecta tu cuenta\nEmpieza desde tu operacion actual, no desde una migracion total.\n\n2. Define reglas de conversion\nUsa stablecoins cuando aporten velocidad o cobertura real.\n\n3. Opera con visibilidad\nGestiona ambos flujos desde una misma capa operativa.",
+      "updatedAt": "2026-03-11T06:34:18.349Z",
+      "decisionNotes": ""
+    },
+    "/productos/fiat-stablecoins::case-studies": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Caso de exito\"\n\nTitle: \"Una fintech conecto su operacion fiat y stablecoins sin duplicar equipos ni procesos.\"\n\nSummary: \"La historia debe unir velocidad y cumplimiento. Si falta uno de los dos, la propuesta pierde credibilidad.\"\n\nHighlight: \"Una sola vista para flujos fiat y cripto\"\n\nBullets:\n• Menos friccion entre tesoreria y producto\n• Cumplimiento visible para equipo legal\n• Cobertura y settlement mas rapidos",
+      "updatedAt": "2026-03-11T06:34:22.763Z",
+      "decisionNotes": ""
+    },
+    "/productos/fiat-stablecoins::faq": {
+      "status": "approved",
+      "finalCopy": "1. Cuanto tarda activar Cobru?\nLa activacion tipica toma entre 24 y 72 horas habiles, dependiendo del producto y de la documentacion del negocio.\n\n2. Necesito cambiar de banco para operar?\nNo. La narrativa del sitio parte de una promesa constante: integrar Cobru sin obligarte a reconstruir tu operacion bancaria actual.\n\n3. Cobru funciona para operaciones reguladas?\nSi. El sitio debe reforzar en todas las rutas las senales de regulacion, trazabilidad y cumplimiento para equipos financieros y de compliance.\n\n4. Que stablecoins soporta Cobru?\nUSDT y USDC deben aparecer visibles desde el hero para que el buyer se auto-califique rapido.\n\n5. Como se maneja el compliance cripto?\nComo una historia de cumplimiento real dentro del marco colombiano, no como una nota marginal al final de la pagina.",
+      "updatedAt": "2026-03-11T06:34:30.465Z",
+      "decisionNotes": ""
+    },
+    "/productos/fiat-stablecoins::cta-final": {
+      "status": "approved",
+      "finalCopy": "Title: \"Infraestructura cripto con el rigor que exige una operacion empresarial.\"\n\nBullets:\n• Evaluacion de casos de uso reales\n• Ruta de compliance y operacion\n• Integracion con la infraestructura existente",
+      "updatedAt": "2026-03-11T06:34:45.838Z",
+      "decisionNotes": ""
+    },
+    "/industrias/marketplaces::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Marketplaces y Plataformas\"\nH1: \"Ordena pagos entre plataforma y terceros sin trabajo manual\"\nLead: \"Cobru ayuda a marketplaces y plataformas a cobrar a compradores, distribuir a vendedores y liquidar comisiones sin sumar herramientas paralelas ni carga manual al equipo.\"\nCTA primario: \"Agendar demo\"\nCTA secundario: \"Ver precios\"",
+      "updatedAt": "2026-03-11T06:34:56.480Z",
+      "decisionNotes": ""
+    },
+    "/industrias/marketplaces::pain-points": {
+      "status": "approved",
+      "finalCopy": "P1 H3: \"Split de pagos manual entre plataforma y vendedor\"\nP1 copy: \"Cada transaccion que pasa por el marketplace genera trabajo de conciliacion: cuanto va al vendedor, cuanto retiene la plataforma, cuando se acredita. Sin automatizacion esto es error humano constante.\"\nP2 H3: \"Trazabilidad limitada por vendedor\"\nP2 copy: \"El equipo no sabe en tiempo real que vendedores tienen pagos pendientes, que se disperso y que esta en proceso. Sin visibilidad, escalar opera a ciegas.\"\nP3 H3: \"Mas proveedores para un mismo flujo de caja\"\nP3 copy: \"Un gateway para cobrar y otro para dispersar duplica integraciones, contratos y puntos de falla. La fragmentacion agrega friccion operativa y comercial.\"",
+      "updatedAt": "2026-03-11T06:35:20.880Z",
+      "decisionNotes": ""
+    },
+    "/industrias/marketplaces::recommended-products": {
+      "status": "approved",
+      "finalCopy": "Producto: 1\nH3: \"Pasarela de Pagos\"\nCopy: \"Cobra a compradores con PSE, Nequi y tarjetas en un solo checkout. Conciliacion centralizada desde el primer pago.\"\nProducto: 2\nH3: \"Pagos Masivos\"\nCopy: \"Dispersa a vendedores y socios en lotes con estado individual por beneficiario. Sin planos bancarios manuales.\"\nProducto: 3\nH3: \"Cobranza Automatizada\"\nCopy: \"Activa seguimiento cuando algun actor del marketplace tiene saldo pendiente. Notificaciones multicanal sin gestion manual.\"",
+      "updatedAt": "2026-03-11T06:35:25.211Z",
+      "decisionNotes": ""
+    },
+    "/industrias/marketplaces::how-it-works": {
+      "status": "draft",
+      "finalCopy": "S1 titulo: \"Conecta tu plataforma\"\nS1 copy: \"Integra el flujo base de cobro y payout para compradores y vendedores desde la API de Cobru.\"\nS2 titulo: \"Configura reglas de distribucion\"\nS2 copy: \"Define como entra y sale el dinero entre actores: comisiones, retenciones y plazos de liquidacion.\"\nS3 titulo: \"Opera y concilia desde una sola capa\"\nS3 copy: \"Controla cobros, dispersiones y cartera de vendedores desde un tablero unificado sin herramientas paralelas.\"",
+      "updatedAt": "2026-03-11T12:00:00.000Z",
+      "decisionNotes": ""
+    },
+    "/industrias/marketplaces::case-studies": {
+      "status": "draft",
+      "finalCopy": "Eyebrow: \"Caso de exito\"\nTitulo: \"Un marketplace redujo 60% su tiempo de liquidacion.\"\nSummary: \"La narrativa correcta combina crecimiento, velocidad operativa y visibilidad de pagos entre compradores, vendedores y la plataforma.\"\nHighlight: \"60% menos tiempo liquidando sellers\"\nBullet 1: \"Cobro y payout conectados en un solo flujo\"\nBullet 2: \"Menos friccion en el onboarding de nuevos vendedores\"\nBullet 3: \"Mas control por seller y por transaccion\"",
+      "updatedAt": "2026-03-11T12:00:00.000Z",
+      "decisionNotes": ""
+    },
+    "/industrias/marketplaces::metrics": {
+      "status": "draft",
+      "finalCopy": "Metrica 1 valor: \"+200\"\nMetrica 1 label: \"empresas activas con Cobru\"\nMetrica 1 copy: \"Incluye marketplaces y plataformas de multiples sectores en Colombia.\"\nMetrica 2 valor: \"60%\"\nMetrica 2 label: \"reduccion en tiempo de liquidacion\"\nMetrica 2 copy: \"Resultado promedio de marketplaces que unifican cobro y dispersion en Cobru.\"\nMetrica 3 valor: \"3 billones COP+\"\nMetrica 3 label: \"volumen procesado\"\nMetrica 3 copy: \"Infraestructura que aguanta el crecimiento de plataformas que escalan rapido.\"",
+      "updatedAt": "2026-03-11T12:00:00.000Z",
+      "decisionNotes": ""
+    },
+    "/industrias/marketplaces::faq": {
+      "status": "draft",
+      "finalCopy": "Grupo: Cobru\nPregunta: \"Cobru soporta split de pagos entre plataforma y vendedores?\"\nRespuesta: \"Cobru tiene los modulos de cobro y dispersion que permiten separar flujos: cobrar al comprador y pagar al vendedor con trazabilidad individual. El caso de uso se define en la sesion comercial segun la logica del marketplace.\"\nGrupo: Cobru\nPregunta: \"Funciona con Shopify o plataformas custom?\"\nRespuesta: \"La integracion funciona tanto para plataformas estandar como para desarrollos propios. La API permite conectar el flujo de pago a cualquier arquitectura existente sin reconstruir la plataforma.\"",
+      "updatedAt": "2026-03-11T12:00:00.000Z",
+      "decisionNotes": ""
+    },
+    "/industrias/marketplaces::cta-final": {
+      "status": "draft",
+      "finalCopy": "H2: \"Tu marketplace no deberia crecer mas rapido que tu capacidad de liquidar.\"\nLead: \"La demo para esta industria muestra el flujo completo: cobro a compradores, dispersion a vendedores y cartera en una sola operacion.\"\nBullet 1: \"Cobro, payout y cartera en una misma historia\"\nBullet 2: \"Demo con foco en sellers y trazabilidad individual\"\nBullet 3: \"Ruta tecnica y comercial alineadas desde el primer dia\"\nCTA: \"Agendar demo\"",
+      "updatedAt": "2026-03-11T12:00:00.000Z",
+      "decisionNotes": ""
+    },
+    "/industrias/ecommerce::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Ecommerce y Retail\"\nH1: \"Cobra mejor y reduce friccion en checkout.\"\nLead: \"Online y fisico, pasarela y cobranza en una narrativa pensada para equipos que viven entre conversion, recaudo y conciliacion.\"\nCTA primario: \"Agendar demo\"\nCTA secundario: \"Ver pasarela\"\nTrust 1: \"Online y fisico\"\nTrust 2: \"PSE y links\"\nTrust 3: \"Conciliacion automatizada\"",
+      "updatedAt": "2026-03-11T07:01:32.568Z",
+      "decisionNotes": ""
+    },
+    "/industrias/ecommerce::pain-points": {
+      "status": "approved",
+      "finalCopy": "P1 H3: \"Checkout con demasiada friccion\"\nP1 copy: \"Mas pasos equivale a mas abandono. Cada obstaculo en el flujo de pago tiene un costo directo en conversion e ingresos que el equipo puede medir pero no resolver sin la herramienta correcta.\"\nP2 H3: \"Online y fisico conciliados por separado\"\nP2 copy: \"El equipo hace doble trabajo para cerrar una sola operacion comercial. Sin unificacion, la informacion llega tarde y con errores que generan reproceso.\"\nP3 H3: \"Clientes recurrentes sin seguimiento\"\nP3 copy: \"La mora o el pago pendiente se convierte en carga manual para ventas u operaciones, sin una herramienta que lo automatice y libere al equipo.\"",
+      "updatedAt": "2026-03-11T07:01:47.342Z",
+      "decisionNotes": ""
+    },
+    "/industrias/ecommerce::how-it-works": {
+      "status": "approved",
+      "finalCopy": "S1 titulo: \"Integra tu checkout\"\nS1 copy: \"Conecta el punto de cobro principal con PSE, links de pago o QR segun el canal de venta.\"\nS2 titulo: \"Activa seguimiento de pendientes\"\nS2 copy: \"Agrega cobranza automatizada para clientes con pagos atrasados o recurrencia sin gestion manual del equipo.\"\nS3 titulo: \"Concilia todo desde un tablero\"\nS3 copy: \"Lee ventas online y fisicas en una sola operacion sin cruzar hojas de calculo ni duplicar trabajo.\"",
+      "updatedAt": "2026-03-11T07:02:15.006Z",
+      "decisionNotes": ""
+    },
+    "/industrias/ecommerce::case-studies": {
+      "status": "draft",
+      "finalCopy": "Eyebrow: \"Caso de exito\"\nTitulo: \"Una tienda redujo abandono y automatizo 100% su conciliacion.\"\nSummary: \"La historia combina conversion arriba del funnel y eficiencia operativa despues del pago.\"\nHighlight: \"25% menos abandono de carrito\"\nBullet 1: \"Checkout mas claro y con menos pasos para el comprador\"\nBullet 2: \"Mejor lectura del recaudo en un solo tablero\"\nBullet 3: \"Cierres manuales eliminados del flujo operativo\"",
+      "updatedAt": "2026-03-11T12:00:00.000Z",
+      "decisionNotes": ""
+    },
+    "/industrias/ecommerce::metrics": {
+      "status": "approved",
+      "finalCopy": "Metrica 1 valor: \"25%\"\nMetrica 1 label: \"menos abandono de carrito\"\nMetrica 1 copy: \"Resultado de tiendas que simplificaron su flujo de checkout con Cobru.\"\nMetrica 2 valor: \"100%\"\nMetrica 2 label: \"conciliacion automatizada\"\nMetrica 2 copy: \"Sin hojas de calculo ni cruces manuales entre canales online y punto fisico.\"\nMetrica 3 valor: \"24/7\"\nMetrica 3 label: \"disponibilidad de cobro\"\nMetrica 3 copy: \"Tu tienda cobra aunque tu equipo no este disponible.\"",
+      "updatedAt": "2026-03-11T07:02:23.324Z",
+      "decisionNotes": ""
+    },
+    "/industrias/ecommerce::faq": {
+      "status": "approved",
+      "finalCopy": "Grupo: Cobru\nPregunta: \"Cobru se integra con Shopify o WooCommerce?\"\nRespuesta: \"Cobru tiene integracion disponible para plataformas estandar de ecommerce. Para instalaciones custom o tiendas propias, la API permite conectar el flujo de cobro sin cambiar la plataforma base.\"\nGrupo: Producto\nPregunta: \"Funciona para ventas online y punto fisico a la vez?\"\nRespuesta: \"Si. La promesa de Cobru para ecommerce y retail es justamente unificar el recaudo omnicanal en una sola operacion, sin tratar cada canal como un mundo aparte.\"",
+      "updatedAt": "2026-03-11T07:02:33.789Z",
+      "decisionNotes": ""
+    },
+    "/industrias/ecommerce::cta-final": {
+      "status": "approved",
+      "finalCopy": "H2: \"Tu tienda necesita un checkout que convierta y una operacion que no duplique trabajo.\"\nLead: \"La demo ideal para ecommerce conecta conversion, omnicanalidad y conciliacion en un flujo real adaptado a tu operacion.\"\nBullet 1: \"Menos friccion en checkout y mas conversion\"\nBullet 2: \"Menos trabajo conciliando online y punto fisico\"\nBullet 3: \"Implementacion rapida sin reconstruir tu tienda\"\nCTA: \"Agendar demo\"",
+      "updatedAt": "2026-03-11T07:02:40.622Z",
+      "decisionNotes": ""
+    },
+    "/industrias/propiedad-horizontal::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Propiedad Horizontal\"\nH1: \"Organiza tu recaudo mensual sin perseguir pagos.\"\nLead: \"Recordatorios automaticos, links de pago y visibilidad de morosos para administraciones que quieren salir del seguimiento manual.\"\nCTA primario: \"Agendar demo\"\nCTA secundario: \"Ver cobranza\"\nTrust 1: \"WhatsApp y email\"\nTrust 2: \"PSE y links\"\nTrust 3: \"Dashboard de morosos\"",
+      "updatedAt": "2026-03-11T07:03:21.702Z",
+      "decisionNotes": ""
+    },
+    "/industrias/propiedad-horizontal::pain-points": {
+      "status": "approved",
+      "finalCopy": "P1 H3: \"Horas llamando a morosos cada mes\"\nP1 copy: \"La administracion gasta tiempo critico en seguimiento repetitivo en vez de gestionar el conjunto. El equipo termina haciendo de call center sin herramientas que lo eviten.\"\nP2 H3: \"Sin visibilidad en tiempo real de quien pago\"\nP2 copy: \"El control de cartera llega tarde y muchas veces depende de cruces manuales. La junta no tiene informacion actualizada cuando la necesita para tomar decisiones.\"\nP3 H3: \"Propietarios sin claridad de como y cuando pagar\"\nP3 copy: \"La friccion en la experiencia del residente impacta directamente el recaudo del conjunto. Pagar deberia ser facil, no una gestion de tres pasos.\"",
+      "updatedAt": "2026-03-11T07:03:25.751Z",
+      "decisionNotes": ""
+    },
+    "/industrias/propiedad-horizontal::recommended-products": {
+      "status": "approved",
+      "finalCopy": "Producto: 1\nH3: \"Cobranza Automatizada\"\nCopy: \"Secuencias de recordatorio por WhatsApp, email y SMS. El propietario recibe el aviso y puede pagar desde el mismo mensaje sin crear una cuenta nueva.\"\nProducto: 2\nH3: \"Pasarela de Pagos\"\nCopy: \"PSE y links de pago para simplificar el cobro de cuotas de administracion. El residente paga en dos pasos desde cualquier dispositivo.\"\nProducto: 3\nH3: \"Tablero de Cartera\"\nCopy: \"Visibilidad en tiempo real de pagos, morosos y estado del recaudo para la administracion y la junta directiva.\"",
+      "updatedAt": "2026-03-11T07:03:31.792Z",
+      "decisionNotes": ""
+    },
+    "/industrias/propiedad-horizontal::how-it-works": {
+      "status": "approved",
+      "finalCopy": "S1 titulo: \"Carga propietarios y cuotas\"\nS1 copy: \"Sube el directorio del conjunto con cuotas, vencimientos y condiciones segun el reglamento interno.\"\nS2 titulo: \"Activa reglas de cobranza\"\nS2 copy: \"Define avisos automaticos, plazos de mora y canales de notificacion segun la politica del conjunto.\"\nS3 titulo: \"Monitorea el recaudo en tiempo real\"\nS3 copy: \"La administracion y la junta tienen visibilidad completa de pagos, morosos y cartera sin llamar ni cruzar reportes.\"",
+      "updatedAt": "2026-03-11T07:03:36.989Z",
+      "decisionNotes": ""
+    },
+    "/industrias/propiedad-horizontal::metrics": {
+      "status": "approved",
+      "finalCopy": "Metrica 1 valor: \"70%\"\nMetrica 1 label: \"menos llamadas de cobranza\"\nMetrica 1 copy: \"Resultado de conjuntos que activaron recordatorios automaticos y links de pago directo con Cobru.\"\nMetrica 2 valor: \"24 horas\"\nMetrica 2 label: \"de activacion promedio\"\nMetrica 2 copy: \"El recaudo automatizado puede estar funcionando al dia siguiente de la sesion comercial.\"\nMetrica 3 valor: \"0\"\nMetrica 3 label: \"sistemas adicionales requeridos\"\nMetrica 3 copy: \"Cobru convive con el banco actual del conjunto sin reemplazar ningun sistema critico.\"",
+      "updatedAt": "2026-03-11T07:04:06.434Z",
+      "decisionNotes": ""
+    },
+    "/industrias/propiedad-horizontal::faq": {
+      "status": "approved",
+      "finalCopy": "Grupo: Cobru\nPregunta: \"El propietario necesita crear una cuenta Cobru para pagar?\"\nRespuesta: \"No. El residente recibe un link de pago y puede pagar con PSE o tarjeta sin registrarse en ningun sistema nuevo. La facilidad de pago para el residente es parte central de la promesa.\"\nGrupo: Producto\nPregunta: \"Se pueden manejar intereses o recargos por mora?\"\nRespuesta: \"Si. Las politicas de cobranza se configuran segun la realidad de la copropiedad: plazos, porcentajes y condiciones especificas del reglamento de propiedad horizontal.\"",
+      "updatedAt": "2026-03-11T07:04:13.573Z",
+      "decisionNotes": ""
+    },
+    "/industrias/propiedad-horizontal::cta-final": {
+      "status": "approved",
+      "finalCopy": "H2: \"Tu administrador deberia gestionar el conjunto, no perseguir pagos todo el mes.\"\nLead: \"La siguiente conversacion debe enfocarse en recaudo real, junta directiva y la experiencia de pago de los propietarios.\"\nBullet 1: \"Recordatorios automatizados por WhatsApp y email\"\nBullet 2: \"Pagos simples y directos para residentes\"\nBullet 3: \"Panel claro para administracion y junta sin cruces manuales\"\nCTA: \"Agendar demo\"",
+      "updatedAt": "2026-03-11T07:04:19.085Z",
+      "decisionNotes": ""
+    },
+    "/industrias/salud::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Salud — IPS y Clinicas\"\nH1: \"Ordena tu recaudo asistencial con menos friccion en caja.\"\nLead: \"Copagos, links de pago y conciliacion de pacientes, EPS y empresas para instituciones que necesitan menos filas y mas control.\"\nCTA primario: \"Agendar demo\"\nCTA secundario: \"Ver pasarela\"\nTrust 1: \"Copagos digitales\"\nTrust 2: \"Links de pago\"\nTrust 3: \"Conciliacion asistencial\"",
+      "updatedAt": "2026-03-11T07:04:32.092Z",
+      "decisionNotes": ""
+    },
+    "/industrias/salud::pain-points": {
+      "status": "approved",
+      "finalCopy": "P1 H3: \"Filas y friccion en caja\"\nP1 copy: \"Cada cuello de botella de recaudo afecta la experiencia del paciente y la operacion interna. El tiempo en caja es tiempo que no se dedica a atencion.\"\nP2 H3: \"Conciliacion manual entre paciente y EPS\"\nP2 copy: \"El trabajo de cruzar fuentes de recaudo distintas consume tiempo critico del equipo administrativo y genera errores que se resuelven tarde.\"\nP3 H3: \"Pacientes sin opciones de pago digital\"\nP3 copy: \"Depender del efectivo o de una sola forma de pago limita el recaudo y genera cuentas pendientes que el equipo debe perseguir manualmente.\"",
+      "updatedAt": "2026-03-11T07:04:37.532Z",
+      "decisionNotes": ""
+    },
+    "/industrias/salud::how-it-works": {
+      "status": "approved",
+      "finalCopy": "S1 titulo: \"Activa los medios de cobro\"\nS1 copy: \"Define como y cuando puede pagar el paciente: link previo a la cita, QR en recepcion o PSE al salir.\"\nS2 titulo: \"Conecta el recaudo a la operacion\"\nS2 copy: \"Las confirmaciones de pago se integran a la operacion diaria de caja sin reproceso manual ni cambios en los sistemas existentes.\"\nS3 titulo: \"Concilia con mas control\"\nS3 copy: \"Lee lo que entra de pacientes, empresas y EPS desde un tablero con menos cruce de archivos y menos errores.\"",
+      "updatedAt": "2026-03-11T07:04:52.833Z",
+      "decisionNotes": ""
+    },
+    "/industrias/salud::case-studies": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Caso de exito\"\nTitulo: \"Una IPS redujo 50% las filas de caja en menos de una semana.\"\nSummary: \"La historia habla de experiencia del paciente y alivio operativo para el equipo administrativo sin tocar sistemas criticos.\"\nHighlight: \"50% menos filas de caja\"\nBullet 1: \"Pacientes pagando desde su celular antes de la cita\"\nBullet 2: \"Menos congestion en recepcion y caja\"\nBullet 3: \"Recaudo mas facil de conciliar entre fuentes\"",
+      "updatedAt": "2026-03-11T07:05:12.234Z",
+      "decisionNotes": ""
+    },
+    "/industrias/salud::metrics": {
+      "status": "approved",
+      "finalCopy": "Metrica 1 valor: \"50%\"\nMetrica 1 label: \"menos filas de caja\"\nMetrica 1 copy: \"Resultado de IPS y clinicas que activaron links de pago y copagos digitales con Cobru.\"\nMetrica 2 valor: \"1 semana\"\nMetrica 2 label: \"de activacion promedio\"\nMetrica 2 copy: \"Sin tocar sistemas criticos ni requerir cambios en la infraestructura asistencial existente.\"\nMetrica 3 valor: \"0\"\nMetrica 3 label: \"sistemas criticos a reemplazar\"\nMetrica 3 copy: \"Cobru convive con el HIS o ERP existente sin interrumpir la operacion asistencial.\"",
+      "updatedAt": "2026-03-11T07:05:18.179Z",
+      "decisionNotes": ""
+    },
+    "/industrias/salud::faq": {
+      "status": "approved",
+      "finalCopy": "Grupo: Cobru\nPregunta: \"Funciona para cobrar a EPS y a pacientes particulares?\"\nRespuesta: \"Si. Distintos tipos de recaudo pueden convivir en una operacion mas clara: copagos de pacientes, facturas a empresas y cuentas a EPS con conciliacion separada para cada uno.\"\nGrupo: Producto\nPregunta: \"Cobru obliga a cambiar el HIS o ERP de la institucion?\"\nRespuesta: \"No. El mensaje central es continuidad operativa con menos friccion, no reemplazo de sistemas nucleares. Cobru se agrega a la operacion sin interrumpir los sistemas que ya funcionan.\"",
+      "updatedAt": "2026-03-11T07:05:26.098Z",
+      "decisionNotes": ""
+    },
+    "/industrias/salud::cta-final": {
+      "status": "approved",
+      "finalCopy": "H2: \"Tu caja deberia mover pacientes, no detenerlos.\"\nLead: \"La demo para salud conecta experiencia del paciente, recaudo y conciliacion sin reemplazar los sistemas que ya funcionan en tu institucion.\"\nBullet 1: \"Menos filas y menos friccion en caja\"\nBullet 2: \"Mas opciones de pago digital para pacientes\"\nBullet 3: \"Implementacion sin tocar sistemas criticos\"\nCTA: \"Agendar demo\"",
+      "updatedAt": "2026-03-11T07:05:33.987Z",
+      "decisionNotes": ""
+    },
+    "/industrias/logistica::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Logistica y BTL\"\nH1: \"Coordina pagos operativos con mas trazabilidad.\"\nLead: \"Dispersion masiva, BRE-B y trazabilidad por persona para operaciones temporales que no pueden esperar al siguiente dia habil.\"\nCTA primario: \"Agendar demo\"\nCTA secundario: \"Ver pagos masivos\"\nTrust 1: \"Trazabilidad por persona\"\nTrust 2: \"24/7 incluso festivos\"\nTrust 3: \"CSV o API\"",
+      "updatedAt": "2026-03-11T07:05:50.229Z",
+      "decisionNotes": ""
+    },
+    "/industrias/logistica::pain-points": {
+      "status": "approved",
+      "finalCopy": "P1 H3: \"Pagar en fin de semana y esperar al lunes\"\nP1 copy: \"La limitacion horaria de la banca tradicional afecta activaciones, eventos y operaciones distribuidas que no pueden pausar pagos por el calendario bancario.\"\nP2 H3: \"Horas rastreando quien recibio su pago\"\nP2 copy: \"La falta de trazabilidad por persona obliga al equipo a revisar extractos y contactar a cada beneficiario despues de cada lote de dispersion.\"\nP3 H3: \"Reclamos por pagos manuales o con error\"\nP3 copy: \"Cada error de carga genera ruido operativo: el beneficiario reclama, el equipo revisa, se reprocesa. Sin validacion previa el costo operativo es alto.\"",
+      "updatedAt": "2026-03-11T07:05:55.130Z",
+      "decisionNotes": ""
+    },
+    "/industrias/logistica::recommended-products": {
+      "status": "approved",
+      "finalCopy": "Producto: 1\nH3: \"Pagos Masivos\"\nCopy: \"La columna vertebral para dispersar por lote con estado individual por beneficiario. Sin planos bancarios manuales ni reproceso.\"\nProducto: 2\nH3: \"BRE-B Empresas\"\nCopy: \"La respuesta para operaciones que no pueden vivir al ritmo bancario. Pagos inmediatos 24/7 incluso en festivos.\"\nProducto: 3\nH3: \"Pasarela de Pagos\"\nCopy: \"Complemento cuando la operacion tambien incluye recaudo en puntos de entrega o activaciones presenciales.\"",
+      "updatedAt": "2026-03-11T07:06:57.150Z",
+      "decisionNotes": ""
+    },
+    "/industrias/logistica::how-it-works": {
+      "status": "approved",
+      "finalCopy": "S1 titulo: \"Carga los beneficiarios\"\nS1 copy: \"Sube la base de personas o equipos a pagar via CSV o conecta por API para operaciones recurrentes de mayor volumen.\"\nS2 titulo: \"Valida y elige el rail de pago\"\nS2 copy: \"Usa validacion previa para reducir errores y define si la operacion requiere velocidad instantanea con BRE-B o lote estandar.\"\nS3 titulo: \"Dispersa y rastrea persona por persona\"\nS3 copy: \"Sigue el estado de cada beneficiario sin recurrir a extractos bancarios ni llamadas de confirmacion al banco.\"",
+      "updatedAt": "2026-03-11T07:06:15.400Z",
+      "decisionNotes": ""
+    },
+    "/industrias/logistica::case-studies": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Caso de exito\"\nTitulo: \"Una activacion de 300 personas se disperso sin un solo reclamo.\"\nSummary: \"La historia habla en lenguaje de operaciones: tiempos, reclamos y confirmacion de pago en tiempo real sin depender del horario bancario.\"\nHighlight: \"0 reclamos de pago en una operacion de 300 personas\"\nBullet 1: \"Dispersion completada en tiempo real sin esperar horario bancario\"\nBullet 2: \"Trazabilidad individual por cada beneficiario desde el tablero\"\nBullet 3: \"Cero reprocesos por errores de carga o validacion\"",
+      "updatedAt": "2026-03-11T07:06:22.701Z",
+      "decisionNotes": ""
+    },
+    "/industrias/logistica::metrics": {
+      "status": "approved",
+      "finalCopy": "Metrica 1 valor: \"0\"\nMetrica 1 label: \"reclamos por dispersion\"\nMetrica 1 copy: \"Resultado de operaciones que usaron validacion previa y trazabilidad individual en Cobru.\"\nMetrica 2 valor: \"24/7\"\nMetrica 2 label: \"disponibilidad de pago\"\nMetrica 2 copy: \"Con BRE-B, la operacion no espera al siguiente dia habil para confirmar pagos a beneficiarios.\"\nMetrica 3 valor: \"CSV a API\"\nMetrica 3 label: \"ruta de integracion flexible\"\nMetrica 3 copy: \"Empieza con carga manual y migra a API cuando el volumen lo justifique sin cambiar de plataforma.\"",
+      "updatedAt": "2026-03-11T07:06:29.053Z",
+      "decisionNotes": ""
+    },
+    "/industrias/logistica::faq": {
+      "status": "approved",
+      "finalCopy": "Grupo: Cobru\nPregunta: \"Funciona en festivos y fines de semana?\"\nRespuesta: \"Si. Con BRE-B Empresas los pagos se ejecutan 24/7 sin depender del horario bancario. Esta promesa es central para operaciones de logistica y BTL con activaciones en dias no habiles.\"\nGrupo: Producto\nPregunta: \"Puedo rastrear quien no recibio su pago?\"\nRespuesta: \"Si. La trazabilidad individual es una de las razones principales por las que esta vertical elige Cobru. El equipo ve estado por persona sin consultar extractos ni contactar al banco.\"",
+      "updatedAt": "2026-03-11T07:06:34.283Z",
+      "decisionNotes": ""
+    },
+    "/industrias/logistica::cta-final": {
+      "status": "approved",
+      "finalCopy": "H2: \"Tu operacion no deberia pausar pagos porque el banco ya cerro.\"\nLead: \"La demo debe girar alrededor de velocidad, trazabilidad y el volumen real de beneficiarios de tu operacion.\"\nBullet 1: \"Pagos por lote con control individual por persona\"\nBullet 2: \"Confirmacion incluso fuera del horario bancario\"\nBullet 3: \"Menos ruido operativo y cero reclamos por pagos\"\nCTA: \"Agendar demo\"",
+      "updatedAt": "2026-03-11T07:06:42.608Z",
+      "decisionNotes": ""
+    },
+    "/industrias/fintechs::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Fintechs\"\nH1: \"Construye sobre infraestructura de pagos lista para operar.\"\nLead: \"API-first, sandbox y modulos listos para equipos que necesitan crecer sin construir cada rail de pago desde cero.\"\nCTA primario: \"Ver documentacion\"\nCTA secundario: \"Agendar demo\"\nTrust 1: \"API-first\"\nTrust 2: \"Sandbox disponible\"\nTrust 3: \"Infraestructura regulada SFC\"",
+      "updatedAt": "2026-03-11T07:07:03.892Z",
+      "decisionNotes": ""
+    },
+    "/industrias/fintechs::pain-points": {
+      "status": "approved",
+      "finalCopy": "P1 H3: \"Construir rieles propios toma meses de desarrollo\"\nP1 copy: \"Compliance, banca y certificaciones no son una distraccion pequena. Meses de trabajo que podrian ir al producto principal terminan en infraestructura de pagos.\"\nP2 H3: \"Licencias y cumplimiento como cuello de botella\"\nP2 copy: \"La barrera no es solo tecnica. El proceso regulatorio y operativo ralentiza el time-to-market y consume recursos que el equipo necesita en otro lado.\"\nP3 H3: \"Escalar volumen sin romper la experiencia\"\nP3 copy: \"A mayor adopcion, peor se siente cualquier limitacion en la capa de pagos. Una infraestructura no disenada para escalar genera friccion justo cuando mas importa.\"",
+      "updatedAt": "2026-03-11T07:07:07.702Z",
+      "decisionNotes": ""
+    },
+    "/industrias/fintechs::recommended-products": {
+      "status": "approved",
+      "finalCopy": "Producto: 1\nH3: \"Pasarela de Pagos\"\nCopy: \"Embed de checkout y cobro sobre infraestructura ya regulada. Sin construir el compliance desde cero ni gestionar certificaciones propias.\"\nProducto: 2\nH3: \"Pagos Internacionales\"\nCopy: \"Rieles para mover dinero internacionalmente sin desarrollar cada caso de expansion regional por separado.\"\nProducto: 3\nH3: \"Pagos Masivos y BRE-B\"\nCopy: \"Capacidad de dispersion masiva y pagos inmediatos para fintechs que necesitan mover fondos a usuarios finales.\"",
+      "updatedAt": "2026-03-11T07:07:42.384Z",
+      "decisionNotes": ""
+    },
+    "/industrias/fintechs::how-it-works": {
+      "status": "approved",
+      "finalCopy": "S1 titulo: \"Lee la documentacion y valida en sandbox\"\nS1 copy: \"La evaluacion tecnica debe arrancar antes de la llamada comercial. Sandbox disponible para probar autenticacion y capacidades sin comprometer recursos.\"\nS2 titulo: \"Prueba el ajuste tecnico\"\nS2 copy: \"Comprueba la integracion con tu stack antes de comprometer recursos. El equipo de Cobru acompana la evaluacion tecnica.\"\nS3 titulo: \"Escala a produccion con infraestructura regulada\"\nS3 copy: \"Entra con una capa ya certificada ante la SFC y pensada para el volumen de una fintech en crecimiento acelerado.\"",
+      "updatedAt": "2026-03-11T07:07:11.901Z",
+      "decisionNotes": ""
+    },
+    "/industrias/fintechs::case-studies": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Caso de exito\"\nTitulo: \"Una fintech acorto su time-to-market de 12 meses a semanas.\"\nSummary: \"El caso habla al CTO y al founder: velocidad de salida, menos deuda tecnica y menos dependencia regulatoria propia desde el primer dia.\"\nHighlight: \"Meses menos de desarrollo propio de infraestructura\"\nBullet 1: \"Sandbox listo para probar desde el primer contacto\"\nBullet 2: \"Infraestructura regulada disponible desde el dia uno\"\nBullet 3: \"Mas foco en producto, menos tiempo en rieles de pago\"",
+      "updatedAt": "2026-03-11T07:07:17.716Z",
+      "decisionNotes": ""
+    },
+    "/industrias/fintechs::metrics": {
+      "status": "approved",
+      "finalCopy": "Metrica 1 valor: \"Semanas\"\nMetrica 1 label: \"de integracion vs meses de desarrollo propio\"\nMetrica 1 copy: \"Fintechs que usan Cobru llegan a produccion significativamente mas rapido que construyendo infraestructura propia.\"\nMetrica 2 valor: \"SFC\"\nMetrica 2 label: \"infraestructura regulada\"\nMetrica 2 copy: \"La fintech hereda el compliance de Cobru sin gestionarlo ni certificarlo internamente.\"\nMetrica 3 valor: \"API-first\"\nMetrica 3 label: \"con sandbox disponible\"\nMetrica 3 copy: \"Evaluacion tecnica autonoma antes de cualquier conversacion comercial o compromiso de contrato.\"",
+      "updatedAt": "2026-03-11T07:07:22.569Z",
+      "decisionNotes": ""
+    },
+    "/industrias/fintechs::faq": {
+      "status": "approved",
+      "finalCopy": "Grupo: Cobru\nPregunta: \"Hay sandbox y documentacion publica disponible?\"\nRespuesta: \"Si. La documentacion y el sandbox deben mostrarse desde arriba porque son los filtros principales para buyers tecnicos. La evaluacion tecnica puede arrancar antes de hablar con ventas.\"\nGrupo: Producto\nPregunta: \"Como manejan SLAs y compliance regulatorio?\"\nRespuesta: \"Cobru opera bajo la regulacion SFC con mas de 7 anos de experiencia. Los SLAs y garantias operativas se definen en la sesion comercial segun el caso de uso y el volumen proyectado.\"",
+      "updatedAt": "2026-03-11T07:07:28.500Z",
+      "decisionNotes": ""
+    },
+    "/industrias/fintechs::cta-final": {
+      "status": "approved",
+      "finalCopy": "H2: \"No construyas rieles propios si tu ventaja esta en otro lado.\"\nLead: \"La siguiente accion debe permitir una evaluacion tecnica real antes de una conversacion comercial mas profunda.\"\nBullet 1: \"Documentacion y sandbox disponibles ahora\"\nBullet 2: \"Infraestructura regulada lista para escalar\"\nBullet 3: \"Ruta comercial y tecnica alineadas desde el primer contacto\"\nCTA: \"Ver documentacion\"",
+      "updatedAt": "2026-03-11T07:07:34.472Z",
+      "decisionNotes": ""
+    },
+    "/recursos/casos::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Casos de Exito\"\nH1: \"Empresas que ya ordenaron su operacion de pagos.\"\nLead: \"Resultados concretos por industria y producto. Sin testimonios vacios ni promesas sin contexto: problema, solucion y metrica verificable.\"\nCTA primario: \"Agendar demo\"\nCTA secundario: \"Ver industrias\"\nTrust 1: \"Resultados medibles\"\nTrust 2: \"Por industria\"\nTrust 3: \"Por producto\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/casos::featured-case": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Caso destacado\"\nTitulo: \"Un marketplace redujo 60% su tiempo de liquidacion.\"\nIndustria: \"Marketplaces y Plataformas\"\nProducto: \"Pagos Masivos + Pasarela de Pagos\"\nResultado: \"60% menos tiempo liquidando sellers\"\nSummary: \"Cobro a compradores, dispersion a vendedores y cartera en un solo flujo. Sin herramientas paralelas ni trabajo manual por lote.\"\nCTA: \"Agendar demo\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/casos::grid": {
+      "status": "approved",
+      "finalCopy": "Card 1 industria: \"Ecommerce y Retail\"\nCard 1 resultado: \"25% menos abandono de carrito\"\nCard 1 producto: \"Pasarela de Pagos\"\nCard 1 copy: \"Checkout mas claro y conciliacion automatizada en una sola operacion.\"\nCard 2 industria: \"Propiedad Horizontal\"\nCard 2 resultado: \"70% menos llamadas de cobranza\"\nCard 2 producto: \"Cobranza Automatizada\"\nCard 2 copy: \"Recordatorios automaticos y links de pago directo para propietarios.\"\nCard 3 industria: \"Salud — IPS y Clinicas\"\nCard 3 resultado: \"50% menos filas de caja\"\nCard 3 producto: \"Pasarela de Pagos\"\nCard 3 copy: \"Copagos digitales y conciliacion entre pacientes, EPS y empresas.\"\nCard 4 industria: \"Logistica y BTL\"\nCard 4 resultado: \"0 reclamos en operacion de 300 personas\"\nCard 4 producto: \"Pagos Masivos + BRE-B\"\nCard 4 copy: \"Dispersion con trazabilidad individual y pagos 24/7 sin horario bancario.\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/casos::metrics": {
+      "status": "approved",
+      "finalCopy": "Metrica 1 valor: \"+200\"\nMetrica 1 label: \"empresas activas\"\nMetrica 1 copy: \"Que confian en Cobru para su operacion de pagos en Colombia.\"\nMetrica 2 valor: \"3 billones COP+\"\nMetrica 2 label: \"volumen procesado\"\nMetrica 2 copy: \"Resiliencia operativa probada en multiples industrias y volumenes.\"\nMetrica 3 valor: \"7+ anos\"\nMetrica 3 label: \"regulados por la SFC\"\nMetrica 3 copy: \"SEDPE con trayectoria verificable y soporte institucional activo.\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/casos::faq": {
+      "status": "approved",
+      "finalCopy": "Grupo: Casos\nPregunta: \"Hay casos de mi industria?\"\nRespuesta: \"La pagina presenta casos organizados por industria y por producto. Si tu vertical no esta listada todavia, el equipo puede orientarte en la sesion comercial con contexto afin a tu sector.\"\nGrupo: Proceso\nPregunta: \"Puedo hablar con un cliente referencia?\"\nRespuesta: \"Es parte del proceso de due diligence. Mencionalo en la sesion comercial y el equipo de Cobru evalua la disponibilidad segun la relacion con cada cliente.\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/casos::cta-final": {
+      "status": "approved",
+      "finalCopy": "H2: \"Si ya viste un resultado parecido al tuyo, el siguiente paso no es seguir leyendo.\"\nLead: \"Lleva esa historia a tu propia operacion. En la sesion revisamos tu caso, el producto de mayor impacto y el tiempo estimado de activacion.\"\nBullet 1: \"Seleccion del caso afin a tu industria\"\nBullet 2: \"Traduccion del resultado a tu contexto operativo\"\nBullet 3: \"Siguiente paso con ventas y producto alineados\"\nCTA: \"Agendar demo\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/blog::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Blog\"\nH1: \"Ideas para operar pagos con mas claridad.\"\nLead: \"Contenido de pagos, operacion, compliance y producto para equipos que todavia no estan listos para una demo pero si para aprender y prepararse mejor.\"\nCTA primario: \"Explorar articulos\"\nCTA secundario: \"Agendar demo\"\nTrust 1: \"Pagos y operacion\"\nTrust 2: \"Compliance\"\nTrust 3: \"Casos y producto\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/blog::filters": {
+      "status": "approved",
+      "finalCopy": "Categoria 1: \"Pagos\"\nCategoria 2: \"Operacion\"\nCategoria 3: \"Compliance\"\nCategoria 4: \"Producto\"\nCategoria 5: \"Casos\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/blog::grid": {
+      "status": "approved",
+      "finalCopy": "Articulo 1 categoria: \"Pagos\"\nArticulo 1 titulo: \"Como elegir la pasarela correcta para tu ecommerce\"\nArticulo 1 copy: \"Las variables que importan cuando el volumen y la conciliacion dejan de ser simples.\"\nArticulo 2 categoria: \"Operacion\"\nArticulo 2 titulo: \"Conciliacion automatizada: que significa en la practica\"\nArticulo 2 copy: \"De los cruces manuales a un tablero unico. Lo que cambia y lo que no.\"\nArticulo 3 categoria: \"Compliance\"\nArticulo 3 titulo: \"Que implica operar con una SEDPE en Colombia\"\nArticulo 3 copy: \"Regulacion, controles y lo que le importa al equipo legal de tu empresa.\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/blog::newsletter": {
+      "status": "approved",
+      "finalCopy": "H2: \"Recibe contenido de operaciones y pagos que no llena la bandeja.\"\nLead: \"Un resumen periodico con lo que vale la pena leer para equipos que mueven dinero en Colombia.\"\nLabel correo: \"Tu correo empresarial\"\nCTA: \"Suscribirme\"\nNota: \"Sin spam. Solo cuando hay algo que vale la pena.\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/blog::faq": {
+      "status": "approved",
+      "finalCopy": "Grupo: Blog\nPregunta: \"El blog tiene contenido tecnico?\"\nRespuesta: \"Si, pero con categorias claras. Compliance, operaciones e integraciones tienen su propia capa. Para documentacion profunda de API, la entrada principal es la seccion de Docs.\"\nGrupo: Blog\nPregunta: \"Con que frecuencia se publica?\"\nRespuesta: \"La prioridad es calidad sobre volumen. Se publica cuando hay algo util que aportar, no para llenar una grilla de posts vacios.\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/blog::cta-final": {
+      "status": "approved",
+      "finalCopy": "H2: \"Cuando el contenido deja de ser teoria, tiene que existir una siguiente accion.\"\nLead: \"Si lo que leiste encaja con tu operacion, el siguiente paso es llevarlo a una sesion donde revisamos tu caso concreto.\"\nBullet 1: \"CTA contextual segun el articulo leido\"\nBullet 2: \"Recursos relacionados bien elegidos\"\nBullet 3: \"Camino claro hacia implementacion o demo\"\nCTA: \"Agendar demo\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/guias::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Guias\"\nH1: \"Playbooks para operar pagos en Colombia.\"\nLead: \"Contenido de alto valor para equipos financieros y operativos que necesitan profundidad practica antes de tomar una decision de infraestructura.\"\nCTA primario: \"Agendar demo\"\nCTA secundario: \"Volver a recursos\"\nTrust 1: \"Playbooks descargables\"\nTrust 2: \"Por industria y producto\"\nTrust 3: \"Acceso gratuito\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/guias::featured-guide": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Guia destacada\"\nTitulo: \"Guia completa para elegir tu infraestructura de pagos en Colombia\"\nTema: \"Operacion y decision de compra\"\nDescripcion: \"Todo lo que necesitas evaluar antes de implementar una pasarela, un motor de cobranza o un modulo de dispersion. Conceptos, criterios y preguntas clave para equipos no tecnicos.\"\nCTA: \"Ver guia\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/guias::grid": {
+      "status": "approved",
+      "finalCopy": "Guia 1 tema: \"Pasarela de Pagos\"\nGuia 1 titulo: \"Como elegir una pasarela: checklist para equipos no tecnicos\"\nGuia 1 copy: \"Variables de integracion, costos, soporte y escalabilidad en un formato practico y accionable.\"\nGuia 2 tema: \"Cobranza\"\nGuia 2 titulo: \"Automatizar cobranza: guia paso a paso para operaciones colombianas\"\nGuia 2 copy: \"Desde la primera secuencia de cobro hasta los reportes. Sin asumir que el lector es tecnico.\"\nGuia 3 tema: \"Compliance\"\nGuia 3 titulo: \"Due diligence financiero: lo que debes validar de cualquier proveedor de pagos\"\nGuia 3 copy: \"Regulacion, seguridad y controles que un equipo legal o financiero debe confirmar antes de firmar.\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/guias::faq": {
+      "status": "approved",
+      "finalCopy": "Grupo: Guias\nPregunta: \"Las guias son gratuitas?\"\nRespuesta: \"Si. En esta etapa la prioridad es confianza y madurez de demanda, no monetizacion de contenido. Acceso directo sin formularios de registro obligatorio.\"\nGrupo: Guias\nPregunta: \"Pueden existir guias tecnicas de integracion?\"\nRespuesta: \"Si, pero para perfiles tecnicos la entrada principal sigue siendo la seccion de Docs API. Las guias estan pensadas para equipos financieros y operativos.\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/guias::newsletter": {
+      "status": "approved",
+      "finalCopy": "H2: \"Recibe las guias nuevas antes que nadie.\"\nLead: \"Aviso directo cuando se publica un nuevo playbook o se actualiza uno existente.\"\nLabel correo: \"Tu correo empresarial\"\nCTA: \"Suscribirme\"\nNota: \"Un correo cuando hay algo nuevo. Nada mas.\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/guias::cta-final": {
+      "status": "approved",
+      "finalCopy": "H2: \"Pasa de la guia a la practica.\"\nLead: \"Si el contenido ya te dio el mapa, la siguiente accion debe ayudarte a recorrerlo en tu operacion real con el equipo de Cobru.\"\nBullet 1: \"Mapea tu caso de uso con el equipo\"\nBullet 2: \"Prioriza el producto o flujo correcto\"\nBullet 3: \"Agenda una sesion con contexto ya preparado\"\nCTA: \"Agendar demo\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/api::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Documentacion API\"\nH1: \"Documentacion para integrar sin adivinar.\"\nLead: \"Autenticacion, endpoints, sandbox y ejemplos para developers e integradores que evaluan Cobru con criterio tecnico antes de hablar con ventas.\"\nCTA primario: \"Ver documentacion\"\nCTA secundario: \"Agendar demo tecnica\"\nTrust 1: \"API-first\"\nTrust 2: \"Sandbox disponible\"\nTrust 3: \"Documentacion publica\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/api::docs": {
+      "status": "approved",
+      "finalCopy": "Seccion 1: \"Autenticacion\"\nSeccion 1 copy: \"OAuth 2.0 y tokens de acceso. Todo lo necesario para autenticarte y empezar a llamar endpoints sin friccion desde el primer request.\"\nSeccion 2: \"Endpoints principales\"\nSeccion 2 copy: \"Pagos, dispersiones, cobranza y consultas. Request, response y codigos de error documentados con ejemplos copiables.\"\nSeccion 3: \"Webhooks\"\nSeccion 3 copy: \"Notificaciones en tiempo real para confirmar transacciones y actualizar estados en tu sistema sin necesidad de polling.\"\nSeccion 4: \"SDKs y librerias\"\nSeccion 4 copy: \"Clientes disponibles para los principales lenguajes. Acelera la evaluacion tecnica sin partir desde cero.\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/api::sandbox": {
+      "status": "approved",
+      "finalCopy": "H2: \"Prueba antes de comprometerte.\"\nLead: \"El sandbox de Cobru permite validar autenticacion, endpoints y flujos de pago en un entorno aislado sin afectar datos reales.\"\nBullet 1: \"Credenciales de prueba disponibles de inmediato\"\nBullet 2: \"Misma estructura de produccion para evitar sorpresas al migrar\"\nBullet 3: \"Soporte tecnico disponible durante la evaluacion\"\nCTA: \"Acceder al sandbox\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/api::faq": {
+      "status": "approved",
+      "finalCopy": "Grupo: Tecnico\nPregunta: \"Hay sandbox disponible desde el inicio?\"\nRespuesta: \"Si. El sandbox es la entrada principal para buyers tecnicos. Credenciales y documentacion disponibles sin necesidad de hablar con ventas primero.\"\nGrupo: Tecnico\nPregunta: \"Que tan publica es la documentacion?\"\nRespuesta: \"La capa de descubrimiento y evaluacion es publica. Detalles de produccion sensibles y configuraciones avanzadas se profundizan en la sesion tecnica con el equipo.\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/api::cta-final": {
+      "status": "approved",
+      "finalCopy": "H2: \"Cuando la integracion se entiende rapido, la venta se acelera.\"\nLead: \"Si el sandbox ya mostro el fit, el siguiente paso es una sesion tecnica donde revisamos el caso de uso, los limites y el plan de produccion.\"\nBullet 1: \"Evaluacion tecnica guiada por el equipo de Cobru\"\nBullet 2: \"Revision de SLAs, limites y arquitectura de integracion\"\nBullet 3: \"Paso a produccion con soporte activo desde el inicio\"\nCTA: \"Agendar demo tecnica\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/compliance::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Compliance\"\nH1: \"Infraestructura regulada, no solo tecnologia.\"\nLead: \"Regulacion, politicas y controles explicados con claridad para equipos de legal, compliance, tecnologia y finanzas que hacen due diligence antes de una decision.\"\nCTA primario: \"Agendar demo\"\nCTA secundario: \"Ver FAQ\"\nTrust 1: \"SFC regulado\"\nTrust 2: \"SEDPE desde 2019\"\nTrust 3: \"Politicas y controles\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/compliance::certifications": {
+      "status": "approved",
+      "finalCopy": "Certificacion 1: \"SFC\"\nCertificacion 1 copy: \"Superintendencia Financiera de Colombia. Cobru opera bajo supervision directa como entidad SEDPE desde 2019.\"\nCertificacion 2: \"SEDPE\"\nCertificacion 2 copy: \"Sociedad Especializada en Depositos y Pagos Electronicos. El marco regulatorio que rige la operacion de Cobru en Colombia.\"\nCertificacion 3: \"7+ anos\"\nCertificacion 3 copy: \"Trayectoria operativa verificable desde 2019 con presencia activa en mas de 200 empresas en Colombia.\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/compliance::policies": {
+      "status": "approved",
+      "finalCopy": "Politica 1: \"Politica de Privacidad\"\nPolitica 1 copy: \"Como Cobru trata, almacena y protege los datos de usuarios y empresas.\"\nPolitica 1 href: \"/privacidad\"\nPolitica 2: \"Terminos de Servicio\"\nPolitica 2 copy: \"Condiciones generales que rigen la relacion entre Cobru y las empresas que usan la plataforma.\"\nPolitica 2 href: \"/terminos\"\nPolitica 3: \"Politica de Cookies\"\nPolitica 3 copy: \"Informacion sobre el uso de cookies en el sitio web de Cobru.\"\nPolitica 3 href: \"/cookies\"\nPolitica 4: \"SAGRILAFT\"\nPolitica 4 copy: \"Sistema de Autocontrol y Gestion del Riesgo de Lavado de Activos y Financiacion del Terrorismo.\"\nPolitica 4 href: \"/sagrilaft\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/compliance::controls": {
+      "status": "approved",
+      "finalCopy": "Control 1: \"Seguridad de datos\"\nControl 1 copy: \"Cifrado en transito y en reposo. Acceso controlado por roles y auditoria de acciones criticas dentro de la plataforma.\"\nControl 2: \"Auditoria operativa\"\nControl 2 copy: \"Logs completos de transacciones y acciones de usuario para trazabilidad y revision interna ante cualquier solicitud.\"\nControl 3: \"Continuidad del servicio\"\nControl 3 copy: \"Arquitectura disenada para alta disponibilidad con redundancia en componentes criticos de la operacion de pagos.\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/compliance::faq": {
+      "status": "approved",
+      "finalCopy": "Grupo: Regulacion\nPregunta: \"Cobru esta regulada por la SFC?\"\nRespuesta: \"Si. Cobru opera como SEDPE bajo supervision de la Superintendencia Financiera de Colombia desde 2019. Esta informacion es verificable publicamente en el registro de la SFC.\"\nGrupo: Datos\nPregunta: \"Como maneja Cobru los datos y auditorias?\"\nRespuesta: \"Con controles de cifrado, auditoria de accesos y politicas de privacidad documentadas. Para due diligence profundo el equipo puede proveer documentacion adicional en la sesion comercial.\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/compliance::cta-final": {
+      "status": "approved",
+      "finalCopy": "H2: \"Cuando el riesgo se explica bien, la conversacion comercial avanza mas rapido.\"\nLead: \"Si tu equipo de legal o compliance necesita documentacion adicional, el siguiente paso es una sesion donde revisamos el caso especifico de tu empresa.\"\nBullet 1: \"Documentacion de compliance accesible en un solo lugar\"\nBullet 2: \"Canal directo para dudas de due diligence\"\nBullet 3: \"Soporte a procesos de evaluacion enterprise\"\nCTA: \"Agendar demo\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/faq::hero": {
+      "status": "approved",
+      "finalCopy": "Eyebrow: \"Preguntas Frecuentes\"\nH1: \"Respuestas claras para dudas que bloquean decisiones.\"\nLead: \"General, activacion, tecnico, precios y compliance. Escrita en lenguaje natural para que cualquier perfil del equipo encuentre lo que necesita sin llamar a ventas.\"\nCTA primario: \"Agendar demo\"\nCTA secundario: \"Volver a recursos\"\nTrust 1: \"General\"\nTrust 2: \"Tecnico\"\nTrust 3: \"Compliance y precios\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/faq::categories": {
+      "status": "approved",
+      "finalCopy": "Categoria 1: \"General\"\nCategoria 1 copy: \"Que es Cobru, como funciona y para quien esta pensado.\"\nCategoria 2: \"Activacion\"\nCategoria 2 copy: \"Tiempos, requisitos y primeros pasos para empezar a operar.\"\nCategoria 3: \"Tecnico\"\nCategoria 3 copy: \"Integracion, API, webhooks y soporte a equipos de desarrollo.\"\nCategoria 4: \"Precios\"\nCategoria 4 copy: \"Costos, comisiones, modelos de cobro y como se calculan las tarifas.\"\nCategoria 5: \"Compliance\"\nCategoria 5 copy: \"Regulacion, datos, auditoria y due diligence para equipos de legal y finanzas.\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/faq::accordion": {
+      "status": "approved",
+      "finalCopy": "Categoria: General\nPregunta: \"Que es Cobru?\"\nRespuesta: \"Cobru es una plataforma de pagos regulada por la SFC que ayuda a empresas en Colombia a cobrar, recaudar y dispersar dinero con mas visibilidad y menos carga manual. Opera como SEDPE desde 2019.\"\nCategoria: Activacion\nPregunta: \"Cuanto tarda activar una cuenta?\"\nRespuesta: \"Para rutas simples como pasarela o cobranza, el tiempo promedio de activacion es de 24 a 48 horas habiles desde la sesion comercial. Casos mas complejos como dispersion masiva o BRE-B se configuran en 3 a 5 dias.\"\nCategoria: Tecnico\nPregunta: \"Hay documentacion y sandbox disponible?\"\nRespuesta: \"Si. La documentacion de la API y el acceso al sandbox estan disponibles antes de cualquier conversacion comercial. Accede desde la seccion de Docs.\"\nCategoria: Precios\nPregunta: \"Como se cobra el servicio?\"\nRespuesta: \"Cobru cobra por transaccion procesada segun el producto activo. No hay mensualidades fijas en la mayoria de los productos. Los detalles de tarifas se revisan en la sesion comercial segun volumen y caso de uso.\"\nCategoria: Compliance\nPregunta: \"Cobru esta regulada en Colombia?\"\nRespuesta: \"Si. Opera bajo supervision de la Superintendencia Financiera de Colombia como SEDPE. La informacion regulatoria es verificable y se puede profundizar en la seccion de Compliance.\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/faq::feedback": {
+      "status": "approved",
+      "finalCopy": "H3: \"Esta respuesta te fue util?\"\nCTA positivo: \"Si, me ayudo\"\nCTA negativo: \"Necesito mas informacion\"\nCopy adicional: \"Si no encontraste lo que buscabas, nuestro equipo puede ayudarte directamente.\"\nCTA contacto: \"Hablar con ventas\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    },
+    "/recursos/faq::cta-final": {
+      "status": "approved",
+      "finalCopy": "H2: \"Si tu pregunta ya esta clara, el siguiente paso deberia ser evidente.\"\nLead: \"La FAQ resuelve la duda, el equipo de Cobru resuelve el caso. Cuando estes listo para pasar a implementacion, la sesion comercial es el siguiente paso natural.\"\nBullet 1: \"Siguiente recurso segun el tipo de duda\"\nBullet 2: \"Menos friccion antes de entrar a la demo\"\nBullet 3: \"Mejor claridad para compra e implementacion\"\nCTA: \"Agendar demo\"",
+      "updatedAt": "2026-03-11T14:30:00.000Z",
+      "decisionNotes": ""
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bun:*)",
+      "Bash(bunx:*)",
+      "Bash(npx:*)",
+      "Bash(git:*)",
+      "Bash(gh:*)"
+    ],
+    "deny": ["Bash(rm -rf:*)", "Bash(curl:*)", "Bash(wget:*)"]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": ["context7", "playwright"]
+}

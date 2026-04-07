@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+@import "fumadocs-openapi/css/preset.css";
+
+@layer base {
+  :root {
+    /* Cobru brand tokens — from tokens/source/primitives.tokens.json */
+    --color-brand: #2ea3f2;
+    --color-accent: #19d6ff;
+    --color-secondary: #5a3cf0;
+
+    /* Override fumadocs primary with Cobru brand blue */
+    --fd-primary: 210 87% 57%;
+  }
+
+  body {
+    font-family: "DM Sans", system-ui, sans-serif;
+  }
+}

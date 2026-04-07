@@ -1,0 +1,211 @@
+openapi: 3.1.0
+info:
+  title: Cobru API
+  version: 1.0.0
+  description: |
+    API de Cobru para procesar pagos en Colombia.
+    Plataforma regulada por la SFC — acepta PSE, Nequi, Daviplata, Bre-B, tarjetas.
+
+    > **PLACEHOLDER**: Reemplazar con el spec exportado desde https://cobru.stoplight.io/
+    > Exportar desde tu cuenta Stoplight → Export → OpenAPI 3.1 YAML → guardar aquí.
+
+  contact:
+    email: soporte@cobru.co
+
+servers:
+  - url: https://prod.cobru.co
+    description: Producción
+  - url: https://dev.cobru.co
+    description: Sandbox
+
+security:
+  - ApiToken: []
+    ApiSecretKey: []
+    BearerAuth: []
+
+components:
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Api-Token
+    ApiSecretKey:
+      type: apiKey
+      in: header
+      name: Api-Secret-Key
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access:
+          type: string
+          description: JWT access token (TTL ~60 min)
+      required: [access]
+
+    CreatePaymentRequest:
+      type: object
+      required:
+        - amount
+        - description
+        - expiration_days
+        - payment_method_enabled
+        - payer_redirect_url
+        - callback
+      properties:
+        amount:
+          type: integer
+          description: Amount in COP (integer)
+          example: 50000
+        description:
+          type: string
+          example: Pago de servicio
+        expiration_days:
+          type: integer
+          example: 1
+        client_assume_costs:
+          type: boolean
+          default: false
+        iva:
+          type: number
+          default: 0
+        payment_method_enabled:
+          type: string
+          description: |
+            JSON-serialized object of enabled payment methods.
+            Must be JSON.stringify'd before sending.
+          example: '{"Bre-B":true,"bancolombia_qr":true}'
+        payer_redirect_url:
+          type: string
+          format: uri
+          description: Redirect URL after payment
+        callback:
+          type: string
+          format: uri
+          description: Webhook URL for payment state updates
+        platform:
+          type: string
+          description: Platform identifier (optional)
+
+    PaymentResponse:
+      type: object
+      properties:
+        pk:
+          type: integer
+          description: Internal numeric ID
+          example: 27150
+        url:
+          type: string
+          description: |
+            Short slug. Payment URL = {base_url}/{url}
+            NOT a full URL — construct as: https://prod.cobru.co/{url}
+          example: 3gofdf6f
+        amount:
+          type: string
+          description: Amount as decimal string
+          example: '50000.00'
+        state:
+          type: integer
+          enum: [0, 1, 2, 3, 4]
+          description: |
+            0=pending, 1=processing, 2=rejected, 3=approved, 4=refunded
+        fee_amount:
+          type: integer
+          description: Fee in COP
+        payed_amount:
+          type: string
+          description: Net amount received by merchant after fees
+        currency_code:
+          type: string
+          example: COP
+        idempotency_key:
+          type: string
+        callback:
+          type: string
+        payer_redirect_url:
+          type: string
+
+    WebhookPayload:
+      type: object
+      properties:
+        orderId:
+          type: string
+        state:
+          type: integer
+          enum: [0, 1, 2, 3, 4]
+        payment_method:
+          type: string
+          nullable: true
+        amount:
+          type: string
+        url:
+          type: string
+
+paths:
+  /token/refresh/:
+    post:
+      operationId: refreshToken
+      summary: Get access token
+      description: |
+        Exchange refresh token for a short-lived access token.
+        Note: field name is `refresh` (NOT `refresh_token` — the WooCommerce plugin is wrong).
+      tags: [Authentication]
+      security:
+        - ApiToken: []
+          ApiSecretKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refresh]
+              properties:
+                refresh:
+                  type: string
+                  description: Refresh token from Cobru dashboard
+      responses:
+        '200':
+          description: Access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+
+  /cobru/:
+    post:
+      operationId: createPayment
+      summary: Create a payment
+      description: |
+        Creates a new payment link. Returns a short URL slug — not a full URL.
+        Construct the payment URL as: `{base_url}/{url}`.
+
+        **Critical**: `payment_method_enabled` must be a JSON-serialized string.
+      tags: [Payments]
+      security:
+        - ApiToken: []
+          ApiSecretKey: []
+          BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentRequest'
+      responses:
+        '201':
+          description: Payment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+        '400':
+          description: |
+            Validation error. Common cause: `payment_method_enabled` sent as object instead of JSON string.
+        '403':
+          description: |
+            Auth error OR validation error (misleading HTTP code).
+            Common causes: missing `payer_redirect_url`, missing `callback`, invalid `payment_method_enabled`.

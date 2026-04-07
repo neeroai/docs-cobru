@@ -1,0 +1,181 @@
+{
+  "slug": "tarjetas-tokenizadas",
+  "hero": {
+    "eyebrow": "Tarjetas Tokenizadas",
+    "title": "Tus pagos recurrentes en dólares no deberían depender de exponer la tarjeta principal de la empresa.",
+    "lead": "Usa tarjetas tokenizadas para delegar pagos de nube, licencias y servicios internacionales sin compartir la tarjeta central, con control por proveedor, servicio contratado y continuidad operativa.",
+    "highlightedPhrases": [
+      "exponer la tarjeta principal de la empresa",
+      "control por proveedor, servicio contratado y continuidad operativa"
+    ],
+    "primaryCta": {
+      "label": "Revisar mis pagos recurrentes",
+      "href": "/agendar-demo"
+    },
+    "secondaryCta": { "label": "Ver precios", "href": "/precios" },
+    "trust": [
+      "Delegación operativa sin compartir la tarjeta central",
+      "Control por proveedor y servicio",
+      "Pagos recurrentes a servicios internacionales"
+    ]
+  },
+  "editorial": {
+    "eyebrow": "El problema real no es solo pagar.",
+    "headline": "Es que cada proveedor crítico termina necesitando acceso a una tarjeta que la empresa no quiere compartir ni convertir en punto único de fallo.",
+    "body": "En muchas empresas colombianas, pagar AWS, Google Cloud, OpenAI, Meta, herramientas SaaS o licencias en dólares termina concentrado en una sola tarjeta corporativa y en una sola persona del equipo. El problema no es solo continuidad; también es delegación operativa, control del gasto por proveedor y servicio, y exposición innecesaria de la tarjeta principal. Tarjetas Tokenizadas debe presentarse como una manera de repartir operación sin repartir riesgo.",
+    "highlightedPhrases": [
+      "control del gasto por proveedor y servicio",
+      "repartir operación sin repartir riesgo"
+    ],
+    "tone": "light"
+  },
+  "painSection": {
+    "eyebrow": "Dónde se rompe el pago recurrente internacional",
+    "title": "Tres fricciones que vuelven riesgoso delegar pagos de nube, SaaS y licencias",
+    "lead": "El buyer no está buscando una tarjeta más. Está buscando delegar pagos recurrentes internacionales sin exponer la tarjeta principal y sin perder control sobre cada proveedor y servicio contratado."
+  },
+  "painPoints": [
+    {
+      "title": "Todo depende de una sola tarjeta o de una sola persona",
+      "description": "Cuando los cargos de nube, licencias o plataformas globales se montan sobre una única tarjeta corporativa, cualquier cambio de cupo, bloqueo, vencimiento o rotación del responsable pone en riesgo servicios críticos y deja a toda la operación atada al mismo instrumento."
+    },
+    {
+      "title": "Delegar el pago implica compartir una tarjeta que la empresa no quiere exponer",
+      "description": "Cuando un equipo necesita activar vendors, renovar licencias o pagar plataformas, la solución improvisada suele ser compartir datos de la tarjeta principal. Eso abre un riesgo operativo y de control que pocas empresas quieren sostener."
+    },
+    {
+      "title": "El gasto por proveedor y servicio se vuelve opaco y difícil de gobernar",
+      "description": "Con varias suscripciones activas, distintos proveedores y cargos mensuales automáticos, finanzas termina viendo movimientos dispersos sin una estructura clara para asignar, limitar o controlar qué servicio contratado está consumiendo gasto."
+    }
+  ],
+  "showcase": {
+    "eyebrow": "Cómo entra a la operación",
+    "title": "La tokenización sirve cuando puedes delegar pagos sin exponer la tarjeta principal y sin perder control por proveedor.",
+    "lead": "Estamos hablando de sostener pagos recurrentes internacionales de empresa a proveedores de infraestructura, software y plataformas críticas con continuidad operativa, delegación segura y una lectura más clara de qué servicio se está pagando.",
+    "bullets": [
+      "Pagos recurrentes a servicios cloud, herramientas SaaS y licencias internacionales.",
+      "Delegación operativa sin compartir la tarjeta principal de la empresa.",
+      "Control por proveedor y servicio contratado para leer mejor el gasto.",
+      "Una forma más gobernable de sostener pagos internacionales mes a mes."
+    ],
+    "href": "/agendar-demo",
+    "hrefLabel": "Revisar cómo ordenar estos pagos",
+    "imageSrc": "/illustrations/pasarela_v2.webp",
+    "imageAlt": "Pagos recurrentes internacionales operados con tokenización",
+    "tone": "cream",
+    "imageLayout": "wide"
+  },
+  "featureSection": {
+    "title": "Lo que gana el equipo cuando delega estos pagos sin exponer la tarjeta central",
+    "lead": "El valor no está en 'tener una tarjeta'. Está en poder repartir operación, controlar el gasto por proveedor y sostener una categoría crítica de pagos con más continuidad.",
+    "columns": 2
+  },
+  "features": [
+    {
+      "title": "Delegación operativa más segura",
+      "description": "Los equipos pueden operar renovaciones, activaciones y pagos recurrentes sin tener acceso directo a la tarjeta principal de la empresa."
+    },
+    {
+      "title": "Más control por proveedor y servicio",
+      "description": "Finanzas y operaciones pueden ordenar mejor qué proveedor se paga, qué servicio contratado está corriendo bajo esa estructura y dónde conviene poner límites o seguimiento."
+    },
+    {
+      "title": "Más continuidad para pagos críticos",
+      "description": "Las renovaciones de licencias, infraestructura o herramientas dejan de depender de perseguir tarjetas, cupos o responsables internos cada ciclo."
+    },
+    {
+      "title": "Una base más clara para gobernanza interna",
+      "description": "El pago recurrente deja de vivirse como una colección de cargos sueltos y pasa a tener una narrativa más clara para finanzas, operaciones y liderazgo."
+    }
+  ],
+  "processSection": {
+    "title": "Cómo empieza sin rearmar toda tu tesorería"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "title": "Leemos qué pagos recurrentes hoy son críticos",
+      "description": "Identificamos qué servicios internacionales dependen hoy de la tarjeta principal, pagos manuales o responsables concretos."
+    },
+    {
+      "step": 2,
+      "title": "Definimos qué parte conviene tokenizar y delegar",
+      "description": "Aterrizamos qué proveedores y servicios deben vivir en esta capa, qué controles internos hacen falta y cómo delegar sin abrir nuevos puntos de exposición."
+    },
+    {
+      "step": 3,
+      "title": "Activamos la operación recurrente",
+      "description": "El flujo empieza a sostener pagos periódicos sin depender del mismo nivel de intervención manual ni de la tarjeta central que hoy castiga al equipo."
+    },
+    {
+      "step": 4,
+      "title": "Ganas lectura, control y continuidad",
+      "description": "El equipo puede operar mejor esa capa de gasto internacional y responder con más claridad qué proveedor, licencia o cargo presenta incidencia."
+    }
+  ],
+  "relatedSection": {
+    "title": "Dónde este patrón de pago recurrente internacional suele ser más útil"
+  },
+  "industries": [
+    {
+      "title": "Fintechs",
+      "description": "Cuando el stack del producto depende de servicios cloud, vendors globales y herramientas recurrentes que no pueden caer por un problema de tarjeta.",
+      "href": "/industrias/fintechs"
+    },
+    {
+      "title": "Marketplaces y Plataformas",
+      "description": "Cuando el negocio opera sobre infraestructura, ads, software o licencias globales con renovación periódica.",
+      "href": "/industrias/marketplaces-plataformas"
+    },
+    {
+      "title": "Logística y BTL",
+      "description": "Cuando campañas, software operativo o herramientas internacionales dependen de pagos recurrentes bien mantenidos.",
+      "href": "/industrias/logistica-btl"
+    }
+  ],
+  "faqSection": {
+    "title": "Preguntas que un equipo con pagos recurrentes internacionales haría antes de delegar esta capa"
+  },
+  "faq": [
+    {
+      "question": "¿Esto está pensado para pagos recurrentes de empresa o para otro tipo de uso?",
+      "answer": "En esta narrativa, el foco está en pagos recurrentes de empresa para nube, licencias, herramientas SaaS y plataformas internacionales críticas para la operación."
+    },
+    {
+      "question": "¿Por qué esto importa tanto en Colombia?",
+      "answer": "Porque para muchas empresas no es trivial obtener y operar una tarjeta prepago o corporativa en dólares con suficiente continuidad, control y gobernanza para sostener pagos internacionales críticos."
+    },
+    {
+      "question": "¿Esto sirve si no quiero exponer la tarjeta principal de la empresa?",
+      "answer": "Sí. Ese es uno de los puntos centrales de la narrativa: delegar pagos recurrentes a equipos o proveedores sin convertir la tarjeta principal en un secreto compartido ni en el único instrumento operativo."
+    },
+    {
+      "question": "¿Qué tipo de pagos caben aquí?",
+      "answer": "Servicios cloud, licencias de software, herramientas SaaS, plataformas de ads y otros pagos internacionales recurrentes que el negocio necesita mantener sin fragilidad operativa."
+    },
+    {
+      "question": "¿Esto reemplaza toda la tesorería internacional de la empresa?",
+      "answer": "No. La propuesta es empezar por una categoría concreta de pagos recurrentes internacionales que hoy ya está generando dependencia, desorden o riesgo operativo."
+    },
+    {
+      "question": "¿Qué gana finanzas además de poder pagar?",
+      "answer": "Gana más claridad sobre una categoría de gasto que suele vivir dispersa, menos dependencia de una sola tarjeta y una base más ordenada para controlar proveedor, servicio contratado y responsabilidad interna."
+    },
+    {
+      "question": "¿Qué pasa si uno de estos pagos críticos falla?",
+      "answer": "Precisamente ahí está parte del valor: convertir ese fallo en algo gobernable y visible para el equipo, en lugar de descubrirlo tarde cuando ya afectó infraestructura, campañas o acceso a herramientas."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Revisa tus pagos recurrentes",
+    "title": "Si hoy tu nube, licencias o herramientas internacionales dependen de compartir la tarjeta principal, la siguiente conversación no debería ser una demo genérica.",
+    "lead": "Revisamos qué pagos recurrentes internacionales hoy exponen la tarjeta central, dónde hace falta delegación operativa y qué parte conviene ordenar primero para ganar control por proveedor y servicio.",
+    "bullets": [
+      "Identificamos qué pagos hoy exponen la tarjeta principal",
+      "Definimos qué parte del flujo conviene delegar y controlar primero",
+      "Aterrizamos una ruta útil para nube, licencias y SaaS internacional"
+    ],
+    "submitLabel": "Quiero revisar estos pagos",
+    "cardTitle": "Agenda una revisión útil de tus pagos recurrentes internacionales"
+  }
+}

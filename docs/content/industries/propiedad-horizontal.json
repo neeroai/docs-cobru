@@ -1,0 +1,113 @@
+{
+  "slug": "propiedad-horizontal",
+  "hero": {
+    "eyebrow": "Propiedad Horizontal",
+    "title": "Cuotas de administración cobradas sin perseguir propietarios",
+    "lead": "Automatiza recordatorios, seguimiento de mora y cobro desde el mensaje. El equipo administrativo deja de hacer llamadas y empieza a leer reportes.",
+    "primaryCta": { "label": "Agendar demo", "href": "/agendar-demo" },
+    "secondaryCta": { "label": "Ver productos", "href": "/productos" },
+    "trust": ["Seguimiento de mora automatizado", "Historial por propietario"],
+    "pills": [
+      { "label": "Cuotas" },
+      { "label": "Mora" },
+      { "label": "Recordatorios" },
+      { "label": "Cobranza" }
+    ]
+  },
+  "painPoints": [
+    {
+      "title": "El cobro de cuotas depende de que el administrador llame uno a uno",
+      "description": "Sin automatización, el equipo persigue cada propietario por WhatsApp o teléfono. Con 50 o más unidades, es inviable de forma sostenida."
+    },
+    {
+      "title": "Sin visibilidad consolidada de la cartera",
+      "description": "Saber cuánta mora hay, quién lleva más de 60 días y quién tiene deuda extraordinaria requiere revisar hojas de cálculo que nadie actualiza al mismo ritmo."
+    },
+    {
+      "title": "Cuotas extraordinarias sin proceso diferenciado",
+      "description": "Las cuotas mensuales y las extraordinarias (obras, emergencias) necesitan seguimientos distintos. Sin un flujo separado, todo se mezcla y se pierde."
+    }
+  ],
+  "recommendedProducts": [
+    {
+      "title": "Cobranza automatizada",
+      "description": "Secuencias de recordatorio por antigüedad de mora. El propietario paga desde el mismo mensaje.",
+      "href": "/productos/cobranza-automatizada"
+    },
+    {
+      "title": "Pasarela de pagos",
+      "description": "Links de pago por WhatsApp o QR en portería para pagos en el momento.",
+      "href": "/productos/pasarela-pagos"
+    },
+    {
+      "title": "Tarjetas tokenizadas",
+      "description": "Cobro recurrente automático para propietarios que prefieren pago fijo mensual.",
+      "href": "/productos/tarjetas-tokenizadas"
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "title": "Cargamos el directorio de propietarios",
+      "description": "Nombre, apto, cuenta (si la tienen) y cuota mensual. El sistema estructura el flujo de cobranza desde el inicio."
+    },
+    {
+      "step": 2,
+      "title": "Configuramos las reglas de recordatorio",
+      "description": "Recordatorio amistoso antes del vencimiento, seguimiento a los 3 días, escalamiento a los 15. Canales según tu política."
+    },
+    {
+      "step": 3,
+      "title": "El propietario paga desde el mensaje",
+      "description": "El recordatorio incluye un link de pago. El propietario hace clic y paga con PSE, Nequi o tarjeta."
+    },
+    {
+      "step": 4,
+      "title": "Reportes de cartera listos para la asamblea",
+      "description": "Historial por propietario, mora por antigüedad y exportable para informes de asamblea."
+    }
+  ],
+  "metrics": [
+    {
+      "value": "-64%",
+      "label": "reducción de mora",
+      "description": "Promedio de reducción en tasa de mora en los primeros 90 días"
+    },
+    {
+      "value": "0",
+      "label": "llamadas manuales de cobro",
+      "description": "El flujo de recordatorios automáticos elimina las llamadas repetitivas"
+    },
+    {
+      "value": "48h",
+      "label": "activación",
+      "description": "Del directorio de propietarios al primer recordatorio automatizado"
+    }
+  ],
+  "faq": [
+    {
+      "question": "¿Funciona para conjuntos pequeños?",
+      "answer": "Sí. No hay mínimo de unidades. Funciona desde 20 apartamentos hasta grandes conjuntos con cientos de propietarios."
+    },
+    {
+      "question": "¿Puedo manejar cuotas extraordinarias?",
+      "answer": "Sí. Se configuran como cobros aparte con su propio ciclo y recordatorio. No interfieren con la cuota mensual."
+    },
+    {
+      "question": "¿El historial de cobros sirve para la asamblea?",
+      "answer": "Sí. Puedes exportar el reporte de cartera por propietario, por antigüedad y por estado en cualquier momento."
+    },
+    {
+      "question": "¿Qué pasa si el propietario quiere pagar en efectivo?",
+      "answer": "Para pagos en efectivo puedes complementar con QR en portería o la opción de entrega en efectivo. Lo revisamos en la implementación."
+    }
+  ],
+  "cta": {
+    "title": "Tu conjunto no debería depender de que el administrador recuerde llamar.",
+    "bullets": [
+      "Recordatorios automáticos por antigüedad de mora",
+      "Link de pago en cada notificación",
+      "Reporte de cartera para asamblea sin trabajo manual"
+    ]
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "slug": "logistica-btl",
+  "hero": {
+    "eyebrow": "Logística y BTL",
+    "title": "Paga a equipos en campo sin planillas bancarias",
+    "lead": "Sube tu lista, el sistema valida y dispersa por el canal correcto — banco, billetera o efectivo. Con estado por beneficiario y evidencia para auditoría.",
+    "primaryCta": { "label": "Agendar demo", "href": "/agendar-demo" },
+    "secondaryCta": { "label": "Ver productos", "href": "/productos" },
+    "trust": ["Pagos en fin de semana", "Mezcla de canales en un solo lote"],
+    "pills": [
+      { "label": "Dispersión" },
+      { "label": "Efectivo" },
+      { "label": "Lotes" },
+      { "label": "Trazabilidad" }
+    ]
+  },
+  "painPoints": [
+    {
+      "title": "Dispersión en fin de semana cuando la operación no espera",
+      "description": "Las activaciones BTL terminan los viernes tarde o los domingos. El pago a los equipos de campo no puede esperar al lunes. El portal bancario tampoco coopera fuera de horario hábil."
+    },
+    {
+      "title": "Beneficiarios bancarizados y no bancarizados en el mismo lote",
+      "description": "Parte del equipo tiene cuenta. Otros solo tienen cédula y van al Efecty. Sin un sistema que maneje los dos canales, hay que hacer dos listas y dos procesos."
+    },
+    {
+      "title": "Sin trazabilidad de quién recibió qué",
+      "description": "Al cierre de la activación, el área de control necesita saber qué promotor recibió qué monto y por cuál canal. Sin eso, la liquidación es un problema de cada coordinador."
+    }
+  ],
+  "recommendedProducts": [
+    {
+      "title": "Pagos masivos",
+      "description": "Lotes con validación previa, estado por beneficiario y reenvío de rechazados sin rehacer el archivo.",
+      "href": "/productos/pagos-masivos"
+    },
+    {
+      "title": "Entrega en efectivo",
+      "description": "Beneficiarios sin cuenta bancaria retiran en puntos físicos con confirmación de retiro.",
+      "href": "/productos/entrega-efectivo"
+    },
+    {
+      "title": "Cobranza automatizada",
+      "description": "Seguimiento de liquidaciones y cuentas por cobrar entre coordinadores y la operación central.",
+      "href": "/productos/cobranza-automatizada"
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "title": "Subes el archivo del equipo",
+      "description": "CSV o Excel con nombre, cédula, monto y tipo de canal preferido (banco, billetera o efectivo)."
+    },
+    {
+      "step": 2,
+      "title": "El sistema valida",
+      "description": "Verificación de cuentas y datos antes de ejecutar. Rechazos detectados antes de que el lote salga."
+    },
+    {
+      "step": 3,
+      "title": "Dispersión por el canal correcto",
+      "description": "Cada beneficiario recibe por su canal. El estado queda registrado por persona."
+    },
+    {
+      "step": 4,
+      "title": "Reporte y evidencia para cierre",
+      "description": "Descarga el reporte con estado por beneficiario. Listo para liquidación y auditoría."
+    }
+  ],
+  "metrics": [
+    {
+      "value": "40min",
+      "label": "por dispersión masiva",
+      "description": "Promedio de dispersión a 500+ beneficiarios con validación previa"
+    },
+    {
+      "value": "-60%",
+      "label": "rechazos en lote",
+      "description": "Gracias a la validación bancaria antes de ejecutar cada lote"
+    },
+    {
+      "value": "0",
+      "label": "llamadas de seguimiento",
+      "description": "El estado por beneficiario elimina las llamadas para saber quién recibió"
+    }
+  ],
+  "faq": [
+    {
+      "question": "¿Funciona en fines de semana?",
+      "answer": "Sí. El sistema opera 24/7. Los pagos a cuentas bancarias respetan el horario bancario, pero los de efectivo y billeteras pueden habilitarse en cualquier momento."
+    },
+    {
+      "question": "¿Puedo mezclar beneficiarios con banco, billetera y efectivo en el mismo archivo?",
+      "answer": "Sí. El sistema enruta cada beneficiario al canal correcto según los datos del archivo. No necesitas archivos separados."
+    },
+    {
+      "question": "¿Cómo se manejan los rechazados?",
+      "answer": "Se marcan automáticamente. Puedes reenviarlos sin rehacer el lote completo. El sistema indica la razón del rechazo."
+    },
+    {
+      "question": "¿El reporte sirve para la liquidación del equipo?",
+      "answer": "Sí. El reporte incluye estado, monto y canal por beneficiario. Exportable en formato estándar para liquidar directamente desde él."
+    }
+  ],
+  "cta": {
+    "title": "Tu operación de campo no debería esperar al lunes para que la gente reciba.",
+    "bullets": [
+      "Lotes mixtos (banco, billetera, efectivo) en un solo archivo",
+      "Validación previa y reenvío de rechazados",
+      "Estado por beneficiario para liquidación y auditoría"
+    ]
+  }
+}

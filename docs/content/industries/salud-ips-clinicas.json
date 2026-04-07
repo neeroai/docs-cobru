@@ -1,0 +1,109 @@
+{
+  "slug": "salud-ips-clinicas",
+  "hero": {
+    "eyebrow": "Salud — IPS y Clínicas",
+    "title": "Copagos y facturas digitales sin filas en caja",
+    "lead": "El paciente paga desde su teléfono antes de llegar o desde la sala de espera. El equipo de caja deja de ser el cuello de botella y la cartera con empresas y EPS se gestiona sin hojas de cálculo.",
+    "primaryCta": { "label": "Agendar demo", "href": "/agendar-demo" },
+    "secondaryCta": { "label": "Ver productos", "href": "/productos" },
+    "trust": ["Auditabilidad para cumplimiento", "Pagos desde teléfono sin app"],
+    "pills": [
+      { "label": "Copagos" },
+      { "label": "Links de pago" },
+      { "label": "Cartera EPS" },
+      { "label": "Auditabilidad" }
+    ]
+  },
+  "painPoints": [
+    {
+      "title": "Fila en caja para copagos pequeños",
+      "description": "El cuello de botella no es por citas complejas — es por copagos que el paciente podría pagar desde su teléfono si tuviera el link. Sin ese link, el flujo de atención espera a caja."
+    },
+    {
+      "title": "Cartera con empresas y EPS sin seguimiento sistemático",
+      "description": "Las facturas a empresas pagadoras y EPS tienen plazos largos y procesos de glosa. Sin un sistema de seguimiento, el equipo trabaja con hojas de cálculo que se desactualizan."
+    },
+    {
+      "title": "Reintegros y ajustes sin trazabilidad",
+      "description": "Cuando hay ajustes de glosa o reintegros, el proceso es manual y difícil de auditar. Reconstruir el histórico de una cuenta toma tiempo."
+    }
+  ],
+  "recommendedProducts": [
+    {
+      "title": "Pasarela de pagos",
+      "description": "Links de pago para copagos y facturas. El paciente paga con PSE, Nequi o tarjeta desde su teléfono.",
+      "href": "/productos/pasarela-pagos"
+    },
+    {
+      "title": "Cobranza automatizada",
+      "description": "Seguimiento sistemático de cartera con empresas pagadoras, EPS y pacientes con plan de pago.",
+      "href": "/productos/cobranza-automatizada"
+    },
+    {
+      "title": "Tarjetas tokenizadas",
+      "description": "Planes de pago en cuotas para tratamientos de alto costo sin cobrar manualmente cada mes.",
+      "href": "/productos/tarjetas-tokenizadas"
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "title": "Diagnóstico de los flujos de cobro",
+      "description": "Revisamos qué se cobra en caja hoy (copagos, facturas, planes de pago) y qué puede moverse a canal digital."
+    },
+    {
+      "step": 2,
+      "title": "Activación de links de pago",
+      "description": "En 48 horas, el equipo puede enviar links por WhatsApp para copagos. Sin integración técnica para empezar."
+    },
+    {
+      "step": 3,
+      "title": "Configuración de cobranza para cartera",
+      "description": "Para empresas pagadoras y EPS configuramos las reglas de recordatorio y seguimiento según el tipo de deuda."
+    },
+    {
+      "step": 4,
+      "title": "Panel unificado para el equipo de cartera",
+      "description": "Copagos, facturas y planes de pago con estado en tiempo real para el equipo administrativo."
+    }
+  ],
+  "metrics": [
+    {
+      "value": "45%",
+      "label": "menos espera en caja",
+      "description": "Reducción promedio al mover copagos a links de pago digitales"
+    },
+    {
+      "value": "-35%",
+      "label": "mora en cartera",
+      "description": "Reducción en cartera vencida de empresas y EPS con seguimiento automatizado"
+    },
+    {
+      "value": "2 min",
+      "label": "link de pago generado",
+      "description": "Tiempo para generar y enviar un link de pago al paciente desde el panel"
+    }
+  ],
+  "faq": [
+    {
+      "question": "¿El paciente necesita descargar una app?",
+      "answer": "No. El link de pago funciona en el navegador del teléfono. El paciente paga con PSE, Nequi o tarjeta sin instalar nada."
+    },
+    {
+      "question": "¿Cómo se maneja la cartera con empresas pagadoras y EPS?",
+      "answer": "Con flujos de recordatorio configurables según la edad de la factura y el tipo de deudor. Lo diseñamos en la implementación según tus procesos."
+    },
+    {
+      "question": "¿Tiene requisitos de facturación electrónica?",
+      "answer": "Cobru gestiona el pago. La factura electrónica es responsabilidad de tu sistema de facturación. La integramos según tu flujo actual."
+    }
+  ],
+  "cta": {
+    "title": "Tu equipo de caja no debería ser el cuello de botella para los copagos.",
+    "bullets": [
+      "Links de pago para copagos en 48 horas",
+      "Cobranza sistemática de cartera con EPS y empresas",
+      "Estado por transacción para auditoría"
+    ]
+  }
+}

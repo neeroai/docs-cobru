@@ -1,0 +1,181 @@
+{
+  "slug": "pagos-internacionales",
+  "hero": {
+    "eyebrow": "Pagos Internacionales",
+    "title": "Tu producto financiero no debería separar recepción, envío y payout internacional en procesos distintos.",
+    "lead": "Integra una capa híbrida para recibir, mover y pagar dinero internacional con trazabilidad, cumplimiento y visibilidad dentro del mismo producto para fintechs, PSP y remesadoras.",
+    "highlightedPhrases": [
+      "recibir, mover y pagar dinero internacional",
+      "dentro del mismo producto"
+    ],
+    "primaryCta": {
+      "label": "Revisar mi flujo internacional",
+      "href": "/agendar-demo"
+    },
+    "secondaryCta": { "label": "Ver precios", "href": "/precios" },
+    "trust": [
+      "Recepción, envío y payout en una sola capa",
+      "Cumplimiento dentro del flujo",
+      "Trazabilidad por operación"
+    ]
+  },
+  "editorial": {
+    "eyebrow": "El cuello de botella no es solo mover dinero.",
+    "headline": "Es tener recepción, envío y payout internacional viviendo como tres operaciones separadas dentro del mismo producto.",
+    "body": "Para una fintech, PSP o remesadora, el problema no es únicamente recibir o enviar dinero del exterior. El problema aparece cuando la recepción corre por un lado, el envío por otro y el payout a beneficiario termina en un flujo aparte con conciliación separada, soporte manual y validación de cumplimiento fuera del sistema. Pagos Internacionales debe presentarse como una capa híbrida que unifica esos momentos operativos, no como una suma de servicios desconectados.",
+    "highlightedPhrases": [
+      "la recepción corre por un lado, el envío por otro y el payout a beneficiario termina en un flujo aparte",
+      "una capa híbrida que unifica esos momentos operativos"
+    ],
+    "tone": "light"
+  },
+  "painSection": {
+    "eyebrow": "Dónde se rompe la operación internacional",
+    "title": "Tres fricciones que aparecen cuando internacional no funciona como una sola capa operativa",
+    "lead": "Un buyer de fintech o remesadora no quiere un proveedor para cada momento del flujo. Quiere que recepción, envío y payout internacional funcionen con la misma lógica de control, soporte y trazabilidad que ya exige al resto de su operación."
+  },
+  "painPoints": [
+    {
+      "title": "Cada tramo del flujo internacional termina en una herramienta distinta",
+      "description": "Cuando la recepción vive en un partner, el envío en otro y el payout en un tercero, soporte y operaciones pierden continuidad. El estado de la operación deja de leerse de punta a punta y el usuario final siente fragmentación."
+    },
+    {
+      "title": "Cumplimiento y operación corren por carriles distintos",
+      "description": "Si compliance necesita reconstruir documentación o validar cada caso por fuera del flujo híbrido, el tiempo operativo se alarga y el producto pierde continuidad frente al cliente, la contraparte o el beneficiario final."
+    },
+    {
+      "title": "La trazabilidad se rompe entre recepción, movimiento y payout",
+      "description": "Sin una vista clara de cada operación de extremo a extremo, el equipo no puede responder rápido qué entró, qué salió, qué se validó y dónde quedó detenido el flujo. Eso castiga producto, soporte y finanzas al mismo tiempo."
+    }
+  ],
+  "showcase": {
+    "eyebrow": "Cómo entra al producto",
+    "title": "La capa híbrida funciona cuando recepción, envío y payout internacional se leen como una sola operación.",
+    "lead": "La promesa no es solo mover dinero cross-border. Es integrar recepción, validación, seguimiento, payout y conciliación con una lógica que el equipo ya pueda operar sin crear otra capa manual al costado.",
+    "bullets": [
+      "Una misma capa para recibir, enviar y pagar internacional según el caso de uso real.",
+      "Trazabilidad por operación para que soporte y operaciones lean el estado real sin salir del sistema.",
+      "Cumplimiento y validación como parte del proceso, no como trabajo posterior.",
+      "Continuidad entre producto, tesorería, riesgo y payout a beneficiario final."
+    ],
+    "href": "/agendar-demo",
+    "hrefLabel": "Revisar cómo integrar este flujo",
+    "imageSrc": "/illustrations/pasarela_v2.webp",
+    "imageAlt": "Flujo internacional integrado a una operación financiera en Cobru",
+    "tone": "cream",
+    "imageLayout": "wide"
+  },
+  "featureSection": {
+    "title": "Lo que gana una operación financiera cuando internacional deja de estar fragmentado",
+    "lead": "El valor está en operar mejor, responder mejor y conciliar mejor una capa híbrida, no solo en habilitar otra ruta de pago.",
+    "columns": 2
+  },
+  "features": [
+    {
+      "title": "Una vista más completa de la operación internacional",
+      "description": "Cada operación debe poder seguirse desde la recepción o instrucción inicial hasta el envío o payout final con claridad suficiente para producto, soporte y finanzas."
+    },
+    {
+      "title": "Cumplimiento dentro del flujo",
+      "description": "La validación regulatoria y documental no debería vivir en otra herramienta. Debe acompañar la operación para no frenar ni opacar el servicio."
+    },
+    {
+      "title": "Más continuidad entre producto y operación",
+      "description": "El usuario final no debería sentir que recepción, envío y payout internacional son productos distintos. El equipo tampoco debería operarlos como tal."
+    },
+    {
+      "title": "Una base más usable para soporte y conciliación",
+      "description": "Cuando el estado y la evidencia de cada operación híbrida están más ordenados, soporte responde mejor y finanzas cierra con menos fricción."
+    }
+  ],
+  "processSection": {
+    "title": "Cómo empieza sin convertirlo en un proyecto paralelo"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "title": "Leemos tu producto y el flujo internacional actual",
+      "description": "Revisamos cómo entra hoy el dinero, cómo sale, cuándo aparece payout a beneficiario, qué actores participan y dónde se rompe la continuidad operativa."
+    },
+    {
+      "step": 2,
+      "title": "Definimos integración y controles",
+      "description": "Aterrizamos cómo debe verse la capa híbrida dentro del producto y qué validaciones, estados o controles deben vivir en el mismo flujo."
+    },
+    {
+      "step": 3,
+      "title": "Activamos la primera operación híbrida con trazabilidad",
+      "description": "La primera ejecución sirve para comprobar continuidad entre recepción, movimiento, payout, soporte y cumplimiento."
+    },
+    {
+      "step": 4,
+      "title": "Escalas sin crear otra operación manual",
+      "description": "El objetivo es que el equipo pueda operar esta ruta con la misma disciplina y visibilidad que ya exige al resto del producto."
+    }
+  ],
+  "relatedSection": {
+    "title": "Dónde esta capa internacional híbrida tiene más sentido operativo"
+  },
+  "industries": [
+    {
+      "title": "Fintechs",
+      "description": "Cuando el producto financiero necesita recibir, mover y pagar internacional dentro de la misma lógica operativa y no en procesos externos.",
+      "href": "/industrias/fintechs"
+    },
+    {
+      "title": "Marketplaces y Plataformas",
+      "description": "Cuando la plataforma necesita cobrar, enviar o hacer payout cross-border con visibilidad operativa suficiente.",
+      "href": "/industrias/marketplaces-plataformas"
+    },
+    {
+      "title": "Logística y BTL",
+      "description": "Cuando existen pagos a proveedores o contrapartes externas que no pueden operarse con opacidad ni seguimiento manual.",
+      "href": "/industrias/logistica-btl"
+    }
+  ],
+  "faqSection": {
+    "title": "Preguntas que una fintech o remesadora haría antes de incorporar una capa internacional híbrida"
+  },
+  "faq": [
+    {
+      "question": "¿Esto está pensado para fintechs y remesadoras o para exportadores tradicionales?",
+      "answer": "La página está priorizada para fintechs, PSP y remesadoras que necesitan integrar este flujo dentro de su producto y no operarlo aparte. Otros casos pueden evaluarse, pero no son el buyer principal de esta narrativa."
+    },
+    {
+      "question": "¿Aquí estamos hablando de recibir, enviar o hacer payout internacional?",
+      "answer": "De una capa híbrida. La narrativa prioriza operaciones donde recepción, envío y payout pueden convivir dentro del mismo producto y deben leerse con una sola lógica operativa."
+    },
+    {
+      "question": "¿El cumplimiento se resuelve dentro del flujo o queda como una capa separada?",
+      "answer": "La promesa del producto es justamente incorporar validación y cumplimiento dentro de la operación para que no se convierta en una carga manual adicional al costado."
+    },
+    {
+      "question": "¿Qué gana producto además de habilitar otra ruta internacional?",
+      "answer": "Gana continuidad operativa: menos excepciones manuales entre recepción, envío y payout, mejor trazabilidad para soporte y una experiencia menos fragmentada para el usuario final o contraparte."
+    },
+    {
+      "question": "¿Cómo ayuda esto a soporte y finanzas?",
+      "answer": "Ayuda cuando el equipo puede leer mejor el estado de cada operación, entender qué se validó y responder con más certeza sin depender de correos, bancos o conciliaciones paralelas."
+    },
+    {
+      "question": "¿Qué tan compleja es la activación?",
+      "answer": "La activación depende del flujo, volumen y nivel de cumplimiento requerido. La conversación correcta no es 'cuántos días tarda', sino cómo incorporar esta ruta sin crear otro sistema operativo aparte."
+    },
+    {
+      "question": "¿Necesito cambiar de banco para empezar?",
+      "answer": "No. La propuesta sigue siendo integrar la capa internacional a la operación existente sin convertir el cambio de banco en requisito de entrada."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Revisa tu flujo internacional",
+    "title": "Si hoy recepción, envío y payout internacional viven como procesos aparte, la siguiente conversación no debería ser otra demo genérica.",
+    "lead": "Revisamos cómo opera hoy tu producto la capa internacional, dónde se rompe la continuidad entre entrada, salida y beneficiario final, y qué parte conviene integrar primero.",
+    "bullets": [
+      "Leemos cómo hoy se separan recepción, envío y payout",
+      "Definimos integración, trazabilidad y controles necesarios",
+      "Aterrizamos una ruta híbrida útil para fintechs y remesadoras"
+    ],
+    "submitLabel": "Quiero revisar mi flujo internacional",
+    "cardTitle": "Agenda una revisión útil de tu operación cross-border"
+  }
+}

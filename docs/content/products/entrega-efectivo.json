@@ -1,0 +1,174 @@
+{
+  "slug": "entrega-efectivo",
+  "hero": {
+    "eyebrow": "Entrega en Efectivo",
+    "title": "Cuando el beneficiario no tiene cuenta, la operación no debería romperse.",
+    "lead": "Activa retiros en efectivo con cobertura física, trazabilidad y confirmación de retiro para logística, programas de dispersión y remeseras que necesitan pagar a personas fuera del sistema bancario tradicional.",
+    "highlightedPhrases": [
+      "retiros en efectivo con cobertura física",
+      "pagar a personas fuera del sistema bancario tradicional"
+    ],
+    "primaryCta": {
+      "label": "Revisar mi operación de dispersión",
+      "href": "/agendar-demo"
+    },
+    "secondaryCta": { "label": "Ver precios", "href": "/precios" },
+    "trust": [
+      "Cobertura en puntos físicos",
+      "Tu empresa no transporta efectivo",
+      "Estado y evidencia por beneficiario"
+    ]
+  },
+  "editorial": {
+    "eyebrow": "El problema no es solo dispersar.",
+    "headline": "Es llegar al beneficiario correcto sin convertir el efectivo en un riesgo operativo para tu empresa.",
+    "body": "En logística, programas de dispersión o remeseras, muchas operaciones siguen chocando con la misma realidad: el beneficiario no tiene cuenta activa, no usa billetera o simplemente necesita retirar en efectivo. La alternativa de manejar caja propia o resolver por excepción multiplica riesgo, costo operativo y opacidad. Entrega de Efectivo debe presentarse como una forma de llegar donde la banca no llega, sin perder control.",
+    "highlightedPhrases": ["el beneficiario no tiene cuenta activa", "sin perder control"],
+    "tone": "light"
+  },
+  "painSection": {
+    "eyebrow": "Dónde se rompe la última milla del pago",
+    "title": "Tres fricciones que vuelven el efectivo un problema operativo en vez de una solución",
+    "lead": "El buyer no está buscando repartir billetes. Está buscando completar el pago cuando la cuenta bancaria no existe, la billetera no aplica o el beneficiario solo puede retirar en físico."
+  },
+  "painPoints": [
+    {
+      "title": "El canal bancario simplemente no resuelve todos los casos",
+      "description": "En campo, programas sociales, remesas o redes de beneficiarios dispersos, parte de la población no tiene cuenta activa o no puede recibir por los canales digitales habituales. El pago se queda sin última milla."
+    },
+    {
+      "title": "Tu empresa termina absorbiendo el riesgo físico y operativo del efectivo",
+      "description": "Cuando la organización arma caja, transporta efectivo o improvisa retiros manuales, el riesgo ya no es solo financiero. También es logístico, reputacional y de control interno."
+    },
+    {
+      "title": "Sin evidencia clara, cada pago se convierte en una posible disputa",
+      "description": "Si auditoría, operaciones o el cliente interno piden confirmar quién retiró, cuánto retiró y cuándo lo hizo, una operación sin trazabilidad termina resolviéndose con llamadas, planillas o versiones cruzadas."
+    }
+  ],
+  "showcase": {
+    "eyebrow": "Cómo entra a la operación",
+    "title": "Entrega en efectivo funciona cuando cobertura, habilitación y confirmación viven en la misma capa.",
+    "lead": "No se trata solo de habilitar un retiro. Se trata de poder registrar al beneficiario, enviar la orden, permitir el retiro en un punto físico y dejar evidencia suficiente para operaciones, auditoría y servicio.",
+    "bullets": [
+      "Cobertura física para beneficiarios que no reciben por cuenta o billetera.",
+      "Tu empresa no transporta ni administra efectivo directamente.",
+      "Estado por beneficiario para saber quién ya retiró y quién sigue pendiente.",
+      "Una ruta útil para logística, programas de dispersión y remeseras."
+    ],
+    "href": "/agendar-demo",
+    "hrefLabel": "Revisar cómo ordenarlo",
+    "imageSrc": "/illustrations/pagos_masivos_vertical_v1.webp",
+    "imageAlt": "Operación de entrega en efectivo con estado por beneficiario",
+    "tone": "cream",
+    "imageLayout": "vertical"
+  },
+  "featureSection": {
+    "title": "Lo que gana la operación cuando el efectivo deja de ser una improvisación",
+    "lead": "El valor no está solo en pagar. Está en pagar con alcance, menos riesgo interno y mejor evidencia de lo que sí ocurrió.",
+    "columns": 2
+  },
+  "features": [
+    {
+      "title": "Cobertura donde la banca no alcanza",
+      "description": "El beneficiario puede retirar en un punto habilitado sin depender de cuenta bancaria activa, smartphone o adopción de una billetera."
+    },
+    {
+      "title": "Menos riesgo operativo para tu organización",
+      "description": "La empresa deja de resolver este tipo de pagos con caja propia, transporte de dinero o procesos informales difíciles de sostener y auditar."
+    },
+    {
+      "title": "Más claridad sobre cada retiro",
+      "description": "Operaciones puede leer mejor quién retiró, en qué punto y en qué momento, con una base más clara para control, seguimiento y servicio."
+    },
+    {
+      "title": "Una misma operación puede mezclar canales",
+      "description": "No todos los beneficiarios tienen que salir por efectivo. El flujo puede convivir con pagos bancarios o digitales cuando la base es mixta."
+    }
+  ],
+  "processSection": {
+    "title": "Cómo empieza sin montar una operación manual paralela"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "title": "Leemos tu población y tu cobertura",
+      "description": "Revisamos quiénes son los beneficiarios, dónde están, por qué no reciben por banca tradicional y qué nivel de confirmación necesita tu operación."
+    },
+    {
+      "step": 2,
+      "title": "Definimos la ruta de habilitación",
+      "description": "Aterrizamos cómo se registra el beneficiario, cómo se habilita el retiro y qué información necesita el equipo para operar con orden."
+    },
+    {
+      "step": 3,
+      "title": "El beneficiario retira en punto físico",
+      "description": "La operación permite el retiro sin que tu empresa tenga que mover efectivo ni coordinar una logística propia de caja."
+    },
+    {
+      "step": 4,
+      "title": "La operación cierra con mejor evidencia",
+      "description": "El equipo puede ver mejor qué retiro sí ocurrió, qué sigue pendiente y qué necesita seguimiento adicional."
+    }
+  ],
+  "relatedSection": {
+    "title": "Dónde esta ruta de efectivo suele ser más necesaria"
+  },
+  "industries": [
+    {
+      "title": "Logística y BTL",
+      "description": "Cuando hay equipos de campo o activaciones donde no todos los beneficiarios operan con cuenta bancaria.",
+      "href": "/industrias/logistica-btl"
+    },
+    {
+      "title": "Fintechs y remeseras",
+      "description": "Cuando la operación necesita pagar a personas sin cuenta o habilitar retiro físico como parte de su red de servicio.",
+      "href": "/industrias/fintechs"
+    },
+    {
+      "title": "Programas de dispersión",
+      "description": "Cuando el objetivo es llegar a beneficiarios dispersos, rurales o fuera del sistema bancario sin improvisar el efectivo.",
+      "href": "/industrias/logistica-btl"
+    }
+  ],
+  "faqSection": {
+    "title": "Preguntas que una operación de campo, dispersión o remesas haría antes de usar entrega en efectivo"
+  },
+  "faq": [
+    {
+      "question": "¿En qué puntos puede retirar el beneficiario?",
+      "answer": "La cobertura depende de la red habilitada para tu operación y de la geografía objetivo. Lo importante es validar desde el inicio si la cobertura real coincide con la población que necesitas atender."
+    },
+    {
+      "question": "¿Qué documento necesita el beneficiario?",
+      "answer": "Depende del tipo de beneficiario y del esquema operativo, pero la narrativa del producto debe dejar claro que la habilitación del retiro depende de identificación válida y reglas de control definidas en implementación."
+    },
+    {
+      "question": "¿Qué gana la empresa además de llegar al beneficiario?",
+      "answer": "Gana una forma de resolver pagos donde la banca no alcanza, sin asumir directamente el riesgo físico del efectivo y con mejor evidencia para control operativo."
+    },
+    {
+      "question": "¿Puedo mezclar efectivo con pagos bancarios o digitales?",
+      "answer": "Sí. Una de las ventajas reales es poder enrutar cada beneficiario por el canal que sí le sirve, en lugar de forzar a toda la base a un único medio de pago."
+    },
+    {
+      "question": "¿Esto aplica solo para casos rurales o sin banca?",
+      "answer": "No solo. También aplica cuando la operación necesita rapidez, cobertura física o una alternativa confiable para personas que no pueden o no van a recibir por los canales tradicionales."
+    },
+    {
+      "question": "¿Cómo ayuda esto a auditoría y seguimiento?",
+      "answer": "Ayuda cuando la operación deja evidencia más clara sobre habilitación, retiro y estado por beneficiario, en vez de depender de planillas, llamadas o confirmaciones informales."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Revisa tu operación de efectivo",
+    "title": "Si hoy el efectivo es la excepción que desordena todo, la siguiente conversación no debería ser una demo genérica.",
+    "lead": "Revisamos dónde hoy no llega la banca, qué nivel de cobertura y evidencia necesita tu operación y qué parte del flujo conviene ordenar primero para pagar sin asumir riesgo innecesario.",
+    "bullets": [
+      "Leemos dónde hoy se rompe la última milla del pago",
+      "Definimos cobertura, habilitación y seguimiento correctos",
+      "Aterrizamos una ruta útil para logística, dispersión y remesas"
+    ],
+    "submitLabel": "Quiero revisar esta operación",
+    "cardTitle": "Agenda una revisión útil de tu flujo de entrega en efectivo"
+  }
+}

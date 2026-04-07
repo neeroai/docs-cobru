@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "title": "Cobru Docs",
+    "home": "Inicio",
+    "docs": "Documentación",
+    "api": "Referencia API"
+  },
+  "search": {
+    "placeholder": "Buscar en la documentación...",
+    "empty": "Sin resultados."
+  },
+  "page": {
+    "editPage": "Editar esta página",
+    "lastUpdated": "Última actualización",
+    "onThisPage": "En esta página",
+    "previousPage": "Anterior",
+    "nextPage": "Siguiente"
+  },
+  "footer": {
+    "poweredBy": "Desarrollado con"
+  }
+}

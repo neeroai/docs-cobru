@@ -1,0 +1,177 @@
+{
+  "slug": "pagos-masivos",
+  "hero": {
+    "eyebrow": "Pagos Masivos",
+    "title": "Tu equipo no debería ejecutar un lote grande sin saber quién cobró y quién no.",
+    "lead": "Dispersa pagos con validación previa, trazabilidad por beneficiario y menos reproceso para operaciones, tesorería y finanzas. El objetivo no es solo mover dinero: es cerrar el lote con control.",
+    "highlightedPhrases": ["trazabilidad por beneficiario", "cerrar el lote con control"],
+    "imageSrc": "/illustrations/pagos_masivos_vertical_v1.webp",
+    "imageAlt": "Panel de Cobru para ejecutar y seguir pagos masivos",
+    "imageHint": "Ejecución por lote con estado por beneficiario",
+    "primaryCta": {
+      "label": "Revisar mi operación de pagos",
+      "href": "/agendar-demo"
+    },
+    "secondaryCta": { "label": "Ver precios", "href": "/precios" },
+    "trust": [
+      "Validación previa de cuentas",
+      "Estado individual por beneficiario",
+      "Carga por archivo o API"
+    ]
+  },
+  "editorial": {
+    "eyebrow": "Mover el lote no es lo mismo que cerrar la operación.",
+    "headline": "El verdadero problema empieza después de darle enviar.",
+    "body": "Para operaciones, tesorería y finanzas, el dolor no está solo en cargar el archivo. Está en descubrir qué pagos fallaron, por qué fallaron, quién reclama, qué se puede reenviar y cuánto tiempo del equipo se va en reconstruir el estado real del lote. Pagos Masivos tiene que presentarse como una herramienta de control operativo, no solo de ejecución.",
+    "highlightedPhrases": [
+      "qué pagos fallaron, por qué fallaron, quién reclama",
+      "herramienta de control operativo"
+    ],
+    "tone": "light"
+  },
+  "painSection": {
+    "eyebrow": "Dónde se rompe el lote",
+    "title": "Tres fricciones que convierten una dispersión en una jornada de cierre",
+    "lead": "Un buyer de operaciones o tesorería no está buscando otra forma de subir archivos. Está buscando dejar de perder horas validando, corrigiendo y confirmando qué pasó con cada beneficiario."
+  },
+  "painPoints": [
+    {
+      "title": "El equipo invierte medio día preparando y revisando un solo lote",
+      "description": "Antes de ejecutar, alguien tiene que limpiar la base, formatear columnas, revisar cuentas y adaptar el archivo al formato que exige el banco o portal. Ese tiempo no agrega valor; solo compensa una mala infraestructura operativa."
+    },
+    {
+      "title": "Después de ejecutar, nadie tiene una lectura clara por beneficiario",
+      "description": "Una vez sale el lote, operaciones y tesorería necesitan saber quién recibió, quién quedó pendiente y quién fue rechazado. Si esa respuesta no existe por persona, empiezan las llamadas, los correos y la reconstrucción manual."
+    },
+    {
+      "title": "Los rechazados contaminan todo el proceso",
+      "description": "Cuando aparecen rechazos por cuentas inactivas, datos errados o validaciones bancarias, el problema no es solo el rechazo. Es tener que rehacer parte del lote, responder reclamos y perder control del cierre."
+    }
+  ],
+  "showcase": {
+    "eyebrow": "Cómo entra a la operación",
+    "title": "Pagos masivos funciona mejor cuando validación, ejecución y seguimiento viven en el mismo flujo.",
+    "lead": "La operación no mejora solo por poder cargar un CSV. Mejora cuando el equipo puede validar antes, ejecutar con más confianza y leer el resultado por beneficiario sin volver al banco o al correo.",
+    "bullets": [
+      "Validación previa para reducir errores antes de ejecutar el lote.",
+      "Carga por CSV, Excel o API según el nivel de madurez del flujo.",
+      "Estado por beneficiario para saber qué acreditó, qué quedó pendiente y qué fue rechazado.",
+      "Reenvío de rechazados sin rehacer todo el trabajo anterior."
+    ],
+    "href": "/agendar-demo",
+    "hrefLabel": "Revisar cómo ordenar mis pagos",
+    "imageSrc": "/illustrations/pagos_masivos_vertical_v1.webp",
+    "imageAlt": "Pagos masivos con validación y seguimiento por beneficiario",
+    "tone": "ink-50",
+    "imageLayout": "vertical"
+  },
+  "featureSection": {
+    "title": "Lo que gana el equipo cuando deja de operar el lote a ciegas",
+    "lead": "El producto no sustituye criterio operativo; le devuelve tiempo y control al equipo que ejecuta, concilia y responde por el pago.",
+    "columns": 2
+  },
+  "features": [
+    {
+      "title": "Más confianza antes de ejecutar",
+      "description": "La validación previa reduce la probabilidad de que el lote salga con errores evitables. Eso baja rechazo, reproceso y ruido operativo."
+    },
+    {
+      "title": "Trazabilidad real por persona o beneficiario",
+      "description": "Cada pago deja de ser parte de una masa opaca. Operaciones y tesorería pueden leer el estado caso a caso y actuar sin reconstruir todo el lote."
+    },
+    {
+      "title": "Menos castigo operativo por los rechazados",
+      "description": "Cuando un pago falla, el equipo no debería perder el trabajo ya hecho. El flujo correcto aísla el problema y permite reenviar sin rehacer todo."
+    },
+    {
+      "title": "Un flujo que crece con la operación",
+      "description": "Puedes empezar por archivo y pasar a integración cuando el volumen o la frecuencia lo justifiquen. La herramienta acompaña la madurez del proceso."
+    }
+  ],
+  "processSection": {
+    "title": "Cómo se activa sin volver más compleja la tesorería"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "title": "Leemos tu flujo actual de dispersión",
+      "description": "Revisamos volumen, frecuencia, tipo de beneficiarios, formato actual y el punto donde hoy aparecen más errores, rechazos o reclamos."
+    },
+    {
+      "step": 2,
+      "title": "Definimos validación y forma de entrada",
+      "description": "Aterrizamos si conviene empezar por archivo o API y qué validaciones deben suceder antes de ejecutar el lote."
+    },
+    {
+      "step": 3,
+      "title": "Ejecutamos con trazabilidad",
+      "description": "El lote sale con lectura por beneficiario para que operaciones y tesorería no dependan de extractos ni confirmaciones manuales."
+    },
+    {
+      "step": 4,
+      "title": "Cerramos con más claridad",
+      "description": "El equipo identifica rechazados, reintentos y estado final con mejor evidencia para conciliación, soporte y cierre operativo."
+    }
+  ],
+  "relatedSection": {
+    "title": "Dónde esta operación de dispersión suele ser más crítica"
+  },
+  "industries": [
+    {
+      "title": "Logística y BTL",
+      "description": "Cuando se pagan equipos de campo, activaciones o personal operativo con presión de tiempo y alto volumen.",
+      "href": "/industrias/logistica-btl"
+    },
+    {
+      "title": "Marketplaces y Plataformas",
+      "description": "Cuando hay que dispersar a sellers o prestadores sin perder trazabilidad por beneficiario.",
+      "href": "/industrias/marketplaces-plataformas"
+    },
+    {
+      "title": "Fintechs",
+      "description": "Cuando el producto financiero necesita pagar usuarios finales con control operativo y visibilidad por caso.",
+      "href": "/industrias/fintechs"
+    }
+  ],
+  "faqSection": {
+    "title": "Preguntas que un equipo de operaciones o tesorería haría antes de cambiar su flujo de dispersión"
+  },
+  "faq": [
+    {
+      "question": "¿Esto sirve aunque hoy operemos por archivo y no por API?",
+      "answer": "Sí. La lógica de la página parte de que muchas operaciones empiezan por CSV o Excel. La integración por API entra cuando el volumen, la frecuencia o el sistema lo hacen necesario."
+    },
+    {
+      "question": "¿Qué gana tesorería además de mover el lote más rápido?",
+      "answer": "Gana visibilidad para leer qué pasó con cada pago, reducir rechazos evitables y cerrar la operación con menos reproceso y menos dependencia de confirmaciones manuales."
+    },
+    {
+      "question": "¿Qué formatos de entrada acepta el flujo?",
+      "answer": "CSV, Excel y API. Lo importante no es solo el formato, sino que el equipo pueda entrar por el canal correcto sin aumentar fricción operativa."
+    },
+    {
+      "question": "¿Qué pasa cuando hay rechazados o cuentas inválidas?",
+      "answer": "El flujo correcto debe identificar el rechazo por beneficiario, mostrar la causa y permitir corrección o reenvío sin rehacer por completo el lote ya procesado."
+    },
+    {
+      "question": "¿Esto aplica solo para nómina?",
+      "answer": "No. La narrativa está pensada para operaciones de pago más amplias: logística, BTL, sellers, prestadores, usuarios finales o cualquier escenario donde lo crítico sea ejecutar y cerrar el lote con control."
+    },
+    {
+      "question": "¿Cómo ayuda esto a auditoría o conciliación?",
+      "answer": "La trazabilidad por beneficiario y el estado más claro del lote facilitan evidencia operativa, seguimiento de incidencias y lectura más ordenada para conciliación posterior."
+    }
+  ],
+  "cta": {
+    "eyebrow": "Revisa tu flujo de dispersión",
+    "title": "Si cada lote te deja validando, corrigiendo y respondiendo reclamos, el siguiente paso no debería ser otra demo genérica.",
+    "lead": "Revisamos cómo ejecuta hoy tu equipo los pagos, dónde aparecen rechazados y qué parte del flujo conviene ordenar primero para que operaciones, tesorería y finanzas ganen control real.",
+    "bullets": [
+      "Identificamos dónde hoy se rompe el lote",
+      "Definimos validación, ejecución y seguimiento correctos",
+      "Aterrizamos una ruta útil para operar con menos reproceso"
+    ],
+    "submitLabel": "Quiero revisar mis pagos masivos",
+    "cardTitle": "Agenda una revisión útil de tu flujo de dispersión"
+  }
+}

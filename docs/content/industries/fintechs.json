@@ -1,0 +1,108 @@
+{
+  "slug": "fintechs",
+  "hero": {
+    "eyebrow": "Fintechs",
+    "title": "Infraestructura de pagos lista para integrar en tu producto",
+    "lead": "Cobros, dispersión y recurrencia en una API. Sin construir desde cero, sin cargar con cumplimiento regulatorio aparte y con soporte local para escalar.",
+    "primaryCta": { "label": "Agendar demo", "href": "/agendar-demo" },
+    "secondaryCta": { "label": "Ver productos", "href": "/productos" },
+    "trust": ["API REST con webhooks", "Sandbox para desarrolladores"],
+    "pills": [
+      { "label": "API" },
+      { "label": "Cobros" },
+      { "label": "Dispersión" },
+      { "label": "Recurrencia" }
+    ]
+  },
+  "painPoints": [
+    {
+      "title": "Construir pasarela y dispersión desde cero consume meses de desarrollo",
+      "description": "El equipo técnico dedica sprints enteros a integrar medios de pago colombianos, gestionar reversiones y garantizar disponibilidad. Ese tiempo no va a producto."
+    },
+    {
+      "title": "El cumplimiento regulatorio colombiano cambia y hay que seguirlo",
+      "description": "SAGRILAFT, regulaciones de la SFC, requisitos de bancos locales. Mantener esos controles actualizados es trabajo continuo que distrae al equipo."
+    },
+    {
+      "title": "Escalar cobros y dispersión juntos sin deuda técnica",
+      "description": "Cuando el producto crece, el volumen de transacciones lo hace también. Una infraestructura de pagos que no fue diseñada para volumen genera deuda técnica que frena el crecimiento."
+    }
+  ],
+  "recommendedProducts": [
+    {
+      "title": "Pasarela de pagos",
+      "description": "API de cobros con PSE, Nequi, Daviplata y tarjetas. Webhooks, reintentos y reportes.",
+      "href": "/productos/pasarela-pagos"
+    },
+    {
+      "title": "Pagos masivos",
+      "description": "Dispersión por API o archivo. Validación bancaria, estado por beneficiario y reenvío de rechazados.",
+      "href": "/productos/pagos-masivos"
+    },
+    {
+      "title": "Tarjetas tokenizadas",
+      "description": "Cobros recurrentes con tokenización para reducir fricción y alcance PCI DSS.",
+      "href": "/productos/tarjetas-tokenizadas"
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "title": "Sandbox y documentación",
+      "description": "Acceso inmediato al ambiente de prueba con documentación de la API. El equipo técnico puede integrar sin esperar."
+    },
+    {
+      "step": 2,
+      "title": "Piloto en producción",
+      "description": "Primera integración real con volumen controlado. El equipo de Cobru acompaña el go-live."
+    },
+    {
+      "step": 3,
+      "title": "Escalar según necesidad",
+      "description": "Más medios, más volumen de dispersión, más módulos. Cada nuevo caso se activa sobre la integración base."
+    }
+  ],
+  "metrics": [
+    {
+      "value": "3sem",
+      "label": "integración a producción",
+      "description": "Tiempo típico desde sandbox a primer pago en producción"
+    },
+    {
+      "value": "99.9%",
+      "label": "uptime SLA",
+      "description": "Disponibilidad garantizada para operaciones en producción"
+    },
+    {
+      "value": "40+",
+      "label": "medios de pago colombianos",
+      "description": "PSE, Nequi, Daviplata, tarjetas y más integrados desde el inicio"
+    }
+  ],
+  "faq": [
+    {
+      "question": "¿Tienen documentación de la API?",
+      "answer": "Sí. Documentación REST completa, colección Postman y sandbox con datos de prueba. El equipo técnico puede empezar a integrar el mismo día."
+    },
+    {
+      "question": "¿Qué SLA de disponibilidad tienen?",
+      "answer": "99.9% de disponibilidad en producción. Los detalles del SLA se definen en la sesión comercial según el volumen y criticidad de la operación."
+    },
+    {
+      "question": "¿Cómo se maneja el cumplimiento SAGRILAFT?",
+      "answer": "Los controles SAGRILAFT están integrados en el flujo de la API. No necesitas construir esa lógica aparte. Lo revisamos según tu modelo de negocio en la implementación."
+    },
+    {
+      "question": "¿Pueden manejar el volumen cuando escalemos?",
+      "answer": "La infraestructura de Cobru está diseñada para escalar. Para operaciones de alto volumen, definimos la arquitectura en la sesión técnica."
+    }
+  ],
+  "cta": {
+    "title": "Tu fintech no debería invertir meses construyendo lo que ya existe.",
+    "bullets": [
+      "API lista con todos los medios de pago colombianos",
+      "Dispersión, recurrencia y compliance en un solo proveedor",
+      "Sandbox disponible para tu equipo hoy"
+    ]
+  }
+}
