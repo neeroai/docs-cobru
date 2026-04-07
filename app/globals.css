@@ -1,21 +1,77 @@
+/* ============================================================
+   GLOBALS.CSS — docs-cobru
+   Entry point. Token layers → fumadocs-ui → base styles.
+   Standard: docs-global/standards/design-tokens.md
+   ============================================================ */
+
 @import "tailwindcss";
+
+/* Exclude symlink outside project root — prevents Turbopack panic */
 @source not "./docs-global/**";
+
+/* ── TOKEN LAYERS (order matters) ── */
+@import "../styles/tokens/primitives.css";
+@import "../styles/tokens/foundation.css";
+@import "../styles/tokens/semantic.css";
+@import "../styles/tokens/agentic.css";
+@import "../styles/tokens/typography.css";
+@import "../styles/tokens/components.css";
+
+/* ── fumadocs-ui ── */
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
 @import "fumadocs-openapi/css/preset.css";
 
-@layer base {
-  :root {
-    /* Cobru brand tokens — from tokens/source/primitives.tokens.json */
-    --color-brand: #2ea3f2;
-    --color-accent: #19d6ff;
-    --color-secondary: #5a3cf0;
+/* ── DARK MODE: map Tailwind `dark:` → data-theme attribute ── */
+/* fumadocs-ui / next-themes sets data-theme on <html> */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-    /* Override fumadocs primary with Cobru brand blue */
-    --fd-primary: 210 87% 57%;
-  }
+/* ── TAILWIND v4: expose tokens as utilities ── */
+@theme inline {
+  --font-sans: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
+  --font-mono: var(--font-mono);
 
-  body {
-    font-family: "DM Sans", system-ui, sans-serif;
-  }
+  /* Text sizes */
+  --text-2xs: var(--text-2xs);
+  --text-xs: var(--text-xs);
+  --text-sm: var(--text-sm);
+  --text-base: var(--text-base);
+  --text-lg: var(--text-lg);
+  --text-xl: var(--text-xl);
+  --text-2xl: var(--text-2xl);
+  --text-3xl: var(--text-3xl);
+  --text-4xl: var(--text-4xl);
+  --text-5xl: var(--text-5xl);
+
+  /* Brand shortcuts */
+  --color-brand: var(--color-brand-primary);
+  --color-brand-hover: var(--color-brand-hover);
+  --color-bg: var(--color-bg-base);
+  --color-surface: var(--color-bg-raised);
+  --color-fg: var(--color-text-primary);
+  --color-fg-muted: var(--color-text-secondary);
+  --color-border: var(--color-border-default);
+}
+
+/* ── BASE STYLES ── */
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: var(--color-brand-subtle);
+  color: var(--color-text-brand);
 }

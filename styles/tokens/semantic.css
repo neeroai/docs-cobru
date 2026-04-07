@@ -1,0 +1,158 @@
+/* ============================================================
+   SEMANTIC COLOR TOKENS — docs-cobru
+   Light + dark theme via [data-theme] attribute.
+   Depends on: primitives.css
+   Standard: docs-global/standards/design-tokens.md
+
+   fumadocs-ui uses [data-theme] natively via next-themes.
+   These tokens bridge Cobru brand → fumadocs-ui overrides.
+   ============================================================ */
+
+/* ── LIGHT THEME ── */
+[data-theme="light"],
+:root {
+  /* Backgrounds */
+  --color-bg-base: var(--neutral-50); /* page canvas */
+  --color-bg-raised: var(--neutral-0); /* cards, panels */
+  --color-bg-overlay: var(--neutral-100); /* subtle containers */
+  --color-bg-float: var(--neutral-0); /* modals, dropdowns */
+  --color-bg-inverted: var(--neutral-900); /* inverted sections */
+
+  /* Text */
+  --color-text-primary: var(--neutral-950);
+  --color-text-secondary: var(--neutral-700);
+  --color-text-tertiary: var(--neutral-500);
+  --color-text-disabled: var(--neutral-400);
+  --color-text-inverse: var(--neutral-50);
+  --color-text-brand: var(--brand-600);
+  --color-text-success: var(--green-700);
+  --color-text-warning: var(--amber-700);
+  --color-text-error: var(--red-700);
+  --color-text-info: var(--blue-700);
+
+  /* Borders */
+  --color-border-default: var(--neutral-200);
+  --color-border-subtle: var(--neutral-100);
+  --color-border-strong: var(--neutral-300);
+  --color-border-brand: var(--brand-500);
+  --color-border-focus: var(--brand-500);
+
+  /* Brand interactive */
+  --color-brand-primary: var(--brand-500);
+  --color-brand-hover: var(--brand-600);
+  --color-brand-active: var(--brand-700);
+  --color-brand-subtle: var(--brand-100);
+  --color-brand-muted: var(--brand-200);
+
+  /* Feedback — Success */
+  --color-success-bg: oklch(0.96 0.04 150);
+  --color-success-border: var(--green-300);
+  --color-success-text: var(--green-700);
+
+  /* Feedback — Warning */
+  --color-warning-bg: oklch(0.97 0.04 75);
+  --color-warning-border: var(--amber-300);
+  --color-warning-text: var(--amber-700);
+
+  /* Feedback — Error */
+  --color-error-bg: oklch(0.96 0.04 25);
+  --color-error-border: var(--red-300);
+  --color-error-text: var(--red-700);
+
+  /* Feedback — Info */
+  --color-info-bg: oklch(0.95 0.04 210);
+  --color-info-border: var(--brand-300);
+  --color-info-text: var(--brand-700);
+
+  /* ── fumadocs-ui bridge — light ── */
+  --fd-background: var(--neutral-0);
+  --fd-foreground: var(--neutral-950);
+  --fd-muted: var(--neutral-100);
+  --fd-muted-foreground: var(--neutral-500);
+  --fd-popover: var(--neutral-0);
+  --fd-popover-foreground: var(--neutral-950);
+  --fd-card: var(--neutral-50);
+  --fd-card-foreground: var(--neutral-950);
+  --fd-border: var(--neutral-200);
+  --fd-primary: var(--brand-500);
+  --fd-primary-foreground: oklch(1 0 0);
+  --fd-secondary: var(--neutral-100);
+  --fd-secondary-foreground: var(--neutral-950);
+  --fd-accent: var(--brand-100);
+  --fd-accent-foreground: var(--brand-700);
+  --fd-ring: var(--brand-400);
+}
+
+/* ── DARK THEME ── */
+[data-theme="dark"] {
+  /* Backgrounds */
+  --color-bg-base: var(--neutral-950);
+  --color-bg-raised: var(--neutral-900);
+  --color-bg-overlay: oklch(0.21 0.03 220);
+  --color-bg-float: oklch(0.25 0.03 220);
+  --color-bg-inverted: var(--neutral-100);
+
+  /* Text */
+  --color-text-primary: var(--neutral-50);
+  --color-text-secondary: var(--neutral-300);
+  --color-text-tertiary: var(--neutral-500);
+  --color-text-disabled: var(--neutral-600);
+  --color-text-inverse: var(--neutral-950);
+  --color-text-brand: var(--brand-300);
+  --color-text-success: var(--green-300);
+  --color-text-warning: var(--amber-300);
+  --color-text-error: var(--red-300);
+  --color-text-info: var(--brand-300);
+
+  /* Borders */
+  --color-border-default: oklch(0.25 0.02 220);
+  --color-border-subtle: oklch(0.21 0.02 220);
+  --color-border-strong: var(--neutral-700);
+  --color-border-brand: var(--brand-400);
+  --color-border-focus: var(--brand-400);
+
+  /* Brand interactive */
+  --color-brand-primary: var(--brand-400);
+  --color-brand-hover: var(--brand-300);
+  --color-brand-active: var(--brand-500);
+  --color-brand-subtle: oklch(0.21 0.05 210);
+  --color-brand-muted: oklch(0.25 0.07 210);
+
+  /* Feedback — Success */
+  --color-success-bg: oklch(0.2 0.04 150);
+  --color-success-border: var(--green-700);
+  --color-success-text: var(--green-300);
+
+  /* Feedback — Warning */
+  --color-warning-bg: oklch(0.2 0.04 75);
+  --color-warning-border: var(--amber-700);
+  --color-warning-text: var(--amber-300);
+
+  /* Feedback — Error */
+  --color-error-bg: oklch(0.2 0.04 25);
+  --color-error-border: var(--red-700);
+  --color-error-text: var(--red-300);
+
+  /* Feedback — Info */
+  --color-info-bg: oklch(0.2 0.04 210);
+  --color-info-border: var(--brand-700);
+  --color-info-text: var(--brand-300);
+
+  /* ── fumadocs-ui bridge — dark ── */
+  --fd-background: var(--neutral-950);
+  --fd-foreground: var(--neutral-50);
+  --fd-muted: oklch(0.21 0.03 220);
+  --fd-muted-foreground: var(--neutral-500);
+  --fd-popover: oklch(0.21 0.03 220);
+  --fd-popover-foreground: var(--neutral-50);
+  --fd-card: var(--neutral-900);
+  --fd-card-foreground: var(--neutral-50);
+  --fd-border: oklch(0.25 0.02 220);
+  --fd-primary: var(--brand-400);
+  --fd-primary-foreground: oklch(1 0 0);
+  --fd-secondary: oklch(0.21 0.03 220);
+  --fd-secondary-foreground: var(--neutral-50);
+  --fd-accent: oklch(0.21 0.05 210);
+  --fd-accent-foreground: var(--brand-300);
+  --fd-ring: var(--brand-500);
+}

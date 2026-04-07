@@ -1,0 +1,96 @@
+/* ============================================================
+   AGENTIC STATE TOKENS — docs-cobru
+   14 AI agent lifecycle states.
+   Standard: docs-global/standards/design-tokens.md
+   Depends on: semantic.css
+
+   Usage: bg-[var(--agent-{state}-bg)]
+          border-[var(--agent-{state}-border)]
+          text-[var(--agent-{state}-text)]
+   ============================================================ */
+
+:root {
+  /* idle: disponible, sin tarea */
+  --agent-idle-bg: var(--color-bg-overlay);
+  --agent-idle-border: var(--color-border-subtle);
+  --agent-idle-text: var(--color-text-tertiary);
+  --agent-idle-indicator: var(--color-text-disabled);
+
+  /* thinking: procesando input */
+  --agent-thinking-bg: var(--color-brand-subtle);
+  --agent-thinking-border: var(--color-border-brand);
+  --agent-thinking-text: var(--color-text-brand);
+  --agent-thinking-indicator: var(--color-brand-primary);
+
+  /* processing: ejecutando tool call */
+  --agent-processing-bg: var(--color-info-bg);
+  --agent-processing-border: var(--color-info-border);
+  --agent-processing-text: var(--color-info-text);
+  --agent-processing-indicator: var(--color-info-text);
+
+  /* streaming: output en tiempo real */
+  --agent-streaming-bg: var(--color-brand-subtle);
+  --agent-streaming-border: var(--color-brand-muted);
+  --agent-streaming-text: var(--color-text-primary);
+  --agent-streaming-indicator: var(--color-brand-primary);
+
+  /* waiting: esperando input del usuario */
+  --agent-waiting-bg: var(--color-warning-bg);
+  --agent-waiting-border: var(--color-warning-border);
+  --agent-waiting-text: var(--color-warning-text);
+  --agent-waiting-indicator: var(--color-warning-text);
+
+  /* active: flujo multi-step en curso */
+  --agent-active-bg: var(--color-brand-muted);
+  --agent-active-border: var(--color-border-brand);
+  --agent-active-text: var(--color-text-brand);
+  --agent-active-indicator: var(--color-brand-hover);
+
+  /* pending: en cola */
+  --agent-pending-bg: var(--color-bg-overlay);
+  --agent-pending-border: var(--color-border-default);
+  --agent-pending-text: var(--color-text-secondary);
+  --agent-pending-indicator: var(--color-text-tertiary);
+
+  /* paused: suspendido temporalmente */
+  --agent-paused-bg: var(--color-warning-bg);
+  --agent-paused-border: var(--color-warning-border);
+  --agent-paused-text: var(--color-warning-text);
+  --agent-paused-indicator: var(--color-warning-text);
+
+  /* interrupted: detenido por error o usuario */
+  --agent-interrupted-bg: var(--color-error-bg);
+  --agent-interrupted-border: var(--color-error-border);
+  --agent-interrupted-text: var(--color-error-text);
+  --agent-interrupted-indicator: var(--color-error-text);
+
+  /* success: tarea completada */
+  --agent-success-bg: var(--color-success-bg);
+  --agent-success-border: var(--color-success-border);
+  --agent-success-text: var(--color-success-text);
+  --agent-success-indicator: var(--color-success-text);
+
+  /* error: fallo irrecuperable */
+  --agent-error-bg: var(--color-error-bg);
+  --agent-error-border: var(--color-error-border);
+  --agent-error-text: var(--color-error-text);
+  --agent-error-indicator: var(--color-error-text);
+
+  /* complete: ciclo finalizado */
+  --agent-complete-bg: var(--color-success-bg);
+  --agent-complete-border: var(--color-success-border);
+  --agent-complete-text: var(--color-success-text);
+  --agent-complete-indicator: var(--color-success-text);
+
+  /* cancelled: detenido por usuario */
+  --agent-cancelled-bg: var(--color-bg-overlay);
+  --agent-cancelled-border: var(--color-border-strong);
+  --agent-cancelled-text: var(--color-text-disabled);
+  --agent-cancelled-indicator: var(--color-text-disabled);
+
+  /* rate-limited: throttled por API */
+  --agent-rate-limited-bg: var(--color-warning-bg);
+  --agent-rate-limited-border: var(--color-warning-border);
+  --agent-rate-limited-text: var(--color-warning-text);
+  --agent-rate-limited-indicator: var(--color-warning-text);
+}

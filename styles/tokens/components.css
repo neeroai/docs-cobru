@@ -1,0 +1,84 @@
+/* ============================================================
+   COMPONENT TOKENS — docs-cobru
+   Button · Input · Card · Badge · Code block
+   Standard: docs-global/standards/design-tokens.md
+   Depends on: semantic.css, foundation.css
+   ============================================================ */
+
+/* ── BUTTON ── */
+.btn {
+  --btn-radius: var(--radius-md);
+  --btn-font-size: var(--text-sm);
+  --btn-font-weight: var(--weight-medium);
+  --btn-height-sm: var(--space-8);
+  --btn-height-md: 2.5rem;
+  --btn-height-lg: var(--space-12);
+  --btn-px-sm: var(--space-3);
+  --btn-px-md: var(--space-4);
+  --btn-px-lg: var(--space-6);
+  --btn-transition: var(--duration-fast) var(--ease-default);
+}
+.btn-primary {
+  --btn-bg: var(--color-brand-primary);
+  --btn-text: oklch(1 0 0);
+}
+.btn-secondary {
+  --btn-bg: var(--color-bg-raised);
+  --btn-text: var(--color-text-primary);
+  --btn-border: var(--color-border-default);
+}
+.btn-ghost {
+  --btn-bg: transparent;
+  --btn-text: var(--color-text-primary);
+}
+
+/* ── INPUT / FORM ── */
+.input {
+  --input-height: 2.5rem;
+  --input-radius: var(--radius-md);
+  --input-border: var(--color-border-default);
+  --input-border-focus: var(--color-border-focus);
+  --input-bg: var(--color-bg-raised);
+  --input-text: var(--color-text-primary);
+  --input-placeholder: var(--color-text-tertiary);
+  --input-font-size: var(--text-sm);
+  --input-px: var(--space-3);
+  --input-ring: 0 0 0 3px var(--color-brand-subtle);
+}
+
+/* ── CARD / PANEL ── */
+.card {
+  --card-bg: var(--color-bg-raised);
+  --card-border: var(--color-border-default);
+  --card-radius: var(--radius-xl);
+  --card-shadow: var(--shadow-sm);
+  --card-px: var(--space-6);
+  --card-py: var(--space-5);
+}
+
+/* ── BADGE / STATUS CHIP ── */
+.badge {
+  --badge-radius: var(--radius-full);
+  --badge-font-size: var(--text-xs);
+  --badge-font-weight: var(--weight-medium);
+  --badge-px: var(--space-2);
+  --badge-py: var(--space-0-5);
+  --badge-tracking: var(--tracking-wide);
+}
+
+/* ── DOCS CODE BLOCK (fumadocs-ui) ── */
+.docs-codeblock {
+  --codeblock-bg: var(--neutral-950);
+  --codeblock-border: var(--color-border-default);
+  --codeblock-radius: var(--radius-lg);
+  --codeblock-font: var(--font-mono);
+  --codeblock-size: var(--text-sm);
+}
+
+/* ── DOCS CALLOUT (fumadocs-ui) ── */
+.docs-callout {
+  --callout-radius: var(--radius-md);
+  --callout-px: var(--space-4);
+  --callout-py: var(--space-3);
+  --callout-border-width: 1px;
+}
