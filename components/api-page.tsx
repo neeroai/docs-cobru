@@ -1,11 +1,9 @@
 import { openapi } from '@/lib/openapi';
-import { generateCobruCodeSamples } from '@/lib/openapi-code-samples';
+import { openapiClient } from '@/lib/openapi-client-config';
 import { createAPIPage } from 'fumadocs-openapi/ui';
 
 const RawAPIPage = createAPIPage(openapi, {
-  generateCodeSamples() {
-    return generateCobruCodeSamples();
-  },
+  client: openapiClient,
 });
 
 export const CobruAPIPage = RawAPIPage;
