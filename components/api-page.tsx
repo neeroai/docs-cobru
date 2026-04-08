@@ -1,10 +1,7 @@
 import { openapi } from '@/lib/openapi';
-import { openapiClient } from '@/lib/openapi-client-config';
 import { createAPIPage } from 'fumadocs-openapi/ui';
 
-const RawAPIPage = createAPIPage(openapi, {
-  client: openapiClient,
-});
+const RawAPIPage = createAPIPage(openapi);
 
 export const CobruAPIPage = RawAPIPage;
 
