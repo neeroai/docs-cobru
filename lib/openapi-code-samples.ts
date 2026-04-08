@@ -1,5 +1,5 @@
-import docsMetadata from '@/openapi/docs-metadata.json';
 import { jsFetchSample, phpSample } from '@/lib/openapi-code-samples.client';
+import docsMetadata from '@/openapi/docs-metadata.json';
 import type { CreateAPIPageOptions } from 'fumadocs-openapi/ui';
 
 type CodeSample = ReturnType<

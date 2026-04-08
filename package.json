@@ -16,6 +16,7 @@
     "openapi:check:locales": "node scripts/validate-openapi-locales.mjs",
     "openapi:validate:strict": "node scripts/validate-openapi.mjs --require-non-placeholder",
     "content:check:sync": "node scripts/validate-content-sync.mjs",
+    "smoke:api-reference": "node scripts/smoke-api-reference.mjs",
     "ci:governance": "bun run openapi:check:bundle && bun run openapi:lint && bun run openapi:validate && bun run openapi:check:locales && bun run content:check:sync",
     "format": "biome format --write ."
   },

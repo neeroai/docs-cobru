@@ -28,3 +28,6 @@ jobs:
 
       - name: Build
         run: bun run build
+
+      - name: Smoke API Reference
+        run: bun run smoke:api-reference

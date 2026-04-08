@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
+import { phpSample } from '@/lib/openapi-code-samples.client';
 import docsMetadata from '@/openapi/docs-metadata.json';
-import { defineClientConfig } from 'fumadocs-openapi/ui/client';
 import { createCodeUsageGeneratorRegistry } from 'fumadocs-openapi/requests/generators';
 import { curl } from 'fumadocs-openapi/requests/generators/curl';
 import { javascript } from 'fumadocs-openapi/requests/generators/javascript';
 import { python } from 'fumadocs-openapi/requests/generators/python';
-import { phpSample } from '@/lib/openapi-code-samples.client';
+import { defineClientConfig } from 'fumadocs-openapi/ui/client';
 
 const codeUsages = createCodeUsageGeneratorRegistry();
 
