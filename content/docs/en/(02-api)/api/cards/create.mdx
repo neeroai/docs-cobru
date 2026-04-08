@@ -5,10 +5,39 @@ icon: CreditCard
 ---
 
 <Callout type="warn">
-  Card issuance is visible in Cobru's API menu, but the public contract is not yet verified in this repo.
+  Card issuance is documented from legacy Cobru exports. Re-verify issuer behavior and PCI
+  handling before shipping a live card program.
 </Callout>
 
-## Questions to settle before implementation
+## Endpoint
+
+`POST /cobru/debit/create_and_reload_card/`
+
+## Best-known request body
+
+Card creation is documented as a call to the shared create-and-reload endpoint with an amount
+of `0`.
+
+```json
+{
+  "amount": 0
+}
+```
+
+## Response fields seen in legacy documentation
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `balance` | `number` | Current card balance. |
+| `cvv` | `string` | Card security code. |
+| `display_expiration` | `string` | Human-readable expiration value. |
+| `id` | `number` | Card identifier. |
+| `masked_pan` | `string` | Masked card number. |
+| `max_balance` | `number` | Maximum allowed card balance. |
+| `state` | `string` | Card state. |
+| `support_token` | `string` | Provider or support reference token. |
+
+## Questions to settle before full rollout
 
 - issuance type: single-use or reusable
 - funding source

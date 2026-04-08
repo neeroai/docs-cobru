@@ -4,13 +4,52 @@ description: Retira saldo Cobru a través de flujos de retiro en efectivo como E
 icon: Banknote
 ---
 
-Cobru expone una familia de retiros en efectivo bajo `Retiros en efectivo`.
+<Callout type="warn">
+  La familia de retiros en efectivo está documentada en su mayoría desde materiales legacy de
+  Cobru. El flujo de Efecty es el contrato público mejor conocido, pero debes revalidar
+  cobertura de proveedor, ventana de cancelación y comportamiento de callbacks antes de
+  desplegarlo.
+</Callout>
+
+Cobru expone una familia de retiros en efectivo bajo `Retiros en efectivo`. Esta superficie
+es útil cuando necesitas una opción de payout que no dependa de una cuenta bancaria destino.
+
+## Cuándo usar retiros en efectivo
+
+- payouts con cobro en efectivo para destinatarios sin cuenta bancaria
+- desembolsos asistidos desde soporte u operaciones
+- experiencias de fallback cuando los rieles bancarios no están disponibles
 
 ## Endpoints
 
-| Endpoint | Método | Estado |
-|----------|--------|--------|
-| retirar dinero por efectivo | `POST` | documentado en materiales legacy |
-| obtener retiros | `GET` | listado en el menú API de Cobru |
-| cancelar retiro | `POST` | listado en el menú API de Cobru |
-| detalles del retiro | `GET` | listado en el menú API de Cobru |
+| Endpoint | Método | Path | Estado |
+|----------|--------|------|--------|
+| retirar dinero por efectivo | `POST` | `/cashwithdraw/` | documentado en materiales legacy |
+| obtener retiros | `GET` | `/cashwithdraw/` | documentado en materiales legacy |
+| detalles del retiro | `GET` | `/cashwithdraw/{id}` | materiales legacy y menú de producto |
+| cancelar retiro | `POST` | `/cancelcashwithdraw/` | documentado en materiales legacy |
+
+## Ciclo de vida del retiro
+
+<Steps>
+  <Step>
+    Crea el retiro con la identidad del destinatario, monto, método de pago y reglas de
+    expiración.
+  </Step>
+  <Step>
+    Sigue el retiro desde el endpoint de listado o detalle hasta que llegue a un estado
+    terminal como pagado, rechazado o expirado.
+  </Step>
+  <Step>
+    Cancela el retiro antes del cobro cuando el flujo de negocio o la solicitud del cliente
+    lo requieran y el payout siga siendo cancelable.
+  </Step>
+</Steps>
+
+## Restricciones conocidas
+
+- Los ejemplos públicos están centrados en `efecty`.
+- Los materiales legacy describen soporte para `callback`, pero el contrato exacto de entrega
+  aún requiere validación fresca.
+- Existen semánticas de estado en exports antiguos, pero deben confirmarse contra un ambiente
+  real antes de codificar reglas de negocio sobre ellas.

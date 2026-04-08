@@ -4,18 +4,28 @@ description: Cobru card issuance and card operations surface.
 icon: CreditCard
 ---
 
-Cobru's API menu includes a `Tarjetas` section, indicating a broader programmable cards capability.
+<Callout type="warn">
+  The cards family is backed by legacy Cobru exports rather than a freshly verified public
+  contract. The endpoint surface is meaningful, but you should still validate issuer behavior,
+  PCI scope, and operational states before launch.
+</Callout>
+
+Cobru's API menu includes a `Tarjetas` section, indicating a broader programmable cards
+capability layered on top of the wallet and balance infrastructure.
 
 ## Visible operations
 
-| Operation | Status |
-|-----------|--------|
-| create card | listed in Cobru menu |
-| top up card | listed in Cobru menu |
-| card details and list | listed in Cobru menu |
-| movements | listed in Cobru menu |
-| freeze card | listed in Cobru menu |
+| Operation | Method | Path | Confidence |
+|-----------|--------|------|------------|
+| Create card | `POST` | `/cobru/debit/create_and_reload_card/` | legacy-doc |
+| Top up card | `POST` | `/cobru/debit/create_and_reload_card/` | legacy-doc |
+| Card details and list | `GET` | `/cobru/debit/get_card/` | legacy-doc |
+| Movements | `GET` | `/cobru/debit/get_transactions/` | legacy-doc |
+| Freeze card | `POST` | `/cobru/debit/freeze_card/` | legacy-doc |
 
-<Callout type="warn">
-  These pages document the current visible surface and integration questions, not a fully verified card API contract yet.
-</Callout>
+## What this family enables
+
+- issue virtual cards
+- add balance to an existing card
+- retrieve card metadata and transaction history
+- freeze or unfreeze a card as part of risk or support workflows

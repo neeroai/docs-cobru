@@ -4,12 +4,37 @@ description: Digital services sold through the Cobru platform, such as recharges
 icon: Smartphone
 ---
 
-Cobru's API menu exposes a `Servicios` section for digital products.
+<Callout type="warn">
+  The services family is documented from legacy Cobru exports and product-menu visibility. The
+  overall capability is clear, but you should still verify inventory behavior and fulfillment
+  responses before go-live.
+</Callout>
+
+Cobru's API menu exposes a `Servicios` section for digital products. These endpoints are
+useful when Cobru is acting as a digital-goods distribution surface in addition to a payments
+API.
 
 ## Visible capabilities
 
-| Capability | Status |
-|------------|--------|
-| cell phone recharge | listed in Cobru menu |
-| PIN product list | listed in Cobru menu |
-| PIN purchase | listed in Cobru menu |
+| Capability | Method | Path | Confidence |
+|------------|--------|------|------------|
+| Cell phone recharge | `POST` | `/request_service_reload/` | legacy-doc |
+| PIN products list | `GET` | `/pines/all_pines/` | legacy-doc |
+| PIN purchase | `POST` | `/pin/` | legacy-doc |
+| Data packages list | `GET` | `/packages/all_packages/` | legacy-doc |
+| Data package purchase | `POST` | `/packages/buy/` | legacy-doc |
+
+## Service workflow
+
+<Steps>
+  <Step>
+    Fetch catalog or operator data before presenting an offer to the end user.
+  </Step>
+  <Step>
+    Create the recharge, PIN purchase, or package purchase with the expected provider fields.
+  </Step>
+  <Step>
+    Reconcile fulfillment result and inventory availability before confirming success to the
+    customer.
+  </Step>
+</Steps>

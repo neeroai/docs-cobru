@@ -4,21 +4,59 @@ description: Envía fondos desde Cobru a cuentas bancarias en países soportados
 icon: Building2
 ---
 
-El menú API de Cobru expone una superficie amplia de retiros bancarios para Colombia y otros países.
+<Callout type="warn">
+  Esta familia mezcla varios niveles de evidencia: contratos legacy de retiros a terceros en
+  Colombia, exports más nuevos por país y visibilidad en el menú del producto. Trata cada
+  página de endpoint con un nivel de confianza distinto y valida el flujo exacto que vayas a
+  desplegar.
+</Callout>
+
+El menú API de Cobru expone una superficie amplia de retiros bancarios para Colombia y otros
+países. Es la familia principal cuando los fondos deben salir de Cobru y liquidarse en una
+cuenta bancaria del beneficiario, no en otra wallet Cobru.
+
+## Cuándo usar retiros a bancos
+
+- desembolsar fondos a cuentas bancarias de beneficiarios
+- construir flujos operativos de payout para comercios, usuarios o tesorería
+- soportar rieles país-específicos como Colombia, Brasil, Argentina, México o movimiento
+  bancario ligado a BRE-B
 
 ## Cobertura visible hoy
 
-| Operación | Estado |
-|-----------|--------|
-| lista de bancos disponibles | listado en el menú Cobru |
-| tus retiros | listado en el menú Cobru |
-| crear retiro a Colombia | listado en el menú Cobru |
-| detalle del retiro | listado en el menú Cobru |
-| crear retiro a Brasil | listado en el menú Cobru |
-| crear retiro a México | listado en el menú Cobru |
-| crear retiro a Argentina | listado en el menú Cobru |
-| transferencia BRE-B | listado en el menú Cobru |
+| Operación | Método | Path | Confianza |
+|-----------|--------|------|-----------|
+| lista de bancos disponibles | `GET` | `/bank_list_third_party_withdraw/` | legacy-doc |
+| tus retiros | `GET` | `/thirdpartywithdraw/` | legacy-doc |
+| crear retiro a Colombia | `POST` | `/thirdpartywithdraw/` | legacy-doc |
+| detalle del retiro | `GET` | `/thirdpartywithdraw/{id}` | legacy-doc |
+| cancelar retiro | `POST` | `/cancelthirdpartywithdraw/` | legacy-doc |
+| transferencia BRE-B | `POST` | `/withdraw/co/` | menú más research |
+| crear retiro a Brasil | `POST` | `/withdraw/br/` | legacy-doc |
+| crear retiro a México | `POST` | `/withdraw/mx/` | legacy-doc |
+| crear retiro a Argentina | `POST` | `/withdraw/ar/` | legacy-doc |
 
-<Callout type="warn">
-  La superficie de producto es clara, pero la mayoría de contratos request/response de esta sección siguen pendientes de extracción real o de un export actualizado de Stoplight.
-</Callout>
+## Flujo de retiro
+
+<Steps>
+  <Step>
+    Resuelve primero el riel del beneficiario, normalmente consultando bancos soportados o
+    validando el identificador país-específico como PIX, CBU/CVU o CLABE.
+  </Step>
+  <Step>
+    Crea el retiro con identidad del beneficiario, datos bancarios, monto y campos opcionales
+    de idempotencia o callback cuando estén documentados.
+  </Step>
+  <Step>
+    Reconcilia el payout de forma asíncrona desde los endpoints de listado y detalle. No
+    asumas que el retiro bancario liquida al instante.
+  </Step>
+</Steps>
+
+## Temas comunes que debes resolver temprano
+
+- KYC del beneficiario y mapeo de tipos de documento
+- idempotencia para reintentos
+- garantías de entrega de callbacks o webhooks
+- fees, FX y monto final liquidado
+- manejo de rechazos por país y por riel bancario

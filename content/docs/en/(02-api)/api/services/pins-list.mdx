@@ -5,5 +5,17 @@ icon: List
 ---
 
 <Callout type="warn">
-  Listed in Cobru's API menu. Verify exact path, filters, and catalog schema with Cobru.
+  This catalog endpoint is documented from legacy Cobru exports. Verify filtering and catalog
+  schema in a live environment before relying on it.
 </Callout>
+
+## Endpoint
+
+`GET /pines/all_pines/`
+
+## Optional query variant seen in older docs
+
+`GET /pines/all_pines/?operator={operator}`
+
+Use the operator-scoped variant when you want to pre-filter the PIN catalog for a specific
+provider.

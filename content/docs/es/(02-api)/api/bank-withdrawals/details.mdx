@@ -5,5 +5,22 @@ icon: FileSearch
 ---
 
 <Callout type="warn">
-  Está listado en el menú API de Cobru. El path exacto y la forma de la respuesta siguen pendientes de verificación.
+  Esta vista de detalle está documentada desde materiales legacy de payouts Cobru y todavía
+  requiere validación fresca desde un ambiente real.
 </Callout>
+
+## Endpoint
+
+`GET /thirdpartywithdraw/{id}`
+
+## Parámetro de path
+
+| Field | Tipo | Descripción |
+|-------|------|-------------|
+| `id` | `number` | Identificador del retiro bancario en Cobru. |
+
+## Qué deberías esperar
+
+Usa este endpoint para recuperar el estado más reciente del payout y el registro final de
+liquidación bancaria para un retiro específico. Los materiales antiguos sugieren que la
+respuesta replica la mayoría de campos del listado, pero acotados a un solo payout.

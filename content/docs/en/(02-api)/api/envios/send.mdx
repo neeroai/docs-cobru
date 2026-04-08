@@ -4,18 +4,31 @@ description: Send Cobru balance to another Cobru user.
 icon: Send
 ---
 
+<Callout type="warn">
+  This contract comes from legacy Cobru materials. Re-verify the exact request and response
+  payload in sandbox before using it in a production transfer workflow.
+</Callout>
+
 ## Endpoint
 
 `POST /send/`
-
-<Callout type="info">
-  Documented in legacy Cobru materials.
-</Callout>
 
 ## Requirements
 
 - the sender must have verified email and phone
 - the recipient is identified by phone number
+
+## Request fields
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `to_user` | `string` | yes | Best-known recipient identifier. Legacy materials describe it as the recipient phone number. |
+| `amount` | `number` | yes | Amount to send from the authenticated Cobru user's available balance. |
+
+<Callout type="info">
+  Some older prose references `toUser` in camelCase. Prefer `to_user` unless Cobru confirms a
+  second accepted alias.
+</Callout>
 
 ## Example body
 
@@ -25,3 +38,11 @@ icon: Send
   "to_user": "3001234567"
 }
 ```
+
+## Production notes
+
+- Validate sender KYC and account readiness before exposing this action in UI.
+- The public materials do not confirm whether transfers are synchronous, queued, or
+  reversible.
+- Treat transfer success as untrusted until you can reconcile it through `GET /send/` or a
+  downstream ledger.

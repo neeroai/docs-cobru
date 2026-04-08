@@ -5,5 +5,17 @@ icon: Snowflake
 ---
 
 <Callout type="warn">
-  Listed in Cobru's API menu. Confirm whether this action is reversible and whether it affects pending authorizations.
+  Freeze and unfreeze are documented from legacy Cobru exports. Confirm reversibility and
+  pending-authorization behavior before exposing this feature to end users.
 </Callout>
+
+## Endpoint
+
+`POST /cobru/debit/freeze_card/`
+
+## Request fields seen in legacy documentation
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `card_id` | `number` | yes | Card identifier. |
+| `freeze` | `boolean` | yes | `true` to freeze, `false` to unfreeze. |

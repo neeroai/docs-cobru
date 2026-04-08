@@ -4,11 +4,54 @@ description: Move balance between Cobru users.
 icon: ArrowLeftRight
 ---
 
-Cobru's transfer surface appears under `Envios` in the product API menu.
+<Callout type="warn">
+  This family is documented from legacy Cobru materials and menu captures. Re-verify paths,
+  filters, and balance movement side effects in sandbox before depending on it for
+  production-critical payout flows.
+</Callout>
+
+Cobru's transfer surface appears under `Envios` in the product API menu. It is the
+best-known way to move available Cobru balance from one Cobru user to another without
+opening a bank withdrawal flow.
+
+## When to use transfers
+
+- move balance between Cobru-operated accounts
+- trigger support, operations, or wallet-to-wallet disbursement flows
+- build a lightweight internal transfer experience before you need bank rails
+
+## Authentication
+
+Transfers are documented as authenticated user operations. Treat them as balance-sensitive
+endpoints and require a valid Cobru session or token before calling them.
 
 ## Endpoints
 
-| Endpoint | Method | Status |
-|----------|--------|--------|
-| Send money to another user | `POST` | documented in legacy materials |
-| List your transfers | `GET` | listed in Cobru API menu, response contract pending verification |
+| Endpoint | Method | Path | Status |
+|----------|--------|------|--------|
+| Send money to another user | `POST` | `/send/` | documented in legacy materials |
+| List your transfers | `GET` | `/send/` | documented in legacy materials |
+
+## Transfer lifecycle
+
+<Steps>
+  <Step>
+    Confirm the sender account is fully usable. Legacy Cobru materials say the sender must
+    have verified email and phone before sending balance.
+  </Step>
+  <Step>
+    Send balance to another Cobru user using the recipient's phone number as the best-known
+    identifier.
+  </Step>
+  <Step>
+    Reconcile transfer history from the transfer listing endpoint before showing final
+    operational state in a dashboard or support panel.
+  </Step>
+</Steps>
+
+## Known constraints
+
+- Recipient identity is documented as a phone-based identifier.
+- Public materials do not yet confirm idempotency, pagination, or explicit transfer status
+  fields.
+- If your business flow needs bank settlement, use bank withdrawals instead of `Envios`.

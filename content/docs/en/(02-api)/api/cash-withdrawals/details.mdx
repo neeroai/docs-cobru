@@ -5,5 +5,22 @@ icon: FileSearch
 ---
 
 <Callout type="warn">
-  Listed in Cobru's API menu. Exact path and response schema still require live verification.
+  Legacy materials and product captures indicate a detail view for cash withdrawals, but the
+  exact detail contract still needs fresh verification.
 </Callout>
+
+## Endpoint
+
+`GET /cashwithdraw/{id}`
+
+## Path parameter
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `number` | Cobru cash-withdrawal identifier, usually surfaced as `pk` in listing responses. |
+
+## Expected use
+
+- fetch the latest payout state before showing pickup instructions
+- support cancellation checks before calling the cancel endpoint
+- inspect provider-specific references when support needs to debug a payout

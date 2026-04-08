@@ -4,13 +4,28 @@ description: Crea una solicitud de retiro en efectivo, hoy documentada para Efec
 icon: BanknoteArrowUp
 ---
 
+<Callout type="warn">
+  Este contrato se basa en materiales legacy de Cobru para retiros por Efecty. Valida el
+  nombre del proveedor, el comportamiento de callbacks y el contrato final de errores en
+  sandbox antes de usarlo en producción.
+</Callout>
+
 ## Endpoint
 
 `POST /cashwithdraw/`
 
-<Callout type="info">
-  Documentado en materiales legacy de Cobru para retiros por Efecty.
-</Callout>
+## Campos del request
+
+| Field | Tipo | Requerido | Notas |
+|-------|------|-----------|-------|
+| `method` | `string` | sí | Selector del proveedor mejor documentado. Los materiales legacy muestran `efecty`. |
+| `document` | `string` | sí | Número de documento del destinatario. |
+| `amount` | `number` | sí | Monto solicitado para el payout. |
+| `exp_days` | `number` | sí | Días hasta que el retiro expire. |
+| `name` | `string` | sí | Nombre completo del destinatario en la solicitud. |
+| `coupon` | `string` | no | Cupón o beneficio opcional cuando esté soportado. |
+| `callback` | `string` | no | URL opcional para actualizaciones del resultado. |
+| `estimate` | `boolean` | no | Cuando es `true`, puede pedir una estimación en lugar de crear el retiro definitivo. |
 
 ## Ejemplo de body
 
@@ -35,3 +50,32 @@ icon: BanknoteArrowUp
   "amount": 9700
 }
 ```
+
+## Comportamiento de callback
+
+Los materiales legacy muestran un campo `callback` en la creación y en el listado. Trata la
+entrega de callbacks como una integración operativa opcional hasta que Cobru confirme:
+
+- política de reintentos
+- modelo de firma o verificación
+- estados terminales que disparan callbacks
+
+## Señales de error vistas en materiales antiguos
+
+| Respuesta | Significado |
+|-----------|-------------|
+| `400 {"error":"not enough balance"}` | El saldo del emisor es insuficiente. |
+| `200 {"error":"BAD_USER"}` | Falló la validación del usuario. |
+| `200 {"error":"EXPIRED"}` | El cupón o beneficio expiró. |
+| `200 {"error":"ALL_USED"}` | El cupón o beneficio ya fue consumido. |
+| `200 {"error":"NOT_FOUND"}` | No se encontró el cupón u objeto referenciado. |
+| `400 {"message":"unknown method"}` | El proveedor o método de retiro no es soportado. |
+
+## Notas de producción
+
+- Reconcilia el monto neto retornado por Cobru, no solo el monto solicitado, porque las fees
+  pueden afectar el payout final.
+- No asumas que todo retiro creado queda disponible de inmediato para cobro; diseña para
+  comportamiento asíncrono del proveedor.
+- Si expones cancelación, guarda los identificadores de referencia de Cobru desde el momento
+  de la creación.

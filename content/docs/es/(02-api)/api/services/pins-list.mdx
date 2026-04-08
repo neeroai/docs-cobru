@@ -5,5 +5,17 @@ icon: List
 ---
 
 <Callout type="warn">
-  Está listado en el menú API de Cobru. Verifica path exacto, filtros y schema del catálogo con Cobru.
+  Este endpoint de catálogo está documentado desde exports legacy de Cobru. Verifica filtros y
+  schema del catálogo en un ambiente real antes de depender de él.
 </Callout>
+
+## Endpoint
+
+`GET /pines/all_pines/`
+
+## Variante opcional de query vista en docs antiguas
+
+`GET /pines/all_pines/?operator={operator}`
+
+Usa la variante filtrada por operador cuando quieras prefiltrar el catálogo de PINes para un
+proveedor específico.

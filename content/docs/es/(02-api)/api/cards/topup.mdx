@@ -5,5 +5,23 @@ icon: WalletCards
 ---
 
 <Callout type="warn">
-  Está listado en el menú API de Cobru. El contrato exacto y los tiempos de settlement siguen sin verificarse.
+  La recarga de tarjeta está documentada desde exports legacy de Cobru. Revalida tiempos de
+  settlement y comportamiento del endpoint compartido antes de usarlo en producción.
 </Callout>
+
+## Endpoint
+
+`POST /cobru/debit/create_and_reload_card/`
+
+## Campos del request vistos en documentación legacy
+
+| Field | Tipo | Requerido | Notas |
+|-------|------|-----------|-------|
+| `amount` | `number` | sí | Saldo que se agregará a la tarjeta. |
+| `card_id` | `number` | sí | Identificador de la tarjeta existente. |
+
+## Nota importante de implementación
+
+Los materiales antiguos describen creación y recarga como dos modos de un mismo endpoint.
+Trata ese comportamiento compartido como real hasta que Cobru confirme un contrato nuevo
+separado.

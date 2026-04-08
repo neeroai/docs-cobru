@@ -4,12 +4,38 @@ description: Servicios digitales vendidos a través de la plataforma Cobru, como
 icon: Smartphone
 ---
 
-El menú API de Cobru expone una sección `Servicios` para productos digitales.
+<Callout type="warn">
+  La familia de servicios está documentada desde exports legacy de Cobru y visibilidad en el
+  menú del producto. La capacidad general es clara, pero debes validar comportamiento de
+  inventario y payloads de fulfillment antes de salir a producción.
+</Callout>
+
+El menú API de Cobru expone una sección `Servicios` para productos digitales. Estos endpoints
+son útiles cuando Cobru funciona como superficie de distribución de bienes digitales además de
+API de pagos.
 
 ## Capacidades visibles
 
-| Capacidad | Estado |
-|-----------|--------|
-| recarga celular | listado en el menú Cobru |
-| lista de productos PIN | listado en el menú Cobru |
-| compra de PINes | listado en el menú Cobru |
+| Capacidad | Método | Path | Confianza |
+|-----------|--------|------|-----------|
+| recarga celular | `POST` | `/request_service_reload/` | legacy-doc |
+| lista de productos PIN | `GET` | `/pines/all_pines/` | legacy-doc |
+| compra de PINes | `POST` | `/pin/` | legacy-doc |
+| lista de paquetes de datos | `GET` | `/packages/all_packages/` | legacy-doc |
+| compra de paquetes | `POST` | `/packages/buy/` | legacy-doc |
+
+## Flujo de servicio
+
+<Steps>
+  <Step>
+    Consulta primero catálogo u operadores antes de mostrar una oferta al usuario final.
+  </Step>
+  <Step>
+    Crea la recarga, compra de PIN o compra de paquete con los campos esperados por el
+    proveedor.
+  </Step>
+  <Step>
+    Reconcilia el resultado del fulfillment y la disponibilidad de inventario antes de
+    confirmar éxito al cliente.
+  </Step>
+</Steps>

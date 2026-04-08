@@ -12,3 +12,20 @@ BRE-B aparece en la superficie de Cobru de dos formas distintas:
 <Callout type="warn">
   El flujo de pago por QR se entiende mucho mejor que el contrato de retiro. Verifica con Cobru el endpoint BRE-B específico antes de implementarlo.
 </Callout>
+
+## Endpoint candidato mejor conocido
+
+`POST /withdraw/co/`
+
+## Para qué sirve esta página
+
+Usa esta página cuando tu producto necesite mover fondos a un destino bancario en Colombia
+usando una capacidad de retiro o transferencia ligada a BRE-B, en lugar de cobrar un pago a
+través de un checkout Cobru.
+
+## Lo que todavía falta confirmar
+
+- path final y forma exacta del request
+- identificadores destino soportados para el beneficiario
+- si los retiros BRE-B comparten el mismo modelo de estados que otros retiros bancarios
+- si callbacks o webhooks entregan eventos finales de liquidación

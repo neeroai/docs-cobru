@@ -5,5 +5,31 @@ icon: Globe2
 ---
 
 <Callout type="warn">
-  The content spec includes Argentina and Cobru's broader withdrawal surface suggests additional countries. Treat this page as planned documentation until Cobru confirms the contract.
+  This cross-border flow is documented from legacy Cobru exports. Re-verify it with Cobru
+  before shipping an Argentina payout experience.
 </Callout>
+
+## Endpoint
+
+`POST /withdraw/ar/`
+
+## Request fields seen in legacy documentation
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `amount` | `number` | yes | Withdrawal amount. |
+| `currency_code` | `string` | yes | Legacy materials document `ARS`. |
+| `bank_name` | `string` | yes | Destination bank name. |
+| `cbu` | `string` | conditional | Traditional Argentine bank account identifier. |
+| `cvu` | `string` | conditional | Virtual account identifier when supported. |
+| `account_phone` | `string` | yes | Beneficiary phone number. |
+| `account_email` | `string` | yes | Beneficiary email. |
+| `callback` | `string` | no | Optional callback URL. |
+| `idempotency_key` | `string` | no | Optional idempotency key. |
+| `description` | `string` | no | Optional payout note. |
+| `platform` | `string` | no | Optional source or platform value. |
+
+## Production notes
+
+- Confirm whether Cobru expects `cbu`, `cvu`, or both depending on the beneficiary rail.
+- Validate FX assumptions and payout timing before exposing this flow to customers.

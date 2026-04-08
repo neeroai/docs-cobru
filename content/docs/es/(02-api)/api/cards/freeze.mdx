@@ -5,5 +5,18 @@ icon: Snowflake
 ---
 
 <Callout type="warn">
-  Está listado en el menú API de Cobru. Confirma si esta acción es reversible y cómo afecta autorizaciones pendientes.
+  Congelar y descongelar está documentado desde exports legacy de Cobru. Confirma
+  reversibilidad y efecto sobre autorizaciones pendientes antes de exponer esta función al
+  usuario final.
 </Callout>
+
+## Endpoint
+
+`POST /cobru/debit/freeze_card/`
+
+## Campos del request vistos en documentación legacy
+
+| Field | Tipo | Requerido | Notas |
+|-------|------|-----------|-------|
+| `card_id` | `number` | sí | Identificador de la tarjeta. |
+| `freeze` | `boolean` | sí | `true` para congelar, `false` para descongelar. |

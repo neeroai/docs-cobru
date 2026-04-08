@@ -4,13 +4,51 @@ description: Withdraw Cobru balance through cash pickup flows such as Efecty.
 icon: Banknote
 ---
 
-Cobru exposes a cash-withdrawal flow under `Retiros en efectivo`.
+<Callout type="warn">
+  The cash-withdrawal family is mostly documented from legacy Cobru materials. The Efecty
+  flow is the best-known public contract, but you should re-verify provider coverage,
+  cancellation windows, and callback behavior before rolling it out.
+</Callout>
+
+Cobru exposes a cash-withdrawal flow under `Retiros en efectivo`. This family is useful when
+you need a payout option that does not depend on a destination bank account.
+
+## When to use cash withdrawals
+
+- cash pickup payouts for recipients without bank accounts
+- assisted support or operations disbursements
+- fallback payout experiences when bank rails are unavailable
 
 ## Endpoints
 
-| Endpoint | Method | Status |
-|----------|--------|--------|
-| Withdraw cash | `POST` | documented in legacy materials |
-| List withdrawals | `GET` | listed in Cobru API menu |
-| Cancel withdrawal | `POST` | listed in Cobru API menu |
-| Withdrawal details | `GET` | listed in Cobru API menu |
+| Endpoint | Method | Path | Status |
+|----------|--------|------|--------|
+| Withdraw cash | `POST` | `/cashwithdraw/` | documented in legacy materials |
+| List withdrawals | `GET` | `/cashwithdraw/` | documented in legacy materials |
+| Withdrawal details | `GET` | `/cashwithdraw/{id}` | legacy materials and product menu |
+| Cancel withdrawal | `POST` | `/cancelcashwithdraw/` | documented in legacy materials |
+
+## Withdrawal lifecycle
+
+<Steps>
+  <Step>
+    Create the withdrawal with recipient identity, amount, provider method, and expiration
+    settings.
+  </Step>
+  <Step>
+    Track the withdrawal from the listing or detail endpoint until it reaches a terminal
+    state such as paid, rejected, or expired.
+  </Step>
+  <Step>
+    Cancel the withdrawal before pickup when the business flow or customer request requires
+    it and the payout is still cancellable.
+  </Step>
+</Steps>
+
+## Known constraints
+
+- Public examples are centered on `efecty`.
+- Legacy materials describe callback support, but the exact webhook-style delivery contract
+  still needs fresh validation.
+- State semantics exist in older exports, but they should be confirmed against a live
+  environment before you encode business rules around them.

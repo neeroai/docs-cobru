@@ -5,5 +5,25 @@ icon: ShoppingCart
 ---
 
 <Callout type="warn">
-  Está listado en el menú API de Cobru. Confirma path, reglas de inventario y campos de fulfillment con Cobru antes de usarlo en producción.
+  Este flujo de compra está documentado desde exports legacy de Cobru. Confirma reglas de
+  inventario y payload final de fulfillment antes de usarlo en producción.
 </Callout>
+
+## Endpoint
+
+`POST /pin/`
+
+## Campos del request vistos en documentación legacy
+
+| Field | Tipo | Requerido | Notas |
+|-------|------|-----------|-------|
+| `id_pin` | `number` | sí | Identificador del producto PIN en el catálogo. |
+| `operator` | `string` | sí | Identificador del proveedor u operador. |
+
+## Campos de respuesta vistos en documentación antigua
+
+| Field | Tipo | Notas |
+|-------|------|-------|
+| `status` | `string` | Resultado de la compra. |
+| `pin` | `string` | PIN o código de redención entregado. |
+| `pk` | `number` | Identificador de la compra en Cobru. |

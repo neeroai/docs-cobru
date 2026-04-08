@@ -5,5 +5,27 @@ icon: Landmark
 ---
 
 <Callout type="warn">
-  Esta operación aparece en el menú API de Cobru. El path exacto, el modelo de país y los campos de respuesta siguen pendientes de verificación.
+  La lista de bancos para retiros a terceros aparece documentada en materiales legacy de Cobru,
+  mientras que una variante más nueva basada en país aparece en exports adicionales. Confirma
+  cuál es la vigente para tu integración.
 </Callout>
+
+## Endpoint mejor conocido
+
+`GET /bank_list_third_party_withdraw/`
+
+## Campos de respuesta vistos en documentación antigua
+
+| Field | Tipo | Notas |
+|-------|------|-------|
+| `id` | `number` | Identificador interno del banco. |
+| `name` | `string` | Nombre legible del banco. |
+
+## Variante más nueva mencionada en materiales adicionales
+
+Algunos exports más recientes también referencian:
+
+`GET /bank_list/?country={country_code}`
+
+Trata esa variante parametrizada por país como un posible contrato más nuevo hasta que Cobru la
+confirme.

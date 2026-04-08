@@ -5,7 +5,30 @@ icon: Globe2
 ---
 
 <Callout type="warn">
-  Visible en el menú API de Cobru. El request y response exactos siguen pendientes de verificación.
+  Este flujo transfronterizo está documentado desde exports legacy de Cobru. Revalídalo con
+  Cobru antes de usarlo en producción.
 </Callout>
 
-Confirma requisitos de CLABE o cuenta bancaria, moneda de settlement y modos de falla con Cobru.
+## Endpoint
+
+`POST /withdraw/mx/`
+
+## Campos del request vistos en documentación legacy
+
+| Field | Tipo | Requerido | Notas |
+|-------|------|-----------|-------|
+| `amount` | `number` | sí | Monto del retiro. |
+| `currency_code` | `string` | sí | Los materiales legacy documentan `MXN`. |
+| `clabe` | `string` | sí | CLABE estándar del banco en México. |
+| `beneficiary` | `string` | sí | Nombre del beneficiario. |
+| `account_phone` | `string` | sí | Teléfono del beneficiario. |
+| `account_email` | `string` | sí | Email del beneficiario. |
+| `callback` | `string` | no | URL opcional de callback. |
+| `idempotency_key` | `string` | no | Clave opcional de idempotencia. |
+| `description` | `string` | no | Nota opcional del payout. |
+| `platform` | `string` | no | Valor opcional de plataforma u origen. |
+
+## Notas de producción
+
+- Confirma validaciones de CLABE, moneda de settlement y modos de falla con Cobru.
+- Haz explícita la validación del beneficiario en tu propia UI antes de enviar el payout.

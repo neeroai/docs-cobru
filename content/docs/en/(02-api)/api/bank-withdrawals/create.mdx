@@ -5,14 +5,49 @@ icon: Building2
 ---
 
 <Callout type="warn">
-  This capability appears in Cobru's API menu, but the public request contract is not yet verified. Use this page as a planning surface, not as a final production contract.
+  This page documents the best-known Colombian third-party withdrawal contract from legacy
+  Cobru exports. Re-verify the exact behavior in sandbox before making it a production
+  dependency.
 </Callout>
 
-## What to confirm with Cobru
+## Endpoint
 
-- exact path and method signature
-- beneficiary identity fields
-- bank code field name
-- account type constraints
-- async vs sync settlement model
-- callback or webhook behavior for withdrawal state changes
+`POST /thirdpartywithdraw/`
+
+## Request fields seen in legacy documentation
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `amount` | `number` | yes | Withdrawal amount. |
+| `account_holder_name` | `string` | yes | Beneficiary full name. |
+| `account_type` | `string` | yes | Account type accepted by the destination bank. |
+| `account_holder_document` | `string` | yes | Beneficiary document number. |
+| `account_holder_document_type` | `string` | yes | Document type code expected by Cobru. |
+| `account_number` | `string` | yes | Destination account number. |
+| `account_phone` | `string` | yes | Beneficiary phone number. |
+| `account_email` | `string` | yes | Beneficiary email. |
+| `bank_name` | `string` | no | Bank name or bank descriptor when required. |
+| `description` | `string` | no | Optional payout note or internal description. |
+| `callback` | `string` | no | Optional callback URL for status updates. |
+| `idempotency_key` | `string` | no | Best-known field for deduplicating payout attempts. |
+
+## What to confirm with Cobru before go-live
+
+- whether `bank_name` should now be replaced by a bank code or bank ID
+- the accepted values for `account_type` and `account_holder_document_type`
+- whether callbacks are still supported or if webhooks replaced them
+- payout settlement timeline and terminal states
+
+## Error signals seen in older materials
+
+| Signal | Meaning |
+|--------|---------|
+| `R010` | Invalid account data or payout rejection by banking validation. |
+| `P002` | Processing or provider-side failure. |
+| `E001` | Generic validation or downstream provider error. |
+
+## Production notes
+
+- Always send an idempotency key if Cobru confirms it remains supported.
+- Keep the withdrawal identifier returned by Cobru to reconcile async state changes.
+- Treat bank withdrawals as asynchronous even when the initial response is successful.

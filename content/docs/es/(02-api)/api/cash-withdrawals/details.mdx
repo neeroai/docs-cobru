@@ -5,5 +5,22 @@ icon: FileSearch
 ---
 
 <Callout type="warn">
-  Está listado en el menú API de Cobru. El path exacto y el schema de respuesta aún requieren verificación en vivo.
+  Los materiales legacy y las capturas del producto indican una vista de detalle para retiros
+  en efectivo, pero el contrato exacto todavía necesita verificación fresca.
 </Callout>
+
+## Endpoint
+
+`GET /cashwithdraw/{id}`
+
+## Parámetro de path
+
+| Field | Tipo | Descripción |
+|-------|------|-------------|
+| `id` | `number` | Identificador del retiro en efectivo en Cobru, normalmente expuesto como `pk` en el listado. |
+
+## Uso esperado
+
+- obtener el estado más reciente antes de mostrar instrucciones de cobro
+- validar si el retiro sigue siendo cancelable antes de llamar el endpoint de cancelación
+- inspeccionar referencias del proveedor cuando soporte necesite depurar el payout

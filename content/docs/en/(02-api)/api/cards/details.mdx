@@ -5,5 +5,25 @@ icon: List
 ---
 
 <Callout type="warn">
-  Listed in Cobru's API menu. Confirm whether detail and list are separate endpoints or variants of the same operation.
+  Card retrieval is documented from legacy Cobru exports. Confirm whether detail and list are
+  still variants of the same endpoint in the current product.
 </Callout>
+
+## Best-known endpoint
+
+`GET /cobru/debit/get_card/`
+
+## Query behavior seen in older docs
+
+- call the endpoint without `card_id` to list cards
+- pass `?card_id={card_id}` to retrieve one card
+
+## Fields seen in legacy responses
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `id` | `number` | Card identifier. |
+| `masked_pan` | `string` | Masked card number. |
+| `display_expiration` | `string` | Human-readable expiration. |
+| `balance` | `number` | Current card balance. |
+| `state` | `string` | Card state. |

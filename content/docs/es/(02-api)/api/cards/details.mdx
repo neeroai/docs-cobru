@@ -5,5 +5,25 @@ icon: List
 ---
 
 <Callout type="warn">
-  Está listado en el menú API de Cobru. Confirma si detalle y listado son endpoints separados o variantes de la misma operación.
+  La recuperación de tarjetas está documentada desde exports legacy de Cobru. Confirma si
+  detalle y listado siguen siendo variantes del mismo endpoint en el producto actual.
 </Callout>
+
+## Endpoint mejor conocido
+
+`GET /cobru/debit/get_card/`
+
+## Comportamiento de query visto en docs antiguas
+
+- llamar sin `card_id` para listar tarjetas
+- pasar `?card_id={card_id}` para recuperar una tarjeta
+
+## Campos vistos en respuestas legacy
+
+| Field | Tipo | Notas |
+|-------|------|-------|
+| `id` | `number` | Identificador de la tarjeta. |
+| `masked_pan` | `string` | Número de tarjeta enmascarado. |
+| `display_expiration` | `string` | Expiración legible. |
+| `balance` | `number` | Balance actual. |
+| `state` | `string` | Estado de la tarjeta. |

@@ -5,7 +5,34 @@ icon: Globe2
 ---
 
 <Callout type="warn">
-  Este flujo transfronterizo es visible en el menú API de Cobru pero aún no tiene un contrato público verificado dentro de este repo.
+  Este flujo transfronterizo está documentado desde exports legacy de Cobru. Revalídalo en
+  sandbox antes de usarlo para payouts de producción.
 </Callout>
 
-Confirma moneda, schema del beneficiario, modelo FX, estructura de fees y tiempos de settlement con Cobru.
+## Endpoint
+
+`POST /withdraw/br/`
+
+## Campos del request vistos en documentación legacy
+
+| Field | Tipo | Requerido | Notas |
+|-------|------|-----------|-------|
+| `amount` | `number` | sí | Monto del retiro. |
+| `currency_code` | `string` | sí | Los materiales legacy documentan `BRL`. |
+| `pix_key` | `string` | sí | Valor de la PIX key. |
+| `pix_key_type` | `string` | sí | Tipo de PIX key. |
+| `cpf` | `string` | condicional | Identificador tributario si el beneficiario es persona natural. |
+| `cnpj` | `string` | condicional | Identificador tributario si el beneficiario es empresa. |
+| `account_phone` | `string` | sí | Teléfono del beneficiario. |
+| `account_email` | `string` | sí | Email del beneficiario. |
+| `callback` | `string` | no | URL opcional de callback. |
+| `idempotency_key` | `string` | no | Clave opcional de idempotencia. |
+| `description` | `string` | no | Nota opcional del payout. |
+| `platform` | `string` | no | Identificador opcional de plataforma u origen. |
+| `longitude` | `number` | no | Campo geográfico opcional visto en exports antiguos. |
+| `latitude` | `number` | no | Campo geográfico opcional visto en exports antiguos. |
+
+## Notas de producción
+
+- Confirma moneda, schema del beneficiario, modelo FX, estructura de fees y tiempos de settlement con Cobru.
+- Valida `pix_key_type` y requisitos de CPF/CNPJ antes de enviar el request.

@@ -5,5 +5,19 @@ icon: Activity
 ---
 
 <Callout type="warn">
-  Está listado en el menú API de Cobru. Confirma paginación, campos de comercio y semántica de movimientos pendientes vs posteados con Cobru.
+  El historial de movimientos está documentado desde exports legacy de Cobru. Confirma
+  paginación y semántica de movimientos posteados vs pendientes antes de construir lógica de
+  conciliación sobre este endpoint.
 </Callout>
+
+## Endpoint mejor conocido
+
+`GET /cobru/debit/get_transactions/?card_id={card_id}`
+
+## Parámetros de query vistos en documentación legacy
+
+| Field | Tipo | Requerido | Notas |
+|-------|------|-----------|-------|
+| `card_id` | `number` | sí | Identificador de la tarjeta. |
+| `per_page` | `number` | no | Tamaño de página opcional. |
+| `page_num` | `number` | no | Número de página opcional. |

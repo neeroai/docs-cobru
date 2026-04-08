@@ -5,5 +5,18 @@ icon: Activity
 ---
 
 <Callout type="warn">
-  Listed in Cobru's API menu. Confirm pagination, merchant fields, and pending vs posted semantics with Cobru.
+  Card movement history is documented from legacy Cobru exports. Confirm pagination and posted
+  vs pending semantics with Cobru before building reconciliation logic on top of it.
 </Callout>
+
+## Best-known endpoint
+
+`GET /cobru/debit/get_transactions/?card_id={card_id}`
+
+## Query parameters seen in legacy docs
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `card_id` | `number` | yes | Card identifier. |
+| `per_page` | `number` | no | Optional page size. |
+| `page_num` | `number` | no | Optional page number. |

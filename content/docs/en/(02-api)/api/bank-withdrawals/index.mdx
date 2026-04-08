@@ -4,21 +4,58 @@ description: Send funds from Cobru to bank accounts in supported countries.
 icon: Building2
 ---
 
+<Callout type="warn">
+  This family mixes multiple evidence levels: older Colombian third-party withdrawal contracts,
+  newer country-specific exports, and product-menu visibility. Treat each endpoint page as a
+  separate confidence level and verify the exact flow you plan to ship.
+</Callout>
+
 Cobru's API menu exposes a broad bank-withdrawal surface across Colombia and other countries.
+It is the main family to use when funds must leave Cobru and settle into a beneficiary bank
+account instead of another Cobru user wallet.
+
+## When to use bank withdrawals
+
+- disburse funds to beneficiary bank accounts
+- build operational payout flows for vendors, customers, or internal treasury
+- support country-specific withdrawal rails such as Colombia, Brazil, Argentina, Mexico, or
+  BRE-B-linked bank movement
 
 ## Coverage visible today
 
-| Operation | Status |
-|-----------|--------|
-| available banks list | listed in Cobru menu |
-| your withdrawals | listed in Cobru menu |
-| create withdrawal to Colombia | listed in Cobru menu |
-| withdrawal details | listed in Cobru menu |
-| create withdrawal to Brazil | listed in Cobru menu |
-| create withdrawal to Mexico | listed in Cobru menu |
-| create withdrawal to Argentina | listed in Cobru menu |
-| BRE-B transfer | listed in Cobru menu |
+| Operation | Method | Path | Confidence |
+|-----------|--------|------|------------|
+| Available banks list | `GET` | `/bank_list_third_party_withdraw/` | legacy-doc |
+| Your withdrawals | `GET` | `/thirdpartywithdraw/` | legacy-doc |
+| Create withdrawal to Colombia | `POST` | `/thirdpartywithdraw/` | legacy-doc |
+| Withdrawal details | `GET` | `/thirdpartywithdraw/{id}` | legacy-doc |
+| Cancel withdrawal | `POST` | `/cancelthirdpartywithdraw/` | legacy-doc |
+| BRE-B transfer | `POST` | `/withdraw/co/` | menu plus research |
+| Create withdrawal to Brazil | `POST` | `/withdraw/br/` | legacy-doc |
+| Create withdrawal to Mexico | `POST` | `/withdraw/mx/` | legacy-doc |
+| Create withdrawal to Argentina | `POST` | `/withdraw/ar/` | legacy-doc |
 
-<Callout type="warn">
-  The product surface is clear, but most request and response contracts in this section still need live extraction or an updated Stoplight export.
-</Callout>
+## Withdrawal workflow
+
+<Steps>
+  <Step>
+    Resolve beneficiary rails first, usually by fetching supported banks or by validating the
+    country-specific account identifier such as PIX, CBU/CVU, or CLABE.
+  </Step>
+  <Step>
+    Create the withdrawal with beneficiary identity, banking data, amount, and optional
+    idempotency or callback fields when documented.
+  </Step>
+  <Step>
+    Reconcile the payout asynchronously from list and detail endpoints. Do not assume bank
+    withdrawals settle instantly.
+  </Step>
+</Steps>
+
+## Common concerns to solve early
+
+- beneficiary KYC and document-type mapping
+- idempotency for payout retries
+- callback or webhook delivery guarantees
+- fees, FX, and final settled amount
+- payout rejection handling by country and bank rail

@@ -5,5 +5,35 @@ icon: List
 ---
 
 <Callout type="warn">
-  Listed in Cobru's API menu. Exact path, filters, and response contract still need live verification.
+  This listing is documented from legacy Cobru materials, but filters and pagination should
+  still be verified live.
 </Callout>
+
+## Endpoint
+
+`GET /cashwithdraw/`
+
+## Fields seen in legacy responses
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `amount` | `number` | Requested withdrawal amount. |
+| `date` | `string` | Creation or provider timestamp. |
+| `from_user` | `string` | Source user identifier. |
+| `from_user_phone` | `string` | Sender phone number. |
+| `pk` | `number` | Cobru withdrawal identifier. |
+| `to_user` | `string` | Recipient descriptor or recipient name. |
+| `method` | `string` | Provider name such as `efecty`. |
+| `state` | `number` | Withdrawal state code. |
+| `callback` | `string` | Callback URL associated with the request when present. |
+
+## State model seen in older exports
+
+| State | Meaning |
+|-------|---------|
+| `0` | pending |
+| `1` | processing |
+| `2` | paid |
+| `3` | rejected |
+| `4` | cancelled |
+| `5` | expired |

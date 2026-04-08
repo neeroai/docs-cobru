@@ -5,5 +5,26 @@ icon: Landmark
 ---
 
 <Callout type="warn">
-  This operation appears in the Cobru API menu. The exact path, country parameter model, and response fields remain pending verification.
+  The third-party withdrawal bank list is documented in legacy Cobru materials, while a newer
+  country-based variant appears in additional exports. Confirm which one is current for your
+  integration.
 </Callout>
+
+## Best-known endpoint
+
+`GET /bank_list_third_party_withdraw/`
+
+## Response fields seen in older docs
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `id` | `number` | Internal bank identifier. |
+| `name` | `string` | Human-readable bank name. |
+
+## Newer variant mentioned in additional materials
+
+Some newer withdrawal exports also reference:
+
+`GET /bank_list/?country={country_code}`
+
+Treat that country-parameterized variant as a candidate newer contract until Cobru confirms it.

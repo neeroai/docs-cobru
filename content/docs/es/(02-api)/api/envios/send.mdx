@@ -4,18 +4,31 @@ description: Envía saldo Cobru a otro usuario Cobru.
 icon: Send
 ---
 
+<Callout type="warn">
+  Este contrato proviene de materiales legacy de Cobru. Revalida request y response exactos
+  en sandbox antes de usarlo en un flujo de transferencias de producción.
+</Callout>
+
 ## Endpoint
 
 `POST /send/`
-
-<Callout type="info">
-  Documentado en materiales legacy de Cobru.
-</Callout>
 
 ## Requisitos
 
 - el emisor debe tener email y teléfono verificados
 - el destinatario se identifica por número de teléfono
+
+## Campos del request
+
+| Field | Tipo | Requerido | Notas |
+|-------|------|-----------|-------|
+| `to_user` | `string` | sí | Mejor identificador conocido del destinatario. Los materiales legacy lo describen como el teléfono del receptor. |
+| `amount` | `number` | sí | Monto a enviar desde el saldo disponible del usuario autenticado. |
+
+<Callout type="info">
+  En algunos textos antiguos aparece `toUser` en camelCase. Prefiere `to_user` salvo que
+  Cobru confirme un alias adicional aceptado.
+</Callout>
 
 ## Ejemplo de body
 
@@ -25,3 +38,10 @@ icon: Send
   "to_user": "3001234567"
 }
 ```
+
+## Notas de producción
+
+- Valida KYC y estado operativo del emisor antes de exponer esta acción en UI.
+- Los materiales públicos no confirman si el envío es síncrono, en cola o reversible.
+- Trata el éxito del envío como no confiable hasta reconciliarlo vía `GET /send/` o con tu
+  propio ledger downstream.

@@ -5,5 +5,22 @@ icon: WalletCards
 ---
 
 <Callout type="warn">
-  Listed in Cobru's API menu. Exact contract and settlement timing remain unverified.
+  Card reload is documented from legacy Cobru exports. Re-verify settlement timing and shared
+  endpoint behavior before production use.
 </Callout>
+
+## Endpoint
+
+`POST /cobru/debit/create_and_reload_card/`
+
+## Request fields seen in legacy documentation
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `amount` | `number` | yes | Balance to add to the card. |
+| `card_id` | `number` | yes | Existing Cobru card identifier. |
+
+## Important implementation note
+
+Older Cobru materials describe creation and reload as two modes of the same endpoint. Treat
+that shared-endpoint behavior as real until Cobru confirms a newer split contract.

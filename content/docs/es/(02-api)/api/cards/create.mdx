@@ -5,10 +5,39 @@ icon: CreditCard
 ---
 
 <Callout type="warn">
-  La emisión de tarjetas es visible en el menú API de Cobru, pero el contrato público todavía no está verificado en este repo.
+  La emisión de tarjetas está documentada desde exports legacy de Cobru. Revalida el
+  comportamiento del emisor y el manejo PCI antes de lanzar un programa de tarjetas en vivo.
 </Callout>
 
-## Preguntas que debes resolver antes de implementar
+## Endpoint
+
+`POST /cobru/debit/create_and_reload_card/`
+
+## Body mejor conocido
+
+La creación de tarjeta está documentada como una llamada al endpoint compartido de
+create-and-reload con un monto de `0`.
+
+```json
+{
+  "amount": 0
+}
+```
+
+## Campos de respuesta vistos en documentación legacy
+
+| Field | Tipo | Notas |
+|-------|------|-------|
+| `balance` | `number` | Balance actual de la tarjeta. |
+| `cvv` | `string` | Código de seguridad. |
+| `display_expiration` | `string` | Expiración legible para humanos. |
+| `id` | `number` | Identificador de la tarjeta. |
+| `masked_pan` | `string` | Número de tarjeta enmascarado. |
+| `max_balance` | `number` | Balance máximo permitido. |
+| `state` | `string` | Estado de la tarjeta. |
+| `support_token` | `string` | Token de soporte o referencia del proveedor. |
+
+## Preguntas que debes resolver antes de un rollout completo
 
 - tipo de emisión: single-use o reusable
 - fuente de fondeo

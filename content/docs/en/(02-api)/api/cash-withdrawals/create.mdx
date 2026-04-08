@@ -4,13 +4,28 @@ description: Create a cash withdrawal request, currently documented for Efecty.
 icon: BanknoteArrowUp
 ---
 
+<Callout type="warn">
+  This contract is based on legacy Cobru materials for Efecty withdrawals. Validate the
+  provider name, callback behavior, and final error contract in sandbox before relying on it
+  in production.
+</Callout>
+
 ## Endpoint
 
 `POST /cashwithdraw/`
 
-<Callout type="info">
-  Documented in legacy Cobru materials for Efecty withdrawals.
-</Callout>
+## Request fields
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `method` | `string` | yes | Best-known provider selector. Legacy materials document `efecty`. |
+| `document` | `string` | yes | Recipient document number. |
+| `amount` | `number` | yes | Requested payout amount. |
+| `exp_days` | `number` | yes | Days until the withdrawal expires. |
+| `name` | `string` | yes | Recipient full name shown in the payout request. |
+| `coupon` | `string` | no | Optional coupon or promo code when supported. |
+| `callback` | `string` | no | Optional callback URL for result updates. |
+| `estimate` | `boolean` | no | When `true`, may request an estimate rather than a live withdrawal. |
 
 ## Example body
 
@@ -35,3 +50,31 @@ icon: BanknoteArrowUp
   "amount": 9700
 }
 ```
+
+## Callback behavior
+
+Legacy materials show a `callback` field on creation and list records. Treat callback delivery
+as an optional operational integration until Cobru confirms:
+
+- retry behavior
+- signature or verification model
+- terminal states that trigger callbacks
+
+## Error signals seen in older materials
+
+| Response | Meaning |
+|----------|---------|
+| `400 {"error":"not enough balance"}` | The sender balance is insufficient. |
+| `200 {"error":"BAD_USER"}` | User validation failed. |
+| `200 {"error":"EXPIRED"}` | Coupon or promotional benefit expired. |
+| `200 {"error":"ALL_USED"}` | Coupon or benefit already exhausted. |
+| `200 {"error":"NOT_FOUND"}` | Referenced coupon or object was not found. |
+| `400 {"message":"unknown method"}` | Unsupported withdrawal provider or method value. |
+
+## Production notes
+
+- Reconcile the net amount returned by Cobru, not only the requested amount, because fees may
+  affect the final payout amount.
+- Do not assume every created withdrawal is immediately claimable; build for asynchronous
+  provider behavior.
+- If you expose cancellation, store Cobru's reference identifiers at creation time.

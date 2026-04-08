@@ -5,5 +5,25 @@ icon: ShoppingCart
 ---
 
 <Callout type="warn">
-  Listed in Cobru's API menu. Confirm path, inventory rules, and fulfillment fields with Cobru before production use.
+  This purchase flow is documented from legacy Cobru exports. Confirm inventory rules and the
+  final fulfillment payload before production use.
 </Callout>
+
+## Endpoint
+
+`POST /pin/`
+
+## Request fields seen in legacy documentation
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `id_pin` | `number` | yes | Catalog identifier of the PIN product. |
+| `operator` | `string` | yes | Provider or operator identifier. |
+
+## Response fields seen in older docs
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `status` | `string` | Purchase result. |
+| `pin` | `string` | Delivered PIN or redemption code. |
+| `pk` | `number` | Cobru purchase identifier. |

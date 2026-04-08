@@ -5,5 +5,34 @@ icon: List
 ---
 
 <Callout type="warn">
-  Está listado en el menú API de Cobru. Confirma filtros, paginación y desglose por país antes de implementarlo.
+  Este listado proviene de materiales legacy de payouts Cobru. Filtros, paginación y
+  segmentación por país todavía requieren validación en vivo.
 </Callout>
+
+## Endpoint
+
+`GET /thirdpartywithdraw/`
+
+## Campos vistos en respuestas legacy
+
+| Field | Tipo | Notas |
+|-------|------|-------|
+| `type` | `string` | Tipo de retiro o identificador del riel. |
+| `pk` | `number` | Identificador del payout en Cobru. |
+| `state` | `string` | Estado del payout. |
+| `amount` | `number` | Monto solicitado. |
+| `payed_amount` | `number` | Monto neto pagado después de fees y ajustes. |
+| `fee` | `number` | Fee de Cobru. |
+| `fee_iva` | `number` | IVA aplicado a las fees. |
+| `gmf` | `number` | GMF cuando aplique. |
+| `account_number` | `string` | Número de cuenta destino. |
+| `description` | `string` | Descripción opcional del payout. |
+| `date_created` | `string` | Timestamp de creación. |
+| `date_consigned` | `string` | Fecha de consignación cuando exista. |
+| `date_deposited` | `string` | Fecha de depósito final cuando exista. |
+| `date_rejected` | `string` | Fecha de rechazo cuando exista. |
+
+## Comportamiento adicional visto en documentación antigua
+
+Los materiales legacy también mencionan consultar el listado por `idempotency_key` para
+encontrar un intento de payout previamente enviado.

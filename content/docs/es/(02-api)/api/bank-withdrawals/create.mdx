@@ -5,14 +5,49 @@ icon: Building2
 ---
 
 <Callout type="warn">
-  Esta capacidad aparece en el menú API de Cobru, pero el contrato público del request aún no está verificado. Usa esta página como superficie de planeación, no como contrato final de producción.
+  Esta página documenta el contrato mejor conocido para retiros a terceros en Colombia a
+  partir de exports legacy de Cobru. Revalida el comportamiento exacto en sandbox antes de
+  convertirlo en una dependencia de producción.
 </Callout>
 
-## Qué debes confirmar con Cobru
+## Endpoint
 
-- path exacto y firma del método
-- campos de identidad del beneficiario
-- nombre del campo para código de banco
-- restricciones de tipo de cuenta
-- modelo de settlement síncrono vs asíncrono
-- comportamiento de callback o webhook para cambios de estado
+`POST /thirdpartywithdraw/`
+
+## Campos del request vistos en documentación legacy
+
+| Field | Tipo | Requerido | Notas |
+|-------|------|-----------|-------|
+| `amount` | `number` | sí | Monto del retiro. |
+| `account_holder_name` | `string` | sí | Nombre completo del beneficiario. |
+| `account_type` | `string` | sí | Tipo de cuenta aceptado por el banco destino. |
+| `account_holder_document` | `string` | sí | Documento del beneficiario. |
+| `account_holder_document_type` | `string` | sí | Código de tipo de documento esperado por Cobru. |
+| `account_number` | `string` | sí | Número de cuenta destino. |
+| `account_phone` | `string` | sí | Teléfono del beneficiario. |
+| `account_email` | `string` | sí | Email del beneficiario. |
+| `bank_name` | `string` | no | Nombre o descriptor del banco cuando sea requerido. |
+| `description` | `string` | no | Nota opcional del payout o descripción interna. |
+| `callback` | `string` | no | URL opcional para actualizaciones de estado. |
+| `idempotency_key` | `string` | no | Campo mejor documentado para deduplicar intentos de payout. |
+
+## Qué debes confirmar con Cobru antes de salir a producción
+
+- si `bank_name` debe reemplazarse hoy por un bank code o bank ID
+- valores aceptados de `account_type` y `account_holder_document_type`
+- si los callbacks siguen soportados o fueron reemplazados por webhooks
+- tiempos de settlement y estados terminales del payout
+
+## Señales de error vistas en materiales antiguos
+
+| Señal | Significado |
+|-------|-------------|
+| `R010` | Datos bancarios inválidos o rechazo de validación. |
+| `P002` | Falla de procesamiento o del proveedor. |
+| `E001` | Error genérico de validación o proveedor downstream. |
+
+## Notas de producción
+
+- Envía siempre una `idempotency_key` si Cobru confirma que sigue soportada.
+- Guarda el identificador del retiro retornado por Cobru para reconciliar cambios de estado.
+- Trata los retiros bancarios como asíncronos incluso si la respuesta inicial es exitosa.

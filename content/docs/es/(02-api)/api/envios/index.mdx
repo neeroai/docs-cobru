@@ -4,11 +4,55 @@ description: Mueve saldo entre usuarios Cobru.
 icon: ArrowLeftRight
 ---
 
-La superficie de transferencias aparece bajo `Envios` en el menú API de Cobru.
+<Callout type="warn">
+  Esta familia está documentada a partir de materiales legacy de Cobru y capturas del menú
+  del producto. Revalida paths, filtros y side effects del movimiento de saldo en sandbox
+  antes de depender de ella en flujos críticos de producción.
+</Callout>
+
+La superficie de transferencias aparece bajo `Envios` en el menú API de Cobru. Es la mejor
+forma documentada de mover saldo disponible entre usuarios Cobru sin abrir un flujo de retiro
+ bancario.
+
+## Cuándo usar envíos
+
+- mover saldo entre cuentas operadas dentro de Cobru
+- disparar flujos de soporte, operaciones o desembolsos wallet-to-wallet
+- construir una experiencia de transferencias internas antes de usar rieles bancarios
+
+## Autenticación
+
+Los envíos están documentados como operaciones autenticadas del usuario. Trátalos como
+endpoints sensibles al saldo y exige una sesión o token válido antes de llamarlos.
 
 ## Endpoints
 
-| Endpoint | Método | Estado |
-|----------|--------|--------|
-| enviar dinero a otro usuario | `POST` | documentado en materiales legacy |
-| obtener envíos del usuario | `GET` | listado en el menú API de Cobru, contrato pendiente de verificación |
+| Endpoint | Método | Path | Estado |
+|----------|--------|------|--------|
+| enviar dinero a otro usuario | `POST` | `/send/` | documentado en materiales legacy |
+| obtener envíos del usuario | `GET` | `/send/` | documentado en materiales legacy |
+
+## Ciclo de vida del envío
+
+<Steps>
+  <Step>
+    Confirma que la cuenta emisora esté completamente habilitada. Los materiales legacy de
+    Cobru indican que el emisor debe tener email y teléfono verificados antes de enviar
+    saldo.
+  </Step>
+  <Step>
+    Envía saldo a otro usuario Cobru usando el número de teléfono del destinatario como el
+    identificador mejor documentado.
+  </Step>
+  <Step>
+    Reconcilia el historial de envíos desde el endpoint de listado antes de mostrar un estado
+    final en un dashboard o panel operativo.
+  </Step>
+</Steps>
+
+## Restricciones conocidas
+
+- La identidad del destinatario está documentada como un identificador basado en teléfono.
+- Los materiales públicos todavía no confirman idempotencia, paginación ni campos explícitos
+  de estado.
+- Si tu flujo necesita liquidación bancaria, usa retiros a bancos en lugar de `Envios`.

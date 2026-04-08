@@ -5,5 +5,35 @@ icon: List
 ---
 
 <Callout type="warn">
-  Está listado en el menú API de Cobru. El path exacto, filtros y response contract todavía requieren verificación en vivo.
+  Este listado está documentado desde materiales legacy de Cobru, pero filtros y paginación
+  todavía deben validarse en vivo.
 </Callout>
+
+## Endpoint
+
+`GET /cashwithdraw/`
+
+## Campos vistos en respuestas legacy
+
+| Field | Tipo | Notas |
+|-------|------|-------|
+| `amount` | `number` | Monto solicitado del retiro. |
+| `date` | `string` | Fecha de creación o timestamp del proveedor. |
+| `from_user` | `string` | Identificador del usuario origen. |
+| `from_user_phone` | `string` | Teléfono del emisor. |
+| `pk` | `number` | Identificador del retiro en Cobru. |
+| `to_user` | `string` | Descriptor del destinatario o nombre del receptor. |
+| `method` | `string` | Nombre del proveedor, por ejemplo `efecty`. |
+| `state` | `number` | Código de estado del retiro. |
+| `callback` | `string` | URL de callback asociada al request cuando exista. |
+
+## Modelo de estados visto en exports antiguos
+
+| Estado | Significado |
+|--------|-------------|
+| `0` | pendiente |
+| `1` | procesando |
+| `2` | pagado |
+| `3` | rechazado |
+| `4` | cancelado |
+| `5` | expirado |

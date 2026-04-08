@@ -4,18 +4,28 @@ description: Superficie de emisión y operación de tarjetas Cobru.
 icon: CreditCard
 ---
 
-El menú API de Cobru incluye una sección `Tarjetas`, lo que sugiere una capacidad más amplia de tarjetas programables.
+<Callout type="warn">
+  La familia de tarjetas está respaldada por exports legacy de Cobru, no por un contrato
+  público recién verificado. La superficie de endpoints es significativa, pero igual debes
+  validar comportamiento del emisor, alcance PCI y estados operativos antes del lanzamiento.
+</Callout>
+
+El menú API de Cobru incluye una sección `Tarjetas`, lo que sugiere una capacidad más amplia
+de tarjetas programables montada sobre la infraestructura de wallet y saldo.
 
 ## Operaciones visibles
 
-| Operación | Estado |
-|-----------|--------|
-| crear tarjeta | listado en el menú Cobru |
-| recargar tarjeta | listado en el menú Cobru |
-| detalles y listado | listado en el menú Cobru |
-| movimientos | listado en el menú Cobru |
-| congelar tarjeta | listado en el menú Cobru |
+| Operación | Método | Path | Confianza |
+|-----------|--------|------|-----------|
+| crear tarjeta | `POST` | `/cobru/debit/create_and_reload_card/` | legacy-doc |
+| recargar tarjeta | `POST` | `/cobru/debit/create_and_reload_card/` | legacy-doc |
+| detalles y listado | `GET` | `/cobru/debit/get_card/` | legacy-doc |
+| movimientos | `GET` | `/cobru/debit/get_transactions/` | legacy-doc |
+| congelar tarjeta | `POST` | `/cobru/debit/freeze_card/` | legacy-doc |
 
-<Callout type="warn">
-  Estas páginas documentan la superficie visible actual y las preguntas de integración, no un contrato de tarjetas ya verificado extremo a extremo.
-</Callout>
+## Lo que habilita esta familia
+
+- emitir tarjetas virtuales
+- agregar saldo a una tarjeta existente
+- recuperar metadata e historial de transacciones
+- congelar o descongelar una tarjeta dentro de flujos de riesgo o soporte

@@ -5,7 +5,34 @@ icon: Globe2
 ---
 
 <Callout type="warn">
-  This cross-border flow is visible in Cobru's API menu but has no verified public contract in this repo yet.
+  This cross-border flow is documented from legacy Cobru exports. Re-verify it in sandbox
+  before using it for production payouts.
 </Callout>
 
-Confirm currency, beneficiary schema, FX model, fee schedule, and settlement times with Cobru.
+## Endpoint
+
+`POST /withdraw/br/`
+
+## Request fields seen in legacy documentation
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `amount` | `number` | yes | Withdrawal amount. |
+| `currency_code` | `string` | yes | Legacy materials document `BRL`. |
+| `pix_key` | `string` | yes | PIX key value. |
+| `pix_key_type` | `string` | yes | PIX key type. |
+| `cpf` | `string` | conditional | Individual taxpayer identifier when the beneficiary is a person. |
+| `cnpj` | `string` | conditional | Company taxpayer identifier when the beneficiary is a business. |
+| `account_phone` | `string` | yes | Beneficiary phone number. |
+| `account_email` | `string` | yes | Beneficiary email. |
+| `callback` | `string` | no | Optional callback URL. |
+| `idempotency_key` | `string` | no | Optional idempotency key. |
+| `description` | `string` | no | Optional payout note. |
+| `platform` | `string` | no | Optional platform or source identifier. |
+| `longitude` | `number` | no | Optional geolocation field in older exports. |
+| `latitude` | `number` | no | Optional geolocation field in older exports. |
+
+## Production notes
+
+- Confirm currency, beneficiary schema, FX model, fee schedule, and settlement times with Cobru.
+- Validate PIX key type and CPF/CNPJ requirements before sending the request.

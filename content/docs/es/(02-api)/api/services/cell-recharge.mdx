@@ -5,5 +5,30 @@ icon: SmartphoneCharging
 ---
 
 <Callout type="warn">
-  La operación es visible en el menú API de Cobru, pero el request schema público, operadores soportados y payload de respuesta siguen pendientes de verificación.
+  Este flujo de recarga está documentado desde exports legacy de Cobru. Los operadores
+  soportados y el payload de respuesta todavía deben validarse antes de usarlo en producción.
 </Callout>
+
+## Endpoint
+
+`POST /request_service_reload/`
+
+## Campos del request vistos en documentación legacy
+
+| Field | Tipo | Requerido | Notas |
+|-------|------|-----------|-------|
+| `value` | `number` | sí | Monto de la recarga. |
+| `recipient` | `string` | sí | Número de teléfono destino. |
+| `operator` | `string` | sí | Código o nombre del operador móvil esperado por Cobru. |
+
+## Campos de respuesta vistos en documentación antigua
+
+| Field | Tipo | Notas |
+|-------|------|-------|
+| `result` | `string` | Resultado de la recarga. |
+| `message` | `string` | Mensaje del proveedor o de Cobru. |
+
+## Operadores vistos en materiales legacy
+
+Los exports antiguos mencionan operadores como `claro`, `movistar`, `tigo` y `avantel`. Trata
+esa lista como indicativa hasta confirmar el catálogo vivo actual.

@@ -5,5 +5,31 @@ icon: XCircle
 ---
 
 <Callout type="warn">
-  Está listado en el menú API de Cobru. Confirma ventana de cancelación, path exacto y side effects con Cobru antes de construir lógica irreversible sobre esta operación.
+  La cancelación está documentada en materiales legacy de Cobru, pero debes validar en vivo
+  la ventana de cancelación y los side effects del proveedor antes de exponerla a clientes.
 </Callout>
+
+## Endpoint
+
+`POST /cancelcashwithdraw/`
+
+## Campos del request
+
+| Field | Tipo | Requerido | Notas |
+|-------|------|-----------|-------|
+| `id` | `number` | sí | Identificador del retiro en efectivo que se quiere cancelar. |
+
+## Ejemplo de body
+
+```json
+{
+  "id": 123456
+}
+```
+
+## Notas operativas
+
+- Solo expón la cancelación mientras el retiro siga pendiente o en un estado cancelable.
+- Refresca el detalle o el listado después de cancelar para reconciliar el estado final.
+- Mantén el identificador del retiro de Cobru disponible en tus herramientas internas de
+  operaciones.

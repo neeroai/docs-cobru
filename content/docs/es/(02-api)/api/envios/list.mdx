@@ -5,14 +5,31 @@ icon: List
 ---
 
 <Callout type="warn">
-  Esta capacidad aparece en el menú API de Cobru, pero el contrato público todavía no se ha revalidado desde una sesión real. Confirma path exacto, filtros y paginación antes de usarlo en producción.
+  Este endpoint está documentado a partir de materiales legacy de Cobru, pero filtros y
+  paginación todavía necesitan verificación fresca desde un ambiente real.
 </Callout>
 
-## Estado de documentación
+## Endpoint
 
-| Señal | Estado |
-|-------|--------|
-| listado en menú API de Cobru | sí |
-| método HTTP | `GET` |
-| path exacto | pendiente de verificación |
-| schema de respuesta | pendiente de verificación |
+`GET /send/`
+
+## Campos vistos en materiales legacy
+
+| Field | Tipo | Notas |
+|-------|------|-------|
+| `from_user` | `string` | Identificador del emisor. |
+| `to_user` | `string` | Identificador del destinatario. |
+| `amount` | `number` | Monto del envío. |
+| `date` | `string` | Timestamp de creación o fecha formateada del envío. |
+
+## Cómo usar el listado
+
+- reconciliar envíos salientes en un panel operativo
+- confirmar si una solicitud de envío ya fue registrada
+- construir tooling de soporte para movimientos wallet-to-wallet
+
+## Lo que todavía falta confirmar
+
+- campos de paginación
+- filtros disponibles
+- si el listado incluye un estado explícito o solo el registro base del movimiento

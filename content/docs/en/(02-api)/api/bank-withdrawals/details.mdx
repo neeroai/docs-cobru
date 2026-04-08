@@ -5,5 +5,22 @@ icon: FileSearch
 ---
 
 <Callout type="warn">
-  Listed in Cobru's API menu. Exact path and response shape still need verification.
+  This detail view is documented from legacy Cobru payout materials and still needs fresh
+  verification from a live environment.
 </Callout>
+
+## Endpoint
+
+`GET /thirdpartywithdraw/{id}`
+
+## Path parameter
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `number` | Cobru bank-withdrawal identifier. |
+
+## What to expect
+
+Use this endpoint to retrieve the latest payout state and the final bank-settlement record
+for one withdrawal. Older materials suggest the response mirrors most fields seen in the
+listing endpoint, but scoped to a single payout.

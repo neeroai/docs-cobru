@@ -5,14 +5,31 @@ icon: List
 ---
 
 <Callout type="warn">
-  This capability appears in the Cobru API menu, but the public contract has not yet been re-verified from a live session. Confirm the exact path, filters, and pagination fields with Cobru before relying on it in production.
+  This endpoint is documented from legacy Cobru materials, but filters and pagination still
+  need fresh verification from a live Cobru environment.
 </Callout>
 
-## Documentation status
+## Endpoint
 
-| Signal | Status |
-|--------|--------|
-| Listed in Cobru API menu | yes |
-| HTTP method | `GET` |
-| Exact path | pending verification |
-| Response schema | pending verification |
+`GET /send/`
+
+## Response fields seen in legacy materials
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `from_user` | `string` | Sender identifier. |
+| `to_user` | `string` | Recipient identifier. |
+| `amount` | `number` | Transfer amount. |
+| `date` | `string` | Transfer creation timestamp or formatted date field. |
+
+## How to use the listing
+
+- reconcile outbound transfers in an operations panel
+- confirm whether a send request has already been registered
+- build customer-support tooling around wallet-to-wallet movement
+
+## What still needs confirmation
+
+- pagination fields
+- available filters
+- whether the list includes transfer status or only the core ledger record

@@ -5,5 +5,34 @@ icon: List
 ---
 
 <Callout type="warn">
-  Listed in Cobru's API menu. Confirm exact filters, pagination, and country breakdown before implementation.
+  This listing comes from legacy Cobru payout materials. Filters, pagination, and country
+  segmentation still need live verification.
 </Callout>
+
+## Endpoint
+
+`GET /thirdpartywithdraw/`
+
+## Fields seen in legacy responses
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `type` | `string` | Withdrawal type or rail identifier. |
+| `pk` | `number` | Cobru payout identifier. |
+| `state` | `string` | Payout state. |
+| `amount` | `number` | Requested amount. |
+| `payed_amount` | `number` | Net paid amount after fees and adjustments. |
+| `fee` | `number` | Cobru fee. |
+| `fee_iva` | `number` | IVA applied to fees. |
+| `gmf` | `number` | Colombian financial transaction tax when applicable. |
+| `account_number` | `string` | Destination account number. |
+| `description` | `string` | Optional payout description. |
+| `date_created` | `string` | Withdrawal creation timestamp. |
+| `date_consigned` | `string` | Consignment timestamp when available. |
+| `date_deposited` | `string` | Deposit completion timestamp when available. |
+| `date_rejected` | `string` | Rejection timestamp when available. |
+
+## Additional query behavior seen in older docs
+
+Legacy materials also mention querying the list by `idempotency_key` to find a previously
+submitted payout attempt.

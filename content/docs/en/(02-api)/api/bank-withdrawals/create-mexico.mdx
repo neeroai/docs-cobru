@@ -5,7 +5,30 @@ icon: Globe2
 ---
 
 <Callout type="warn">
-  Visible in Cobru's API menu. Exact request and response contract still pending verification.
+  This cross-border flow is documented from legacy Cobru exports. Re-verify it with Cobru
+  before using it in production.
 </Callout>
 
-Confirm CLABE or bank-account requirements, settlement currency, and failure modes with Cobru.
+## Endpoint
+
+`POST /withdraw/mx/`
+
+## Request fields seen in legacy documentation
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `amount` | `number` | yes | Withdrawal amount. |
+| `currency_code` | `string` | yes | Legacy materials document `MXN`. |
+| `clabe` | `string` | yes | Standard Mexican CLABE account identifier. |
+| `beneficiary` | `string` | yes | Beneficiary name. |
+| `account_phone` | `string` | yes | Beneficiary phone number. |
+| `account_email` | `string` | yes | Beneficiary email. |
+| `callback` | `string` | no | Optional callback URL. |
+| `idempotency_key` | `string` | no | Optional idempotency key. |
+| `description` | `string` | no | Optional payout note. |
+| `platform` | `string` | no | Optional source or platform value. |
+
+## Production notes
+
+- Confirm CLABE validation requirements, settlement currency, and failure modes with Cobru.
+- Make beneficiary validation explicit in your own UI before submitting the payout.

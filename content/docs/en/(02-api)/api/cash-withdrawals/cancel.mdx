@@ -5,5 +5,30 @@ icon: XCircle
 ---
 
 <Callout type="warn">
-  Listed in Cobru's API menu. Confirm cancellation window, exact path, and side effects with Cobru before implementing irreversible workflows around it.
+  Cancellation is documented in legacy Cobru materials, but you should verify the allowed
+  cancellation window and provider side effects live before exposing it to customers.
 </Callout>
+
+## Endpoint
+
+`POST /cancelcashwithdraw/`
+
+## Request fields
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `id` | `number` | yes | Cash-withdrawal identifier to cancel. |
+
+## Example body
+
+```json
+{
+  "id": 123456
+}
+```
+
+## Operational notes
+
+- Only expose cancellation while the withdrawal is still pending or otherwise cancellable.
+- Refresh the withdrawal detail or listing after cancellation to reconcile the final state.
+- Keep Cobru's withdrawal identifier available in your own operations tooling.
