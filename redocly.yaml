@@ -1,0 +1,18 @@
+apis:
+  cobru@v1:
+    root: ./openapi/cobru.yaml
+
+extends:
+  - recommended
+
+rules:
+  info-license: off
+  operation-operationId: error
+  operation-operationId-unique: error
+  operation-summary: error
+  no-unused-components: warn
+  no-path-trailing-slash: off
+  operation-4xx-response: off
+  security-defined: off
+  struct: off
+  tag-description: off

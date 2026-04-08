@@ -1,0 +1,22 @@
+get:
+  operationId: listWhitelabelSubcategories
+  tags:
+    - Whitelabel
+  summary: List subcategories by category
+  x-verification-status: legacy-doc
+  parameters:
+    - in: query
+      name: category_id
+      required: true
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: Subcategory list
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

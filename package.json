@@ -9,9 +9,14 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "lint": "biome check app components i18n lib next.config.mjs postcss.config.mjs proxy.ts source.config.ts package.json tsconfig.json biome.json vercel.json",
-    "openapi:sync": "node scripts/fetch-stoplight-openapi.mjs",
+    "openapi:bundle": "redocly bundle openapi/src/openapi.yaml --output openapi/cobru.yaml",
+    "openapi:check:bundle": "node scripts/check-openapi-bundle-sync.mjs",
+    "openapi:lint": "redocly lint openapi/src/openapi.yaml",
     "openapi:validate": "node scripts/validate-openapi.mjs",
+    "openapi:check:locales": "node scripts/validate-openapi-locales.mjs",
     "openapi:validate:strict": "node scripts/validate-openapi.mjs --require-non-placeholder",
+    "content:check:sync": "node scripts/validate-content-sync.mjs",
+    "ci:governance": "bun run openapi:check:bundle && bun run openapi:lint && bun run openapi:validate && bun run openapi:check:locales && bun run content:check:sync",
     "format": "biome format --write ."
   },
   "dependencies": {
@@ -29,11 +34,13 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.0",
+    "@redocly/cli": "^2.25.4",
     "@tailwindcss/postcss": "^4.2.2",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "playwright": "^1.59.1",
-    "typescript": "^5.8.0"
+    "typescript": "^5.8.0",
+    "yaml": "^2.8.3"
   }
 }

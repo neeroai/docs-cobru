@@ -1,0 +1,23 @@
+post:
+  operationId: payWithTokenizedCard
+  tags:
+    - Tokenization
+  summary: Pay with a tokenized card
+  x-verification-status: legacy-doc
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: true
+  responses:
+    '200':
+      description: Payment result
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

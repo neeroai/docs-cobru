@@ -1,0 +1,20 @@
+type: object
+properties:
+  orderId:
+    type: string
+  state:
+    type: integer
+    enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+  payment_method:
+    type: string
+    nullable: true
+  amount:
+    type: string
+  url:
+    type: string

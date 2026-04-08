@@ -1,0 +1,22 @@
+get:
+  operationId: deleteTokenizedCard
+  tags:
+    - Tokenization
+  summary: Delete a tokenized card
+  x-verification-status: legacy-doc
+  parameters:
+    - in: query
+      name: card_uuid
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Card deleted
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

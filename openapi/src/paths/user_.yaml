@@ -1,0 +1,23 @@
+post:
+  operationId: createWhitelabelUser
+  tags:
+    - Whitelabel
+  summary: Register a white-label user
+  x-verification-status: legacy-doc
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: true
+  responses:
+    '200':
+      description: User created
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

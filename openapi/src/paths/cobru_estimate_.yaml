@@ -1,0 +1,22 @@
+post:
+  operationId: estimateCobru
+  tags:
+    - Cobrus
+  summary: Quote a cobru
+  x-verification-status: legacy-doc
+  description: Estimate fees and net received amount before creating a cobru.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/EstimateRequest.yaml
+  responses:
+    '200':
+      description: Fee quote
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EstimateResponse.yaml
+    default:
+      $ref: ../components/responses/GenericError.yaml

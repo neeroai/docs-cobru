@@ -1,0 +1,50 @@
+get:
+  operationId: getSoatQuote
+  tags:
+    - Services
+  summary: Quote SOAT insurance
+  x-verification-status: legacy-doc
+  parameters:
+    - in: query
+      name: placa
+      required: true
+      schema:
+        type: string
+    - in: query
+      name: type
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: SOAT quote
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml
+post:
+  operationId: buySoat
+  tags:
+    - Services
+  summary: Buy SOAT insurance
+  x-verification-status: legacy-doc
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: true
+  responses:
+    '200':
+      description: SOAT purchase result
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

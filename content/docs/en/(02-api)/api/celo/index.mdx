@@ -1,0 +1,119 @@
+---
+title: Celo
+description: CUSD wallet operations exposed by Cobru's legacy API surface.
+icon: Coins
+---
+
+<Callout type="warn">
+  Celo support is documented from legacy Spotlight materials and should be treated as an advanced or beta capability until re-verified.
+</Callout>
+
+## What Cobru exposes
+
+The original Cobru materials describe a Celo / cUSD surface with these operations:
+
+- create or retrieve a wallet with `GET /celo/`
+- transfer cUSD with `POST /celo/`
+- retrieve account export details with `POST /celo/account/`
+- list wallet transactions with `GET /celo/transactions/cusd/`
+- estimate or purchase cUSD in related helper flows
+
+## Recommended audience
+
+Only ship against this surface if your product explicitly needs:
+
+- blockchain settlement visibility
+- cUSD treasury operations
+- wallet-level transfers between Cobru-managed accounts
+
+For standard checkout, PSE, BRE-B, or QR experiences, stay on Cobrus first.
+
+## Example: get or create the wallet
+
+<Tabs items={['cURL', 'JavaScript / TypeScript', 'Python', 'PHP']}>
+  <Tab value="cURL">
+    ```bash
+    curl -X GET https://dev.cobru.co/celo/ \
+      -H "Api-Token: $COBRU_API_TOKEN" \
+      -H "Api-Secret-Key: $COBRU_API_SECRET" \
+      -H "Authorization: Bearer $COBRU_ACCESS_TOKEN"
+    ```
+  </Tab>
+  <Tab value="JavaScript / TypeScript">
+    ```ts
+    const response = await fetch('https://dev.cobru.co/celo/', {
+      method: 'GET',
+      headers: {
+        'Api-Token': process.env.COBRU_API_TOKEN!,
+        'Api-Secret-Key': process.env.COBRU_API_SECRET!,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const wallet = await response.json();
+    console.log(wallet.address, wallet.balance);
+    ```
+  </Tab>
+  <Tab value="Python">
+    ```python
+    import requests
+
+    response = requests.get(
+        "https://dev.cobru.co/celo/",
+        headers={
+            "Api-Token": COBRU_API_TOKEN,
+            "Api-Secret-Key": COBRU_API_SECRET,
+            "Authorization": f"Bearer {access_token}",
+        },
+    )
+    print(response.json())
+    ```
+  </Tab>
+  <Tab value="PHP">
+    ```php
+    <?php
+
+    use GuzzleHttp\Client;
+
+    $client = new Client();
+    $response = $client->request('GET', 'https://dev.cobru.co/celo/', [
+        'headers' => [
+            'Api-Token' => getenv('COBRU_API_TOKEN'),
+            'Api-Secret-Key' => getenv('COBRU_API_SECRET'),
+            'Authorization' => 'Bearer ' . $accessToken,
+        ],
+    ]);
+
+    $wallet = json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+    var_dump($wallet);
+    ```
+  </Tab>
+</Tabs>
+
+## Operational warnings
+
+<Accordions>
+  <Accordion title="Mnemonic export is high risk">
+    The legacy docs mention a flow that returns the 24-word mnemonic for wallet recovery.
+    Treat that as extremely sensitive material. Do not log it, persist it casually, or expose it to customer support tools.
+  </Accordion>
+
+  <Accordion title="Explorer and chain assumptions">
+    The historical docs mention Alfarojes and mainnet explorers. Confirm chain, explorer, and environment behavior before exposing any user-facing transaction explorer link.
+  </Accordion>
+
+  <Accordion title="Treasury guidance">
+    If you support cUSD, create operational runbooks for wallet export, transfer failure recovery, and finance reconciliation before enabling it for customers.
+  </Accordion>
+</Accordions>
+
+## Related docs
+
+<Cards>
+  <Card title="API Reference" href="/en/docs/api/reference">
+    Inspect the Celo endpoints and schemas in the interactive reference.
+  </Card>
+  <Card title="Balances" href="/en/docs/guides/balances">
+    Design treasury and balance workflows around the broader Cobru account model.
+  </Card>
+</Cards>

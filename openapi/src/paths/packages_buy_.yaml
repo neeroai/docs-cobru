@@ -1,0 +1,23 @@
+post:
+  operationId: buyCellPackage
+  tags:
+    - Services
+  summary: Buy recharge package
+  x-verification-status: legacy-doc
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: true
+  responses:
+    '200':
+      description: Package purchase result
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

@@ -1,0 +1,46 @@
+type: object
+properties:
+  fee_amount:
+    type: integer
+  payer_id:
+    type: string
+  payer_name:
+    type: string
+  payment_method:
+    type: string
+  state:
+    type: integer
+    enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+  payer_email:
+    type: string
+  payment_method_enabled:
+    $ref: ./PaymentMethodsString.yaml
+  date_payed:
+    type: string
+  url:
+    type: string
+  amount:
+    type: integer
+  expiration_days:
+    type: integer
+  payer_phone:
+    type: string
+  iva_amount:
+    type: number
+  date_expired:
+    type: integer
+  date_created:
+    type: integer
+  images:
+    type: string
+    nullable: true
+  description:
+    type: string
+  payed_amount:
+    type: integer

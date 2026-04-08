@@ -1,0 +1,6 @@
+type: object
+properties:
+  bankName:
+    type: string
+  bankCode:
+    type: string

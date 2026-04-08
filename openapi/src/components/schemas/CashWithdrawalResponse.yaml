@@ -1,0 +1,11 @@
+type: object
+properties:
+  status:
+    type: string
+    example: ok
+  document:
+    type: string
+  ref:
+    type: integer
+  amount:
+    type: integer

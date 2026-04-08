@@ -1,0 +1,23 @@
+post:
+  operationId: createBreBTransfer
+  tags:
+    - Bank Withdrawals
+  summary: Create BRE-B transfer
+  x-verification-status: legacy-doc
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: true
+  responses:
+    '200':
+      description: BRE-B transfer created
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

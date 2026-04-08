@@ -1,0 +1,22 @@
+get:
+  operationId: listDebitCardTransactions
+  tags:
+    - Cards
+  summary: List debit card transactions
+  x-verification-status: legacy-doc
+  parameters:
+    - in: query
+      name: card_id
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Transaction list
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

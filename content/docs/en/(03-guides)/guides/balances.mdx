@@ -4,7 +4,11 @@ description: Check account balance and use it operationally in Cobru integration
 icon: Scale
 ---
 
-Cobru's legacy API materials expose a balance endpoint:
+<Callout type="warn">
+  The balance endpoint is documented in legacy Cobru materials. The route is useful, but the full contract still needs a fresh sandbox verification pass.
+</Callout>
+
+## Endpoint
 
 `GET /balance/`
 
@@ -14,6 +18,93 @@ Cobru's legacy API materials expose a balance endpoint:
 - dashboard balance synchronization
 - reconciliation and treasury views
 
-<Callout type="info">
-  The balance endpoint is documented in legacy materials, but this repo still needs a fresh sandbox verification pass for the exact response schema.
-</Callout>
+## Response shape seen in legacy docs
+
+```json
+{
+  "balance": "14179.25",
+  "balance_cop": "14179.25",
+  "balance_usd": "9995.00",
+  "balance_ars": "10000.00",
+  "balance_mxn": "96536.31",
+  "balance_brl": "89772737.20"
+}
+```
+
+## Example request
+
+<Tabs items={['cURL', 'JavaScript / TypeScript', 'Python', 'PHP']}>
+  <Tab value="cURL">
+    ```bash
+    curl -X GET https://dev.cobru.co/balance/ \
+      -H "Api-Token: $COBRU_API_TOKEN" \
+      -H "Api-Secret-Key: $COBRU_API_SECRET" \
+      -H "Authorization: Bearer $COBRU_ACCESS_TOKEN"
+    ```
+  </Tab>
+  <Tab value="JavaScript / TypeScript">
+    ```ts
+    const response = await fetch('https://dev.cobru.co/balance/', {
+      method: 'GET',
+      headers: {
+        'Api-Token': process.env.COBRU_API_TOKEN!,
+        'Api-Secret-Key': process.env.COBRU_API_SECRET!,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const balance = await response.json();
+    console.log(balance.balance_cop);
+    ```
+  </Tab>
+  <Tab value="Python">
+    ```python
+    import requests
+
+    response = requests.get(
+        "https://dev.cobru.co/balance/",
+        headers={
+            "Api-Token": COBRU_API_TOKEN,
+            "Api-Secret-Key": COBRU_API_SECRET,
+            "Authorization": f"Bearer {access_token}",
+        },
+    )
+    print(response.json())
+    ```
+  </Tab>
+  <Tab value="PHP">
+    ```php
+    <?php
+
+    use GuzzleHttp\Client;
+
+    $client = new Client();
+    $response = $client->request('GET', 'https://dev.cobru.co/balance/', [
+        'headers' => [
+            'Api-Token' => getenv('COBRU_API_TOKEN'),
+            'Api-Secret-Key' => getenv('COBRU_API_SECRET'),
+            'Authorization' => 'Bearer ' . $accessToken,
+        ],
+    ]);
+
+    $balance = json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+    var_dump($balance);
+    ```
+  </Tab>
+</Tabs>
+
+## Integration guidance
+
+<Accordions>
+  <Accordion title="Do not treat the raw response as ledger truth">
+    Use balance reads as an operational snapshot, not as the only source of truth for settlement. Pair them with movements and payment status when building reconciliation.
+  </Accordion>
+
+  <Accordion title="Cache carefully">
+    For dashboards, short-lived caching is reasonable. For payouts or withdrawals, re-read the balance immediately before executing the operation.
+  </Accordion>
+
+  <Accordion title="Multi-currency fields">
+    The legacy response includes COP, USD, ARS, MXN, and BRL balances. Confirm which balances are actually meaningful for your account type before showing them in production UI.
+  </Accordion>
+</Accordions>

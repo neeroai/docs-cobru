@@ -1,0 +1,24 @@
+get:
+  operationId: getTokenizationPublicKey
+  tags:
+    - Tokenization
+  summary: Get tokenization public key
+  x-verification-status: legacy-doc
+  responses:
+    '200':
+      description: RSA public key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  text_long_value:
+                    type: string
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

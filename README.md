@@ -63,6 +63,12 @@ Your first integration usually looks like this:
 
 This repository contains the public documentation site for Cobru, built with Next.js and Fumadocs.
 
+If you maintain the docs or API reference in this repo, use:
+
+- `CONTRIBUTING.md`
+- `openapi/README.md`
+- `tokens/README.md`
+
 If you are looking for internal maintainer guidance, see:
 
 - `CLAUDE.md`

@@ -2,14 +2,5 @@
   "title": "API",
   "icon": "Braces",
   "defaultOpen": true,
-  "pages": [
-    "reference",
-    "authentication",
-    "cobrus",
-    "envios",
-    "cash-withdrawals",
-    "bank-withdrawals",
-    "services",
-    "cards"
-  ]
+  "pages": ["reference"]
 }

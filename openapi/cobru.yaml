@@ -15,31 +15,1388 @@ info:
     - `x-verification-status: legacy-doc` means the contract comes from older Cobru materials and should be re-validated before production dependence.
     - `x-verification-status: menu-only` means the capability is visible in Cobru's API surface but the contract is still pending extraction.
 
-    This file should still be replaced by the official Stoplight export when available.
+    The editable source of truth lives in `openapi/src/**` and is bundled to `openapi/cobru.yaml` for runtime consumption.
   contact:
     email: soporte@cobru.co
-
 servers:
   - url: https://prod.cobru.co
     description: Production
   - url: https://dev.cobru.co
     description: Sandbox
-
-tags:
-  - name: Authentication
-  - name: Cobrus
-  - name: Transfers
-  - name: Cash Withdrawals
-  - name: Bank Withdrawals
-  - name: Services
-  - name: Cards
-  - name: Webhooks
-
 security:
   - ApiToken: []
     ApiSecretKey: []
     BearerAuth: []
+tags:
+  - name: Authentication
+  - name: Cobrus
+  - name: Transfers
+  - name: Balance & Movements
+  - name: Cash Withdrawals
+  - name: Bank Withdrawals
+  - name: Services
+  - name: Tokenization
+  - name: Cards
+  - name: Celo
+  - name: Whitelabel
+  - name: Webhooks
+paths:
+  /token/refresh/:
+    post:
+      operationId: refreshToken
+      tags:
+        - Authentication
+      summary: Refresh access token
+      x-verification-status: verified
+      description: |
+        Exchange a Cobru refresh token for a short-lived access token.
+        The request body field is `refresh`, not `refresh_token`.
+      security:
+        - ApiToken: []
+          ApiSecretKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefreshRequest'
+      responses:
+        '200':
+          description: Access token issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        default:
+          $ref: '#/components/responses/GenericError'
+  /cobru/:
+    post:
+      operationId: createCobru
+      tags:
+        - Cobrus
+      summary: Create a cobru
+      x-verification-status: verified
+      description: |
+        Create a hosted Cobru payment object.
 
+        Important quirks:
+        - `payment_method_enabled` must be a JSON string.
+        - `payer_redirect_url` and `callback` should always be included.
+        - the response field `url` is a short slug, not a full URL.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentRequest'
+      responses:
+        '201':
+          description: Cobru created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Authentication error or misleading validation failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        default:
+          $ref: '#/components/responses/GenericError'
+  /{url}:
+    post:
+      operationId: submitPaymentDetails
+      tags:
+        - Cobrus
+      summary: Generate payment details
+      x-verification-status: legacy-doc
+      description: |
+        Submit payer and payment-method-specific details for an existing cobru.
+        This contract comes from Cobru legacy API materials and deep BRE-B research.
+      parameters:
+        - in: path
+          name: url
+          required: true
+          schema:
+            type: string
+          description: Cobru slug returned by `POST /cobru/`
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentDetailsRequest'
+      responses:
+        '200':
+          description: Payment details accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /cobru_detail/{url}:
+    get:
+      operationId: consultCobru
+      tags:
+        - Cobrus
+      summary: Consult a cobru
+      x-verification-status: legacy-doc
+      parameters:
+        - in: path
+          name: url
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cobru details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CobruDetailResponse'
+        default:
+          $ref: '#/components/responses/GenericError'
+  /get_banks/1/:
+    get:
+      operationId: listPseBanks
+      tags:
+        - Cobrus
+      summary: List PSE banks
+      x-verification-status: legacy-doc
+      description: Retrieve available PSE bank codes.
+      security: []
+      responses:
+        '200':
+          description: PSE bank list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BankCode'
+        default:
+          $ref: '#/components/responses/GenericError'
+  /cobru/estimate/:
+    post:
+      operationId: estimateCobru
+      tags:
+        - Cobrus
+      summary: Quote a cobru
+      x-verification-status: legacy-doc
+      description: Estimate fees and net received amount before creating a cobru.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateRequest'
+      responses:
+        '200':
+          description: Fee quote
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EstimateResponse'
+        default:
+          $ref: '#/components/responses/GenericError'
+  /edit_cobru/:
+    post:
+      operationId: editCobru
+      tags:
+        - Cobrus
+      summary: Edit a cobru
+      x-verification-status: legacy-doc
+      description: Update mutable fields on an existing cobru.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditCobruRequest'
+      responses:
+        '200':
+          description: Cobru updated
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /send/:
+    post:
+      operationId: sendBalance
+      tags:
+        - Transfers
+      summary: Send balance to another user
+      x-verification-status: legacy-doc
+      description: Transfer Cobru balance to another Cobru user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferRequest'
+      responses:
+        '200':
+          description: Transfer created
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /balance/:
+    get:
+      operationId: getBalance
+      tags:
+        - Balance & Movements
+      summary: Get balance
+      x-verification-status: legacy-doc
+      description: Retrieve account balance.
+      responses:
+        '200':
+          description: Account balance
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /movements/movements_by_types/:
+    get:
+      operationId: listMovementsByType
+      tags:
+        - Balance & Movements
+      summary: List movements by operation family
+      x-verification-status: legacy-doc
+      description: |
+        Retrieve operational movement history with one family filter at a time.
+        Spotlight documents `by_cobrus`, `by_withdraws`, `by_sends`, and `by_other_payments`.
+      parameters:
+        - in: query
+          name: by_cobrus
+          schema:
+            type: boolean
+        - in: query
+          name: by_withdraws
+          schema:
+            type: boolean
+        - in: query
+          name: by_sends
+          schema:
+            type: boolean
+        - in: query
+          name: by_other_payments
+          schema:
+            type: boolean
+        - in: query
+          name: per_page
+          schema:
+            type: integer
+            default: 10
+        - in: query
+          name: page_num
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Movement rows
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /withdraw/:
+    post:
+      operationId: createBankWithdrawalLegacy
+      tags:
+        - Cash Withdrawals
+      summary: Withdraw money to a bank account
+      x-verification-status: legacy-doc
+      description: Legacy withdrawal flow documented before the third-party withdrawal endpoints.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Withdrawal created
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+    get:
+      operationId: listLegacyBankWithdrawals
+      tags:
+        - Cash Withdrawals
+      summary: List legacy bank withdrawals
+      x-verification-status: legacy-doc
+      responses:
+        '200':
+          description: Withdrawal list
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /cashwithdraw/:
+    post:
+      operationId: createCashWithdrawal
+      tags:
+        - Cash Withdrawals
+      summary: Withdraw cash
+      x-verification-status: legacy-doc
+      description: Create a cash withdrawal, documented in legacy materials for Efecty.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CashWithdrawalRequest'
+      responses:
+        '200':
+          description: Cash withdrawal created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CashWithdrawalResponse'
+        default:
+          $ref: '#/components/responses/GenericError'
+    get:
+      operationId: listCashWithdrawals
+      tags:
+        - Cash Withdrawals
+      summary: List cash withdrawals
+      x-verification-status: legacy-doc
+      responses:
+        '200':
+          description: Cash withdrawal list
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /cashwithdraw/{id}:
+    get:
+      operationId: getCashWithdrawal
+      tags:
+        - Cash Withdrawals
+      summary: Get cash withdrawal by ID
+      x-verification-status: legacy-doc
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cash withdrawal detail
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /cancelcashwithdraw/:
+    post:
+      operationId: cancelCashWithdrawal
+      tags:
+        - Cash Withdrawals
+      summary: Cancel cash withdrawal
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Cash withdrawal cancelled
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /bank_list_third_party_withdraw/:
+    get:
+      operationId: listThirdPartyWithdrawalBanks
+      tags:
+        - Bank Withdrawals
+      summary: List available banks for third-party withdrawals
+      x-verification-status: legacy-doc
+      responses:
+        '200':
+          description: Bank list
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /thirdpartywithdraw/:
+    post:
+      operationId: createThirdPartyWithdrawal
+      tags:
+        - Bank Withdrawals
+      summary: Create bank withdrawal to a third party
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Withdrawal created
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+    get:
+      operationId: listThirdPartyWithdrawals
+      tags:
+        - Bank Withdrawals
+      summary: List third-party withdrawals
+      x-verification-status: legacy-doc
+      responses:
+        '200':
+          description: Withdrawal list
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /thirdpartywithdraw/{id}:
+    get:
+      operationId: getThirdPartyWithdrawal
+      tags:
+        - Bank Withdrawals
+      summary: Get third-party withdrawal by ID
+      x-verification-status: legacy-doc
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Withdrawal detail
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /cancelthirdpartywithdraw/:
+    post:
+      operationId: cancelThirdPartyWithdrawal
+      tags:
+        - Bank Withdrawals
+      summary: Cancel third-party withdrawal
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Withdrawal cancelled
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /panel/detail_withdraw_pdf/:
+    get:
+      operationId: getThirdPartyWithdrawalPdf
+      tags:
+        - Bank Withdrawals
+      summary: Get third-party withdrawal PDF
+      x-verification-status: legacy-doc
+      parameters:
+        - in: query
+          name: withdraw_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Withdrawal PDF or download metadata
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: '#/components/responses/GenericError'
+  /withdraw/co/:
+    post:
+      operationId: createBreBTransfer
+      tags:
+        - Bank Withdrawals
+      summary: Create BRE-B transfer
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: BRE-B transfer created
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /withdraw/br/:
+    post:
+      operationId: createBankWithdrawalBrazil
+      tags:
+        - Bank Withdrawals
+      summary: Create bank withdrawal to Brazil
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Withdrawal created
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /withdraw/ar/:
+    post:
+      operationId: createBankWithdrawalArgentina
+      tags:
+        - Bank Withdrawals
+      summary: Create bank withdrawal to Argentina
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Withdrawal created
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /withdraw/mx/:
+    post:
+      operationId: createBankWithdrawalMexico
+      tags:
+        - Bank Withdrawals
+      summary: Create bank withdrawal to Mexico
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Withdrawal created
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /request_service_reload/:
+    post:
+      operationId: rechargeCellPhone
+      tags:
+        - Services
+      summary: Recharge a mobile phone
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Recharge accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /pines/all_pines/:
+    get:
+      operationId: listPinProducts
+      tags:
+        - Services
+      summary: List PIN products
+      x-verification-status: legacy-doc
+      responses:
+        '200':
+          description: PIN catalog
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /pin/:
+    post:
+      operationId: buyPinProduct
+      tags:
+        - Services
+      summary: Buy PIN product
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: PIN purchase result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /packages/all_packages/:
+    get:
+      operationId: listCellPackages
+      tags:
+        - Services
+      summary: List recharge packages
+      x-verification-status: legacy-doc
+      responses:
+        '200':
+          description: Package catalog
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /packages/buy/:
+    post:
+      operationId: buyCellPackage
+      tags:
+        - Services
+      summary: Buy recharge package
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Package purchase result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /soat/:
+    get:
+      operationId: getSoatQuote
+      tags:
+        - Services
+      summary: Quote SOAT insurance
+      x-verification-status: legacy-doc
+      parameters:
+        - in: query
+          name: placa
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: type
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: SOAT quote
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+    post:
+      operationId: buySoat
+      tags:
+        - Services
+      summary: Buy SOAT insurance
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: SOAT purchase result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /soat/doc_types/:
+    get:
+      operationId: listSoatDocumentTypes
+      tags:
+        - Services
+      summary: List SOAT document types
+      x-verification-status: legacy-doc
+      responses:
+        '200':
+          description: Document type catalog
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /soat/cities/:
+    get:
+      operationId: listSoatCities
+      tags:
+        - Services
+      summary: List SOAT cities
+      x-verification-status: legacy-doc
+      parameters:
+        - in: query
+          name: dpto
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: City catalog
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /base/get_constants_key_public/:
+    get:
+      operationId: getTokenizationPublicKey
+      tags:
+        - Tokenization
+      summary: Get tokenization public key
+      x-verification-status: legacy-doc
+      responses:
+        '200':
+          description: RSA public key
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      text_long_value:
+                        type: string
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /register_tc/:
+    post:
+      operationId: registerCreditCardToken
+      tags:
+        - Tokenization
+      summary: Register a tokenized credit card
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Card registered
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /list_tc/:
+    get:
+      operationId: listTokenizedCards
+      tags:
+        - Tokenization
+      summary: List tokenized cards
+      x-verification-status: legacy-doc
+      parameters:
+        - in: query
+          name: card_uuid
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Tokenized card list
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /tc_payment/:
+    post:
+      operationId: payWithTokenizedCard
+      tags:
+        - Tokenization
+      summary: Pay with a tokenized card
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Payment result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /delete_tc/:
+    get:
+      operationId: deleteTokenizedCard
+      tags:
+        - Tokenization
+      summary: Delete a tokenized card
+      x-verification-status: legacy-doc
+      parameters:
+        - in: query
+          name: card_uuid
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Card deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /cobru/debit/create_and_reload_card/:
+    post:
+      operationId: createOrReloadCard
+      tags:
+        - Cards
+      summary: Create and reload card
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Card created or reloaded
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /cobru/debit/get_card/:
+    get:
+      operationId: getDebitCard
+      tags:
+        - Cards
+      summary: Get debit cards or one card by ID
+      x-verification-status: legacy-doc
+      parameters:
+        - in: query
+          name: card_id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Card detail or list
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /cobru/debit/get_transactions/:
+    get:
+      operationId: listDebitCardTransactions
+      tags:
+        - Cards
+      summary: List debit card transactions
+      x-verification-status: legacy-doc
+      parameters:
+        - in: query
+          name: card_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Transaction list
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /cobru/debit/freeze_card/:
+    post:
+      operationId: freezeDebitCard
+      tags:
+        - Cards
+      summary: Freeze debit card
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Card frozen
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /celo/:
+    get:
+      operationId: getOrCreateCeloWallet
+      tags:
+        - Celo
+      summary: Get or create cUSD wallet
+      x-verification-status: legacy-doc
+      responses:
+        '200':
+          description: Wallet snapshot
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  address:
+                    type: string
+                  balance:
+                    type: string
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+    post:
+      operationId: transferCusd
+      tags:
+        - Celo
+      summary: Transfer cUSD
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                to:
+                  type: string
+                amount:
+                  type: number
+              additionalProperties: true
+      responses:
+        '200':
+          description: Transfer result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /celo/account/:
+    post:
+      operationId: exportCeloWalletAccount
+      tags:
+        - Celo
+      summary: Export Celo wallet account details
+      x-verification-status: legacy-doc
+      responses:
+        '200':
+          description: Wallet export details
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /celo/transactions/cusd/:
+    get:
+      operationId: listCusdTransactions
+      tags:
+        - Celo
+      summary: List cUSD wallet transactions
+      x-verification-status: legacy-doc
+      responses:
+        '200':
+          description: cUSD transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /pay_with_celo/:
+    post:
+      operationId: payCobruWithCelo
+      tags:
+        - Celo
+      summary: Pay a Cobru with cUSD
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Payment result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /crypto/rates/:
+    get:
+      operationId: getCryptoRates
+      tags:
+        - Celo
+      summary: Get crypto rates
+      x-verification-status: legacy-doc
+      responses:
+        '200':
+          description: Rate data
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /crypto/buy/:
+    post:
+      operationId: buyCrypto
+      tags:
+        - Celo
+      summary: Buy cUSD or other supported crypto balance
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Purchase result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /user/:
+    post:
+      operationId: createWhitelabelUser
+      tags:
+        - Whitelabel
+      summary: Register a white-label user
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: User created
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /category/:
+    get:
+      operationId: listWhitelabelCategories
+      tags:
+        - Whitelabel
+      summary: List business categories
+      x-verification-status: legacy-doc
+      responses:
+        '200':
+          description: Category list
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /subcategory:
+    get:
+      operationId: listWhitelabelSubcategories
+      tags:
+        - Whitelabel
+      summary: List subcategories by category
+      x-verification-status: legacy-doc
+      parameters:
+        - in: query
+          name: category_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Subcategory list
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /request_confirmation/:
+    post:
+      operationId: requestWhitelabelConfirmationCode
+      tags:
+        - Whitelabel
+      summary: Request email or phone confirmation code
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: boolean
+                email:
+                  type: boolean
+              additionalProperties: true
+      responses:
+        '200':
+          description: Confirmation code sent
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /verify_email/:
+    post:
+      operationId: verifyWhitelabelEmail
+      tags:
+        - Whitelabel
+      summary: Verify email confirmation code
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: integer
+              additionalProperties: true
+      responses:
+        '200':
+          description: Email verified
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+  /verify_phone/:
+    post:
+      operationId: verifyWhitelabelPhone
+      tags:
+        - Whitelabel
+      summary: Verify phone confirmation code
+      x-verification-status: legacy-doc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: integer
+              additionalProperties: true
+      responses:
+        '200':
+          description: Phone verified
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+webhooks:
+  paymentStateChanged:
+    post:
+      tags:
+        - Webhooks
+      operationId: paymentStateChanged
+      summary: Payment state callback
+      description: |
+        Cobru sends a POST request to the callback URL provided when creating a payment.
+        Webhooks are not signed today, so consumers should treat them as notifications and re-check state for sensitive flows.
+      x-verification-status: verified
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookPayload'
+      responses:
+        '200':
+          description: Callback received successfully
 components:
   securitySchemes:
     ApiToken:
@@ -53,8 +1410,15 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
-
   schemas:
+    TokenRefreshRequest:
+      type: object
+      required:
+        - refresh
+      properties:
+        refresh:
+          type: string
+          description: Refresh token issued by Cobru
     ErrorResponse:
       type: object
       properties:
@@ -65,30 +1429,20 @@ components:
           type: string
           example: payment_method_enabled must be a JSON string
       additionalProperties: true
-
-    TokenRefreshRequest:
-      type: object
-      required: [refresh]
-      properties:
-        refresh:
-          type: string
-          description: Refresh token issued by Cobru
-
     TokenResponse:
       type: object
       properties:
         access:
           type: string
           description: Short-lived JWT access token
-      required: [access]
-
+      required:
+        - access
     PaymentMethodsString:
       type: string
       description: |
         JSON-serialized object of enabled payment methods.
         Cobru expects this field as a string, not as a nested JSON object.
       example: '{"Bre-B":true,"pse":true,"NEQUI":true}'
-
     CreatePaymentRequest:
       type: object
       required:
@@ -105,7 +1459,7 @@ components:
           example: 50000
         description:
           type: string
-          example: Order #123
+          example: Order
         expiration_days:
           type: integer
           example: 1
@@ -126,7 +1480,6 @@ components:
         platform:
           type: string
           example: API
-
     PaymentResponse:
       type: object
       properties:
@@ -138,7 +1491,13 @@ components:
           example: '50000.00'
         state:
           type: integer
-          enum: [0, 1, 2, 3, 4, 5]
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
         date_created:
           type: string
           format: date-time
@@ -200,10 +1559,15 @@ components:
         currency_code:
           type: string
           example: COP
-
     PaymentDetailsRequest:
       type: object
-      required: [name, payment, cc, email, document_type, phone]
+      required:
+        - name
+        - payment
+        - cc
+        - email
+        - document_type
+        - phone
       properties:
         name:
           type: string
@@ -220,7 +1584,13 @@ components:
           format: email
         document_type:
           type: string
-          enum: [CC, TI, CE, PAN, NIT, PASAPORTE]
+          enum:
+            - CC
+            - TI
+            - CE
+            - PAN
+            - NIT
+            - PASAPORTE
         phone:
           type: string
         phone_nequi:
@@ -243,7 +1613,6 @@ components:
         json:
           type: boolean
           default: true
-
     CobruDetailResponse:
       type: object
       properties:
@@ -257,7 +1626,13 @@ components:
           type: string
         state:
           type: integer
-          enum: [0, 1, 2, 3, 4, 5]
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
         payer_email:
           type: string
         payment_method_enabled:
@@ -285,17 +1660,23 @@ components:
           type: string
         payed_amount:
           type: integer
-
+    BankCode:
+      type: object
+      properties:
+        bankName:
+          type: string
+        bankCode:
+          type: string
     EstimateRequest:
       type: object
-      required: [amount]
+      required:
+        - amount
       properties:
         amount:
           type: string
           example: '5000'
         client_assume_costs:
           type: boolean
-
     EstimateResponse:
       type: object
       properties:
@@ -307,10 +1688,10 @@ components:
           type: number
         cobru_payed_amount:
           type: integer
-
     EditCobruRequest:
       type: object
-      required: [url]
+      required:
+        - url
       properties:
         url:
           type: string
@@ -324,20 +1705,25 @@ components:
           type: string
         fee_iva:
           type: string
-
     TransferRequest:
       type: object
-      required: [to_user, amount]
+      required:
+        - to_user
+        - amount
       properties:
         to_user:
           type: string
           description: Recipient phone number
         amount:
           type: integer
-
     CashWithdrawalRequest:
       type: object
-      required: [method, document, amount, exp_days, name]
+      required:
+        - method
+        - document
+        - amount
+        - exp_days
+        - name
       properties:
         method:
           type: string
@@ -357,7 +1743,6 @@ components:
           format: uri
         estimate:
           type: boolean
-
     CashWithdrawalResponse:
       type: object
       properties:
@@ -370,15 +1755,6 @@ components:
           type: integer
         amount:
           type: integer
-
-    BankCode:
-      type: object
-      properties:
-        bankName:
-          type: string
-        bankCode:
-          type: string
-
     WebhookPayload:
       type: object
       properties:
@@ -386,7 +1762,13 @@ components:
           type: string
         state:
           type: integer
-          enum: [0, 1, 2, 3, 4, 5]
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
         payment_method:
           type: string
           nullable: true
@@ -394,7 +1776,6 @@ components:
           type: string
         url:
           type: string
-
   responses:
     GenericError:
       description: Cobru error response
@@ -402,488 +1783,3 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-
-webhooks:
-  paymentStateChanged:
-    post:
-      tags: [Webhooks]
-      summary: Payment state callback
-      description: |
-        Cobru sends a POST request to the callback URL provided when creating a payment.
-        Webhooks are not signed today, so consumers should treat them as notifications and re-check state for sensitive flows.
-      x-verification-status: verified
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/WebhookPayload'
-      responses:
-        '200':
-          description: Callback received successfully
-
-paths:
-  /token/refresh/:
-    post:
-      operationId: refreshToken
-      tags: [Authentication]
-      summary: Refresh access token
-      x-verification-status: verified
-      description: |
-        Exchange a Cobru refresh token for a short-lived access token.
-        The request body field is `refresh`, not `refresh_token`.
-      security:
-        - ApiToken: []
-          ApiSecretKey: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TokenRefreshRequest'
-      responses:
-        '200':
-          description: Access token issued
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TokenResponse'
-        default:
-          $ref: '#/components/responses/GenericError'
-
-  /cobru/:
-    post:
-      operationId: createCobru
-      tags: [Cobrus]
-      summary: Create a cobru
-      x-verification-status: verified
-      description: |
-        Create a hosted Cobru payment object.
-
-        Important quirks:
-        - `payment_method_enabled` must be a JSON string.
-        - `payer_redirect_url` and `callback` should always be included.
-        - the response field `url` is a short slug, not a full URL.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreatePaymentRequest'
-      responses:
-        '201':
-          description: Cobru created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaymentResponse'
-        '400':
-          description: Validation error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '403':
-          description: Authentication error or misleading validation failure
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        default:
-          $ref: '#/components/responses/GenericError'
-
-  /{url}:
-    post:
-      operationId: submitPaymentDetails
-      tags: [Cobrus]
-      summary: Generate payment details
-      x-verification-status: legacy-doc
-      description: |
-        Submit payer and payment-method-specific details for an existing cobru.
-        This contract comes from Cobru legacy API materials and deep BRE-B research.
-      parameters:
-        - in: path
-          name: url
-          required: true
-          schema:
-            type: string
-          description: Cobru slug returned by `POST /cobru/`
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PaymentDetailsRequest'
-      responses:
-        '200':
-          description: Payment details accepted
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-        default:
-          $ref: '#/components/responses/GenericError'
-
-  /cobru_detail/{url}:
-    get:
-      operationId: consultCobru
-      tags: [Cobrus]
-      summary: Consult a cobru
-      x-verification-status: legacy-doc
-      parameters:
-        - in: path
-          name: url
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Cobru details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CobruDetailResponse'
-        default:
-          $ref: '#/components/responses/GenericError'
-
-  /get_banks/1/:
-    get:
-      operationId: listPseBanks
-      tags: [Cobrus]
-      summary: List PSE banks
-      x-verification-status: legacy-doc
-      description: Retrieve available PSE bank codes.
-      security: []
-      responses:
-        '200':
-          description: PSE bank list
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/BankCode'
-        default:
-          $ref: '#/components/responses/GenericError'
-
-  /cobru/estimate/:
-    post:
-      operationId: estimateCobru
-      tags: [Cobrus]
-      summary: Quote a cobru
-      x-verification-status: legacy-doc
-      description: Estimate fees and net received amount before creating a cobru.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/EstimateRequest'
-      responses:
-        '200':
-          description: Fee quote
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EstimateResponse'
-        default:
-          $ref: '#/components/responses/GenericError'
-
-  /edit_cobru/:
-    post:
-      operationId: editCobru
-      tags: [Cobrus]
-      summary: Edit a cobru
-      x-verification-status: legacy-doc
-      description: Update mutable fields on an existing cobru.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/EditCobruRequest'
-      responses:
-        '200':
-          description: Cobru updated
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-        default:
-          $ref: '#/components/responses/GenericError'
-
-  /send/:
-    post:
-      operationId: sendBalance
-      tags: [Transfers]
-      summary: Send balance to another user
-      x-verification-status: legacy-doc
-      description: Transfer Cobru balance to another Cobru user.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TransferRequest'
-      responses:
-        '200':
-          description: Transfer created
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-        default:
-          $ref: '#/components/responses/GenericError'
-
-  /cashwithdraw/:
-    post:
-      operationId: createCashWithdrawal
-      tags: [Cash Withdrawals]
-      summary: Withdraw cash
-      x-verification-status: legacy-doc
-      description: Create a cash withdrawal, documented in legacy materials for Efecty.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CashWithdrawalRequest'
-      responses:
-        '200':
-          description: Cash withdrawal created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CashWithdrawalResponse'
-        default:
-          $ref: '#/components/responses/GenericError'
-
-  /balance/:
-    get:
-      operationId: getBalance
-      tags: [Transfers]
-      summary: Get balance
-      x-verification-status: legacy-doc
-      description: Retrieve account balance.
-      responses:
-        '200':
-          description: Account balance
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-        default:
-          $ref: '#/components/responses/GenericError'
-
-  /withdrawals/banks/:
-    get:
-      operationId: listBankWithdrawalBanks
-      tags: [Bank Withdrawals]
-      summary: List available banks for withdrawals
-      x-verification-status: menu-only
-      description: |
-        Capability visible in Cobru's API menu.
-        Exact path and schema still pending official confirmation.
-      responses:
-        '200':
-          description: Placeholder success response
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-
-  /withdrawals/banks/colombia:
-    post:
-      operationId: createBankWithdrawalColombia
-      tags: [Bank Withdrawals]
-      summary: Create bank withdrawal to Colombia
-      x-verification-status: menu-only
-      responses:
-        '200':
-          description: Placeholder success response
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-
-  /withdrawals/banks/brazil:
-    post:
-      operationId: createBankWithdrawalBrazil
-      tags: [Bank Withdrawals]
-      summary: Create bank withdrawal to Brazil
-      x-verification-status: menu-only
-      responses:
-        '200':
-          description: Placeholder success response
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-
-  /withdrawals/banks/mexico:
-    post:
-      operationId: createBankWithdrawalMexico
-      tags: [Bank Withdrawals]
-      summary: Create bank withdrawal to Mexico
-      x-verification-status: menu-only
-      responses:
-        '200':
-          description: Placeholder success response
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-
-  /withdrawals/banks/argentina:
-    post:
-      operationId: createBankWithdrawalArgentina
-      tags: [Bank Withdrawals]
-      summary: Create bank withdrawal to Argentina
-      x-verification-status: menu-only
-      responses:
-        '200':
-          description: Placeholder success response
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-
-  /withdrawals/banks/bre-b:
-    post:
-      operationId: createBreBWithdrawal
-      tags: [Bank Withdrawals]
-      summary: Create BRE-B transfer
-      x-verification-status: menu-only
-      responses:
-        '200':
-          description: Placeholder success response
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-
-  /services/cell-recharge:
-    post:
-      operationId: rechargeCellPhone
-      tags: [Services]
-      summary: Recharge cell phone
-      x-verification-status: menu-only
-      responses:
-        '200':
-          description: Placeholder success response
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-
-  /services/pins:
-    get:
-      operationId: listPinProducts
-      tags: [Services]
-      summary: List PIN products
-      x-verification-status: menu-only
-      responses:
-        '200':
-          description: Placeholder success response
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-    post:
-      operationId: buyPinProduct
-      tags: [Services]
-      summary: Buy PIN product
-      x-verification-status: menu-only
-      responses:
-        '200':
-          description: Placeholder success response
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-
-  /cards:
-    get:
-      operationId: listCards
-      tags: [Cards]
-      summary: List cards
-      x-verification-status: menu-only
-      responses:
-        '200':
-          description: Placeholder success response
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-    post:
-      operationId: createCard
-      tags: [Cards]
-      summary: Create card
-      x-verification-status: menu-only
-      responses:
-        '200':
-          description: Placeholder success response
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-
-  /cards/topup:
-    post:
-      operationId: topupCard
-      tags: [Cards]
-      summary: Top up card
-      x-verification-status: menu-only
-      responses:
-        '200':
-          description: Placeholder success response
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-
-  /cards/movements:
-    get:
-      operationId: listCardMovements
-      tags: [Cards]
-      summary: List card movements
-      x-verification-status: menu-only
-      responses:
-        '200':
-          description: Placeholder success response
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-
-  /cards/freeze:
-    post:
-      operationId: freezeCard
-      tags: [Cards]
-      summary: Freeze card
-      x-verification-status: menu-only
-      responses:
-        '200':
-          description: Placeholder success response
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true

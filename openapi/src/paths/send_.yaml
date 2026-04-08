@@ -1,0 +1,23 @@
+post:
+  operationId: sendBalance
+  tags:
+    - Transfers
+  summary: Send balance to another user
+  x-verification-status: legacy-doc
+  description: Transfer Cobru balance to another Cobru user.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/TransferRequest.yaml
+  responses:
+    '200':
+      description: Transfer created
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

@@ -1,0 +1,18 @@
+get:
+  operationId: listCusdTransactions
+  tags:
+    - Celo
+  summary: List cUSD wallet transactions
+  x-verification-status: legacy-doc
+  responses:
+    '200':
+      description: cUSD transactions
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

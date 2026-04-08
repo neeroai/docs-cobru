@@ -1,0 +1,78 @@
+type: object
+properties:
+  pk:
+    type: integer
+    example: 27150
+  amount:
+    type: string
+    example: '50000.00'
+  state:
+    type: integer
+    enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+  date_created:
+    type: string
+    format: date-time
+  payment_method:
+    type: string
+    nullable: true
+  url:
+    type: string
+    description: Short slug. Final payment URL is `{baseUrl}/{url}`.
+    example: 3gofdf6f
+  owner:
+    type: string
+  name:
+    type: string
+  payed_amount:
+    type: string
+    example: '47605.00'
+  client_assume_costs:
+    type: boolean
+  payment_method_enabled:
+    $ref: ./PaymentMethodsString.yaml
+  expiration_days:
+    type: integer
+  fee_amount:
+    type: integer
+  fee_iva_amount:
+    type: integer
+  platform:
+    type: string
+  callback:
+    type: string
+  fee_iva:
+    type: number
+  iva_amount:
+    type: number
+  not_send_email:
+    type: boolean
+  by_topup:
+    type: boolean
+  bank_withdraw:
+    type: string
+    nullable: true
+  payer_redirect_url:
+    type: string
+  franchise:
+    type: string
+    nullable: true
+  idempotency_key:
+    type: string
+  wallet_bitcoin:
+    type: string
+    nullable: true
+  amount_bitcoin:
+    type: string
+    nullable: true
+  currency:
+    type: string
+    nullable: true
+  currency_code:
+    type: string
+    example: COP

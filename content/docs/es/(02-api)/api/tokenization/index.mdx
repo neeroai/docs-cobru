@@ -1,0 +1,145 @@
+---
+title: Tokenización
+description: Almacenamiento tokenizado de tarjetas y pagos card-on-file en Cobru.
+icon: ShieldCheck
+---
+
+<Callout type="warn">
+  Esta superficie viene de materiales legacy de Cobru y todavía necesita una validación fresca en sandbox.
+  Trátala como contrato beta hasta contar con el export oficial de OpenAPI o una nueva verificación endpoint por endpoint.
+</Callout>
+
+## Para qué sirve esta capability
+
+Usa tokenización cuando tu integración necesite:
+
+- registrar una tarjeta una sola vez y cobrarla después
+- evitar recolectar PAN completo en cada flujo de pago
+- listar tarjetas guardadas de la cuenta autenticada
+- eliminar tarjetas almacenadas cuando el usuario lo solicite
+
+## Flujo Cobru
+
+<Steps>
+  <Step>
+    Obtén la llave pública RSA desde `GET /base/get_constants_key_public/`.
+  </Step>
+  <Step>
+    Encripta los campos sensibles de la tarjeta en el cliente o en un servicio con alcance PCI.
+  </Step>
+  <Step>
+    Registra la tarjeta con `POST /register_tc/`.
+  </Step>
+  <Step>
+    Consulta tarjetas con `GET /list_tc/` y cobra con `POST /tc_payment/`.
+  </Step>
+</Steps>
+
+## Mapa de endpoints
+
+| Endpoint | Propósito | Estado |
+| --- | --- | --- |
+| `GET /base/get_constants_key_public/` | Obtener la llave pública RSA | Legacy doc |
+| `POST /register_tc/` | Registrar un token de tarjeta | Legacy doc |
+| `GET /list_tc/` | Listar tarjetas guardadas o consultar una por `card_uuid` | Legacy doc |
+| `POST /tc_payment/` | Pagar con una tarjeta guardada o tokenizada | Legacy doc |
+| `DELETE /delete_tc/` | Eliminar una tarjeta almacenada | Legacy doc |
+
+## Modelo de autenticación
+
+Los exports de Spotlight sugieren que los endpoints de tokenización son superficies autenticadas del usuario. Hasta completar una nueva validación en sandbox, asume que:
+
+- aplican los headers estándar de autenticación Cobru
+- las requests deben salir de un backend confiable o de servicios con alcance PCI
+- `Api-Secret-Key` nunca debe vivir en frontend público
+
+## Ejemplo: obtener la llave pública
+
+<Tabs items={['cURL', 'JavaScript / TypeScript', 'Python', 'PHP']}>
+  <Tab value="cURL">
+    ```bash
+    curl -X GET https://dev.cobru.co/base/get_constants_key_public/ \
+      -H "Api-Token: $COBRU_API_TOKEN" \
+      -H "Api-Secret-Key: $COBRU_API_SECRET" \
+      -H "Authorization: Bearer $COBRU_ACCESS_TOKEN"
+    ```
+  </Tab>
+  <Tab value="JavaScript / TypeScript">
+    ```ts
+    const response = await fetch('https://dev.cobru.co/base/get_constants_key_public/', {
+      method: 'GET',
+      headers: {
+        'Api-Token': process.env.COBRU_API_TOKEN!,
+        'Api-Secret-Key': process.env.COBRU_API_SECRET!,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const payload = await response.json();
+    console.log(payload.data.text_long_value);
+    ```
+  </Tab>
+  <Tab value="Python">
+    ```python
+    import requests
+
+    response = requests.get(
+        "https://dev.cobru.co/base/get_constants_key_public/",
+        headers={
+            "Api-Token": COBRU_API_TOKEN,
+            "Api-Secret-Key": COBRU_API_SECRET,
+            "Authorization": f"Bearer {access_token}",
+        },
+    )
+    print(response.json())
+    ```
+  </Tab>
+  <Tab value="PHP">
+    ```php
+    <?php
+
+    use GuzzleHttp\Client;
+
+    $client = new Client();
+    $response = $client->request('GET', 'https://dev.cobru.co/base/get_constants_key_public/', [
+        'headers' => [
+            'Api-Token' => getenv('COBRU_API_TOKEN'),
+            'Api-Secret-Key' => getenv('COBRU_API_SECRET'),
+            'Authorization' => 'Bearer ' . $accessToken,
+        ],
+    ]);
+
+    $payload = json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+    var_dump($payload);
+    ```
+  </Tab>
+</Tabs>
+
+## Notas operativas
+
+<Accordions>
+  <Accordion title="PCI y límites de encriptación">
+    El flujo legacy de Cobru espera encriptación RSA para número de tarjeta, nombre del titular y fecha de expiración.
+    Incluso con tokenización, debes tratar la captura y el transporte como sensibles a PCI hasta que Cobru publique un modelo de confianza más acotado.
+  </Accordion>
+
+  <Accordion title="Estabilidad de campos">
+    La documentación legacy menciona campos móviles/dispositivo como `imei`, `latitude` y `longitude`.
+    No los asumas como universalmente obligatorios hasta confirmar el contrato actual.
+  </Accordion>
+
+  <Accordion title="Postura recomendada en producción">
+    Usa tokenización de Cobru solo desde backend o desde un proxy con alcance PCI, registra únicamente identificadores enmascarados y diseña tu propio flujo de recuperación para eliminación de tarjetas.
+  </Accordion>
+</Accordions>
+
+## Siguientes pasos
+
+<Cards>
+  <Card title="Referencia API" href="/es/docs/api/reference">
+    Explora los métodos de tokenización dentro de la referencia OpenAPI interactiva.
+  </Card>
+  <Card title="Tarjetas" href="/es/docs/api/cards">
+    Continúa con las tarjetas emitidas por Cobru y sus operaciones posteriores.
+  </Card>
+</Cards>

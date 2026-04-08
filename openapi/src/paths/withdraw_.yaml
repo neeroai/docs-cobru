@@ -1,0 +1,42 @@
+post:
+  operationId: createBankWithdrawalLegacy
+  tags:
+    - Cash Withdrawals
+  summary: Withdraw money to a bank account
+  x-verification-status: legacy-doc
+  description: >-
+    Legacy withdrawal flow documented before the third-party withdrawal
+    endpoints.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: true
+  responses:
+    '200':
+      description: Withdrawal created
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml
+get:
+  operationId: listLegacyBankWithdrawals
+  tags:
+    - Cash Withdrawals
+  summary: List legacy bank withdrawals
+  x-verification-status: legacy-doc
+  responses:
+    '200':
+      description: Withdrawal list
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

@@ -1,0 +1,22 @@
+get:
+  operationId: getThirdPartyWithdrawalPdf
+  tags:
+    - Bank Withdrawals
+  summary: Get third-party withdrawal PDF
+  x-verification-status: legacy-doc
+  parameters:
+    - in: query
+      name: withdraw_id
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Withdrawal PDF or download metadata
+      content:
+        application/pdf:
+          schema:
+            type: string
+            format: binary
+    default:
+      $ref: ../components/responses/GenericError.yaml

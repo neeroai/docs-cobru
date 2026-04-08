@@ -1,66 +1,62 @@
-# OpenAPI Source Of Truth
+# Cobru OpenAPI Maintenance
 
-`openapi/cobru.yaml` is the local copy consumed by Fumadocs and `createOpenAPI()`.
+This repo is the official source of truth for Cobru API documentation.
 
-## Expected source
+## Source of truth
 
-- Stoplight project: `https://cobru.stoplight.io/`
-- Format: OpenAPI `3.1` YAML
-- Target file: `openapi/cobru.yaml`
+- Editable root contract: `openapi/src/openapi.yaml`
+- Bundled artifact consumed by Fumadocs: `openapi/cobru.yaml`
+- Localized API labels and operation names: `openapi/docs-metadata.json`
+- Narrative docs: `content/docs/es/**` as canonical editorial source, mirrored to `content/docs/en/**`
 
-## Update workflow
+`Stoplight` is no longer part of the maintenance flow.
 
-1. Export the latest OpenAPI `3.1` YAML from Stoplight, or sync it with `bun run openapi:sync`.
-2. Replace `openapi/cobru.yaml` with the exported file.
-3. Run `bun run openapi:validate`.
-4. Run `bun run openapi:validate:strict`.
-5. Run `bun run build`.
+## Normal update workflow
 
-## Automated sync
+1. Edit `openapi/src/openapi.yaml` or the referenced files under `openapi/src/**`.
+2. If the change affects operation names or API group names shown in docs, update `openapi/docs-metadata.json`.
+3. If the change affects public narrative docs, update the Spanish page under `content/docs/es/**` and the synchronized English counterpart under `content/docs/en/**`.
+4. Run:
+   - `bun run openapi:bundle`
+   - `bun run openapi:lint`
+   - `bun run openapi:check:bundle`
+   - `bun run openapi:validate`
+   - `bun run openapi:check:locales`
+   - `bun run content:check:sync`
+   - `bun run build`
+5. Open a GitHub pull request for review.
 
-The public Stoplight workspace exposes docs pages, but the real OpenAPI export still requires authenticated access. The repo includes a fetch script for the internal export endpoint used by Stoplight's frontend bundle.
+## Governance rules
 
-Required env vars:
+- Every operation must have a stable `operationId`.
+- Every operation must have at least one tag.
+- Every operation visible in the API reference must have:
+  - Spanish label
+  - English label
+  - localized API group title
+- EN/ES content trees must remain structurally identical.
+- Normal API maintenance should not require edits to layout code, component code, or design-system code.
 
-- `STOPLIGHT_PROJECT_SLUG`
-- `STOPLIGHT_EXPORT_URI`
-- `STOPLIGHT_TOKEN`
+## CI checks
 
-Optional env vars:
+- `OpenAPI Governance`
+  - checks that the bundle matches `openapi/src/**`
+  - lints the contract with Redocly
+  - validates basic contract shape
+  - validates localized API metadata sync
+- `Localization Sync`
+  - checks EN/ES docs tree parity
+  - checks EN/ES API metadata parity
+- `Docs Build`
+  - runs lint, typecheck, and production build
 
-- `STOPLIGHT_WORKSPACE_SLUG` (default: `cobru`)
-- `STOPLIGHT_BRANCH_SLUG` (default: `main`)
-- `STOPLIGHT_API_BASE` (default: `https://<workspace>.stoplight.io/api`)
-- `STOPLIGHT_OUTPUT_PATH` (default: `openapi/cobru.yaml`)
+## Design-system policy
 
-Example:
+- Editable source of truth for tokens: `tokens/source/*.json`
+- Fumadocs layout and design-system bridge are treated as platform code and should stay stable during routine docs/API updates.
+- If branding changes are needed, update token JSON rather than layout/components whenever possible.
 
-```bash
-STOPLIGHT_PROJECT_SLUG=cobru-docs-en \
-STOPLIGHT_EXPORT_URI=<node-export-uri> \
-STOPLIGHT_TOKEN=<workspace-export-token> \
-bun run openapi:sync
-```
+## Notes
 
-If the response is not valid OpenAPI 3 YAML, the script fails without overwriting the local file.
-
-## Public workspace findings
-
-- Public docs projects discovered on `2026-04-07`:
-  - `cobru-docs-en` (`project id 216734`, flavor `design`)
-  - `cobru-docs` (`project id 215301`, flavor `design`)
-- Public docs entry nodes discovered:
-  - `0pthfghecr0zd-what-is-cobru`
-  - `0pthfghecr0zd-que-es-cobru`
-- Direct unauthenticated requests to `/api/v1/projects/<workspace>/<project>` and `/api/v1/projects/<workspace>/<project>/nodes/<public-doc-slug>` returned `404`, so the export URI for the OpenAPI source is not derivable from the public docs pages alone.
-
-## Validation modes
-
-- `bun run openapi:validate`
-  Checks basic shape and warns if the spec still contains placeholder markers.
-- `bun run openapi:validate:strict`
-  Fails if placeholder markers are still present. Use this in CI once the real spec is committed.
-
-## Why strict mode is separate
-
-The repo still contains a temporary placeholder spec during bootstrap. Strict mode exists so the project can switch to hard enforcement without changing the validator itself.
+- Runtime consumers still point to `openapi/cobru.yaml` for compatibility and deterministic builds.
+- Maintainers should treat `openapi/cobru.yaml` as a generated artifact and `openapi/src/**` as the editable contract.

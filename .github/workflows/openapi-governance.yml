@@ -1,0 +1,49 @@
+name: OpenAPI Governance
+
+on:
+  pull_request:
+    paths:
+      - "openapi/**"
+      - "scripts/validate-openapi*.mjs"
+      - "lib/openapi-*.ts"
+      - "components/api-page.tsx"
+      - "package.json"
+      - "bun.lock"
+      - "redocly.yaml"
+  push:
+    branches:
+      - main
+    paths:
+      - "openapi/**"
+      - "scripts/validate-openapi*.mjs"
+      - "lib/openapi-*.ts"
+      - "components/api-page.tsx"
+      - "package.json"
+      - "bun.lock"
+      - "redocly.yaml"
+
+jobs:
+  openapi:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.2.9"
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Check bundled OpenAPI artifact
+        run: bun run openapi:check:bundle
+
+      - name: Lint OpenAPI
+        run: bun run openapi:lint
+
+      - name: Validate OpenAPI shape
+        run: bun run openapi:validate
+
+      - name: Validate localized API metadata
+        run: bun run openapi:check:locales

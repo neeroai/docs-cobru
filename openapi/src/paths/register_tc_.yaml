@@ -1,0 +1,23 @@
+post:
+  operationId: registerCreditCardToken
+  tags:
+    - Tokenization
+  summary: Register a tokenized credit card
+  x-verification-status: legacy-doc
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: true
+  responses:
+    '200':
+      description: Card registered
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

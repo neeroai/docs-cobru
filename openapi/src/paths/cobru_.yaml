@@ -1,0 +1,40 @@
+post:
+  operationId: createCobru
+  tags:
+    - Cobrus
+  summary: Create a cobru
+  x-verification-status: verified
+  description: |
+    Create a hosted Cobru payment object.
+
+    Important quirks:
+    - `payment_method_enabled` must be a JSON string.
+    - `payer_redirect_url` and `callback` should always be included.
+    - the response field `url` is a short slug, not a full URL.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CreatePaymentRequest.yaml
+  responses:
+    '201':
+      description: Cobru created
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PaymentResponse.yaml
+    '400':
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+    '403':
+      description: Authentication error or misleading validation failure
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ErrorResponse.yaml
+    default:
+      $ref: ../components/responses/GenericError.yaml

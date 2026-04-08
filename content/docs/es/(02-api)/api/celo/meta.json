@@ -1,0 +1,6 @@
+{
+  "title": "Celo",
+  "icon": "Coins",
+  "defaultOpen": false,
+  "pages": ["index"]
+}

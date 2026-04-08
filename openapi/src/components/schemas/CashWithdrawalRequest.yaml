@@ -1,0 +1,26 @@
+type: object
+required:
+  - method
+  - document
+  - amount
+  - exp_days
+  - name
+properties:
+  method:
+    type: string
+    example: efecty
+  document:
+    type: string
+  amount:
+    type: string
+  exp_days:
+    type: string
+  name:
+    type: string
+  coupon:
+    type: string
+  callback:
+    type: string
+    format: uri
+  estimate:
+    type: boolean

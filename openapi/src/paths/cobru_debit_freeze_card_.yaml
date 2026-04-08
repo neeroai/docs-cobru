@@ -1,0 +1,23 @@
+post:
+  operationId: freezeDebitCard
+  tags:
+    - Cards
+  summary: Freeze debit card
+  x-verification-status: legacy-doc
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: true
+  responses:
+    '200':
+      description: Card frozen
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

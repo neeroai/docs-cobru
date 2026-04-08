@@ -4,15 +4,132 @@ description: Use movement history for reconciliation, treasury, and support oper
 icon: Activity
 ---
 
+<Callout type="warn">
+  Cobru's movements contract still comes from legacy materials. The route shape is promising, but the parameters and response need a fresh verification pass before you depend on them for automated accounting.
+</Callout>
+
+## Why this page matters
+
 Movement history is a recurring operational requirement across payments, transfers, withdrawals, and cards.
 
-## What a strong Cobru movements guide should answer
+## Endpoint pattern
 
-- which surfaces emit movements
-- how to reconcile webhook state changes with movement rows
-- which identifiers are stable across product areas
-- how to re-run reconciliation when a webhook is missed
+`GET /movements/movements_by_types/?{type_req}=true&per_page={number}&page_num={number}`
 
-<Callout type="warn">
-  Cobru's public movement contracts are still incomplete in this repo. Treat this page as operational guidance until endpoint-level verification is complete.
-</Callout>
+Supported `type_req` values from Spotlight:
+
+- `by_cobrus`
+- `by_withdraws`
+- `by_sends`
+- `by_other_payments`
+
+Send only one type filter at a time.
+
+## Example request
+
+<Tabs items={['cURL', 'JavaScript / TypeScript', 'Python', 'PHP']}>
+  <Tab value="cURL">
+    ```bash
+    curl -G https://dev.cobru.co/movements/movements_by_types/ \
+      -H "Api-Token: $COBRU_API_TOKEN" \
+      -H "Api-Secret-Key: $COBRU_API_SECRET" \
+      -H "Authorization: Bearer $COBRU_ACCESS_TOKEN" \
+      --data-urlencode "by_cobrus=true" \
+      --data-urlencode "per_page=10" \
+      --data-urlencode "page_num=1"
+    ```
+  </Tab>
+  <Tab value="JavaScript / TypeScript">
+    ```ts
+    const url = new URL('https://dev.cobru.co/movements/movements_by_types/');
+    url.searchParams.set('by_cobrus', 'true');
+    url.searchParams.set('per_page', '10');
+    url.searchParams.set('page_num', '1');
+
+    const response = await fetch(url, {
+      headers: {
+        'Api-Token': process.env.COBRU_API_TOKEN!,
+        'Api-Secret-Key': process.env.COBRU_API_SECRET!,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const movements = await response.json();
+    console.log(movements);
+    ```
+  </Tab>
+  <Tab value="Python">
+    ```python
+    import requests
+
+    response = requests.get(
+        "https://dev.cobru.co/movements/movements_by_types/",
+        headers={
+            "Api-Token": COBRU_API_TOKEN,
+            "Api-Secret-Key": COBRU_API_SECRET,
+            "Authorization": f"Bearer {access_token}",
+        },
+        params={
+            "by_cobrus": "true",
+            "per_page": 10,
+            "page_num": 1,
+        },
+    )
+    print(response.json())
+    ```
+  </Tab>
+  <Tab value="PHP">
+    ```php
+    <?php
+
+    use GuzzleHttp\Client;
+
+    $client = new Client();
+    $response = $client->request('GET', 'https://dev.cobru.co/movements/movements_by_types/', [
+        'headers' => [
+            'Api-Token' => getenv('COBRU_API_TOKEN'),
+            'Api-Secret-Key' => getenv('COBRU_API_SECRET'),
+            'Authorization' => 'Bearer ' . $accessToken,
+        ],
+        'query' => [
+            'by_cobrus' => 'true',
+            'per_page' => 10,
+            'page_num' => 1,
+        ],
+    ]);
+
+    $movements = json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+    var_dump($movements);
+    ```
+  </Tab>
+</Tabs>
+
+## Reconciliation checklist
+
+<Steps>
+  <Step>
+    Persist Cobru webhook payloads first, then process them asynchronously.
+  </Step>
+  <Step>
+    Reconcile a movement row with payment or withdrawal identifiers, not only by amount.
+  </Step>
+  <Step>
+    Re-run a historical pull when a webhook fails, arrives late, or produces ambiguous state.
+  </Step>
+</Steps>
+
+## Integration warnings
+
+<Accordions>
+  <Accordion title="One filter per request">
+    Spotlight explicitly says not to send all type flags at the same time. Build your sync jobs to query one movement family per request.
+  </Accordion>
+
+  <Accordion title="Do not assume image fields or payer fields are stable">
+    The sample response includes presentational fields such as `img` plus payer and tax fields. Treat those as informational until the current contract is revalidated.
+  </Accordion>
+
+  <Accordion title="Stable identifiers first">
+    Prefer `pk`, `reference_cobru`, `url`, and operation-specific IDs over derived display fields when joining movement rows to internal records.
+  </Accordion>
+</Accordions>

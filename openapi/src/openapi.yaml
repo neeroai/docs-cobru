@@ -1,0 +1,176 @@
+openapi: 3.1.0
+info:
+  title: Cobru API
+  version: 1.0.0
+  description: >
+    Cobru API for payments and operational money movement in Colombia.
+
+
+    This OpenAPI file is currently a curated working spec built from:
+
+    - live sandbox verification on `dev.cobru.co`
+
+    - Cobru legacy API materials
+
+    - Cobru API menu captures
+
+
+    Verification model:
+
+    - `x-verification-status: verified` means behavior has been validated
+    against sandbox or first-hand integration learnings.
+
+    - `x-verification-status: legacy-doc` means the contract comes from older
+    Cobru materials and should be re-validated before production dependence.
+
+    - `x-verification-status: menu-only` means the capability is visible in
+    Cobru's API surface but the contract is still pending extraction.
+
+
+    The editable source of truth lives in `openapi/src/**` and is bundled to
+    `openapi/cobru.yaml` for runtime consumption.
+  contact:
+    email: soporte@cobru.co
+servers:
+  - url: https://prod.cobru.co
+    description: Production
+  - url: https://dev.cobru.co
+    description: Sandbox
+tags:
+  - name: Authentication
+  - name: Cobrus
+  - name: Transfers
+  - name: Balance & Movements
+  - name: Cash Withdrawals
+  - name: Bank Withdrawals
+  - name: Services
+  - name: Tokenization
+  - name: Cards
+  - name: Celo
+  - name: Whitelabel
+  - name: Webhooks
+security:
+  - ApiToken: []
+    ApiSecretKey: []
+    BearerAuth: []
+components:
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Api-Token
+    ApiSecretKey:
+      type: apiKey
+      in: header
+      name: Api-Secret-Key
+    BearerAuth:
+      type: http
+      scheme: bearer
+webhooks:
+  paymentStateChanged:
+    $ref: webhooks/paymentStateChanged.yaml
+paths:
+  /token/refresh/:
+    $ref: paths/token_refresh_.yaml
+  /cobru/:
+    $ref: paths/cobru_.yaml
+  /{url}:
+    $ref: paths/{url}.yaml
+  /cobru_detail/{url}:
+    $ref: paths/cobru_detail_{url}.yaml
+  /get_banks/1/:
+    $ref: paths/get_banks_1_.yaml
+  /cobru/estimate/:
+    $ref: paths/cobru_estimate_.yaml
+  /edit_cobru/:
+    $ref: paths/edit_cobru_.yaml
+  /send/:
+    $ref: paths/send_.yaml
+  /balance/:
+    $ref: paths/balance_.yaml
+  /movements/movements_by_types/:
+    $ref: paths/movements_movements_by_types_.yaml
+  /withdraw/:
+    $ref: paths/withdraw_.yaml
+  /cashwithdraw/:
+    $ref: paths/cashwithdraw_.yaml
+  /cashwithdraw/{id}:
+    $ref: paths/cashwithdraw_{id}.yaml
+  /cancelcashwithdraw/:
+    $ref: paths/cancelcashwithdraw_.yaml
+  /bank_list_third_party_withdraw/:
+    $ref: paths/bank_list_third_party_withdraw_.yaml
+  /thirdpartywithdraw/:
+    $ref: paths/thirdpartywithdraw_.yaml
+  /thirdpartywithdraw/{id}:
+    $ref: paths/thirdpartywithdraw_{id}.yaml
+  /cancelthirdpartywithdraw/:
+    $ref: paths/cancelthirdpartywithdraw_.yaml
+  /panel/detail_withdraw_pdf/:
+    $ref: paths/panel_detail_withdraw_pdf_.yaml
+  /withdraw/co/:
+    $ref: paths/withdraw_co_.yaml
+  /withdraw/br/:
+    $ref: paths/withdraw_br_.yaml
+  /withdraw/ar/:
+    $ref: paths/withdraw_ar_.yaml
+  /withdraw/mx/:
+    $ref: paths/withdraw_mx_.yaml
+  /request_service_reload/:
+    $ref: paths/request_service_reload_.yaml
+  /pines/all_pines/:
+    $ref: paths/pines_all_pines_.yaml
+  /pin/:
+    $ref: paths/pin_.yaml
+  /packages/all_packages/:
+    $ref: paths/packages_all_packages_.yaml
+  /packages/buy/:
+    $ref: paths/packages_buy_.yaml
+  /soat/:
+    $ref: paths/soat_.yaml
+  /soat/doc_types/:
+    $ref: paths/soat_doc_types_.yaml
+  /soat/cities/:
+    $ref: paths/soat_cities_.yaml
+  /base/get_constants_key_public/:
+    $ref: paths/base_get_constants_key_public_.yaml
+  /register_tc/:
+    $ref: paths/register_tc_.yaml
+  /list_tc/:
+    $ref: paths/list_tc_.yaml
+  /tc_payment/:
+    $ref: paths/tc_payment_.yaml
+  /delete_tc/:
+    $ref: paths/delete_tc_.yaml
+  /cobru/debit/create_and_reload_card/:
+    $ref: paths/cobru_debit_create_and_reload_card_.yaml
+  /cobru/debit/get_card/:
+    $ref: paths/cobru_debit_get_card_.yaml
+  /cobru/debit/get_transactions/:
+    $ref: paths/cobru_debit_get_transactions_.yaml
+  /cobru/debit/freeze_card/:
+    $ref: paths/cobru_debit_freeze_card_.yaml
+  /celo/:
+    $ref: paths/celo_.yaml
+  /celo/account/:
+    $ref: paths/celo_account_.yaml
+  /celo/transactions/cusd/:
+    $ref: paths/celo_transactions_cusd_.yaml
+  /pay_with_celo/:
+    $ref: paths/pay_with_celo_.yaml
+  /crypto/rates/:
+    $ref: paths/crypto_rates_.yaml
+  /crypto/buy/:
+    $ref: paths/crypto_buy_.yaml
+  /user/:
+    $ref: paths/user_.yaml
+  /category/:
+    $ref: paths/category_.yaml
+  /subcategory:
+    $ref: paths/subcategory.yaml
+  /request_confirmation/:
+    $ref: paths/request_confirmation_.yaml
+  /verify_email/:
+    $ref: paths/verify_email_.yaml
+  /verify_phone/:
+    $ref: paths/verify_phone_.yaml

@@ -1,6 +1,6 @@
 # AGENTS.md - docs-cobru
 
-Version: 2.0 | Date: 2026-04-07
+Version: 3.0 | Date: 2026-04-08
 
 ---
 
@@ -54,9 +54,14 @@ Goals:
 | Typecheck | `bun run typecheck` |
 | Lint | `bun run lint` |
 | Format | `bun run format` |
+| Bundle OpenAPI | `bun run openapi:bundle` |
+| Check OpenAPI bundle | `bun run openapi:check:bundle` |
+| Lint OpenAPI | `bun run openapi:lint` |
 | Validate OpenAPI | `bun run openapi:validate` |
+| Validate OpenAPI locales | `bun run openapi:check:locales` |
+| Validate content sync | `bun run content:check:sync` |
+| Governance suite | `bun run ci:governance` |
 | Strict OpenAPI validation | `bun run openapi:validate:strict` |
-| Sync Stoplight export | `bun run openapi:sync` |
 
 ---
 
@@ -83,7 +88,8 @@ Goals:
 | `docs/` | internal research and source materials |
 | `.captures/` | screenshots of Cobru menu/UI used to infer product scope |
 | `lib/` | source loader, layout config, OpenAPI setup, site config |
-| `openapi/` | local spec + operational README |
+| `openapi/src/` | editable multi-file OpenAPI source |
+| `openapi/` | bundled spec, metadata, and operational README |
 | `scripts/` | scraping, compiling, syncing, and validating support scripts |
 | `styles/tokens/` | CSS token layers |
 | `tokens/source/` | token source JSON |
@@ -105,10 +111,13 @@ Goals:
 
 ## OpenAPI Rules
 
-- `openapi/cobru.yaml` is a curated working spec, not yet the final official export.
+- `openapi/src/**` is the editable contract source.
+- `openapi/cobru.yaml` is the bundled artifact consumed by the runtime.
+- `openapi/docs-metadata.json` is the declarative source for localized API labels and code-sample policy.
 - Every new endpoint added to the spec should carry honest verification context where useful.
 - Do not silently upgrade a `legacy-doc` or `menu-only` contract to “verified” without fresh evidence.
-- Run `bun run openapi:validate` after modifying the spec.
+- Run `bun run openapi:bundle` after modifying `openapi/src/**`.
+- Run `bun run ci:governance` after modifying the spec or localized API metadata.
 - Run `bun run build` after modifying the spec because the OpenAPI UI must still render.
 
 ---
@@ -165,7 +174,6 @@ Goals:
 
 ## High-Value Next Steps
 
-- Replace curated spec with official Stoplight export
 - Re-verify endpoint families beyond core payments
 - Improve public API changelog/versioning story
 - Add deeper operational/testing examples for webhook flows

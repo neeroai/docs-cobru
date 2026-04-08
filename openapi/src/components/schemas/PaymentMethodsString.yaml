@@ -1,0 +1,5 @@
+type: string
+description: |
+  JSON-serialized object of enabled payment methods.
+  Cobru expects this field as a string, not as a nested JSON object.
+example: '{"Bre-B":true,"pse":true,"NEQUI":true}'

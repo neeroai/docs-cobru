@@ -1,0 +1,23 @@
+post:
+  operationId: editCobru
+  tags:
+    - Cobrus
+  summary: Edit a cobru
+  x-verification-status: legacy-doc
+  description: Update mutable fields on an existing cobru.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/EditCobruRequest.yaml
+  responses:
+    '200':
+      description: Cobru updated
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

@@ -1,0 +1,49 @@
+get:
+  operationId: getOrCreateCeloWallet
+  tags:
+    - Celo
+  summary: Get or create cUSD wallet
+  x-verification-status: legacy-doc
+  responses:
+    '200':
+      description: Wallet snapshot
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              address:
+                type: string
+              balance:
+                type: string
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml
+post:
+  operationId: transferCusd
+  tags:
+    - Celo
+  summary: Transfer cUSD
+  x-verification-status: legacy-doc
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            to:
+              type: string
+            amount:
+              type: number
+          additionalProperties: true
+  responses:
+    '200':
+      description: Transfer result
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

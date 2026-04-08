@@ -1,0 +1,16 @@
+post:
+  operationId: exportCeloWalletAccount
+  tags:
+    - Celo
+  summary: Export Celo wallet account details
+  x-verification-status: legacy-doc
+  responses:
+    '200':
+      description: Wallet export details
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

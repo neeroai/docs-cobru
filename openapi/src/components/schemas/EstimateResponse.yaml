@@ -1,0 +1,10 @@
+type: object
+properties:
+  cobru_amount:
+    type: integer
+  cobru_fee:
+    type: integer
+  iva:
+    type: number
+  cobru_payed_amount:
+    type: integer

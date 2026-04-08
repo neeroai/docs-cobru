@@ -1,0 +1,23 @@
+post:
+  operationId: payCobruWithCelo
+  tags:
+    - Celo
+  summary: Pay a Cobru with cUSD
+  x-verification-status: legacy-doc
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: true
+  responses:
+    '200':
+      description: Payment result
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

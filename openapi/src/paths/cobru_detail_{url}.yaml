@@ -1,0 +1,21 @@
+get:
+  operationId: consultCobru
+  tags:
+    - Cobrus
+  summary: Consult a cobru
+  x-verification-status: legacy-doc
+  parameters:
+    - in: path
+      name: url
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Cobru details
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CobruDetailResponse.yaml
+    default:
+      $ref: ../components/responses/GenericError.yaml

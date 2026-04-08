@@ -1,0 +1,22 @@
+get:
+  operationId: listSoatCities
+  tags:
+    - Services
+  summary: List SOAT cities
+  x-verification-status: legacy-doc
+  parameters:
+    - in: query
+      name: dpto
+      required: false
+      schema:
+        type: string
+  responses:
+    '200':
+      description: City catalog
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

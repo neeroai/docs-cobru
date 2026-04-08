@@ -1,0 +1,26 @@
+post:
+  operationId: verifyWhitelabelPhone
+  tags:
+    - Whitelabel
+  summary: Verify phone confirmation code
+  x-verification-status: legacy-doc
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            code:
+              type: integer
+          additionalProperties: true
+  responses:
+    '200':
+      description: Phone verified
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

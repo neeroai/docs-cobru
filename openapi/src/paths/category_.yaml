@@ -1,0 +1,16 @@
+get:
+  operationId: listWhitelabelCategories
+  tags:
+    - Whitelabel
+  summary: List business categories
+  x-verification-status: legacy-doc
+  responses:
+    '200':
+      description: Category list
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

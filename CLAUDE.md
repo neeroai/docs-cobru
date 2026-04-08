@@ -20,11 +20,15 @@ Version: 3.0 | Date: 2026-04-07
   - `Docs`: onboarding, auth, webhooks, errors, testing
   - `API`: reference + endpoint families for Cobrus, transfers, withdrawals, services, and cards
   - `Guides`: BRE-B + QR, balances, movements, white-label
+- OpenAPI is now repo-first:
+  - editable source: `openapi/src/**`
+  - bundled runtime artifact: `openapi/cobru.yaml`
+  - localized API metadata: `openapi/docs-metadata.json`
 - `openapi/cobru.yaml` is no longer a 2-path placeholder. It is now a curated working spec with verification markers:
   - `verified`
   - `legacy-doc`
   - `menu-only`
-- The real Stoplight export is still the preferred source of truth when available.
+- Stoplight is no longer part of the maintenance model for this repo.
 
 ---
 
@@ -65,7 +69,9 @@ Version: 3.0 | Date: 2026-04-07
 | `components/mdx.tsx` | Official Fumadocs component registry |
 | `content/docs/en/` | English docs content |
 | `content/docs/es/` | Spanish docs content |
-| `openapi/cobru.yaml` | Curated working OpenAPI 3.1 spec |
+| `openapi/src/` | Editable multi-file OpenAPI source |
+| `openapi/cobru.yaml` | Bundled OpenAPI artifact consumed at runtime |
+| `openapi/docs-metadata.json` | Localized API group/operation labels + code sample policy |
 | `docs/` | Internal research, learnings, and source material for public docs |
 
 ---
@@ -93,7 +99,9 @@ Version: 3.0 | Date: 2026-04-07
 
 | Content | Location | Reliability |
 | ------- | -------- | ----------- |
-| Working OpenAPI spec | `openapi/cobru.yaml` | Mixed — see `x-verification-status` |
+| OpenAPI source | `openapi/src/**` | High |
+| OpenAPI bundle | `openapi/cobru.yaml` | Generated artifact |
+| OpenAPI docs metadata | `openapi/docs-metadata.json` | High |
 | Live integration learnings | `docs/cobru-api-learnings.md` | High |
 | BRE-B / QR implementation | `docs/cobru-breb-qr-integration.md` | High |
 | Deep BRE-B reverse engineering | `docs/cobru-qr-bre-b-deep-research.md` | High |
@@ -118,20 +126,23 @@ Version: 3.0 | Date: 2026-04-07
 
 ## OpenAPI Notes
 
-- `openapi/cobru.yaml` currently documents 22 paths.
+- `openapi/src/**` is the editable contract source.
+- `openapi/cobru.yaml` is a bundled artifact and should not be edited directly during routine maintenance.
 - The spec uses `x-verification-status` on operations:
   - `verified`: live behavior validated
   - `legacy-doc`: sourced from older Cobru materials
   - `menu-only`: surfaced in Cobru UI/menu, exact contract pending
-- Preferred workflow:
-  1. sync/export official Stoplight spec
-  2. compare against current curated spec
-  3. preserve verification notes where they still add value
+- Governance flow:
+  1. edit `openapi/src/**`
+  2. run `bun run openapi:bundle`
+  3. run `bun run ci:governance`
+  4. open PR
 
 Related files:
 - `openapi/README.md`
-- `scripts/fetch-stoplight-openapi.mjs`
+- `scripts/check-openapi-bundle-sync.mjs`
 - `scripts/validate-openapi.mjs`
+- `scripts/validate-openapi-locales.mjs`
 
 ---
 
@@ -145,15 +156,21 @@ Related files:
 | Typecheck | `bun run typecheck` |
 | Lint | `bun run lint` |
 | Format | `bun run format` |
+| Bundle OpenAPI | `bun run openapi:bundle` |
+| Check OpenAPI bundle sync | `bun run openapi:check:bundle` |
+| Lint OpenAPI | `bun run openapi:lint` |
 | Validate OpenAPI | `bun run openapi:validate` |
+| Validate OpenAPI locale sync | `bun run openapi:check:locales` |
+| Validate EN/ES content sync | `bun run content:check:sync` |
+| Governance suite | `bun run ci:governance` |
 | Strict OpenAPI validation | `bun run openapi:validate:strict` |
-| Sync Stoplight export | `bun run openapi:sync` |
 
 ---
 
 ## Operational Notes
 
 - `README.md` should be kept external-facing and concise.
+- `CONTRIBUTING.md` should define maintainer workflow and PR expectations.
 - `AGENTS.md` should be kept repo-operational and session-oriented.
 - `CLAUDE.md` should stay as the compact technical map of the repo.
 - Public docs content should prefer:
@@ -165,7 +182,7 @@ Related files:
 
 ## Backlog Themes
 
-- Replace curated OpenAPI spec with official Stoplight export
+- Move more OpenAPI presentation logic out of TS and into declarative repo metadata where useful
 - Re-verify `legacy-doc` and `menu-only` endpoint families against sandbox
 - Add stronger API reference coverage for cards, services, and withdrawals
 - Introduce changelog/versioning strategy for public API evolution

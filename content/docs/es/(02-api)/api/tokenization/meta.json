@@ -1,0 +1,6 @@
+{
+  "title": "Tokenización",
+  "icon": "ShieldCheck",
+  "defaultOpen": false,
+  "pages": ["index"]
+}

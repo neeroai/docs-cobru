@@ -1,0 +1,28 @@
+post:
+  operationId: requestWhitelabelConfirmationCode
+  tags:
+    - Whitelabel
+  summary: Request email or phone confirmation code
+  x-verification-status: legacy-doc
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            phone:
+              type: boolean
+            email:
+              type: boolean
+          additionalProperties: true
+  responses:
+    '200':
+      description: Confirmation code sent
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

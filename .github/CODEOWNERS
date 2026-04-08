@@ -1,0 +1,10 @@
+# Cobru docs governance
+# Keep API contract, public docs, and token sources under explicit review.
+
+* @neeroai
+
+/openapi/ @neeroai
+/content/docs/ @neeroai
+/tokens/source/ @neeroai
+/styles/tokens/ @neeroai
+/scripts/validate-*.mjs @neeroai

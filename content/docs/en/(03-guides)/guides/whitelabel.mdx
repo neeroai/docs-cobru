@@ -4,9 +4,133 @@ description: Guidance for embedding Cobru in your own product experience with mi
 icon: Paintbrush
 ---
 
-Cobru's hosted payment flows can still feel integrated into your own product if you design the handoff carefully.
+Cobru's hosted payment flows can still feel integrated into your own product if you design the handoff carefully. The original Spotlight material also documents a white-label user registration surface that is important for embedded financial products.
 
-## Recommendations
+<Callout type="warn">
+  White-label onboarding and brand-prefixed usernames come from legacy Cobru documentation. Publish or ship only after confirming the current contract with your Cobru team.
+</Callout>
+
+## What this capability covers
+
+- registering users under a partner or brand namespace
+- collecting categories and subcategories before registration
+- confirming email and phone
+- embedding Cobru-owned flows inside your product experience
+
+## Registration workflow
+
+<Steps>
+  <Step>
+    Fetch categories from `GET /category/` and the matching subcategories from `GET /subcategory?category_id=...`.
+  </Step>
+  <Step>
+    Collect the registration payload, including `brand`, `username`, `documents`, and legal identity fields.
+  </Step>
+  <Step>
+    Create the user with `POST /user/`.
+  </Step>
+  <Step>
+    Complete post-registration verification flows such as email and phone confirmation.
+  </Step>
+</Steps>
+
+## Example registration payload
+
+<Tabs items={['JSON', 'JavaScript / TypeScript', 'Python', 'PHP']}>
+  <Tab value="JSON">
+    ```json
+    {
+      "username": "09906786442",
+      "first_name": "Test",
+      "last_name": "User",
+      "email": "test@example.com",
+      "password": "12345678",
+      "phone": "09906786442",
+      "document_type": "0",
+      "document_number": "11111122223",
+      "country_code": "+57",
+      "gender": 2,
+      "date_birth": "2001-08-08",
+      "type_person": 1,
+      "date_expiration": "2019-08-08",
+      "subcategory": 745,
+      "category": 99,
+      "platform": "ios",
+      "brand": "MY_BRAND"
+    }
+    ```
+  </Tab>
+  <Tab value="JavaScript / TypeScript">
+    ```ts
+    const response = await fetch('https://dev.cobru.co/user/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Api-Token': process.env.COBRU_API_TOKEN!,
+        'Api-Secret-Key': process.env.COBRU_API_SECRET!,
+      },
+      body: JSON.stringify(userPayload),
+    });
+
+    const createdUser = await response.json();
+    console.log(createdUser.username);
+    ```
+  </Tab>
+  <Tab value="Python">
+    ```python
+    import requests
+
+    response = requests.post(
+        "https://dev.cobru.co/user/",
+        headers={
+            "Api-Token": COBRU_API_TOKEN,
+            "Api-Secret-Key": COBRU_API_SECRET,
+            "Content-Type": "application/json",
+        },
+        json=user_payload,
+    )
+    print(response.json())
+    ```
+  </Tab>
+  <Tab value="PHP">
+    ```php
+    <?php
+
+    use GuzzleHttp\Client;
+
+    $client = new Client();
+    $response = $client->request('POST', 'https://dev.cobru.co/user/', [
+        'headers' => [
+            'Api-Token' => getenv('COBRU_API_TOKEN'),
+            'Api-Secret-Key' => getenv('COBRU_API_SECRET'),
+            'Content-Type' => 'application/json',
+        ],
+        'json' => $userPayload,
+    ]);
+
+    $createdUser = json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+    var_dump($createdUser);
+    ```
+  </Tab>
+</Tabs>
+
+## Integration rules
+
+<Accordions>
+  <Accordion title="Brand-prefixed usernames">
+    The legacy docs state that the request sends a plain `username`, while Cobru may return a stored username with the `brand` prefix applied. Do not assume the input and persisted values are identical.
+  </Accordion>
+
+  <Accordion title="Category and subcategory dependency">
+    Category and subcategory should be treated as a server-driven taxonomy. Always fetch them before registration rather than hard-coding IDs in the client.
+  </Accordion>
+
+  <Accordion title="Documents payload">
+    The onboarding payload references a `documents` array with document IDs and URLs. Design a controlled upload flow and do not assume Cobru stores arbitrary external URLs forever.
+  </Accordion>
+</Accordions>
+
+## UX recommendations
 
 - always describe the next step before redirecting the user
 - use your own reference ID in the `callback` URL

@@ -1,0 +1,7 @@
+type: object
+properties:
+  access:
+    type: string
+    description: Short-lived JWT access token
+required:
+  - access

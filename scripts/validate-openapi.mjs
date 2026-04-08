@@ -58,7 +58,7 @@ console.log(`OpenAPI validation passed: ${pathCount} path(s) found in openapi/co
 
 if (placeholderDetected) {
   const message =
-    'Placeholder marker detected in openapi/cobru.yaml. Export the real spec from Stoplight before enabling strict validation.';
+    'Placeholder marker detected in openapi/cobru.yaml. Replace it with the repo-owned Cobru contract before enabling strict validation.';
 
   if (requireNonPlaceholder) {
     console.error(message);

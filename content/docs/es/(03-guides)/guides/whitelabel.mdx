@@ -4,12 +4,136 @@ description: Recomendaciones para integrar Cobru dentro de tu propia experiencia
 icon: Paintbrush
 ---
 
-Los flujos hosted de Cobru pueden seguir sintiéndose integrados dentro de tu producto si diseñas bien el handoff.
+Cobru puede sentirse integrado en tu producto incluso cuando el checkout o ciertas superficies siguen siendo hosted, si diseñas bien la transición. El material original de Spotlight también documenta una superficie de registro de usuarios white-label importante para productos financieros embebidos.
 
-## Recomendaciones
+<Callout type="warn">
+  El onboarding white-label y los usernames prefijados por marca vienen de documentación legacy de Cobru. No lo publiques como contrato definitivo sin confirmarlo con tu equipo de Cobru.
+</Callout>
 
-- explica siempre el siguiente paso antes de redirigir al usuario
-- usa tu propia referencia interna en la URL `callback`
+## Qué cubre esta capability
+
+- registrar usuarios bajo un namespace o marca aliada
+- consultar categorías y subcategorías antes del registro
+- confirmar correo y teléfono
+- integrar flujos Cobru dentro de la experiencia de tu propio producto
+
+## Flujo de registro
+
+<Steps>
+  <Step>
+    Consulta categorías con `GET /category/` y subcategorías con `GET /subcategory?category_id=...`.
+  </Step>
+  <Step>
+    Recolecta el payload de registro con `brand`, `username`, `documents` y campos legales.
+  </Step>
+  <Step>
+    Crea el usuario con `POST /user/`.
+  </Step>
+  <Step>
+    Completa flujos posteriores como confirmación de correo y teléfono.
+  </Step>
+</Steps>
+
+## Payload de ejemplo
+
+<Tabs items={['JSON', 'JavaScript / TypeScript', 'Python', 'PHP']}>
+  <Tab value="JSON">
+    ```json
+    {
+      "username": "09906786442",
+      "first_name": "Test",
+      "last_name": "User",
+      "email": "test@example.com",
+      "password": "12345678",
+      "phone": "09906786442",
+      "document_type": "0",
+      "document_number": "11111122223",
+      "country_code": "+57",
+      "gender": 2,
+      "date_birth": "2001-08-08",
+      "type_person": 1,
+      "date_expiration": "2019-08-08",
+      "subcategory": 745,
+      "category": 99,
+      "platform": "ios",
+      "brand": "MY_BRAND"
+    }
+    ```
+  </Tab>
+  <Tab value="JavaScript / TypeScript">
+    ```ts
+    const response = await fetch('https://dev.cobru.co/user/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Api-Token': process.env.COBRU_API_TOKEN!,
+        'Api-Secret-Key': process.env.COBRU_API_SECRET!,
+      },
+      body: JSON.stringify(userPayload),
+    });
+
+    const createdUser = await response.json();
+    console.log(createdUser.username);
+    ```
+  </Tab>
+  <Tab value="Python">
+    ```python
+    import requests
+
+    response = requests.post(
+        "https://dev.cobru.co/user/",
+        headers={
+            "Api-Token": COBRU_API_TOKEN,
+            "Api-Secret-Key": COBRU_API_SECRET,
+            "Content-Type": "application/json",
+        },
+        json=user_payload,
+    )
+    print(response.json())
+    ```
+  </Tab>
+  <Tab value="PHP">
+    ```php
+    <?php
+
+    use GuzzleHttp\Client;
+
+    $client = new Client();
+    $response = $client->request('POST', 'https://dev.cobru.co/user/', [
+        'headers' => [
+            'Api-Token' => getenv('COBRU_API_TOKEN'),
+            'Api-Secret-Key' => getenv('COBRU_API_SECRET'),
+            'Content-Type' => 'application/json',
+        ],
+        'json' => $userPayload,
+    ]);
+
+    $createdUser = json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+    var_dump($createdUser);
+    ```
+  </Tab>
+</Tabs>
+
+## Reglas de integración
+
+<Accordions>
+  <Accordion title="Usernames prefijados por brand">
+    La doc legacy indica que la request envía un `username` plano, mientras Cobru puede responder con un username persistido al que se le aplica el prefijo `brand`. No asumas que el valor enviado y el almacenado serán idénticos.
+  </Accordion>
+
+  <Accordion title="Dependencia entre categoría y subcategoría">
+    Categoría y subcategoría deben tratarse como taxonomía server-driven. Siempre consúltalas antes del registro en lugar de hard-codear IDs en el cliente.
+  </Accordion>
+
+  <Accordion title="Payload de documentos">
+    El payload de onboarding menciona un array `documents` con IDs y URLs. Diseña un flujo de upload controlado y no asumas que Cobru almacenará URLs externas arbitrarias de forma indefinida.
+  </Accordion>
+</Accordions>
+
+## Recomendaciones UX
+
+- anticipa el siguiente paso antes de redirigir al usuario
+- incluye tu propio identificador de referencia en el `callback`
 - guarda `pk`, `url` e `idempotency_key` de Cobru
-- diseña una return URL que confirme estado y próximos pasos
-- documenta el UX específico por método, especialmente para BRE-B y QR
+- diseña una return URL que explique estado y siguientes acciones
+- documenta UX específica por método de pago, especialmente BRE-B y QR

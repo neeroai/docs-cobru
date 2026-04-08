@@ -1,0 +1,23 @@
+post:
+  operationId: createOrReloadCard
+  tags:
+    - Cards
+  summary: Create and reload card
+  x-verification-status: legacy-doc
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: true
+  responses:
+    '200':
+      description: Card created or reloaded
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

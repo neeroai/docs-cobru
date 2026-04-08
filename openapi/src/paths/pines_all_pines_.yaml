@@ -1,0 +1,16 @@
+get:
+  operationId: listPinProducts
+  tags:
+    - Services
+  summary: List PIN products
+  x-verification-status: legacy-doc
+  responses:
+    '200':
+      description: PIN catalog
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

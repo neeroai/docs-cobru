@@ -1,0 +1,21 @@
+get:
+  operationId: getDebitCard
+  tags:
+    - Cards
+  summary: Get debit cards or one card by ID
+  x-verification-status: legacy-doc
+  parameters:
+    - in: query
+      name: card_id
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Card detail or list
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

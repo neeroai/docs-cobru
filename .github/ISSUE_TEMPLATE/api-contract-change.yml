@@ -1,0 +1,48 @@
+name: API Contract Change
+description: Track an API contract update that should land in the public docs repo.
+title: "[API] "
+labels:
+  - api
+  - docs
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the API change clearly.
+    validations:
+      required: true
+  - type: textarea
+    id: endpoints
+    attributes:
+      label: Endpoints affected
+      description: List paths, methods, and operationIds.
+      placeholder: |
+        POST /cobru/ — createCobru
+        GET /balance/ — getBalance
+    validations:
+      required: true
+  - type: dropdown
+    id: verification
+    attributes:
+      label: Verification status
+      options:
+        - verified
+        - legacy-doc
+        - menu-only
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Link sandbox evidence, integration learnings, or internal confirmation.
+    validations:
+      required: true
+  - type: checkboxes
+    id: locales
+    attributes:
+      label: Localization requirements
+      options:
+        - label: Requires EN and ES API label updates
+        - label: Requires EN and ES narrative docs updates

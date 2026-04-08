@@ -1,0 +1,21 @@
+get:
+  operationId: listTokenizedCards
+  tags:
+    - Tokenization
+  summary: List tokenized cards
+  x-verification-status: legacy-doc
+  parameters:
+    - in: query
+      name: card_uuid
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Tokenized card list
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

@@ -1,0 +1,36 @@
+type: object
+required:
+  - amount
+  - description
+  - expiration_days
+  - payment_method_enabled
+  - payer_redirect_url
+  - callback
+properties:
+  amount:
+    type: integer
+    description: Amount in COP
+    example: 50000
+  description:
+    type: string
+    example: Order
+  expiration_days:
+    type: integer
+    example: 1
+  client_assume_costs:
+    type: boolean
+    default: false
+  iva:
+    type: number
+    default: 0
+  payment_method_enabled:
+    $ref: ./PaymentMethodsString.yaml
+  payer_redirect_url:
+    type: string
+    format: uri
+  callback:
+    type: string
+    format: uri
+  platform:
+    type: string
+    example: API

@@ -1,0 +1,39 @@
+post:
+  operationId: createThirdPartyWithdrawal
+  tags:
+    - Bank Withdrawals
+  summary: Create bank withdrawal to a third party
+  x-verification-status: legacy-doc
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: true
+  responses:
+    '200':
+      description: Withdrawal created
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml
+get:
+  operationId: listThirdPartyWithdrawals
+  tags:
+    - Bank Withdrawals
+  summary: List third-party withdrawals
+  x-verification-status: legacy-doc
+  responses:
+    '200':
+      description: Withdrawal list
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

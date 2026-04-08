@@ -1,0 +1,5 @@
+description: Cobru error response
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/ErrorResponse.yaml

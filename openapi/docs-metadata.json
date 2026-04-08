@@ -1,0 +1,317 @@
+{
+  "groups": {
+    "authentication": {
+      "en": "Authentication",
+      "es": "Autenticación"
+    },
+    "balance-&-movements": {
+      "en": "Balance & Movements",
+      "es": "Balances y movimientos"
+    },
+    "bank-withdrawals": {
+      "en": "Bank Withdrawals",
+      "es": "Retiros a bancos"
+    },
+    "cards": {
+      "en": "Cards",
+      "es": "Tarjetas"
+    },
+    "cash-withdrawals": {
+      "en": "Cash Withdrawals",
+      "es": "Retiros en efectivo"
+    },
+    "celo": {
+      "en": "Celo",
+      "es": "Celo"
+    },
+    "cobrus": {
+      "en": "Cobrus",
+      "es": "Cobrus"
+    },
+    "services": {
+      "en": "Services",
+      "es": "Servicios"
+    },
+    "tokenization": {
+      "en": "Tokenization",
+      "es": "Tokenización"
+    },
+    "transfers": {
+      "en": "Transfers",
+      "es": "Envíos"
+    },
+    "webhooks": {
+      "en": "Webhooks",
+      "es": "Webhooks"
+    },
+    "whitelabel": {
+      "en": "Whitelabel",
+      "es": "White-label"
+    }
+  },
+  "operations": {
+    "refreshToken": {
+      "en": "Refresh access token",
+      "es": "Refrescar access token"
+    },
+    "createCobru": {
+      "en": "Create a cobru",
+      "es": "Crear un cobru"
+    },
+    "submitPaymentDetails": {
+      "en": "Generate payment details",
+      "es": "Generar detalles de pago"
+    },
+    "consultCobru": {
+      "en": "Consult a cobru",
+      "es": "Consultar un cobru"
+    },
+    "listPseBanks": {
+      "en": "List PSE banks",
+      "es": "Listar bancos PSE"
+    },
+    "estimateCobru": {
+      "en": "Quote a cobru",
+      "es": "Cotizar un cobru"
+    },
+    "editCobru": {
+      "en": "Edit a cobru",
+      "es": "Editar un cobru"
+    },
+    "sendBalance": {
+      "en": "Send balance to another user",
+      "es": "Enviar saldo a otro usuario"
+    },
+    "getBalance": {
+      "en": "Get balance",
+      "es": "Obtener balance"
+    },
+    "listMovementsByType": {
+      "en": "List movements by operational family",
+      "es": "Listar movimientos por familia operativa"
+    },
+    "createBankWithdrawalLegacy": {
+      "en": "Create bank withdrawal",
+      "es": "Retirar dinero a una cuenta bancaria"
+    },
+    "listLegacyBankWithdrawals": {
+      "en": "List legacy bank withdrawals",
+      "es": "Listar retiros bancarios legacy"
+    },
+    "createCashWithdrawal": {
+      "en": "Create cash withdrawal",
+      "es": "Retirar efectivo"
+    },
+    "listCashWithdrawals": {
+      "en": "List cash withdrawals",
+      "es": "Listar retiros en efectivo"
+    },
+    "getCashWithdrawal": {
+      "en": "Get cash withdrawal by ID",
+      "es": "Obtener retiro en efectivo por ID"
+    },
+    "cancelCashWithdrawal": {
+      "en": "Cancel cash withdrawal",
+      "es": "Cancelar retiro en efectivo"
+    },
+    "listThirdPartyWithdrawalBanks": {
+      "en": "List banks for third-party withdrawals",
+      "es": "Listar bancos disponibles para retiros a terceros"
+    },
+    "createThirdPartyWithdrawal": {
+      "en": "Create third-party withdrawal",
+      "es": "Crear retiro bancario a terceros"
+    },
+    "listThirdPartyWithdrawals": {
+      "en": "List third-party withdrawals",
+      "es": "Listar retiros a terceros"
+    },
+    "getThirdPartyWithdrawal": {
+      "en": "Get third-party withdrawal by ID",
+      "es": "Obtener retiro a terceros por ID"
+    },
+    "cancelThirdPartyWithdrawal": {
+      "en": "Cancel third-party withdrawal",
+      "es": "Cancelar retiro a terceros"
+    },
+    "getThirdPartyWithdrawalPdf": {
+      "en": "Get third-party withdrawal PDF",
+      "es": "Obtener PDF del retiro a terceros"
+    },
+    "createBreBTransfer": {
+      "en": "Create BRE-B transfer",
+      "es": "Crear transferencia BRE-B"
+    },
+    "createBankWithdrawalBrazil": {
+      "en": "Create bank withdrawal Brazil",
+      "es": "Crear retiro bancario Brasil"
+    },
+    "createBankWithdrawalArgentina": {
+      "en": "Create bank withdrawal Argentina",
+      "es": "Crear retiro bancario Argentina"
+    },
+    "createBankWithdrawalMexico": {
+      "en": "Create bank withdrawal Mexico",
+      "es": "Crear retiro bancario México"
+    },
+    "rechargeCellPhone": {
+      "en": "Recharge cell phone",
+      "es": "Recargar celular"
+    },
+    "listPinProducts": {
+      "en": "List PIN products",
+      "es": "Listar productos PIN"
+    },
+    "buyPinProduct": {
+      "en": "Buy PIN product",
+      "es": "Comprar producto PIN"
+    },
+    "listCellPackages": {
+      "en": "List cell packages",
+      "es": "Listar paquetes celulares"
+    },
+    "buyCellPackage": {
+      "en": "Buy cell package",
+      "es": "Comprar paquete celular"
+    },
+    "getSoatQuote": {
+      "en": "Get SOAT quote",
+      "es": "Cotizar SOAT"
+    },
+    "buySoat": {
+      "en": "Buy SOAT",
+      "es": "Comprar SOAT"
+    },
+    "listSoatDocumentTypes": {
+      "en": "List SOAT document types",
+      "es": "Listar tipos de documento SOAT"
+    },
+    "listSoatCities": {
+      "en": "List SOAT cities",
+      "es": "Listar ciudades SOAT"
+    },
+    "getTokenizationPublicKey": {
+      "en": "Get tokenization public key",
+      "es": "Obtener llave pública de tokenización"
+    },
+    "registerCreditCardToken": {
+      "en": "Register card token",
+      "es": "Registrar token de tarjeta"
+    },
+    "listTokenizedCards": {
+      "en": "List tokenized cards",
+      "es": "Listar tarjetas tokenizadas"
+    },
+    "payWithTokenizedCard": {
+      "en": "Pay with tokenized card",
+      "es": "Pagar con tarjeta tokenizada"
+    },
+    "deleteTokenizedCard": {
+      "en": "Delete tokenized card",
+      "es": "Eliminar tarjeta tokenizada"
+    },
+    "createOrReloadCard": {
+      "en": "Create or reload card",
+      "es": "Crear y recargar tarjeta"
+    },
+    "getDebitCard": {
+      "en": "Get debit card",
+      "es": "Obtener tarjetas débito o una tarjeta por ID"
+    },
+    "listDebitCardTransactions": {
+      "en": "List debit card transactions",
+      "es": "Listar transacciones de tarjeta débito"
+    },
+    "freezeDebitCard": {
+      "en": "Freeze debit card",
+      "es": "Congelar tarjeta débito"
+    },
+    "getOrCreateCeloWallet": {
+      "en": "Get or create cUSD wallet",
+      "es": "Obtener o crear wallet cUSD"
+    },
+    "transferCusd": {
+      "en": "Transfer cUSD",
+      "es": "Transferir cUSD"
+    },
+    "exportCeloWalletAccount": {
+      "en": "Export Celo wallet account",
+      "es": "Exportar datos de cuenta Celo wallet"
+    },
+    "listCusdTransactions": {
+      "en": "List cUSD transactions",
+      "es": "Listar transacciones cUSD"
+    },
+    "payCobruWithCelo": {
+      "en": "Pay Cobru with cUSD",
+      "es": "Pagar un Cobru con cUSD"
+    },
+    "getCryptoRates": {
+      "en": "Get crypto rates",
+      "es": "Obtener tasas crypto"
+    },
+    "buyCrypto": {
+      "en": "Buy crypto",
+      "es": "Comprar cUSD u otro balance crypto soportado"
+    },
+    "createWhitelabelUser": {
+      "en": "Create whitelabel user",
+      "es": "Registrar usuario white-label"
+    },
+    "listWhitelabelCategories": {
+      "en": "List whitelabel categories",
+      "es": "Listar categorías de negocio"
+    },
+    "listWhitelabelSubcategories": {
+      "en": "List whitelabel subcategories",
+      "es": "Listar subcategorías por categoría"
+    },
+    "requestWhitelabelConfirmationCode": {
+      "en": "Request whitelabel confirmation code",
+      "es": "Solicitar código de confirmación por email o teléfono"
+    },
+    "verifyWhitelabelEmail": {
+      "en": "Verify whitelabel email code",
+      "es": "Verificar código de confirmación de email"
+    },
+    "verifyWhitelabelPhone": {
+      "en": "Verify whitelabel phone code",
+      "es": "Verificar código de confirmación de teléfono"
+    },
+    "paymentStateChanged": {
+      "en": "Payment state changed webhook",
+      "es": "Callback de cambio de estado de pago"
+    }
+  },
+  "codeSamples": {
+    "languages": [
+      {
+        "id": "js",
+        "lang": "ts",
+        "label": "JavaScript / TypeScript",
+        "generator": "fetch"
+      },
+      {
+        "id": "go",
+        "lang": "go",
+        "disabled": true
+      },
+      {
+        "id": "java",
+        "lang": "java",
+        "disabled": true
+      },
+      {
+        "id": "csharp",
+        "lang": "csharp",
+        "disabled": true
+      },
+      {
+        "id": "php",
+        "lang": "php",
+        "label": "PHP",
+        "generator": "php-guzzle"
+      }
+    ]
+  }
+}

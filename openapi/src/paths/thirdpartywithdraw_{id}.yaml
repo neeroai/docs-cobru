@@ -1,0 +1,22 @@
+get:
+  operationId: getThirdPartyWithdrawal
+  tags:
+    - Bank Withdrawals
+  summary: Get third-party withdrawal by ID
+  x-verification-status: legacy-doc
+  parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Withdrawal detail
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

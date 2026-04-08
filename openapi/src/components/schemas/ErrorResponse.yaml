@@ -1,0 +1,9 @@
+type: object
+properties:
+  error:
+    type: string
+    example: Error en la creacion del cobru.
+  detail:
+    type: string
+    example: payment_method_enabled must be a JSON string
+additionalProperties: true

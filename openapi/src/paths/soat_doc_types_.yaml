@@ -1,0 +1,16 @@
+get:
+  operationId: listSoatDocumentTypes
+  tags:
+    - Services
+  summary: List SOAT document types
+  x-verification-status: legacy-doc
+  responses:
+    '200':
+      description: Document type catalog
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

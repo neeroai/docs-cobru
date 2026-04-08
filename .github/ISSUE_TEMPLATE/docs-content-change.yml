@@ -1,0 +1,34 @@
+name: Docs Content Change
+description: Track a public docs content update in EN and ES.
+title: "[Docs] "
+labels:
+  - docs
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What documentation needs to change?
+    validations:
+      required: true
+  - type: textarea
+    id: routes
+    attributes:
+      label: Routes or pages affected
+      description: List the public docs pages or folders.
+    validations:
+      required: true
+  - type: checkboxes
+    id: sync
+    attributes:
+      label: Locale sync
+      options:
+        - label: Spanish source has been identified
+          required: true
+        - label: English mirror is required in the same change
+          required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: Source material
+      description: Link research docs, learnings, screenshots, or evidence.

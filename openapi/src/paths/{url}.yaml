@@ -1,0 +1,32 @@
+post:
+  operationId: submitPaymentDetails
+  tags:
+    - Cobrus
+  summary: Generate payment details
+  x-verification-status: legacy-doc
+  description: |
+    Submit payer and payment-method-specific details for an existing cobru.
+    This contract comes from Cobru legacy API materials and deep BRE-B research.
+  parameters:
+    - in: path
+      name: url
+      required: true
+      schema:
+        type: string
+      description: Cobru slug returned by `POST /cobru/`
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PaymentDetailsRequest.yaml
+  responses:
+    '200':
+      description: Payment details accepted
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

@@ -1,0 +1,9 @@
+type: object
+required:
+  - amount
+properties:
+  amount:
+    type: string
+    example: '5000'
+  client_assume_costs:
+    type: boolean

@@ -1,0 +1,21 @@
+post:
+  tags:
+    - Webhooks
+  operationId: paymentStateChanged
+  summary: Payment state callback
+  description: >
+    Cobru sends a POST request to the callback URL provided when creating a
+    payment.
+
+    Webhooks are not signed today, so consumers should treat them as
+    notifications and re-check state for sensitive flows.
+  x-verification-status: verified
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/WebhookPayload.yaml
+  responses:
+    '200':
+      description: Callback received successfully

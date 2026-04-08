@@ -1,0 +1,22 @@
+get:
+  operationId: getCashWithdrawal
+  tags:
+    - Cash Withdrawals
+  summary: Get cash withdrawal by ID
+  x-verification-status: legacy-doc
+  parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Cash withdrawal detail
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Cobru technical support
+    url: mailto:soporte@cobru.co
+    about: Use support for integration or account issues instead of repo maintenance requests.

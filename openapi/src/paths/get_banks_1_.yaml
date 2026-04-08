@@ -1,0 +1,19 @@
+get:
+  operationId: listPseBanks
+  tags:
+    - Cobrus
+  summary: List PSE banks
+  x-verification-status: legacy-doc
+  description: Retrieve available PSE bank codes.
+  security: []
+  responses:
+    '200':
+      description: PSE bank list
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/BankCode.yaml
+    default:
+      $ref: ../components/responses/GenericError.yaml

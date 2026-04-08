@@ -1,0 +1,48 @@
+get:
+  operationId: listMovementsByType
+  tags:
+    - Balance & Movements
+  summary: List movements by operation family
+  x-verification-status: legacy-doc
+  description: >
+    Retrieve operational movement history with one family filter at a time.
+
+    Spotlight documents `by_cobrus`, `by_withdraws`, `by_sends`, and
+    `by_other_payments`.
+  parameters:
+    - in: query
+      name: by_cobrus
+      schema:
+        type: boolean
+    - in: query
+      name: by_withdraws
+      schema:
+        type: boolean
+    - in: query
+      name: by_sends
+      schema:
+        type: boolean
+    - in: query
+      name: by_other_payments
+      schema:
+        type: boolean
+    - in: query
+      name: per_page
+      schema:
+        type: integer
+        default: 10
+    - in: query
+      name: page_num
+      schema:
+        type: integer
+        default: 1
+  responses:
+    '200':
+      description: Movement rows
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

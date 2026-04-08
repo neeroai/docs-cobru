@@ -1,0 +1,23 @@
+post:
+  operationId: buyCrypto
+  tags:
+    - Celo
+  summary: Buy cUSD or other supported crypto balance
+  x-verification-status: legacy-doc
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: true
+  responses:
+    '200':
+      description: Purchase result
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

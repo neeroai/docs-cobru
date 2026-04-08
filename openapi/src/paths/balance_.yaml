@@ -1,0 +1,17 @@
+get:
+  operationId: getBalance
+  tags:
+    - Balance & Movements
+  summary: Get balance
+  x-verification-status: legacy-doc
+  description: Retrieve account balance.
+  responses:
+    '200':
+      description: Account balance
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

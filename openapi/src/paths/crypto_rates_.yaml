@@ -1,0 +1,16 @@
+get:
+  operationId: getCryptoRates
+  tags:
+    - Celo
+  summary: Get crypto rates
+  x-verification-status: legacy-doc
+  responses:
+    '200':
+      description: Rate data
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

@@ -1,0 +1,23 @@
+post:
+  operationId: cancelCashWithdrawal
+  tags:
+    - Cash Withdrawals
+  summary: Cancel cash withdrawal
+  x-verification-status: legacy-doc
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: true
+  responses:
+    '200':
+      description: Cash withdrawal cancelled
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml

@@ -1,18 +1,18 @@
 # Status — docs-cobru
 
-Version: 1.0 | Date: 2026-04-07
+Version: 2.0 | Date: 2026-04-08
 
 ## Estado actual
 
 | Dimensión    | Estado         | Detalle                                                            |
 | ------------ | -------------- | ------------------------------------------------------------------ |
-| Dev server   | ✅ OK          | localhost:3000 — estilos cargando, páginas SSG/dynamic OK          |
-| Build local  | ✅ OK          | `NODE_ENV=production next build` — 0 errores, 11 páginas generadas |
-| Build Vercel | ⚠️ pendiente   | Últimos builds fallaban por symlink; fix en `2a1fcb6`              |
-| TypeScript   | ✅ OK          | `tsc --noEmit` sin errores                                         |
-| Git / GitHub | ✅ OK          | `neeroai/docs-cobru` main — 5 commits                              |
-| Dominio      | ❌ pendiente   | `docs.cobru.co` → conectar en Vercel dashboard                     |
-| OpenAPI spec | ⚠️ placeholder | `openapi/cobru.yaml` — exportar desde Stoplight                    |
+| Dev server   | ✅ OK        | localhost:3000 — docs, search, API reference y rutas markdown OK                               |
+| Build local  | ✅ OK        | `bun run build` — 106 páginas generadas sin errores                                            |
+| Build Vercel | ⚠️ pendiente | Confirmar branch protection + required checks en GitHub/Vercel                                  |
+| TypeScript   | ✅ OK        | `tsc --noEmit` sin errores                                                                     |
+| Git / GitHub | ✅ OK        | workflows repo-first + `CODEOWNERS` + templates añadidos                                       |
+| Dominio      | ❌ pendiente | `docs.cobru.co` → confirmar configuración final en Vercel dashboard                            |
+| OpenAPI spec | ✅ OK        | repo-first multi-file en `openapi/src/**`, bundle en `openapi/cobru.yaml`, governance en verde |
 
 ## Rutas activas
 
@@ -24,5 +24,5 @@ Version: 1.0 | Date: 2026-04-07
 | /en/docs/guides/qr-breb  | SSG     | ✅     |
 | /en/docs/api/reference   | Dynamic | ✅     |
 | /api/search              | Dynamic | ✅     |
-| /llms.txt                | Dynamic | ✅     |
-| /llms-full.txt           | Dynamic | ✅     |
+| /llms.txt                | Static  | ✅     |
+| /llms-full.txt           | Static  | ✅     |
