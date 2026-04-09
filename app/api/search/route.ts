@@ -3,4 +3,4 @@ import { createFromSource } from 'fumadocs-core/search/server';
 
 const searchApi = createFromSource(source);
 
-export const GET = searchApi.staticGET;
+export const GET = searchApi.GET;

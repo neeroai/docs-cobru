@@ -75,7 +75,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           <RootProvider
             search={{
               options: {
-                type: 'static',
+                type: 'fetch',
                 api: '/api/search',
               },
             }}
