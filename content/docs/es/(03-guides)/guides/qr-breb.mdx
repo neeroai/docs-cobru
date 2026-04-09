@@ -18,6 +18,17 @@ El flujo tiene dos partes:
   como aparece en los materiales originales: `payment: "breb"` y `"Bre-B": true` dentro de `payment_method_enabled`.
 </Callout>
 
+## Modos de salida de Bre-B
+
+Hay dos formas muy distintas de ofrecer una experiencia Bre-B con Cobru:
+
+| Modo | Qué generas | Requiere página hosted de Cobru | Qué escanea el pagador |
+|------|-------------|----------------------------------|------------------------|
+| QR de link hosted | un QR que apunta a `https://dev.cobru.co/{slug}` o `https://prod.cobru.co/{slug}` | sí | una URL que abre la página de Cobru |
+| QR Bre-B nativo | un QR generado a partir del string de payload Bre-B que retorna Cobru | no | un string EMV/Bre-B procesado por apps bancarias |
+
+Si tu objetivo es específicamente generar un **QR Bre-B sin el link de pago**, necesitas la segunda ruta: obtener el string de payload Bre-B desde Cobru y renderizar tú mismo el QR.
+
 ## Paso 1 — Crear el cobru
 
 ```json
@@ -35,6 +46,25 @@ El flujo tiene dos partes:
 
 Spotlight y los learnings posteriores coinciden en un quirk crítico: `payment_method_enabled` debe ser un string JSON, no un objeto anidado.
 
+## Paso 1.5 — Habilitar la capacidad correcta de Bre-B
+
+Spotlight documenta explícitamente el paso de creación con `"Bre-B": true` dentro de `payment_method_enabled`.
+
+El research profundo posterior también encontró un segundo literal de checkout, `breb_qr`, usado por los internos del checkout hosted de Cobru.
+
+Para fines de documentación, trátalos así:
+
+| Capacidad | De dónde sale | Qué significa |
+|-----------|---------------|---------------|
+| `"Bre-B": true` en `payment_method_enabled` | Spotlight | el cobru debe ofrecer Bre-B |
+| `payment: "breb"` | Spotlight | request directo de detalles de pago Bre-B |
+| `payment: "breb_qr"` | research profundo | variante Bre-B enfocada en QR vista en análisis posteriores del checkout |
+
+<Callout type="warn">
+  El research posterior en sandbox observó `payment: "breb"` directo como restringido comercialmente o deshabilitado en algunos entornos.
+  Ten en cuenta ambas variantes si vas a implementar un flujo de QR Bre-B nativo.
+</Callout>
+
 ## Paso 2 — Enviar los detalles de pago Bre-B
 
 Llama el slug del cobru retornado por `POST /cobru/`:
@@ -48,6 +78,123 @@ Llama el slug del cobru retornado por `POST /cobru/`:
 ```
 
 Los materiales originales de Spotlight describen Bre-B como un método de transferencia rápida ligado a la app Bre-B o a la llave (`llaves`) del usuario.
+
+## Generar un QR Bre-B nativo sin el link de pago
+
+Esta es la sección que la mayoría de equipos realmente necesita.
+
+Si **no** quieres mandar al pagador a la página hosted de Cobru, el flujo es:
+
+1. crear el cobru con Bre-B habilitado
+2. llamar `POST /{url}` para la variante Bre-B de checkout
+3. extraer el string de payload Bre-B que retorna Cobru
+4. generar la imagen QR en tu frontend o backend
+5. mostrar el QR junto con la llave Bre-B al pagador
+
+### ¿Qué campo debes usar para armar el QR?
+
+Los materiales fuente son inconsistentes, así que tu integración debe normalizar todos los nombres de campo conocidos:
+
+| Fuente | Nombre del campo | Significado |
+|--------|------------------|-------------|
+| Spotlight | `check_qr` | string que se usa para armar el QR |
+| Ejemplo de respuesta en Spotlight | `qr_value` | payload QR expuesto dentro de `api.paymentorder` |
+| research profundo posterior | `payment_details.qr_bitcoin` | string EMV encontrado en los internos del checkout hosted de Cobru |
+| Spotlight y research posterior | `key_value` | llave Bre-B mostrada al usuario |
+
+Regla práctica:
+
+- primero busca `check_qr`
+- luego usa `qr_value` como fallback
+- si integras contra la ruta posterior del checkout hosted, revisa también `payment_details.qr_bitcoin`
+
+### Ejemplo de normalización
+
+```ts
+const qrPayload =
+  response?.check_qr ??
+  response?.qr_value ??
+  response?.payment_details?.qr_bitcoin ??
+  response?.fields?.check_qr ??
+  response?.fields?.qr_value;
+
+const keyValue =
+  response?.key_value ??
+  response?.payment_details?.key_value ??
+  response?.fields?.key_value;
+
+if (!qrPayload) {
+  throw new Error('Cobru no retornó un payload QR Bre-B');
+}
+```
+
+### Ejemplo de generación del QR
+
+```ts
+import QRCode from 'qrcode';
+
+const qrDataUrl = await QRCode.toDataURL(qrPayload, {
+  errorCorrectionLevel: 'M',
+  margin: 1,
+  width: 320,
+});
+```
+
+Usa la imagen generada dentro de tu propio checkout. Si tu objetivo es un QR Bre-B nativo, no codifiques la URL hosted de Cobru.
+
+### Campos que deberías mostrar en tu UI
+
+| Campo | ¿Mostrarlo al pagador? | Por qué |
+|-------|-------------------------|---------|
+| `qr_value` / `check_qr` / `qr_bitcoin` | sí | es el payload que conviertes en QR |
+| `key_value` | sí | sirve como fallback cuando el pagador quiere copiar o digitar la llave |
+| `amount` | sí | ayuda a validar el cobro |
+| `state` | interno y UI | la transacción inicia como pendiente |
+| `GOrdenId` | interno | útil para correlación y consultas posteriores |
+
+### Tiempo de vida
+
+Spotlight dice que `qr_value` y `key_value` viven **5 minutos**.
+
+El reverse engineering posterior también observó `time_to_complete: 520` segundos en la lógica de la página de Cobru, o sea aproximadamente **8.6 minutos**.
+
+La regla operativa correcta es:
+
+- tu UX debe asumir una instrucción Bre-B de vida **muy corta**
+- debes regenerar o refrescar el QR cuando expire la ventana
+- nunca reutilices un payload Bre-B viejo para una nueva transacción
+
+### Limitación actual
+
+El research profundo posterior encontró que Cobru **no** expone un QR Bre-B estático simple que cualquier pagador pueda escanear indefinidamente.
+
+El QR Bre-B nativo está ligado a la transacción y, en pruebas posteriores de sandbox, puede requerir datos reales del pagador o habilitación comercial. Eso significa:
+
+- sí puedes generar un QR Bre-B sin usar el link hosted
+- pero primero dependes de que Cobru te devuelva un payload Bre-B específico de la transacción
+- esto no equivale a tener un QR estático reutilizable de comercio
+
+## Ruta alternativa de QR nativo observada en research posterior
+
+El research posterior del checkout también encontró una variante enfocada en QR:
+
+```json
+{
+  "payment": "breb_qr"
+}
+```
+
+Caveats importantes de ese research:
+
+- fue observada en una implementación posterior del checkout de Cobru, no en el contrato Spotlight original
+- las pruebas en sandbox sugirieron que puede requerir documento real del pagador
+- la respuesta parece más cercana a `payment_details.qr_bitcoin` que al wording `check_qr` de Spotlight
+
+Úsala solo si:
+
+- `breb` directo no está disponible en tu entorno
+- soporte de Cobru confirma `breb_qr` para tu cuenta
+- estás listo para probar con datos de pagador compatibles con sandbox
 
 ## Forma de respuesta esperada
 
@@ -107,6 +254,14 @@ Ese patrón QR es útil cuando tu producto necesita distribuir una imagen escane
 <Callout type="info">
   Addenda verificada: Cobru no expone un endpoint PNG de QR. Si tu UX necesita una imagen QR compartible, debes generarla desde la URL hosted del cobru.
 </Callout>
+
+## Árbol de decisión recomendado
+
+| Si necesitas... | Ruta recomendada |
+|-----------------|------------------|
+| el MVP más simple | usa el link hosted de Cobru y genera un QR que apunte a la página de pago |
+| un QR Bre-B nativo dentro de tu propia UI | llama el flujo Bre-B de detalles de pago y renderiza tú mismo el payload retornado |
+| un QR bancario estático reutilizable | no asumas que Cobru lo expone hoy; pregunta a Cobru o usa un proveedor alternativo |
 
 ## Cuándo usar Bre-B
 
