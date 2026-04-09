@@ -1,0 +1,49 @@
+type: object
+required:
+  - amount
+  - account_holder_name
+  - account_type
+  - account_holder_document
+  - account_holder_document_type
+  - account_number
+  - account_phone
+  - account_email
+properties:
+  amount:
+    type: integer
+    example: 250000
+  account_holder_name:
+    type: string
+    example: Maria Perez
+  account_type:
+    type: string
+    example: savings
+  account_holder_document:
+    type: string
+    example: "1029384756"
+  account_holder_document_type:
+    type: string
+    example: CC
+  account_number:
+    type: string
+    example: "1234567890"
+  account_phone:
+    type: string
+    example: "3001234567"
+  account_email:
+    type: string
+    format: email
+    example: maria@example.com
+  bank_name:
+    type: string
+    example: Bancolombia
+  description:
+    type: string
+    example: Supplier payout
+  callback:
+    type: string
+    format: uri
+    example: https://merchant.example/webhooks/withdrawals
+  idempotency_key:
+    type: string
+    example: wd_2026_04_08_0001

@@ -1,0 +1,23 @@
+allOf:
+  - $ref: ./PaymentDetailsBase.yaml
+  - type: object
+    required:
+      - credit_card
+      - expiration_date
+      - cvv
+      - dues
+    properties:
+      payment:
+        type: string
+        const: credit_card
+        example: credit_card
+      credit_card:
+        type: string
+        description: Card number without spaces
+      expiration_date:
+        type: string
+        description: Expiration date in MM/AA
+      cvv:
+        type: string
+      dues:
+        type: integer

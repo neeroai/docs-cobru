@@ -35,6 +35,24 @@ Cobru sends a `POST` request to the `callback` URL you include when creating a p
 | `4` | Refunded | refund applied |
 | `5` | Expired | appears in older Cobru materials; confirm before depending on it |
 
+## What a safe webhook integration must do
+
+<Steps>
+  <Step>
+    Accept the callback, parse JSON, and persist the raw payload immediately.
+  </Step>
+  <Step>
+    Return HTTP `200` quickly so Cobru does not depend on your downstream processing time.
+  </Step>
+  <Step>
+    Deduplicate by `orderId`, `url`, or your own internal payment reference.
+  </Step>
+  <Step>
+    Reconcile the payment before shipping goods, unlocking value, or marking irreversible
+    business success.
+  </Step>
+</Steps>
+
 ## Recommended handler pattern
 
 1. Parse the payload.
@@ -53,6 +71,18 @@ export async function POST(request: Request) {
 }
 ```
 
+## Recommended persistence model
+
+Store at least:
+
+- raw payload
+- received timestamp
+- your internal order ID
+- Cobru `url` slug
+- Cobru `orderId` when present
+- processing result
+- replay count or deduplication marker
+
 ## Hardening options available today
 
 | Risk | Workaround today |
@@ -62,6 +92,13 @@ export async function POST(request: Request) {
 | Callback spoofing | re-check payment details with Cobru before shipping goods or unlocking value |
 | Operational blind spots | log every callback and expose an internal replay tool |
 
+## What not to do
+
+- do not mark an order as permanently successful before reconciliation
+- do not perform heavy downstream work before returning `200`
+- do not trust source IP alone as your only security control
+- do not assume callbacks are delivered exactly once
+
 ## Local testing
 
 ```bash
@@ -70,8 +107,20 @@ ngrok http 3000
 
 Then use the public HTTPS URL as your Cobru `callback` value in sandbox.
 
+## Recommended production controls
+
+| Control | Why it matters |
+|---------|----------------|
+| callback URL secret or unguessable token | reduces trivial spoofing risk |
+| persistent event log | lets you debug support incidents and replay failures |
+| idempotent processor | protects against duplicates |
+| reconciliation step | prevents false positives when callbacks are spoofed or incomplete |
+| alerting on failed processing | reduces silent payment-handling failures |
+
 ## Related pages
 
 - `/docs/errors`
 - `/docs/testing`
+- `/docs/production-readiness`
+- `/docs/troubleshooting`
 - `/docs/api/cobrus/create`

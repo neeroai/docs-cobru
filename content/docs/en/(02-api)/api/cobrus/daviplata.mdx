@@ -1,0 +1,35 @@
+---
+title: Daviplata
+description: Start a Daviplata payment and confirm it later with the payer OTP.
+icon: MessageSquareCode
+---
+
+## Step 1 — Start the payment
+
+`POST /{url}`
+
+```json
+{
+  "name": "Test Gómez",
+  "payment": "daviplata",
+  "cc": "1082626262",
+  "email": "test@cobru.co",
+  "phone": "307654332",
+  "document_type": "CC"
+}
+```
+
+## Step 2 — Confirm the OTP
+
+Spotlight documents a follow-up endpoint:
+
+`POST /cobru/confirm_daviplata/`
+
+```json
+{
+  "URL": "ufa8q176",
+  "OTP": "123456"
+}
+```
+
+If everything succeeds, Spotlight describes a response with `result == "OK"`.

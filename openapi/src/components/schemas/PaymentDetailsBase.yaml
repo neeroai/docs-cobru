@@ -1,0 +1,33 @@
+type: object
+required:
+  - name
+  - payment
+  - cc
+  - email
+  - document_type
+  - phone
+properties:
+  name:
+    type: string
+  payment:
+    type: string
+    description: |
+      Payment method selector.
+      Spotlight and later research point to `payment`, not `payment_method`.
+  cc:
+    type: string
+    description: Payer document number
+  email:
+    type: string
+    format: email
+  document_type:
+    type: string
+    enum:
+      - CC
+      - TI
+      - CE
+      - NIT
+      - PA
+  phone:
+    type: string
+additionalProperties: true

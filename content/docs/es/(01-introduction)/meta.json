@@ -9,6 +9,8 @@
     "webhooks",
     "errors",
     "testing",
+    "production-readiness",
+    "troubleshooting",
     "external:[Github][GitHub](https://github.com/neeroai/docs-cobru)"
   ]
 }

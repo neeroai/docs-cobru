@@ -2,15 +2,22 @@ post:
   operationId: sendBalance
   tags:
     - Transfers
-  summary: Send balance to another user
+  summary: Send balance to another Cobru user
   x-verification-status: legacy-doc
-  description: Transfer Cobru balance to another Cobru user.
+  description: >
+    Transfer Cobru balance to another Cobru user. Legacy materials indicate the sender must
+    have verified phone and email, and that the recipient is identified by phone number.
   requestBody:
     required: true
     content:
       application/json:
         schema:
           $ref: ../components/schemas/TransferRequest.yaml
+        examples:
+          default:
+            value:
+              amount: 99000
+              to_user: "3001234567"
   responses:
     '200':
       description: Transfer created
@@ -19,5 +26,23 @@ post:
           schema:
             type: object
             additionalProperties: true
+    default:
+      $ref: ../components/responses/GenericError.yaml
+get:
+  operationId: listTransfers
+  tags:
+    - Transfers
+  summary: List transfers
+  x-verification-status: legacy-doc
+  description: >
+    Retrieve transfers created by the authenticated Cobru user. Older materials show
+    `from_user`, `to_user`, `amount`, and `date` fields in the response.
+  responses:
+    '200':
+      description: Transfer list
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TransferListResponse.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

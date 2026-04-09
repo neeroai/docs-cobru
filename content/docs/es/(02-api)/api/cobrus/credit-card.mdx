@@ -1,0 +1,34 @@
+---
+title: Tarjeta de crédito
+description: Envía los campos del tarjetahabiente y de la tarjeta para un pago hosted de Cobru.
+icon: CreditCard
+---
+
+## Endpoint
+
+`POST /{url}`
+
+## Request
+
+```json
+{
+  "name": "Test Gómez",
+  "payment": "credit_card",
+  "cc": "1082626262",
+  "email": "test@cobru.co",
+  "phone": "307654332",
+  "document_type": "CC",
+  "credit_card": "4111111111111111",
+  "expiration_date": "12/30",
+  "cvv": "123",
+  "dues": 1
+}
+```
+
+## Notas de Spotlight
+
+- Cobru no persiste los datos de la tarjeta
+- en producción el tráfico debe ser HTTPS
+- tarjetas de prueba mostradas por Spotlight:
+  - aprobada: `4111 1111 1111 1111`
+  - rechazada: `4111 1111 1111 1112`

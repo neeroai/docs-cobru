@@ -1,0 +1,15 @@
+allOf:
+  - $ref: ./PaymentDetailsBase.yaml
+  - type: object
+    required:
+      - phone_nequi
+    properties:
+      payment:
+        type: string
+        const: NEQUI
+        example: NEQUI
+      phone_nequi:
+        type: string
+      push:
+        type: boolean
+        default: true

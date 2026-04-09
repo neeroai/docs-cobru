@@ -4,20 +4,19 @@ post:
     - Services
   summary: Buy PIN product
   x-verification-status: legacy-doc
+  description: Purchase a PIN-based digital product from Cobru.
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          type: object
-          additionalProperties: true
+          $ref: ../components/schemas/BuyPinRequest.yaml
   responses:
     '200':
       description: PIN purchase result
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/BuyPinResponse.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

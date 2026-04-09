@@ -4,19 +4,32 @@ get:
     - Cards
   summary: List debit card transactions
   x-verification-status: legacy-doc
+  description: Retrieve movement history for one Cobru virtual card.
   parameters:
     - in: query
       name: card_id
       required: true
       schema:
-        type: string
+        type: integer
+      description: Card identifier.
+    - in: query
+      name: per_page
+      required: false
+      schema:
+        type: integer
+      description: Optional page size.
+    - in: query
+      name: page_num
+      required: false
+      schema:
+        type: integer
+      description: Optional page number.
   responses:
     '200':
       description: Transaction list
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/CardTransactionsResponse.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

@@ -1,95 +1,126 @@
 ---
-title: Integración BRE-B + QR
-description: Cómo generar QR de pago BRE-B y enviarlos por WhatsApp usando la API de Cobru.
+title: Flujo de pago Bre-B
+description: Flujo end-to-end de Bre-B para un cobru existente, basado en los materiales originales de Spotlight más addenda QR verificadas.
 icon: QrCode
 ---
 
-## ¿Qué es BRE-B?
+## Qué cubre esta guía
 
-Sistema de Pagos Inmediatos operado por Redeban (Banco de la República de Colombia). Permite transferencias bancarias instantáneas entre cuentas colombianas mediante QR interoperable. Lanzado en marzo 2024.
+Esta guía reemplaza la narrativa anterior centrada solo en QR y documenta el flujo Bre-B tal como aparece en los materiales originales de Spotlight de Cobru.
 
-## Flujo de pago
+El flujo tiene dos partes:
 
-```
-Usuario → App → Cobru API → Generador QR → Usuario recibe QR
-                  ↓
-           Webhook callback en el pago
-```
+1. Crear un cobru con Bre-B habilitado en `payment_method_enabled`
+2. Enviar detalles de pago a `POST /{url}` con `payment: "breb"`
 
-1. La app llama a la API de Cobru para crear un pago con `"Bre-B": true` en `payment_method_enabled`
-2. Cobru devuelve `pk` (entero) y `url` (slug corto)
-3. La app construye la URL de pago: `{COBRU_BASE_URL}/{url}`
-4. La app genera un PNG QR desde la URL de pago
-5. La app envía el QR al usuario (ej: via mensaje de imagen en WhatsApp)
-6. El usuario escanea el QR → Cobru procesa el pago
-7. Cobru hace POST al `callback` con `state: 3` al aprobar
-
-## Generar PNG QR
-
-Cobru no expone un endpoint de imagen QR. Usa un generador externo:
-
-```typescript
-const paymentUrl = `${COBRU_BASE_URL}/${cobruResponse.url}`;
-const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=512x512&data=${encodeURIComponent(paymentUrl)}&margin=10`;
-```
-
-`api.qrserver.com` devuelve `200 image/png` en menos de 100ms, sin autenticación.
-
-<Callout type="info">
-  El QR apunta a la página de pago de Cobru — el usuario ve el QR nativo de Bre-B más todos los otros métodos habilitados.
-  Para QR EMV nativo directamente en tu app, contacta soporte@cobru.co — no está expuesto en la API actual.
+<Callout type="warn">
+  En narrativa pública usamos <strong>Bre-B</strong>, pero los payloads conservan el literal exacto del backend tal
+  como aparece en los materiales originales: `payment: "breb"` y `"Bre-B": true` dentro de `payment_method_enabled`.
 </Callout>
 
-## Habilitar BRE-B en un pago
+## Paso 1 — Crear el cobru
 
-```typescript
-const body = {
-  amount: 50000,
-  description: 'Pago Bre-B',
-  expiration_days: 1,
-  client_assume_costs: false,
-  iva: 0,
-  // Debe ser JSON.stringify'd
-  payment_method_enabled: JSON.stringify({
-    'Bre-B': true,
-    bancolombia_qr: true,
-  }),
-  payer_redirect_url: 'https://tuapp.com/pago-exitoso',
-  callback: `https://tuapp.com/api/cobru/webhook?ref=${referenceId}`,
-};
+```json
+{
+  "amount": 20000,
+  "description": "Cobro Bre-B",
+  "expiration_days": 1,
+  "client_assume_costs": false,
+  "iva": 0,
+  "payment_method_enabled": "{\"Bre-B\":true}",
+  "payer_redirect_url": "https://tuapp.com/pago/exitoso",
+  "callback": "https://tuapp.com/api/cobru/webhook"
+}
 ```
 
-## Enviar QR por WhatsApp
+Spotlight y los learnings posteriores coinciden en un quirk crítico: `payment_method_enabled` debe ser un string JSON, no un objeto anidado.
 
-```typescript
-// Mensaje de imagen WhatsApp Cloud API
-const payload = {
-  messaging_product: 'whatsapp',
-  to: '573001234567',
-  type: 'image',
-  image: {
-    link: qrUrl, // URL de api.qrserver.com — WhatsApp lo descarga directamente
-    caption: `Pago Bre-B/QR - $${amount.toLocaleString('es-CO')}\nAbrir: ${paymentUrl}`,
+## Paso 2 — Enviar los detalles de pago Bre-B
+
+Llama el slug del cobru retornado por `POST /cobru/`:
+
+`POST /{url}`
+
+```json
+{
+  "payment": "breb"
+}
+```
+
+Los materiales originales de Spotlight describen Bre-B como un método de transferencia rápida ligado a la app Bre-B o a la llave (`llaves`) del usuario.
+
+## Forma de respuesta esperada
+
+Spotlight muestra una respuesta que contiene tanto un objeto `api.paymentorder` como un objeto `api.cobru`. Los campos Bre-B más importantes son:
+
+| Campo | Significado |
+|-------|-------------|
+| `method` | `breb` |
+| `franchise` | `breb` |
+| `qr_value` | payload QR expuesto por Cobru en la respuesta |
+| `key_value` | llave Bre-B mostrada al usuario |
+| `GOrdenId` | identificador de orden del gateway |
+
+Fragmento de ejemplo de los materiales originales:
+
+```json
+[
+  {
+    "model": "api.paymentorder",
+    "fields": {
+      "method": "breb",
+      "franchise": "breb",
+      "state": "PENDIENTE",
+      "amount": "20000.00",
+      "qr_value": "9893839849384938434.COM.CRB.LLA04...",
+      "key_value": "@llave0343"
+    }
   },
-};
+  {
+    "model": "api.cobru",
+    "fields": {
+      "url": "urmndopt"
+    }
+  }
+]
 ```
 
-WhatsApp Cloud API descarga el PNG directamente — no se necesita upload previo.
+## Ventana de expiración
 
-## Caché del token
+Los materiales de Spotlight indican explícitamente que tanto `qr_value` como `key_value` viven **5 minutos**.
 
-| Propiedad | Valor |
-|-----------|-------|
-| TTL real del token de Cobru | ~60 min (inferido) |
-| TTL recomendado para caché | 50 min |
-| Edge Runtime | El caché en memoria no persiste entre invocaciones — 1 refresh por invocación |
-| Fix para producción | Guardar token en Vercel KV / Redis con TTL de 50 min |
+Trátalos como instrucciones de pago de corta duración, no como identificadores reutilizables.
 
-## Limitaciones conocidas
+## Cómo se relaciona esto con la addenda de QR
 
-| Limitación | Impacto | Workaround |
-|------------|---------|------------|
-| Sin QR EMV nativo | El usuario ve la página web de Cobru, no QR bancario directo | Aceptable para MVP |
-| Sin firma en webhook | Cualquiera podría hacer POST al callback | Validar via IP allowlist o secreto en query param |
-| Sin endpoint de consulta de estado | No se puede hacer polling | Usar webhook; usar `idempotency_key` de la respuesta para deduplicación |
-| `amount` en respuesta es string | Requiere parsing | `parseFloat(response.amount)` |
+El contrato Spotlight de arriba es la fuente principal del flujo de pago Bre-B.
+
+Además existe un patrón posterior verificado:
+
+- crear un cobru con Bre-B habilitado
+- construir la URL hosted de Cobru usando el slug retornado
+- generar un PNG QR externo que apunte a la página de pago hosted
+- enviarlo por canales como WhatsApp
+
+Ese patrón QR es útil cuando tu producto necesita distribuir una imagen escaneable, pero es una addenda sobre el flujo Bre-B original, no el contrato base.
+
+<Callout type="info">
+  Addenda verificada: Cobru no expone un endpoint PNG de QR. Si tu UX necesita una imagen QR compartible, debes generarla desde la URL hosted del cobru.
+</Callout>
+
+## Cuándo usar Bre-B
+
+Usa Bre-B cuando:
+
+- el pagador puede completar una transferencia interoperable bancaria
+- tu checkout debe mostrar Bre-B como opción principal
+- puedes trabajar con instrucciones de pago de vida corta y confirmación por webhook
+
+Si necesitas un flujo hosted con selección explícita de banco, PSE encaja mejor.
+
+## Páginas relacionadas
+
+- [Crear un cobru](/es/docs/api/cobrus/create)
+- [Enviar detalles de pago](/es/docs/api/cobrus/payment-details)
+- [Códigos de bancos PSE](/es/docs/api/cobrus/pse-banks)
+- [Pagos PSE](/es/docs/api/cobrus/pse)

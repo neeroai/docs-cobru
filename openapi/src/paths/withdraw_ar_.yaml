@@ -4,20 +4,21 @@ post:
     - Bank Withdrawals
   summary: Create bank withdrawal to Argentina
   x-verification-status: legacy-doc
+  description: >
+    Create an Argentina payout using the legacy Cobru export built around `cbu` or `cvu`
+    destination identifiers.
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          type: object
-          additionalProperties: true
+          $ref: ../components/schemas/BankWithdrawalArgentinaRequest.yaml
   responses:
     '200':
       description: Withdrawal created
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/ThirdPartyWithdrawalRecord.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

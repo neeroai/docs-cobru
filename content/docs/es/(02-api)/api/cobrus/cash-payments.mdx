@@ -1,0 +1,31 @@
+---
+title: Pagos en efectivo
+description: Genera detalles de pago para Efecty y Corresponsal Bancolombia.
+icon: Banknote
+---
+
+## Endpoint
+
+`POST /{url}`
+
+## Literales soportados de `payment`
+
+- `efecty`
+- `corresponsal_bancolombia`
+
+Spotlight también menciona rieles en efectivo como Baloto en ejemplos más antiguos, pero los requests más claros están para Efecty y Corresponsal Bancolombia.
+
+## Ejemplo de request
+
+```json
+{
+  "name": "Juan Perez",
+  "payment": "efecty",
+  "cc": "1140867070",
+  "email": "juan@cobru.co",
+  "document_type": "CC",
+  "phone": "3002794981"
+}
+```
+
+La forma del request para `corresponsal_bancolombia` es la misma; solo cambia el literal `payment`.

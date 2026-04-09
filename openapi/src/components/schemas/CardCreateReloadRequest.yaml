@@ -1,0 +1,13 @@
+type: object
+required:
+  - amount
+properties:
+  amount:
+    type: integer
+    description: Use `0` to create a card, or a positive number to reload an existing card.
+    example: 0
+  card_id:
+    type: integer
+    description: Existing card identifier when reloading a card.
+    nullable: true
+    example: 9182

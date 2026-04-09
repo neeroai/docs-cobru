@@ -18,6 +18,23 @@ Lo más común es ver una de estas respuestas:
 { "payment_method_enabled": ["Not a valid string."] }
 ```
 
+## Estrategia recomendada para manejar errores
+
+<Steps>
+  <Step>
+    Captura el status HTTP exacto, headers y body raw de respuesta de Cobru.
+  </Step>
+  <Step>
+    Normaliza la respuesta de Cobru a tu propio tipo de error interno.
+  </Step>
+  <Step>
+    Decide si el error es reintentable, corregible por el caller u operativo.
+  </Step>
+  <Step>
+    Muestra un mensaje seguro al usuario final y conserva el payload raw en logs.
+  </Step>
+</Steps>
+
 ## Quirks conocidos
 
 | Síntoma | HTTP code | Causa real | Fix |
@@ -28,6 +45,16 @@ Lo más común es ver una de estas respuestas:
 | falla el campo `refresh_token` | `400` o auth failure | nombre de campo incorrecto | usar `refresh` |
 | la URL de pago no abre | bug cliente | se está usando `pk` en vez del slug `url` | construir `{baseUrl}/{url}` |
 
+## Categorías internas sugeridas
+
+| Categoría | Úsala para |
+|-----------|------------|
+| `configuration_error` | credenciales faltantes, ambiente incorrecto, callback URL ausente |
+| `request_validation_error` | payloads mal formados, tipos inválidos, campos requeridos ausentes |
+| `authentication_error` | material de auth inválido o expirado |
+| `provider_processing_error` | Cobru o un proveedor downstream falló después de validar el request |
+| `reconciliation_error` | el callback y el estado del pago no coinciden con tu estado interno |
+
 ## Checklist de troubleshooting
 
 1. Confirma que estás usando la base URL correcta.
@@ -36,6 +63,32 @@ Lo más común es ver una de estas respuestas:
 4. Verifica que `payment_method_enabled` vaya serializado como string.
 5. Confirma que `callback` y `payer_redirect_url` sean URLs HTTPS válidas.
 6. Conserva las respuestas raw de Cobru en logs durante la integración.
+
+## Qué conviene loguear en cada request fallido
+
+- request ID interno
+- endpoint y método Cobru
+- body sanitizado enviado
+- status HTTP
+- respuesta raw de Cobru
+- categoría interna del error
+- decisión de retry
+
+## Guía de reintentos
+
+<Accordions>
+  <Accordion title="Reintentar de inmediato">
+    Solo reintenta cuando el fallo parezca transitorio y la operación sea segura de repetir. En
+    creación de pagos, mantén comportamiento idempotente del lado interno aunque Cobru no exponga
+    idempotencia formal en todos los endpoints.
+  </Accordion>
+
+  <Accordion title="No reintentar automáticamente">
+    No hagas retry automático para payloads mal formados, callback URLs faltantes, serialización
+    incorrecta de `payment_method_enabled` o nombres erróneos de campos de auth. Son errores de
+    request, no de disponibilidad.
+  </Accordion>
+</Accordions>
 
 ## Modelo deseable a futuro
 

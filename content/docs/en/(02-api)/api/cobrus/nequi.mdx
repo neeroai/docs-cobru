@@ -1,0 +1,29 @@
+---
+title: Nequi
+description: Submit Nequi payment details, optionally pushing the payment to the payer app.
+icon: Smartphone
+---
+
+## Endpoint
+
+`POST /{url}`
+
+## Request
+
+```json
+{
+  "name": "Test Gómez",
+  "payment": "NEQUI",
+  "cc": "1082626262",
+  "email": "test@cobru.co",
+  "phone": "307654332",
+  "document_type": "CC",
+  "phone_nequi": "307654332",
+  "push": true
+}
+```
+
+## Push behavior
+
+- `push: true` sends a push request to the payer's Nequi app
+- `push: false` avoids the push and Spotlight says the response includes the data required to generate a QR-style experience, including `ref`

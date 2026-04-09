@@ -1,0 +1,11 @@
+type: object
+required:
+  - id_pin
+  - operator
+properties:
+  id_pin:
+    type: integer
+    example: 17
+  operator:
+    type: string
+    example: netflix

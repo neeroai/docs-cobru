@@ -4,13 +4,23 @@ get:
     - Services
   summary: List PIN products
   x-verification-status: legacy-doc
+  description: Retrieve the PIN product catalog. Legacy materials also mention filtering by operator.
+  parameters:
+    - in: query
+      name: operator
+      required: false
+      schema:
+        type: string
+      description: Optional operator filter.
   responses:
     '200':
       description: PIN catalog
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            type: array
+            items:
+              type: object
+              additionalProperties: true
     default:
       $ref: ../components/responses/GenericError.yaml

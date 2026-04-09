@@ -1,6 +1,6 @@
 ---
-title: Generar detalles de pago
-description: Envía datos del pagador y detalles específicos del método de pago para un cobru hosted.
+title: Enviar detalles de pago
+description: Envía los datos del pagador y los campos específicos del método para un cobru existente.
 icon: ReceiptText
 ---
 
@@ -9,12 +9,23 @@ icon: ReceiptText
 `POST /{url}`
 
 <Callout type="warn">
-  Este contrato viene de materiales API legacy y de research técnico sobre BRE-B. Revalida el comportamiento exacto en sandbox antes de construir una dependencia productiva sobre él.
+  Este contrato viene principalmente de los materiales originales de Spotlight de Cobru. Revalida el comportamiento exacto en sandbox antes de depender de métodos menos frecuentes en producción.
 </Callout>
 
 ## Propósito
 
-Después de crear un cobru, este endpoint parece recibir datos del pagador y campos específicos por método, como banco PSE, teléfono Nequi o datos de tarjeta.
+Después de crear un cobru, este endpoint recibe los datos del pagador y los campos requeridos por el método de pago seleccionado.
+
+Este es el hub de checkout para:
+
+- Bre-B
+- PSE
+- Efecty y Corresponsal Bancolombia
+- Nequi
+- dale!
+- Botón Bancolombia
+- Daviplata
+- tarjetas de crédito
 
 ## Parámetro de path
 
@@ -22,7 +33,7 @@ Después de crear un cobru, este endpoint parece recibir datos del pagador y cam
 |-------|------|-------------|
 | `url` | string | slug del cobru retornado por `POST /cobru/` |
 
-## Forma del body observada en materiales legacy
+## Campos comunes
 
 ```json
 {
@@ -35,6 +46,213 @@ Después de crear un cobru, este endpoint parece recibir datos del pagador y cam
 }
 ```
 
-## Nota importante para BRE-B
+| Campo | Requerido | Notas |
+|-------|-----------|-------|
+| `name` | sí en la mayoría de métodos | nombre del pagador |
+| `payment` | sí | selector del método de pago |
+| `cc` | sí en la mayoría de métodos | número de documento del pagador |
+| `email` | sí en la mayoría de métodos | email del pagador |
+| `document_type` | sí en la mayoría de métodos | Spotlight muestra `CC`, `TI`, `CE`, `NIT`, `PA` |
+| `phone` | sí en la mayoría de métodos | teléfono del pagador |
 
-El research profundo indica que el campo correcto es `payment`, no `payment_method`. Si envías el nombre incorrecto, Cobru puede rechazar el request.
+<Callout type="warn">
+  Usa el campo `payment`, no `payment_method`. Spotlight y el research posterior apuntan a `payment` como el selector aceptado.
+</Callout>
+
+## Respuestas y errores observados en Spotlight
+
+| Status | Causa | Notas |
+|--------|-------|-------|
+| `200` | detalles de pago generados | la forma de la respuesta cambia según el método |
+| `403` | intentas pagar tu propio cobru con saldo Cobru | Spotlight muestra `{"result":"same_user"}` |
+| `400` | el dueño superaría su balance permitido | `{"result":"LIMIT_BALANCE"}` |
+| `400` | el cobru ya fue pagado | `{"result":"COBRU_IS_PAYED"}` |
+| `400` | método de pago desconocido | `{"error": true, "msg": "unknown payment method"}` |
+| `400` | método no habilitado | `{"error":"Payment method is not enabled.","result":"NOT_ALLOWED"}` |
+| `404` | no se encontró el usuario que paga con saldo Cobru | solo flujo legacy |
+
+## Matriz de métodos
+
+| Método | literal de `payment` | Campos extra | Siguiente paso |
+|--------|-----------------------|--------------|----------------|
+| Bre-B | `breb` | ninguno en el request base | mostrar `qr_value` / `key_value` |
+| PSE | `pse` | `bank`, `address` | redirigir a la URL PSE retornada por Cobru |
+| Efecty | `efecty` | ninguno además de los comunes | mostrar los detalles de pago en efectivo retornados |
+| Corresponsal Bancolombia | `corresponsal_bancolombia` | ninguno además de los comunes | mostrar los detalles de pago retornados |
+| Nequi | `NEQUI` | `phone_nequi`, `push` opcional | usar `checkout` o respuesta tipo QR |
+| dale! | `dale` | ninguno además de los comunes | seguir la respuesta retornada por Cobru |
+| Botón Bancolombia | `bancolombia_transfer` | ninguno además de los comunes | redirigir a `checkout` |
+| Daviplata | `daviplata` | ninguno en el primer request | confirmar luego con OTP |
+| Tarjeta de crédito | `credit_card` | `credit_card`, `expiration_date`, `cvv`, `dues` | completar el flujo de tarjeta |
+
+## Bre-B
+
+```json
+{
+  "payment": "breb"
+}
+```
+
+Spotlight muestra una respuesta que incluye:
+
+- `qr_value`
+- `key_value`
+- `method: "breb"`
+- `franchise: "breb"`
+
+Los materiales originales también indican que `qr_value` y `key_value` viven 5 minutos.
+
+## PSE
+
+PSE requiere dos campos extra:
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `bank` | string | código numérico del banco |
+| `address` | string | dirección del pagador |
+
+```json
+{
+  "name": "Juan Perez",
+  "payment": "pse",
+  "cc": "1140867070",
+  "email": "juan@cobru.co",
+  "document_type": "CC",
+  "phone": "300000000",
+  "bank": "1040",
+  "address": "Bogotá, Colombia"
+}
+```
+
+<Callout type="info">
+  Antes de enviar `payment: "pse"`, consulta `GET /get_banks/1/` y envía en `bank` el `bankCode` elegido.
+</Callout>
+
+Si el request es exitoso, Cobru retorna la URL de PSE a la que tu frontend debe redirigir al usuario.
+
+## Métodos en efectivo: Efecty y Corresponsal Bancolombia
+
+Spotlight agrupa estos métodos como generación de detalles de pago en efectivo.
+
+```json
+{
+  "name": "Juan Perez",
+  "payment": "efecty",
+  "cc": "1140867070",
+  "email": "juan@cobru.co",
+  "document_type": "CC",
+  "phone": "3002794981"
+}
+```
+
+`corresponsal_bancolombia` usa la misma forma base, cambiando solo el literal `payment`.
+
+## Nequi
+
+```json
+{
+  "name": "Test Gómez",
+  "payment": "NEQUI",
+  "cc": "1082626262",
+  "email": "test@cobru.co",
+  "phone": "307654332",
+  "document_type": "CC",
+  "phone_nequi": "307654332",
+  "push": true
+}
+```
+
+Comportamiento descrito por Spotlight:
+
+- `push: true` genera un push en la app Nequi del usuario
+- `push: false` evita el push y retorna la data necesaria para una experiencia tipo QR, incluyendo `ref`
+
+## dale!
+
+```json
+{
+  "name": "Test Gómez",
+  "payment": "dale",
+  "cc": "1082626262",
+  "email": "test@cobru.co",
+  "phone": "307654332",
+  "document_type": "CC"
+}
+```
+
+## Botón Bancolombia
+
+```json
+{
+  "name": "Test Gómez",
+  "payment": "bancolombia_transfer",
+  "cc": "1082626262",
+  "email": "test@cobru.co",
+  "phone": "307654332",
+  "document_type": "CC"
+}
+```
+
+Spotlight indica que la respuesta incluye un `checkout` URL que el usuario debe abrir para completar el pago.
+
+## Daviplata
+
+Request inicial:
+
+```json
+{
+  "name": "Test Gómez",
+  "payment": "daviplata",
+  "cc": "1082626262",
+  "email": "test@cobru.co",
+  "phone": "307654332",
+  "document_type": "CC"
+}
+```
+
+Después de que el pagador recibe el OTP de Daviplata, Spotlight requiere una segunda llamada:
+
+`POST /cobru/confirm_daviplata/`
+
+Campos del body:
+
+| Campo | Descripción |
+|-------|-------------|
+| `URL` | URL/slug del cobru |
+| `OTP` | OTP recibido por el pagador |
+
+El éxito se describe como `result == "OK"`.
+
+## Tarjeta de crédito
+
+```json
+{
+  "name": "Test Gómez",
+  "payment": "credit_card",
+  "cc": "1082626262",
+  "email": "test@cobru.co",
+  "phone": "307654332",
+  "document_type": "CC",
+  "credit_card": "4111111111111111",
+  "expiration_date": "12/30",
+  "cvv": "123",
+  "dues": 1
+}
+```
+
+Spotlight indica:
+
+- Cobru no persiste los datos de tarjeta
+- en producción el tráfico debe ser HTTPS
+- tarjetas de prueba mostradas en Spotlight:
+  - aprobada: `4111 1111 1111 1111`
+  - rechazada: `4111 1111 1111 1112`
+
+## Páginas relacionadas
+
+- [Flujo de pago Bre-B](/es/docs/guides/qr-breb)
+- [Bre-B](/es/docs/api/cobrus/breb)
+- [Pagos PSE](/es/docs/api/cobrus/pse)
+- [Pagos en efectivo](/es/docs/api/cobrus/cash-payments)
+- [Nequi](/es/docs/api/cobrus/nequi)
+- [Daviplata](/es/docs/api/cobrus/daviplata)

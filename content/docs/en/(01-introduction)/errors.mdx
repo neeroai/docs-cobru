@@ -18,6 +18,23 @@ You will most often see one of these:
 { "payment_method_enabled": ["Not a valid string."] }
 ```
 
+## Error-handling strategy
+
+<Steps>
+  <Step>
+    Capture the exact HTTP status, headers, and raw response body from Cobru.
+  </Step>
+  <Step>
+    Normalize Cobru's response into your own internal error type.
+  </Step>
+  <Step>
+    Decide whether the error is retryable, fixable by the caller, or operational.
+  </Step>
+  <Step>
+    Surface a safe customer-facing message while keeping the raw Cobru payload in logs.
+  </Step>
+</Steps>
+
 ## Known quirks
 
 | Symptom | HTTP code | Actual cause | Fix |
@@ -28,6 +45,16 @@ You will most often see one of these:
 | `refresh_token` body field fails | `400` or auth failure | wrong field name | use `refresh` |
 | Payment URL does not open | client bug | using `pk` path instead of `url` slug | build `{baseUrl}/{url}` |
 
+## Suggested internal error categories
+
+| Category | Use for |
+|----------|---------|
+| `configuration_error` | missing credentials, wrong environment, missing callback URL |
+| `request_validation_error` | malformed payloads, wrong field types, missing required fields |
+| `authentication_error` | invalid or expired auth material |
+| `provider_processing_error` | Cobru or downstream payment provider failed after request validation |
+| `reconciliation_error` | callback and payment status do not match your internal order state |
+
 ## Troubleshooting checklist
 
 1. Confirm you are hitting the right base URL.
@@ -36,6 +63,31 @@ You will most often see one of these:
 4. Verify `payment_method_enabled` is serialized as a string.
 5. Confirm `callback` and `payer_redirect_url` are valid HTTPS URLs.
 6. Keep raw responses from Cobru in logs during integration.
+
+## What to log for every failed request
+
+- internal request ID
+- Cobru endpoint and method
+- sanitized request body
+- HTTP status
+- raw Cobru response
+- internal error category
+- retry decision
+
+## Retry guidance
+
+<Accordions>
+  <Accordion title="Retry immediately">
+    Only retry when the failure looks transient and the operation is safe to repeat. For payment
+    creation, prefer idempotent internal behavior even if Cobru does not yet expose a formal
+    idempotency contract on every endpoint.
+  </Accordion>
+
+  <Accordion title="Do not retry automatically">
+    Do not auto-retry malformed payloads, missing callback URLs, bad `payment_method_enabled`
+    serialization, or wrong auth field names. These are fix-the-request failures.
+  </Accordion>
+</Accordions>
 
 ## Desired future model
 

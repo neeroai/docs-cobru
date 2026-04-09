@@ -1,0 +1,36 @@
+type: object
+properties:
+  pk:
+    type: integer
+    description: Cobru withdrawal identifier.
+    example: 123456
+  amount:
+    type: integer
+    description: Requested withdrawal amount.
+    example: 10000
+  date:
+    type: string
+    description: Creation date or timestamp.
+    example: '2026-04-08T14:35:00Z'
+  from_user:
+    type: string
+    example: ops@cobru.co
+  from_user_phone:
+    type: string
+    example: "3000000000"
+  to_user:
+    type: string
+    description: Recipient descriptor or recipient full name.
+    example: Testeo efecty
+  method:
+    type: string
+    example: efecty
+  state:
+    type: integer
+    description: Legacy state code.
+    example: 2
+  callback:
+    type: string
+    format: uri
+    example: https://merchant.example/webhooks/cash-withdrawals
+additionalProperties: true

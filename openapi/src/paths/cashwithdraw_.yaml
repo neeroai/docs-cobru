@@ -4,13 +4,24 @@ post:
     - Cash Withdrawals
   summary: Withdraw cash
   x-verification-status: legacy-doc
-  description: Create a cash withdrawal, documented in legacy materials for Efecty.
+  description: >
+    Create a cash withdrawal. The best-known public contract is documented for Efecty and
+    supports optional callback and estimate fields.
   requestBody:
     required: true
     content:
       application/json:
         schema:
           $ref: ../components/schemas/CashWithdrawalRequest.yaml
+        examples:
+          efecty:
+            value:
+              amount: "10000"
+              document: "213232323"
+              estimate: false
+              exp_days: "30"
+              method: efecty
+              name: Testeo efecty
   responses:
     '200':
       description: Cash withdrawal created
@@ -26,13 +37,15 @@ get:
     - Cash Withdrawals
   summary: List cash withdrawals
   x-verification-status: legacy-doc
+  description: >
+    Retrieve cash withdrawals for the authenticated account. Legacy materials expose state
+    codes and callback information in the listing payload.
   responses:
     '200':
       description: Cash withdrawal list
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/CashWithdrawalListResponse.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

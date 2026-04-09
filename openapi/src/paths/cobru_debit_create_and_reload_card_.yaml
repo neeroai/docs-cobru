@@ -4,20 +4,29 @@ post:
     - Cards
   summary: Create and reload card
   x-verification-status: legacy-doc
+  description: >
+    Shared legacy endpoint for card issuance and card reload. Use `amount: 0` to create a new
+    card, or send `card_id` plus a positive amount to reload an existing card.
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          type: object
-          additionalProperties: true
+          $ref: ../components/schemas/CardCreateReloadRequest.yaml
+        examples:
+          create:
+            value:
+              amount: 0
+          reload:
+            value:
+              amount: 50000
+              card_id: 9182
   responses:
     '200':
       description: Card created or reloaded
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/CardRecord.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

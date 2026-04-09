@@ -1,0 +1,27 @@
+type: object
+properties:
+  id:
+    type: integer
+    example: 9182
+  masked_pan:
+    type: string
+    example: '411111******1111'
+  display_expiration:
+    type: string
+    example: 12/28
+  balance:
+    type: integer
+    example: 150000
+  state:
+    type: string
+    example: active
+  cvv:
+    type: string
+    example: '123'
+  max_balance:
+    type: integer
+    example: 1000000
+  support_token:
+    type: string
+    example: tok_support_9182
+additionalProperties: true

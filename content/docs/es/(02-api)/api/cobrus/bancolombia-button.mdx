@@ -1,0 +1,26 @@
+---
+title: Botón Bancolombia
+description: Genera detalles de pago hosted para flujos de Botón Bancolombia.
+icon: Landmark
+---
+
+## Endpoint
+
+`POST /{url}`
+
+## Request
+
+```json
+{
+  "name": "Test Gómez",
+  "payment": "bancolombia_transfer",
+  "cc": "1082626262",
+  "email": "test@cobru.co",
+  "phone": "307654332",
+  "document_type": "CC"
+}
+```
+
+## Siguiente paso
+
+Spotlight indica que la respuesta contiene un `checkout` URL que el usuario debe abrir para completar el pago.

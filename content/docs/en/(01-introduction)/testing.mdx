@@ -4,7 +4,7 @@ description: Sandbox usage, webhook testing, and production-readiness checks for
 icon: FlaskConical
 ---
 
-## Sandbox
+## Sandbox environment
 
 | Property | Value |
 |----------|-------|
@@ -12,6 +12,12 @@ icon: FlaskConical
 | Purpose | development, QA, integration debugging |
 | Credentials | separate from production |
 | Fees | not representative of production economics |
+| Recommended use | auth validation, payment creation, hosted checkout, webhook handling, QR/BRE-B flow testing |
+
+<Callout type="info">
+  Treat sandbox as a behavior-validation environment, not as a source of truth for production
+  economics, settlement timing, or support procedures.
+</Callout>
 
 ## Recommended test flow
 
@@ -21,6 +27,25 @@ icon: FlaskConical
 4. Complete the flow manually through Cobru's page.
 5. Confirm your webhook receives the expected state update.
 
+## Minimum integration test matrix
+
+| Scenario | What to verify |
+|----------|----------------|
+| Token refresh | `POST /token/refresh/` works with your credential storage and cache strategy |
+| Payment creation | your backend sends `payment_method_enabled` as a JSON string and gets `201` |
+| Hosted payment URL | your app uses `response.url`, not `response.pk`, to build the checkout URL |
+| Redirect handling | `payer_redirect_url` resolves correctly after payment completion |
+| Callback handling | your webhook endpoint persists, deduplicates, and acknowledges callbacks fast |
+| Payment lookup | your system can reconcile the payment after a callback or manual support action |
+
+## Recommended test accounts and fixtures
+
+- one low-value order for smoke tests
+- one order with BRE-B enabled
+- one order with multiple payment methods enabled
+- one invalid payload fixture to confirm error normalization
+- one webhook replay fixture for idempotency checks
+
 ## Local webhook testing
 
 ```bash
@@ -29,19 +54,45 @@ ngrok http 3000
 
 Use the generated HTTPS URL as your `callback` field in the payment creation request.
 
-## What to log during integration
+## What to record during every test run
 
 - request body sent to Cobru
 - raw Cobru response body
 - generated payment URL
 - every webhook payload
 - your own reconciliation result
+- the internal order ID or payment reference you mapped to Cobru
 
-## Production checklist
+## Common sandbox pitfalls
 
-- switch `COBRU_BASE_URL` to `https://prod.cobru.co`
-- replace sandbox credentials with production credentials
-- verify the callback URL is public and HTTPS
-- keep an idempotent webhook handler
-- normalize Cobru errors into your own monitoring pipeline
-- confirm real fees with Cobru before exposing them to end users
+<Accordions>
+  <Accordion title="The payment URL opens but the flow looks wrong">
+    Confirm you are constructing the hosted URL as `{COBRU_BASE_URL}/{url}`. Older plugin patterns
+    using `/pay/{pk}` do not match the current behavior.
+  </Accordion>
+
+  <Accordion title="Payment creation returns 403 even though auth looks correct">
+    Re-check body validation first. Missing `callback`, missing `payer_redirect_url`, or sending
+    `payment_method_enabled` as an object can all surface as misleading `403` responses.
+  </Accordion>
+
+  <Accordion title="Webhook arrives but you cannot trust it">
+    That is expected. Treat callbacks as notifications and re-check payment details or internal
+    state before releasing high-risk value.
+  </Accordion>
+</Accordions>
+
+## Exit criteria before production
+
+- you can create and complete a payment end to end from your app
+- you can persist and deduplicate callbacks
+- you can manually reconcile a payment from Cobru data plus your own order state
+- your logs include enough information to debug a failed payment without guessing
+- your credentials are not hardcoded anywhere outside secure environment storage
+
+## Related pages
+
+- `/docs/webhooks`
+- `/docs/errors`
+- `/docs/production-readiness`
+- `/docs/troubleshooting`

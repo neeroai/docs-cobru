@@ -1,0 +1,11 @@
+allOf:
+  - $ref: ./PaymentDetailsBase.yaml
+  - type: object
+    properties:
+      payment:
+        type: string
+        enum:
+          - efecty
+          - corresponsal_bancolombia
+          - baloto
+        example: efecty

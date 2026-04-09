@@ -4,18 +4,21 @@ get:
     - Cards
   summary: Get debit cards or one card by ID
   x-verification-status: legacy-doc
+  description: Retrieve the card list or a single card when `card_id` is provided.
   parameters:
     - in: query
       name: card_id
       schema:
-        type: string
+        type: integer
+      description: Card identifier for detail mode.
   responses:
     '200':
       description: Card detail or list
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            oneOf:
+              - $ref: ../components/schemas/CardRecord.yaml
+              - $ref: ../components/schemas/CardListResponse.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

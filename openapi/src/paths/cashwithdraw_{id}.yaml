@@ -4,19 +4,20 @@ get:
     - Cash Withdrawals
   summary: Get cash withdrawal by ID
   x-verification-status: legacy-doc
+  description: Retrieve the detail view of one cash withdrawal.
   parameters:
     - in: path
       name: id
       required: true
       schema:
-        type: string
+        type: integer
+      description: Cobru cash-withdrawal identifier.
   responses:
     '200':
       description: Cash withdrawal detail
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/CashWithdrawalListItem.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

@@ -2,11 +2,13 @@ post:
   operationId: submitPaymentDetails
   tags:
     - Cobrus
-  summary: Generate payment details
+  summary: Submit payment details
   x-verification-status: legacy-doc
   description: |
     Submit payer and payment-method-specific details for an existing cobru.
-    This contract comes from Cobru legacy API materials and deep BRE-B research.
+    Spotlight materials describe this endpoint as the checkout hub for Bre-B, PSE,
+    Efecty, Corresponsal Bancolombia, Nequi, dale!, Botón Bancolombia, Daviplata,
+    and credit-card flows.
   parameters:
     - in: path
       name: url
@@ -20,6 +22,46 @@ post:
       application/json:
         schema:
           $ref: ../components/schemas/PaymentDetailsRequest.yaml
+        examples:
+          breb:
+            summary: Bre-B
+            value:
+              payment: breb
+          pse:
+            summary: PSE
+            value:
+              name: Juan Perez
+              payment: pse
+              cc: '1140867070'
+              email: juan@cobru.co
+              document_type: CC
+              phone: '300000000'
+              bank: '1040'
+              address: Bogotá, Colombia
+          nequi:
+            summary: Nequi
+            value:
+              name: Test Gómez
+              payment: NEQUI
+              cc: '1082626262'
+              email: test@cobru.co
+              document_type: CC
+              phone: '307654332'
+              phone_nequi: '307654332'
+              push: true
+          creditCard:
+            summary: Credit card
+            value:
+              name: Test Gómez
+              payment: credit_card
+              cc: '1082626262'
+              email: test@cobru.co
+              document_type: CC
+              phone: '307654332'
+              credit_card: '4111111111111111'
+              expiration_date: 12/30
+              cvv: '123'
+              dues: 1
   responses:
     '200':
       description: Payment details accepted
@@ -28,5 +70,24 @@ post:
           schema:
             type: object
             additionalProperties: true
+          examples:
+            breb:
+              summary: Bre-B response excerpt
+              value:
+                model: api.paymentorder
+                fields:
+                  method: breb
+                  franchise: breb
+                  state: PENDIENTE
+                  qr_value: 9893839849384938434.COM.CRB.LLA04...
+                  key_value: '@llave0343'
+            checkout:
+              summary: Hosted redirect response excerpt
+              value:
+                checkout: https://url_botonbancolombia.apps.bancolombia.com/web/transfer-gateway/checkout/url_de_bc
+            daviplata:
+              summary: Daviplata follow-up required
+              value:
+                result: OTP_REQUIRED
     default:
       $ref: ../components/responses/GenericError.yaml

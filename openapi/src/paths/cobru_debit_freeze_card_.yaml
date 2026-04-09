@@ -4,20 +4,19 @@ post:
     - Cards
   summary: Freeze debit card
   x-verification-status: legacy-doc
+  description: Freeze or unfreeze a Cobru virtual card.
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          type: object
-          additionalProperties: true
+          $ref: ../components/schemas/FreezeCardRequest.yaml
   responses:
     '200':
       description: Card frozen
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/CardRecord.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

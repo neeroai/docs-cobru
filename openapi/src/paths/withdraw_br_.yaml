@@ -4,20 +4,21 @@ post:
     - Bank Withdrawals
   summary: Create bank withdrawal to Brazil
   x-verification-status: legacy-doc
+  description: >
+    Create a Brazil payout using the legacy Cobru export built around PIX keys and CPF/CNPJ
+    identity.
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          type: object
-          additionalProperties: true
+          $ref: ../components/schemas/BankWithdrawalBrazilRequest.yaml
   responses:
     '200':
       description: Withdrawal created
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/ThirdPartyWithdrawalRecord.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

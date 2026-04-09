@@ -1,0 +1,79 @@
+---
+title: Troubleshooting
+description: Fast diagnosis guide for the most common Cobru integration failures.
+icon: Wrench
+---
+
+Use this page when the integration is failing and you need a concrete diagnosis path instead of
+general API guidance.
+
+## Fast triage order
+
+1. Confirm environment and base URL.
+2. Confirm all required credentials are present.
+3. Inspect the exact JSON body sent to Cobru.
+4. Inspect the raw Cobru response.
+5. Check whether the hosted payment URL was constructed from `url`.
+6. Check whether callbacks are arriving and being deduplicated.
+
+## Common failure map
+
+| Symptom | First thing to check |
+|---------|----------------------|
+| `403` on payment creation | request validation, not only auth |
+| `400` on payment creation | `payment_method_enabled` serialization |
+| payment page does not open | hosted URL built from `pk` instead of `url` |
+| callback arrives but order not updated | webhook persistence and async processing |
+| duplicate business actions | missing idempotency in webhook handler |
+| payout flow unclear | verify endpoint confidence level before implementation |
+
+## Payment creation triage
+
+<Accordions>
+  <Accordion title="403 when credentials look correct">
+    Check `callback`, `payer_redirect_url`, content type, and the shape of
+    `payment_method_enabled`. Cobru can surface validation failures as `403`.
+  </Accordion>
+
+  <Accordion title="400 with payment_method_enabled error">
+    Send `payment_method_enabled` as a JSON string, not as a nested object.
+  </Accordion>
+
+  <Accordion title="Hosted payment page does not load">
+    Build the payment URL as `{COBRU_BASE_URL}/{response.url}`. Do not use `/pay/{pk}`.
+  </Accordion>
+</Accordions>
+
+## Webhook triage
+
+<Accordions>
+  <Accordion title="Webhook handler is running twice">
+    Add deduplication using `orderId`, `url`, or your own internal reference. Treat duplicate
+    deliveries as normal until Cobru documents stronger delivery guarantees.
+  </Accordion>
+
+  <Accordion title="Webhook payload cannot be trusted">
+    Reconcile the payment before shipping goods or marking irreversible success.
+  </Accordion>
+</Accordions>
+
+## What support should always have
+
+- internal order ID
+- Cobru `url` slug
+- payment creation timestamp
+- raw Cobru error body when creation failed
+- raw webhook payload when a callback was received
+
+## Escalate to Cobru when
+
+- sandbox and production differ in undocumented ways
+- a legacy-documented endpoint behaves differently from the published docs
+- you see sustained provider-side failures without actionable error details
+
+## Related pages
+
+- `/docs/testing`
+- `/docs/webhooks`
+- `/docs/errors`
+- `/docs/api/reference`

@@ -4,20 +4,21 @@ post:
     - Services
   summary: Recharge a mobile phone
   x-verification-status: legacy-doc
+  description: >
+    Recharge a mobile phone line using Cobru's digital-services surface. Legacy materials
+    mention operators such as Claro, Movistar, Tigo, and Avantel.
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          type: object
-          additionalProperties: true
+          $ref: ../components/schemas/RechargeRequest.yaml
   responses:
     '200':
       description: Recharge accepted
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/RechargeResponse.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

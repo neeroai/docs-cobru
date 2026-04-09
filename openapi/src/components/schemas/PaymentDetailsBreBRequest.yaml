@@ -1,0 +1,9 @@
+allOf:
+  - type: object
+    required:
+      - payment
+    properties:
+      payment:
+        type: string
+        const: breb
+        example: breb

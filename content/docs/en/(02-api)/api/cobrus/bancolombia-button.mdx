@@ -1,0 +1,26 @@
+---
+title: Botón Bancolombia
+description: Generate hosted payment details for Bancolombia button flows.
+icon: Landmark
+---
+
+## Endpoint
+
+`POST /{url}`
+
+## Request
+
+```json
+{
+  "name": "Test Gómez",
+  "payment": "bancolombia_transfer",
+  "cc": "1082626262",
+  "email": "test@cobru.co",
+  "phone": "307654332",
+  "document_type": "CC"
+}
+```
+
+## Next step
+
+Spotlight says the response contains a `checkout` URL that the user must open to complete the payment.

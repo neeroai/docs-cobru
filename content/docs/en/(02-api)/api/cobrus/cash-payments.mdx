@@ -1,0 +1,31 @@
+---
+title: Cash payments
+description: Generate payment details for Efecty and Corresponsal Bancolombia.
+icon: Banknote
+---
+
+## Endpoint
+
+`POST /{url}`
+
+## Supported payment literals
+
+- `efecty`
+- `corresponsal_bancolombia`
+
+Spotlight also mentions cash rails such as Baloto in older examples, but the clearest request examples are for Efecty and Corresponsal Bancolombia.
+
+## Request example
+
+```json
+{
+  "name": "Juan Perez",
+  "payment": "efecty",
+  "cc": "1140867070",
+  "email": "juan@cobru.co",
+  "document_type": "CC",
+  "phone": "3002794981"
+}
+```
+
+The request shape for `corresponsal_bancolombia` is the same, changing only the `payment` literal.

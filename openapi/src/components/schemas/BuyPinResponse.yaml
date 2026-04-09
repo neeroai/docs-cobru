@@ -1,0 +1,12 @@
+type: object
+properties:
+  status:
+    type: string
+    example: ok
+  pin:
+    type: string
+    example: ABCD-EFGH-IJKL
+  pk:
+    type: integer
+    example: 4451
+additionalProperties: true

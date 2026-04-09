@@ -35,6 +35,24 @@ Cobru envía un `POST` a la URL `callback` que incluyes al crear un pago. Hoy es
 | `4` | Reembolsado | reembolso aplicado |
 | `5` | Expirado | aparece en materiales históricos de Cobru; confírmalo antes de depender de él |
 
+## Qué debe hacer una integración segura de webhooks
+
+<Steps>
+  <Step>
+    Recibir el callback, parsear el JSON y persistir el payload raw de inmediato.
+  </Step>
+  <Step>
+    Responder HTTP `200` rápido para que Cobru no dependa del tiempo de tu procesamiento
+    downstream.
+  </Step>
+  <Step>
+    Deduplicar por `orderId`, `url` o tu propia referencia interna del pago.
+  </Step>
+  <Step>
+    Reconciliar el pago antes de despachar bienes, liberar valor o marcar éxito irreversible.
+  </Step>
+</Steps>
+
 ## Patrón recomendado para el handler
 
 1. Parsea el payload.
@@ -53,6 +71,18 @@ export async function POST(request: Request) {
 }
 ```
 
+## Modelo de persistencia recomendado
+
+Guarda al menos:
+
+- payload raw
+- timestamp de recepción
+- order ID interno
+- slug `url` de Cobru
+- `orderId` de Cobru cuando exista
+- resultado del procesamiento
+- contador de replay o marca de deduplicación
+
 ## Opciones de hardening disponibles hoy
 
 | Riesgo | Workaround actual |
@@ -62,6 +92,13 @@ export async function POST(request: Request) {
 | spoofing del callback | vuelve a consultar detalles del pago con Cobru antes de liberar valor |
 | puntos ciegos operativos | loguea todos los callbacks y expón una herramienta interna de replay |
 
+## Qué no debes hacer
+
+- no marques una orden como definitivamente exitosa antes de reconciliar
+- no ejecutes trabajo pesado downstream antes de responder `200`
+- no confíes solo en la IP de origen como control de seguridad
+- no asumas que los callbacks llegan exactamente una sola vez
+
 ## Pruebas locales
 
 ```bash
@@ -70,8 +107,20 @@ ngrok http 3000
 
 Luego usa esa URL pública HTTPS como tu valor `callback` en sandbox.
 
+## Controles recomendados para producción
+
+| Control | Por qué importa |
+|---------|-----------------|
+| secreto en callback o token no adivinable | reduce riesgo de spoofing trivial |
+| event log persistente | permite depurar incidentes y replays |
+| procesador idempotente | protege contra duplicados |
+| paso de reconciliación | evita falsos positivos cuando el callback es incompleto o falso |
+| alertas sobre fallas de procesamiento | reduce errores silenciosos en pagos |
+
 ## Páginas relacionadas
 
 - `/docs/errors`
 - `/docs/testing`
+- `/docs/production-readiness`
+- `/docs/troubleshooting`
 - `/docs/api/cobrus/create`

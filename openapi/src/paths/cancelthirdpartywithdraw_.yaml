@@ -4,20 +4,23 @@ post:
     - Bank Withdrawals
   summary: Cancel third-party withdrawal
   x-verification-status: legacy-doc
+  description: Cancel a previously created third-party bank withdrawal.
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          type: object
-          additionalProperties: true
+          $ref: ../components/schemas/ThirdPartyWithdrawalCancelRequest.yaml
+        examples:
+          default:
+            value:
+              id: 7821
   responses:
     '200':
       description: Withdrawal cancelled
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/CashWithdrawalCancelResponse.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

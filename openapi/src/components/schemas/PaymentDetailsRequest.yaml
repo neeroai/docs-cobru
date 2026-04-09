@@ -1,53 +1,15 @@
 type: object
 required:
-  - name
   - payment
-  - cc
-  - email
-  - document_type
-  - phone
 properties:
-  name:
-    type: string
   payment:
     type: string
-    description: |
-      Payment method selector.
-      Deep research suggests Cobru expects `payment`, not `payment_method`.
-  cc:
-    type: string
-    description: Payer document number
-  email:
-    type: string
-    format: email
-  document_type:
-    type: string
-    enum:
-      - CC
-      - TI
-      - CE
-      - PAN
-      - NIT
-      - PASAPORTE
-  phone:
-    type: string
-  phone_nequi:
-    type: string
-  push:
-    type: boolean
-    default: true
-  bank:
-    type: string
-  address:
-    type: string
-  credit_card:
-    type: string
-  expiration_date:
-    type: string
-  cvv:
-    type: string
-  dues:
-    type: integer
-  json:
-    type: boolean
-    default: true
+oneOf:
+  - $ref: ./PaymentDetailsBreBRequest.yaml
+  - $ref: ./PaymentDetailsPseRequest.yaml
+  - $ref: ./PaymentDetailsCashRequest.yaml
+  - $ref: ./PaymentDetailsNequiRequest.yaml
+  - $ref: ./PaymentDetailsDaleRequest.yaml
+  - $ref: ./PaymentDetailsBancolombiaTransferRequest.yaml
+  - $ref: ./PaymentDetailsDaviplataRequest.yaml
+  - $ref: ./PaymentDetailsCreditCardRequest.yaml

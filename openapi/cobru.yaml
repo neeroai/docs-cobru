@@ -115,11 +115,13 @@ paths:
       operationId: submitPaymentDetails
       tags:
         - Cobrus
-      summary: Generate payment details
+      summary: Submit payment details
       x-verification-status: legacy-doc
       description: |
         Submit payer and payment-method-specific details for an existing cobru.
-        This contract comes from Cobru legacy API materials and deep BRE-B research.
+        Spotlight materials describe this endpoint as the checkout hub for Bre-B, PSE,
+        Efecty, Corresponsal Bancolombia, Nequi, dale!, Botón Bancolombia, Daviplata,
+        and credit-card flows.
       parameters:
         - in: path
           name: url
@@ -133,6 +135,46 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/PaymentDetailsRequest'
+            examples:
+              breb:
+                summary: Bre-B
+                value:
+                  payment: breb
+              pse:
+                summary: PSE
+                value:
+                  name: Juan Perez
+                  payment: pse
+                  cc: '1140867070'
+                  email: juan@cobru.co
+                  document_type: CC
+                  phone: '300000000'
+                  bank: '1040'
+                  address: Bogotá, Colombia
+              nequi:
+                summary: Nequi
+                value:
+                  name: Test Gómez
+                  payment: NEQUI
+                  cc: '1082626262'
+                  email: test@cobru.co
+                  document_type: CC
+                  phone: '307654332'
+                  phone_nequi: '307654332'
+                  push: true
+              creditCard:
+                summary: Credit card
+                value:
+                  name: Test Gómez
+                  payment: credit_card
+                  cc: '1082626262'
+                  email: test@cobru.co
+                  document_type: CC
+                  phone: '307654332'
+                  credit_card: '4111111111111111'
+                  expiration_date: 12/30
+                  cvv: '123'
+                  dues: 1
       responses:
         '200':
           description: Payment details accepted
@@ -141,6 +183,53 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
+              examples:
+                breb:
+                  summary: Bre-B response excerpt
+                  value:
+                    model: api.paymentorder
+                    fields:
+                      method: breb
+                      franchise: breb
+                      state: PENDIENTE
+                      qr_value: 9893839849384938434.COM.CRB.LLA04...
+                      key_value: '@llave0343'
+                checkout:
+                  summary: Hosted redirect response excerpt
+                  value:
+                    checkout: https://url_botonbancolombia.apps.bancolombia.com/web/transfer-gateway/checkout/url_de_bc
+                daviplata:
+                  summary: Daviplata follow-up required
+                  value:
+                    result: OTP_REQUIRED
+        default:
+          $ref: '#/components/responses/GenericError'
+  /cobru/confirm_daviplata/:
+    post:
+      operationId: confirmDaviplataPayment
+      tags:
+        - Cobrus
+      summary: Confirm Daviplata OTP
+      x-verification-status: legacy-doc
+      description: |
+        Confirm a Daviplata payment after the payer receives the OTP.
+        This operation comes from the original Spotlight materials.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DaviplataConfirmRequest'
+            example:
+              URL: ufa8q176
+              OTP: '123456'
+      responses:
+        '200':
+          description: Daviplata confirmation accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DaviplataConfirmResponse'
         default:
           $ref: '#/components/responses/GenericError'
   /cobru_detail/{url}:
@@ -237,15 +326,21 @@ paths:
       operationId: sendBalance
       tags:
         - Transfers
-      summary: Send balance to another user
+      summary: Send balance to another Cobru user
       x-verification-status: legacy-doc
-      description: Transfer Cobru balance to another Cobru user.
+      description: |
+        Transfer Cobru balance to another Cobru user. Legacy materials indicate the sender must have verified phone and email, and that the recipient is identified by phone number.
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/TransferRequest'
+            examples:
+              default:
+                value:
+                  amount: 99000
+                  to_user: '3001234567'
       responses:
         '200':
           description: Transfer created
@@ -254,6 +349,23 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
+        default:
+          $ref: '#/components/responses/GenericError'
+    get:
+      operationId: listTransfers
+      tags:
+        - Transfers
+      summary: List transfers
+      x-verification-status: legacy-doc
+      description: |
+        Retrieve transfers created by the authenticated Cobru user. Older materials show `from_user`, `to_user`, `amount`, and `date` fields in the response.
+      responses:
+        '200':
+          description: Transfer list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferListResponse'
         default:
           $ref: '#/components/responses/GenericError'
   /balance/:
@@ -369,13 +481,23 @@ paths:
         - Cash Withdrawals
       summary: Withdraw cash
       x-verification-status: legacy-doc
-      description: Create a cash withdrawal, documented in legacy materials for Efecty.
+      description: |
+        Create a cash withdrawal. The best-known public contract is documented for Efecty and supports optional callback and estimate fields.
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CashWithdrawalRequest'
+            examples:
+              efecty:
+                value:
+                  amount: '10000'
+                  document: '213232323'
+                  estimate: false
+                  exp_days: '30'
+                  method: efecty
+                  name: Testeo efecty
       responses:
         '200':
           description: Cash withdrawal created
@@ -391,14 +513,15 @@ paths:
         - Cash Withdrawals
       summary: List cash withdrawals
       x-verification-status: legacy-doc
+      description: |
+        Retrieve cash withdrawals for the authenticated account. Legacy materials expose state codes and callback information in the listing payload.
       responses:
         '200':
           description: Cash withdrawal list
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/CashWithdrawalListResponse'
         default:
           $ref: '#/components/responses/GenericError'
   /cashwithdraw/{id}:
@@ -408,20 +531,21 @@ paths:
         - Cash Withdrawals
       summary: Get cash withdrawal by ID
       x-verification-status: legacy-doc
+      description: Retrieve the detail view of one cash withdrawal.
       parameters:
         - in: path
           name: id
           required: true
           schema:
-            type: string
+            type: integer
+          description: Cobru cash-withdrawal identifier.
       responses:
         '200':
           description: Cash withdrawal detail
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/CashWithdrawalListItem'
         default:
           $ref: '#/components/responses/GenericError'
   /cancelcashwithdraw/:
@@ -431,21 +555,24 @@ paths:
         - Cash Withdrawals
       summary: Cancel cash withdrawal
       x-verification-status: legacy-doc
+      description: Cancel a previously created cash withdrawal before pickup.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/CashWithdrawalCancelRequest'
+            examples:
+              default:
+                value:
+                  id: 123456
       responses:
         '200':
           description: Cash withdrawal cancelled
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/CashWithdrawalCancelResponse'
         default:
           $ref: '#/components/responses/GenericError'
   /bank_list_third_party_withdraw/:
@@ -455,14 +582,15 @@ paths:
         - Bank Withdrawals
       summary: List available banks for third-party withdrawals
       x-verification-status: legacy-doc
+      description: |
+        Retrieve the bank catalog used by the legacy Colombian third-party withdrawal flow.
       responses:
         '200':
           description: Bank list
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/ThirdPartyWithdrawalBanksResponse'
         default:
           $ref: '#/components/responses/GenericError'
   /thirdpartywithdraw/:
@@ -472,21 +600,36 @@ paths:
         - Bank Withdrawals
       summary: Create bank withdrawal to a third party
       x-verification-status: legacy-doc
+      description: |
+        Create a bank withdrawal using the best-known Colombian third-party payout contract from legacy Cobru materials. Supports beneficiary banking details, optional callback, and optional idempotency key.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/ThirdPartyWithdrawalRequest'
+            examples:
+              colombia:
+                value:
+                  amount: 250000
+                  account_holder_name: Maria Perez
+                  account_type: savings
+                  account_holder_document: '1029384756'
+                  account_holder_document_type: CC
+                  account_number: '1234567890'
+                  account_phone: '3001234567'
+                  account_email: maria@example.com
+                  bank_name: Bancolombia
+                  description: Supplier payout
+                  callback: https://merchant.example/webhooks/withdrawals
+                  idempotency_key: wd_2026_04_08_0001
       responses:
         '200':
           description: Withdrawal created
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/ThirdPartyWithdrawalRecord'
         default:
           $ref: '#/components/responses/GenericError'
     get:
@@ -495,14 +638,22 @@ paths:
         - Bank Withdrawals
       summary: List third-party withdrawals
       x-verification-status: legacy-doc
+      description: |
+        Retrieve previously created third-party withdrawals. Legacy materials mention querying by idempotency key in addition to standard list retrieval.
+      parameters:
+        - in: query
+          name: idempotency_key
+          required: false
+          schema:
+            type: string
+          description: Optional idempotency key used to find a previously submitted payout.
       responses:
         '200':
           description: Withdrawal list
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/ThirdPartyWithdrawalListResponse'
         default:
           $ref: '#/components/responses/GenericError'
   /thirdpartywithdraw/{id}:
@@ -512,20 +663,21 @@ paths:
         - Bank Withdrawals
       summary: Get third-party withdrawal by ID
       x-verification-status: legacy-doc
+      description: Retrieve the latest state and details for one third-party bank withdrawal.
       parameters:
         - in: path
           name: id
           required: true
           schema:
-            type: string
+            type: integer
+          description: Cobru bank-withdrawal identifier.
       responses:
         '200':
           description: Withdrawal detail
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/ThirdPartyWithdrawalRecord'
         default:
           $ref: '#/components/responses/GenericError'
   /cancelthirdpartywithdraw/:
@@ -535,21 +687,24 @@ paths:
         - Bank Withdrawals
       summary: Cancel third-party withdrawal
       x-verification-status: legacy-doc
+      description: Cancel a previously created third-party bank withdrawal.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/ThirdPartyWithdrawalCancelRequest'
+            examples:
+              default:
+                value:
+                  id: 7821
       responses:
         '200':
           description: Withdrawal cancelled
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/CashWithdrawalCancelResponse'
         default:
           $ref: '#/components/responses/GenericError'
   /panel/detail_withdraw_pdf/:
@@ -582,21 +737,21 @@ paths:
         - Bank Withdrawals
       summary: Create BRE-B transfer
       x-verification-status: legacy-doc
+      description: |
+        Candidate endpoint for BRE-B-linked bank movement in Colombia. The exact request and settlement model still require fresh validation with Cobru.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/BreBWithdrawalRequest'
       responses:
         '200':
           description: BRE-B transfer created
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/ThirdPartyWithdrawalRecord'
         default:
           $ref: '#/components/responses/GenericError'
   /withdraw/br/:
@@ -606,21 +761,21 @@ paths:
         - Bank Withdrawals
       summary: Create bank withdrawal to Brazil
       x-verification-status: legacy-doc
+      description: |
+        Create a Brazil payout using the legacy Cobru export built around PIX keys and CPF/CNPJ identity.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/BankWithdrawalBrazilRequest'
       responses:
         '200':
           description: Withdrawal created
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/ThirdPartyWithdrawalRecord'
         default:
           $ref: '#/components/responses/GenericError'
   /withdraw/ar/:
@@ -630,21 +785,21 @@ paths:
         - Bank Withdrawals
       summary: Create bank withdrawal to Argentina
       x-verification-status: legacy-doc
+      description: |
+        Create an Argentina payout using the legacy Cobru export built around `cbu` or `cvu` destination identifiers.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/BankWithdrawalArgentinaRequest'
       responses:
         '200':
           description: Withdrawal created
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/ThirdPartyWithdrawalRecord'
         default:
           $ref: '#/components/responses/GenericError'
   /withdraw/mx/:
@@ -654,21 +809,21 @@ paths:
         - Bank Withdrawals
       summary: Create bank withdrawal to Mexico
       x-verification-status: legacy-doc
+      description: |
+        Create a Mexico payout using the legacy Cobru export built around CLABE and beneficiary name.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/BankWithdrawalMexicoRequest'
       responses:
         '200':
           description: Withdrawal created
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/ThirdPartyWithdrawalRecord'
         default:
           $ref: '#/components/responses/GenericError'
   /request_service_reload/:
@@ -678,21 +833,21 @@ paths:
         - Services
       summary: Recharge a mobile phone
       x-verification-status: legacy-doc
+      description: |
+        Recharge a mobile phone line using Cobru's digital-services surface. Legacy materials mention operators such as Claro, Movistar, Tigo, and Avantel.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/RechargeRequest'
       responses:
         '200':
           description: Recharge accepted
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/RechargeResponse'
         default:
           $ref: '#/components/responses/GenericError'
   /pines/all_pines/:
@@ -702,14 +857,24 @@ paths:
         - Services
       summary: List PIN products
       x-verification-status: legacy-doc
+      description: Retrieve the PIN product catalog. Legacy materials also mention filtering by operator.
+      parameters:
+        - in: query
+          name: operator
+          required: false
+          schema:
+            type: string
+          description: Optional operator filter.
       responses:
         '200':
           description: PIN catalog
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
         default:
           $ref: '#/components/responses/GenericError'
   /pin/:
@@ -719,21 +884,20 @@ paths:
         - Services
       summary: Buy PIN product
       x-verification-status: legacy-doc
+      description: Purchase a PIN-based digital product from Cobru.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/BuyPinRequest'
       responses:
         '200':
           description: PIN purchase result
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/BuyPinResponse'
         default:
           $ref: '#/components/responses/GenericError'
   /packages/all_packages/:
@@ -743,14 +907,24 @@ paths:
         - Services
       summary: List recharge packages
       x-verification-status: legacy-doc
+      description: Retrieve the catalog of mobile data or recharge packages available in Cobru.
+      parameters:
+        - in: query
+          name: cell_provider
+          required: false
+          schema:
+            type: string
+          description: Optional provider filter referenced in older Cobru materials.
       responses:
         '200':
           description: Package catalog
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
         default:
           $ref: '#/components/responses/GenericError'
   /packages/buy/:
@@ -760,13 +934,13 @@ paths:
         - Services
       summary: Buy recharge package
       x-verification-status: legacy-doc
+      description: Purchase a mobile data or recharge package through Cobru.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/BuyPackageRequest'
       responses:
         '200':
           description: Package purchase result
@@ -993,21 +1167,29 @@ paths:
         - Cards
       summary: Create and reload card
       x-verification-status: legacy-doc
+      description: |
+        Shared legacy endpoint for card issuance and card reload. Use `amount: 0` to create a new card, or send `card_id` plus a positive amount to reload an existing card.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/CardCreateReloadRequest'
+            examples:
+              create:
+                value:
+                  amount: 0
+              reload:
+                value:
+                  amount: 50000
+                  card_id: 9182
       responses:
         '200':
           description: Card created or reloaded
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/CardRecord'
         default:
           $ref: '#/components/responses/GenericError'
   /cobru/debit/get_card/:
@@ -1017,19 +1199,22 @@ paths:
         - Cards
       summary: Get debit cards or one card by ID
       x-verification-status: legacy-doc
+      description: Retrieve the card list or a single card when `card_id` is provided.
       parameters:
         - in: query
           name: card_id
           schema:
-            type: string
+            type: integer
+          description: Card identifier for detail mode.
       responses:
         '200':
           description: Card detail or list
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                oneOf:
+                  - $ref: '#/components/schemas/CardRecord'
+                  - $ref: '#/components/schemas/CardListResponse'
         default:
           $ref: '#/components/responses/GenericError'
   /cobru/debit/get_transactions/:
@@ -1039,20 +1224,33 @@ paths:
         - Cards
       summary: List debit card transactions
       x-verification-status: legacy-doc
+      description: Retrieve movement history for one Cobru virtual card.
       parameters:
         - in: query
           name: card_id
           required: true
           schema:
-            type: string
+            type: integer
+          description: Card identifier.
+        - in: query
+          name: per_page
+          required: false
+          schema:
+            type: integer
+          description: Optional page size.
+        - in: query
+          name: page_num
+          required: false
+          schema:
+            type: integer
+          description: Optional page number.
       responses:
         '200':
           description: Transaction list
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/CardTransactionsResponse'
         default:
           $ref: '#/components/responses/GenericError'
   /cobru/debit/freeze_card/:
@@ -1062,21 +1260,20 @@ paths:
         - Cards
       summary: Freeze debit card
       x-verification-status: legacy-doc
+      description: Freeze or unfreeze a Cobru virtual card.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/FreezeCardRequest'
       responses:
         '200':
           description: Card frozen
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
+                $ref: '#/components/schemas/CardRecord'
         default:
           $ref: '#/components/responses/GenericError'
   /celo/:
@@ -1559,7 +1756,17 @@ components:
         currency_code:
           type: string
           example: COP
-    PaymentDetailsRequest:
+    PaymentDetailsBreBRequest:
+      allOf:
+        - type: object
+          required:
+            - payment
+          properties:
+            payment:
+              type: string
+              const: breb
+              example: breb
+    PaymentDetailsBase:
       type: object
       required:
         - name
@@ -1575,7 +1782,7 @@ components:
           type: string
           description: |
             Payment method selector.
-            Deep research suggests Cobru expects `payment`, not `payment_method`.
+            Spotlight and later research point to `payment`, not `payment_method`.
         cc:
           type: string
           description: Payer document number
@@ -1588,31 +1795,145 @@ components:
             - CC
             - TI
             - CE
-            - PAN
             - NIT
-            - PASAPORTE
+            - PA
         phone:
           type: string
-        phone_nequi:
+      additionalProperties: true
+    PaymentDetailsPseRequest:
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetailsBase'
+        - type: object
+          required:
+            - bank
+            - address
+          properties:
+            payment:
+              type: string
+              const: pse
+              example: pse
+            bank:
+              type: string
+              description: Numeric bank code obtained from `GET /get_banks/1/`
+              example: '1040'
+            address:
+              type: string
+              example: Bogotá, Colombia
+    PaymentDetailsCashRequest:
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetailsBase'
+        - type: object
+          properties:
+            payment:
+              type: string
+              enum:
+                - efecty
+                - corresponsal_bancolombia
+                - baloto
+              example: efecty
+    PaymentDetailsNequiRequest:
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetailsBase'
+        - type: object
+          required:
+            - phone_nequi
+          properties:
+            payment:
+              type: string
+              const: NEQUI
+              example: NEQUI
+            phone_nequi:
+              type: string
+            push:
+              type: boolean
+              default: true
+    PaymentDetailsDaleRequest:
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetailsBase'
+        - type: object
+          properties:
+            payment:
+              type: string
+              const: dale
+              example: dale
+    PaymentDetailsBancolombiaTransferRequest:
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetailsBase'
+        - type: object
+          properties:
+            payment:
+              type: string
+              const: bancolombia_transfer
+              example: bancolombia_transfer
+    PaymentDetailsDaviplataRequest:
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetailsBase'
+        - type: object
+          properties:
+            payment:
+              type: string
+              const: daviplata
+              example: daviplata
+    PaymentDetailsCreditCardRequest:
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetailsBase'
+        - type: object
+          required:
+            - credit_card
+            - expiration_date
+            - cvv
+            - dues
+          properties:
+            payment:
+              type: string
+              const: credit_card
+              example: credit_card
+            credit_card:
+              type: string
+              description: Card number without spaces
+            expiration_date:
+              type: string
+              description: Expiration date in MM/AA
+            cvv:
+              type: string
+            dues:
+              type: integer
+    PaymentDetailsRequest:
+      type: object
+      required:
+        - payment
+      properties:
+        payment:
           type: string
-        push:
-          type: boolean
-          default: true
-        bank:
+      oneOf:
+        - $ref: '#/components/schemas/PaymentDetailsBreBRequest'
+        - $ref: '#/components/schemas/PaymentDetailsPseRequest'
+        - $ref: '#/components/schemas/PaymentDetailsCashRequest'
+        - $ref: '#/components/schemas/PaymentDetailsNequiRequest'
+        - $ref: '#/components/schemas/PaymentDetailsDaleRequest'
+        - $ref: '#/components/schemas/PaymentDetailsBancolombiaTransferRequest'
+        - $ref: '#/components/schemas/PaymentDetailsDaviplataRequest'
+        - $ref: '#/components/schemas/PaymentDetailsCreditCardRequest'
+    DaviplataConfirmRequest:
+      type: object
+      required:
+        - URL
+        - OTP
+      properties:
+        URL:
           type: string
-        address:
+          description: Cobru URL or slug to confirm
+        OTP:
           type: string
-        credit_card:
+          description: OTP received by the payer
+      additionalProperties: true
+    DaviplataConfirmResponse:
+      type: object
+      properties:
+        result:
           type: string
-        expiration_date:
-          type: string
-        cvv:
-          type: string
-        dues:
-          type: integer
-        json:
-          type: boolean
-          default: true
+          example: OK
+      additionalProperties: true
     CobruDetailResponse:
       type: object
       properties:
@@ -1705,6 +2026,30 @@ components:
           type: string
         fee_iva:
           type: string
+    TransferListItem:
+      type: object
+      properties:
+        from_user:
+          type: string
+          description: Sender identifier.
+          example: support@cobru.co
+        to_user:
+          type: string
+          description: Recipient identifier, documented as a phone-based value in legacy materials.
+          example: '3001234567'
+        amount:
+          type: integer
+          description: Transfer amount.
+          example: 99000
+        date:
+          type: string
+          description: Transfer creation date or timestamp.
+          example: '2026-04-08T14:35:00Z'
+      additionalProperties: true
+    TransferListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/TransferListItem'
     TransferRequest:
       type: object
       required:
@@ -1716,6 +2061,47 @@ components:
           description: Recipient phone number
         amount:
           type: integer
+    CashWithdrawalListItem:
+      type: object
+      properties:
+        pk:
+          type: integer
+          description: Cobru withdrawal identifier.
+          example: 123456
+        amount:
+          type: integer
+          description: Requested withdrawal amount.
+          example: 10000
+        date:
+          type: string
+          description: Creation date or timestamp.
+          example: '2026-04-08T14:35:00Z'
+        from_user:
+          type: string
+          example: ops@cobru.co
+        from_user_phone:
+          type: string
+          example: '3000000000'
+        to_user:
+          type: string
+          description: Recipient descriptor or recipient full name.
+          example: Testeo efecty
+        method:
+          type: string
+          example: efecty
+        state:
+          type: integer
+          description: Legacy state code.
+          example: 2
+        callback:
+          type: string
+          format: uri
+          example: https://merchant.example/webhooks/cash-withdrawals
+      additionalProperties: true
+    CashWithdrawalListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/CashWithdrawalListItem'
     CashWithdrawalRequest:
       type: object
       required:
@@ -1755,6 +2141,443 @@ components:
           type: integer
         amount:
           type: integer
+    CashWithdrawalCancelRequest:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          description: Cash withdrawal identifier.
+          example: 123456
+    CashWithdrawalCancelResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+        message:
+          type: string
+          example: cash withdrawal cancelled
+      additionalProperties: true
+    ThirdPartyWithdrawalBanksResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            example: 1
+          name:
+            type: string
+            example: Bancolombia
+        additionalProperties: true
+    ThirdPartyWithdrawalRecord:
+      type: object
+      properties:
+        pk:
+          type: integer
+          example: 7821
+        type:
+          type: string
+          example: bank_withdrawal
+        state:
+          type: string
+          example: deposited
+        amount:
+          type: integer
+          example: 250000
+        payed_amount:
+          type: integer
+          example: 244350
+        fee:
+          type: integer
+          example: 4500
+        fee_iva:
+          type: integer
+          example: 855
+        gmf:
+          type: integer
+          example: 295
+        account_number:
+          type: string
+          example: '1234567890'
+        description:
+          type: string
+          example: Supplier payout
+        date_created:
+          type: string
+          example: '2026-04-08T14:35:00Z'
+        date_consigned:
+          type: string
+          nullable: true
+          example: '2026-04-08T15:10:00Z'
+        date_deposited:
+          type: string
+          nullable: true
+          example: '2026-04-08T16:00:00Z'
+        date_rejected:
+          type: string
+          nullable: true
+      additionalProperties: true
+    ThirdPartyWithdrawalListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/ThirdPartyWithdrawalRecord'
+    ThirdPartyWithdrawalRequest:
+      type: object
+      required:
+        - amount
+        - account_holder_name
+        - account_type
+        - account_holder_document
+        - account_holder_document_type
+        - account_number
+        - account_phone
+        - account_email
+      properties:
+        amount:
+          type: integer
+          example: 250000
+        account_holder_name:
+          type: string
+          example: Maria Perez
+        account_type:
+          type: string
+          example: savings
+        account_holder_document:
+          type: string
+          example: '1029384756'
+        account_holder_document_type:
+          type: string
+          example: CC
+        account_number:
+          type: string
+          example: '1234567890'
+        account_phone:
+          type: string
+          example: '3001234567'
+        account_email:
+          type: string
+          format: email
+          example: maria@example.com
+        bank_name:
+          type: string
+          example: Bancolombia
+        description:
+          type: string
+          example: Supplier payout
+        callback:
+          type: string
+          format: uri
+          example: https://merchant.example/webhooks/withdrawals
+        idempotency_key:
+          type: string
+          example: wd_2026_04_08_0001
+    ThirdPartyWithdrawalCancelRequest:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          example: 7821
+    BreBWithdrawalRequest:
+      type: object
+      description: |
+        Candidate request contract for BRE-B-linked bank movement. The exact production request still needs live verification with Cobru.
+      properties:
+        amount:
+          type: integer
+          example: 180000
+        destination:
+          type: string
+          description: Destination identifier for the beneficiary, still pending confirmation.
+          example: '3001234567'
+        callback:
+          type: string
+          format: uri
+        idempotency_key:
+          type: string
+      additionalProperties: true
+    BankWithdrawalBrazilRequest:
+      type: object
+      required:
+        - amount
+        - currency_code
+        - pix_key
+        - pix_key_type
+        - account_phone
+        - account_email
+      properties:
+        amount:
+          type: integer
+          example: 180000
+        currency_code:
+          type: string
+          example: BRL
+        pix_key:
+          type: string
+          example: usuario@example.com
+        pix_key_type:
+          type: string
+          example: email
+        cpf:
+          type: string
+          nullable: true
+          example: '12345678901'
+        cnpj:
+          type: string
+          nullable: true
+          example: '12345678000199'
+        account_phone:
+          type: string
+          example: '5511999999999'
+        account_email:
+          type: string
+          format: email
+          example: usuario@example.com
+        callback:
+          type: string
+          format: uri
+        idempotency_key:
+          type: string
+        description:
+          type: string
+        platform:
+          type: string
+        longitude:
+          type: number
+        latitude:
+          type: number
+    BankWithdrawalArgentinaRequest:
+      type: object
+      required:
+        - amount
+        - currency_code
+        - bank_name
+        - account_phone
+        - account_email
+      properties:
+        amount:
+          type: integer
+          example: 180000
+        currency_code:
+          type: string
+          example: ARS
+        bank_name:
+          type: string
+          example: Banco Galicia
+        cbu:
+          type: string
+          nullable: true
+          example: '2850590940090418135201'
+        cvu:
+          type: string
+          nullable: true
+          example: '0000003100000000000001'
+        account_phone:
+          type: string
+          example: '5491112345678'
+        account_email:
+          type: string
+          format: email
+          example: usuario@example.com
+        callback:
+          type: string
+          format: uri
+        idempotency_key:
+          type: string
+        description:
+          type: string
+        platform:
+          type: string
+    BankWithdrawalMexicoRequest:
+      type: object
+      required:
+        - amount
+        - currency_code
+        - clabe
+        - beneficiary
+        - account_phone
+        - account_email
+      properties:
+        amount:
+          type: integer
+          example: 180000
+        currency_code:
+          type: string
+          example: MXN
+        clabe:
+          type: string
+          example: '032180000118359719'
+        beneficiary:
+          type: string
+          example: Juan Perez
+        account_phone:
+          type: string
+          example: '525511223344'
+        account_email:
+          type: string
+          format: email
+          example: usuario@example.com
+        callback:
+          type: string
+          format: uri
+        idempotency_key:
+          type: string
+        description:
+          type: string
+        platform:
+          type: string
+    RechargeRequest:
+      type: object
+      required:
+        - value
+        - recipient
+        - operator
+      properties:
+        value:
+          type: integer
+          example: 20000
+        recipient:
+          type: string
+          example: '3001234567'
+        operator:
+          type: string
+          example: claro
+    RechargeResponse:
+      type: object
+      properties:
+        result:
+          type: string
+          example: ok
+        message:
+          type: string
+          example: recharge accepted
+      additionalProperties: true
+    BuyPinRequest:
+      type: object
+      required:
+        - id_pin
+        - operator
+      properties:
+        id_pin:
+          type: integer
+          example: 17
+        operator:
+          type: string
+          example: netflix
+    BuyPinResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+        pin:
+          type: string
+          example: ABCD-EFGH-IJKL
+        pk:
+          type: integer
+          example: 4451
+      additionalProperties: true
+    BuyPackageRequest:
+      type: object
+      required:
+        - cell_provider
+        - code_provider
+        - phone
+      properties:
+        cell_provider:
+          type: string
+          example: claro
+        code_provider:
+          type: string
+          example: paquete_20gb
+        phone:
+          type: string
+          example: '3001234567'
+    CardCreateReloadRequest:
+      type: object
+      required:
+        - amount
+      properties:
+        amount:
+          type: integer
+          description: Use `0` to create a card, or a positive number to reload an existing card.
+          example: 0
+        card_id:
+          type: integer
+          description: Existing card identifier when reloading a card.
+          nullable: true
+          example: 9182
+    CardRecord:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 9182
+        masked_pan:
+          type: string
+          example: 411111******1111
+        display_expiration:
+          type: string
+          example: 12/28
+        balance:
+          type: integer
+          example: 150000
+        state:
+          type: string
+          example: active
+        cvv:
+          type: string
+          example: '123'
+        max_balance:
+          type: integer
+          example: 1000000
+        support_token:
+          type: string
+          example: tok_support_9182
+      additionalProperties: true
+    CardListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/CardRecord'
+    CardTransactionRecord:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1001
+        amount:
+          type: integer
+          example: 25000
+        status:
+          type: string
+          example: posted
+        created_at:
+          type: string
+          example: '2026-04-08T14:35:00Z'
+        merchant_name:
+          type: string
+          example: Streaming Service
+      additionalProperties: true
+    CardTransactionsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/CardTransactionRecord'
+    FreezeCardRequest:
+      type: object
+      required:
+        - card_id
+        - freeze
+      properties:
+        card_id:
+          type: integer
+          example: 9182
+        freeze:
+          type: boolean
+          example: true
     WebhookPayload:
       type: object
       properties:

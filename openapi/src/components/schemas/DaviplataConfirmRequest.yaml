@@ -1,0 +1,12 @@
+type: object
+required:
+  - URL
+  - OTP
+properties:
+  URL:
+    type: string
+    description: Cobru URL or slug to confirm
+  OTP:
+    type: string
+    description: OTP received by the payer
+additionalProperties: true

@@ -1,0 +1,15 @@
+type: object
+required:
+  - value
+  - recipient
+  - operator
+properties:
+  value:
+    type: integer
+    example: 20000
+  recipient:
+    type: string
+    example: "3001234567"
+  operator:
+    type: string
+    example: claro

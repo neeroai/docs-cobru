@@ -1,6 +1,6 @@
 ---
-title: Generate payment details
-description: Submit payer information and payment-method-specific details for a hosted Cobru payment.
+title: Submit payment details
+description: Submit payer information and method-specific fields for an existing cobru.
 icon: ReceiptText
 ---
 
@@ -9,12 +9,23 @@ icon: ReceiptText
 `POST /{url}`
 
 <Callout type="warn">
-  This contract comes from legacy Cobru API materials and deep BRE-B research. Re-verify the exact behavior in sandbox before building a production dependency on it.
+  This contract comes primarily from Cobru's original Spotlight materials. Re-verify exact runtime behavior in sandbox before relying on less common methods in production.
 </Callout>
 
 ## Purpose
 
-After a cobru exists, this endpoint appears to receive payer details and payment-method-specific fields such as PSE bank code, Nequi phone, or card data.
+After a cobru exists, this endpoint receives the payer details and the fields required by the selected payment method.
+
+This is the checkout hub for:
+
+- Bre-B
+- PSE
+- Efecty and Corresponsal Bancolombia
+- Nequi
+- dale!
+- Botón Bancolombia
+- Daviplata
+- credit cards
 
 ## Path parameter
 
@@ -22,7 +33,7 @@ After a cobru exists, this endpoint appears to receive payer details and payment
 |-------|------|-------------|
 | `url` | string | the cobru slug returned by `POST /cobru/` |
 
-## Request body shape seen in legacy materials
+## Common fields
 
 ```json
 {
@@ -35,6 +46,214 @@ After a cobru exists, this endpoint appears to receive payer details and payment
 }
 ```
 
-## Important note for BRE-B
+| Field | Required | Notes |
+|-------|----------|-------|
+| `name` | yes for most methods | payer name |
+| `payment` | yes | payment method selector |
+| `cc` | yes for most methods | payer document number |
+| `email` | yes for most methods | payer email |
+| `document_type` | yes for most methods | Spotlight shows `CC`, `TI`, `CE`, `NIT`, `PA` |
+| `phone` | yes for most methods | payer phone |
 
-Deep research indicates the field name is `payment`, not `payment_method`. If you send the wrong field name, Cobru may reject the request.
+<Callout type="warn">
+  Use the field name `payment`, not `payment_method`. Spotlight and later research both point to `payment` as the accepted selector.
+</Callout>
+
+## Response and error behavior seen in Spotlight
+
+| Status | Cause | Notes |
+|--------|-------|-------|
+| `200` | payment details generated | response shape varies by method |
+| `403` | trying to pay your own cobru with Cobru balance | Spotlight shows `{"result":"same_user"}` |
+| `400` | owner would exceed allowed balance | `{"result":"LIMIT_BALANCE"}` |
+| `400` | cobru already paid | `{"result":"COBRU_IS_PAYED"}` |
+| `400` | unknown payment method | `{"error": true, "msg": "unknown payment method"}` |
+| `400` | method not enabled | `{"error":"Payment method is not enabled.","result":"NOT_ALLOWED"}` |
+| `404` | Cobru-balance payer not found | legacy flow only |
+
+## Method matrix
+
+| Method | `payment` literal | Extra fields | Next step |
+|--------|-------------------|--------------|-----------|
+| Bre-B | `breb` | none in the base request | render `qr_value` / `key_value` |
+| PSE | `pse` | `bank`, `address` | redirect to PSE URL returned by Cobru |
+| Efecty | `efecty` | none beyond common fields | show the cash payment details returned |
+| Corresponsal Bancolombia | `corresponsal_bancolombia` | none beyond common fields | show the payment details returned |
+| Nequi | `NEQUI` | `phone_nequi`, optional `push` | use `checkout` or QR-style response |
+| dale! | `dale` | none beyond common fields | follow the response returned by Cobru |
+| Botón Bancolombia | `bancolombia_transfer` | none beyond common fields | redirect to `checkout` |
+| Daviplata | `daviplata` | none in the first request | confirm later with OTP |
+| Credit card | `credit_card` | `credit_card`, `expiration_date`, `cvv`, `dues` | complete card payment flow |
+
+## Bre-B
+
+```json
+{
+  "payment": "breb"
+}
+```
+
+Spotlight shows a response that includes:
+
+- `qr_value`
+- `key_value`
+- `method: "breb"`
+- `franchise: "breb"`
+
+The original materials also state that `qr_value` and `key_value` live for 5 minutes.
+
+## PSE
+
+PSE requires two extra fields:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `bank` | string | numeric bank code |
+| `address` | string | payer address |
+
+```json
+{
+  "name": "Juan Perez",
+  "payment": "pse",
+  "cc": "1140867070",
+  "email": "juan@cobru.co",
+  "document_type": "CC",
+  "phone": "300000000",
+  "bank": "1040",
+  "address": "Bogotá, Colombia"
+}
+```
+
+<Callout type="info">
+  Before sending `payment: "pse"`, fetch the available bank list from `GET /get_banks/1/` and send the selected
+  `bankCode` in the `bank` field.
+</Callout>
+
+If the request succeeds, Cobru returns the PSE URL that your frontend should use to redirect the user.
+
+## Cash methods: Efecty and Corresponsal Bancolombia
+
+Spotlight groups these as cash-style payment detail generation.
+
+```json
+{
+  "name": "Juan Perez",
+  "payment": "efecty",
+  "cc": "1140867070",
+  "email": "juan@cobru.co",
+  "document_type": "CC",
+  "phone": "3002794981"
+}
+```
+
+`corresponsal_bancolombia` uses the same common-field shape, only changing the `payment` literal.
+
+## Nequi
+
+```json
+{
+  "name": "Test Gómez",
+  "payment": "NEQUI",
+  "cc": "1082626262",
+  "email": "test@cobru.co",
+  "phone": "307654332",
+  "document_type": "CC",
+  "phone_nequi": "307654332",
+  "push": true
+}
+```
+
+Behavior described by Spotlight:
+
+- `push: true` triggers a push in the user's Nequi app
+- `push: false` avoids the push and returns the data needed to generate a QR-style experience, including `ref`
+
+## dale!
+
+```json
+{
+  "name": "Test Gómez",
+  "payment": "dale",
+  "cc": "1082626262",
+  "email": "test@cobru.co",
+  "phone": "307654332",
+  "document_type": "CC"
+}
+```
+
+## Botón Bancolombia
+
+```json
+{
+  "name": "Test Gómez",
+  "payment": "bancolombia_transfer",
+  "cc": "1082626262",
+  "email": "test@cobru.co",
+  "phone": "307654332",
+  "document_type": "CC"
+}
+```
+
+Spotlight says the response includes a `checkout` URL that the user should open to complete the payment.
+
+## Daviplata
+
+Initial request:
+
+```json
+{
+  "name": "Test Gómez",
+  "payment": "daviplata",
+  "cc": "1082626262",
+  "email": "test@cobru.co",
+  "phone": "307654332",
+  "document_type": "CC"
+}
+```
+
+After the payer receives the Daviplata OTP, Spotlight requires a second call:
+
+`POST /cobru/confirm_daviplata/`
+
+Body fields:
+
+| Field | Description |
+|-------|-------------|
+| `URL` | cobru URL/slug |
+| `OTP` | OTP received by the payer |
+
+Success is described as `result == "OK"`.
+
+## Credit card
+
+```json
+{
+  "name": "Test Gómez",
+  "payment": "credit_card",
+  "cc": "1082626262",
+  "email": "test@cobru.co",
+  "phone": "307654332",
+  "document_type": "CC",
+  "credit_card": "4111111111111111",
+  "expiration_date": "12/30",
+  "cvv": "123",
+  "dues": 1
+}
+```
+
+Spotlight notes:
+
+- Cobru does not persist card data
+- production traffic must be HTTPS
+- test cards shown in Spotlight:
+  - approved: `4111 1111 1111 1111`
+  - declined: `4111 1111 1111 1112`
+
+## Related pages
+
+- [Bre-B payment flow](/en/docs/guides/qr-breb)
+- [Bre-B](/en/docs/api/cobrus/breb)
+- [PSE payments](/en/docs/api/cobrus/pse)
+- [Cash payments](/en/docs/api/cobrus/cash-payments)
+- [Nequi](/en/docs/api/cobrus/nequi)
+- [Daviplata](/en/docs/api/cobrus/daviplata)

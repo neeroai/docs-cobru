@@ -1,5 +1,5 @@
 {
   "title": "Cobrus",
   "icon": "Wallet",
-  "pages": ["index", "create", "payment-details", "consult", "pse-banks", "quote", "edit"]
+  "pages": ["index", "create", "payment-details", "breb", "pse", "cash-payments", "nequi", "dale", "bancolombia-button", "daviplata", "credit-card", "consult", "pse-banks", "quote", "edit"]
 }

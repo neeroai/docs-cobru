@@ -4,19 +4,20 @@ get:
     - Bank Withdrawals
   summary: Get third-party withdrawal by ID
   x-verification-status: legacy-doc
+  description: Retrieve the latest state and details for one third-party bank withdrawal.
   parameters:
     - in: path
       name: id
       required: true
       schema:
-        type: string
+        type: integer
+      description: Cobru bank-withdrawal identifier.
   responses:
     '200':
       description: Withdrawal detail
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/ThirdPartyWithdrawalRecord.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

@@ -1,0 +1,41 @@
+type: object
+required:
+  - amount
+  - currency_code
+  - bank_name
+  - account_phone
+  - account_email
+properties:
+  amount:
+    type: integer
+    example: 180000
+  currency_code:
+    type: string
+    example: ARS
+  bank_name:
+    type: string
+    example: Banco Galicia
+  cbu:
+    type: string
+    nullable: true
+    example: "2850590940090418135201"
+  cvu:
+    type: string
+    nullable: true
+    example: "0000003100000000000001"
+  account_phone:
+    type: string
+    example: "5491112345678"
+  account_email:
+    type: string
+    format: email
+    example: usuario@example.com
+  callback:
+    type: string
+    format: uri
+  idempotency_key:
+    type: string
+  description:
+    type: string
+  platform:
+    type: string

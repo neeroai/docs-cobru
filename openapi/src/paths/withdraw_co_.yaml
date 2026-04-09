@@ -4,20 +4,21 @@ post:
     - Bank Withdrawals
   summary: Create BRE-B transfer
   x-verification-status: legacy-doc
+  description: >
+    Candidate endpoint for BRE-B-linked bank movement in Colombia. The exact request and
+    settlement model still require fresh validation with Cobru.
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          type: object
-          additionalProperties: true
+          $ref: ../components/schemas/BreBWithdrawalRequest.yaml
   responses:
     '200':
       description: BRE-B transfer created
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/ThirdPartyWithdrawalRecord.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

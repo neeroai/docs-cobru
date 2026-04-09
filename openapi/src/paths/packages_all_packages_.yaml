@@ -4,13 +4,23 @@ get:
     - Services
   summary: List recharge packages
   x-verification-status: legacy-doc
+  description: Retrieve the catalog of mobile data or recharge packages available in Cobru.
+  parameters:
+    - in: query
+      name: cell_provider
+      required: false
+      schema:
+        type: string
+      description: Optional provider filter referenced in older Cobru materials.
   responses:
     '200':
       description: Package catalog
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            type: array
+            items:
+              type: object
+              additionalProperties: true
     default:
       $ref: ../components/responses/GenericError.yaml

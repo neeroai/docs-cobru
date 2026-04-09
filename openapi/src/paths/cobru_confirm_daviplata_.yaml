@@ -1,0 +1,27 @@
+post:
+  operationId: confirmDaviplataPayment
+  tags:
+    - Cobrus
+  summary: Confirm Daviplata OTP
+  x-verification-status: legacy-doc
+  description: |
+    Confirm a Daviplata payment after the payer receives the OTP.
+    This operation comes from the original Spotlight materials.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/DaviplataConfirmRequest.yaml
+        example:
+          URL: ufa8q176
+          OTP: '123456'
+  responses:
+    '200':
+      description: Daviplata confirmation accepted
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DaviplataConfirmResponse.yaml
+    default:
+      $ref: ../components/responses/GenericError.yaml

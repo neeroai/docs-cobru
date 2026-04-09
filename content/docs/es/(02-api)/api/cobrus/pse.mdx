@@ -1,0 +1,36 @@
+---
+title: Pagos PSE
+description: Envía los detalles de pago PSE para un cobru existente y redirige al pagador al flujo del banco elegido.
+icon: Landmark
+---
+
+## Endpoint
+
+`POST /{url}`
+
+## Dependencia obligatoria
+
+Antes de llamar el endpoint de detalles de pago con PSE, consulta el catálogo de bancos en:
+
+`GET /get_banks/1/`
+
+Usa el `bankCode` seleccionado dentro del campo `bank`.
+
+## Request
+
+```json
+{
+  "name": "Juan Perez",
+  "payment": "pse",
+  "cc": "1140867070",
+  "email": "juan@cobru.co",
+  "document_type": "CC",
+  "phone": "300000000",
+  "bank": "1040",
+  "address": "Bogotá, Colombia"
+}
+```
+
+## Siguiente paso
+
+Si el request es exitoso, Cobru retorna la URL de PSE a la que tu frontend debe redirigir al usuario.

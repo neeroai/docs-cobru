@@ -1,0 +1,49 @@
+type: object
+required:
+  - amount
+  - currency_code
+  - pix_key
+  - pix_key_type
+  - account_phone
+  - account_email
+properties:
+  amount:
+    type: integer
+    example: 180000
+  currency_code:
+    type: string
+    example: BRL
+  pix_key:
+    type: string
+    example: usuario@example.com
+  pix_key_type:
+    type: string
+    example: email
+  cpf:
+    type: string
+    nullable: true
+    example: "12345678901"
+  cnpj:
+    type: string
+    nullable: true
+    example: "12345678000199"
+  account_phone:
+    type: string
+    example: "5511999999999"
+  account_email:
+    type: string
+    format: email
+    example: usuario@example.com
+  callback:
+    type: string
+    format: uri
+  idempotency_key:
+    type: string
+  description:
+    type: string
+  platform:
+    type: string
+  longitude:
+    type: number
+  latitude:
+    type: number

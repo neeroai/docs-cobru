@@ -1,0 +1,19 @@
+type: object
+properties:
+  from_user:
+    type: string
+    description: Sender identifier.
+    example: support@cobru.co
+  to_user:
+    type: string
+    description: Recipient identifier, documented as a phone-based value in legacy materials.
+    example: "3001234567"
+  amount:
+    type: integer
+    description: Transfer amount.
+    example: 99000
+  date:
+    type: string
+    description: Transfer creation date or timestamp.
+    example: '2026-04-08T14:35:00Z'
+additionalProperties: true

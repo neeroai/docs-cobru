@@ -1,0 +1,9 @@
+type: object
+properties:
+  result:
+    type: string
+    example: ok
+  message:
+    type: string
+    example: recharge accepted
+additionalProperties: true

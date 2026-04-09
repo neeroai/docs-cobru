@@ -1,0 +1,18 @@
+type: object
+description: >
+  Candidate request contract for BRE-B-linked bank movement. The exact production request still
+  needs live verification with Cobru.
+properties:
+  amount:
+    type: integer
+    example: 180000
+  destination:
+    type: string
+    description: Destination identifier for the beneficiary, still pending confirmation.
+    example: "3001234567"
+  callback:
+    type: string
+    format: uri
+  idempotency_key:
+    type: string
+additionalProperties: true

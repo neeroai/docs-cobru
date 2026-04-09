@@ -1,0 +1,34 @@
+---
+title: Bre-B
+description: Submit Bre-B payment instructions for an existing cobru.
+icon: QrCode
+---
+
+## Endpoint
+
+`POST /{url}`
+
+## Request
+
+```json
+{
+  "payment": "breb"
+}
+```
+
+This is the most minimal payment-details variant documented in Spotlight.
+
+## What to expect back
+
+Spotlight shows a payment-order response that includes:
+
+- `qr_value`
+- `key_value`
+- `method: "breb"`
+- `franchise: "breb"`
+
+The original materials also state that both `qr_value` and `key_value` expire after 5 minutes.
+
+## When to use it
+
+Use Bre-B when you want an interoperable bank-transfer option and your product can work with short-lived payment instructions plus webhook-based confirmation.

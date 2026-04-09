@@ -1,0 +1,6 @@
+type: object
+properties:
+  result:
+    type: string
+    example: OK
+additionalProperties: true

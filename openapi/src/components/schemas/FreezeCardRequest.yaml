@@ -1,0 +1,11 @@
+type: object
+required:
+  - card_id
+  - freeze
+properties:
+  card_id:
+    type: integer
+    example: 9182
+  freeze:
+    type: boolean
+    example: true

@@ -4,20 +4,23 @@ post:
     - Cash Withdrawals
   summary: Cancel cash withdrawal
   x-verification-status: legacy-doc
+  description: Cancel a previously created cash withdrawal before pickup.
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          type: object
-          additionalProperties: true
+          $ref: ../components/schemas/CashWithdrawalCancelRequest.yaml
+        examples:
+          default:
+            value:
+              id: 123456
   responses:
     '200':
       description: Cash withdrawal cancelled
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/CashWithdrawalCancelResponse.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

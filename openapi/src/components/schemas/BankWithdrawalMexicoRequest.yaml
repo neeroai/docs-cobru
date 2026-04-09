@@ -1,0 +1,37 @@
+type: object
+required:
+  - amount
+  - currency_code
+  - clabe
+  - beneficiary
+  - account_phone
+  - account_email
+properties:
+  amount:
+    type: integer
+    example: 180000
+  currency_code:
+    type: string
+    example: MXN
+  clabe:
+    type: string
+    example: "032180000118359719"
+  beneficiary:
+    type: string
+    example: Juan Perez
+  account_phone:
+    type: string
+    example: "525511223344"
+  account_email:
+    type: string
+    format: email
+    example: usuario@example.com
+  callback:
+    type: string
+    format: uri
+  idempotency_key:
+    type: string
+  description:
+    type: string
+  platform:
+    type: string

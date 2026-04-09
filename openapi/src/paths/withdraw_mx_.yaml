@@ -4,20 +4,21 @@ post:
     - Bank Withdrawals
   summary: Create bank withdrawal to Mexico
   x-verification-status: legacy-doc
+  description: >
+    Create a Mexico payout using the legacy Cobru export built around CLABE and beneficiary
+    name.
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          type: object
-          additionalProperties: true
+          $ref: ../components/schemas/BankWithdrawalMexicoRequest.yaml
   responses:
     '200':
       description: Withdrawal created
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/ThirdPartyWithdrawalRecord.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

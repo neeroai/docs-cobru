@@ -1,0 +1,85 @@
+---
+title: Production Readiness
+description: Operational checklist for taking a Cobru integration from sandbox to live traffic.
+icon: ShieldCheck
+---
+
+Going live with Cobru is not just a credential switch. You should treat production readiness as
+an operational milestone with explicit checks across auth, payment creation, callbacks,
+observability, and support workflows.
+
+## Go-live checklist
+
+<Steps>
+  <Step>
+    Confirm production credentials are stored only in secure environment configuration and are
+    not shared with frontend code.
+  </Step>
+  <Step>
+    Switch your base URL to `https://prod.cobru.co` only after sandbox flows are consistently
+    passing.
+  </Step>
+  <Step>
+    Confirm your `callback` URL is public, HTTPS, monitored, and idempotent.
+  </Step>
+  <Step>
+    Validate that your team can manually reconcile one payment from request to callback to
+    internal order state.
+  </Step>
+  <Step>
+    Make sure support can locate payments by internal order ID and Cobru `url` slug.
+  </Step>
+</Steps>
+
+## Minimum controls before live traffic
+
+| Area | Requirement |
+|------|-------------|
+| Auth | access-token caching and secure secret storage |
+| Payments | safe serialization of `payment_method_enabled` and reliable redirect URLs |
+| Webhooks | fast `200` response, persistence, deduplication, reconciliation |
+| Logging | request IDs, raw Cobru responses, webhook event logs |
+| Support | ability to trace a payment from internal order to Cobru payment object |
+| Monitoring | alerts on failed payment creation and failed webhook processing |
+
+## Recommended launch strategy
+
+- start with internal or low-risk traffic
+- keep manual reconciliation enabled during the first production days
+- avoid broad customer communication until you confirm callback handling is stable
+- document who owns incident response during launch week
+
+## Known production-sensitive areas
+
+<Accordions>
+  <Accordion title="Misleading validation errors">
+    Some malformed payment-creation requests can still appear as `403` instead of a clean
+    validation status. Your monitoring should preserve raw Cobru responses for diagnosis.
+  </Accordion>
+
+  <Accordion title="Unsigned webhooks">
+    Because Cobru callbacks are not signed today, your production system must treat them as
+    notifications and re-check payment state before irreversible actions.
+  </Accordion>
+
+  <Accordion title="Hosted URL construction">
+    Always build the hosted URL from the `url` slug returned by Cobru, not from `pk` or an older
+    plugin pattern.
+  </Accordion>
+</Accordions>
+
+## Launch-day rollback criteria
+
+Pause or limit live traffic if:
+
+- payment creation success drops unexpectedly
+- callbacks stop arriving or cannot be reconciled
+- you cannot match Cobru payments to internal orders reliably
+- support cannot diagnose failures from available logs
+
+## Related pages
+
+- `/docs/testing`
+- `/docs/webhooks`
+- `/docs/errors`
+- `/docs/troubleshooting`

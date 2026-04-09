@@ -4,21 +4,38 @@ post:
     - Bank Withdrawals
   summary: Create bank withdrawal to a third party
   x-verification-status: legacy-doc
+  description: >
+    Create a bank withdrawal using the best-known Colombian third-party payout contract from
+    legacy Cobru materials. Supports beneficiary banking details, optional callback, and
+    optional idempotency key.
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          type: object
-          additionalProperties: true
+          $ref: ../components/schemas/ThirdPartyWithdrawalRequest.yaml
+        examples:
+          colombia:
+            value:
+              amount: 250000
+              account_holder_name: Maria Perez
+              account_type: savings
+              account_holder_document: "1029384756"
+              account_holder_document_type: CC
+              account_number: "1234567890"
+              account_phone: "3001234567"
+              account_email: maria@example.com
+              bank_name: Bancolombia
+              description: Supplier payout
+              callback: https://merchant.example/webhooks/withdrawals
+              idempotency_key: wd_2026_04_08_0001
   responses:
     '200':
       description: Withdrawal created
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/ThirdPartyWithdrawalRecord.yaml
     default:
       $ref: ../components/responses/GenericError.yaml
 get:
@@ -27,13 +44,22 @@ get:
     - Bank Withdrawals
   summary: List third-party withdrawals
   x-verification-status: legacy-doc
+  description: >
+    Retrieve previously created third-party withdrawals. Legacy materials mention querying by
+    idempotency key in addition to standard list retrieval.
+  parameters:
+    - in: query
+      name: idempotency_key
+      required: false
+      schema:
+        type: string
+      description: Optional idempotency key used to find a previously submitted payout.
   responses:
     '200':
       description: Withdrawal list
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/ThirdPartyWithdrawalListResponse.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

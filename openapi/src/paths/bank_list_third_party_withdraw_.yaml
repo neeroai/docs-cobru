@@ -4,13 +4,14 @@ get:
     - Bank Withdrawals
   summary: List available banks for third-party withdrawals
   x-verification-status: legacy-doc
+  description: >
+    Retrieve the bank catalog used by the legacy Colombian third-party withdrawal flow.
   responses:
     '200':
       description: Bank list
       content:
         application/json:
           schema:
-            type: object
-            additionalProperties: true
+            $ref: ../components/schemas/ThirdPartyWithdrawalBanksResponse.yaml
     default:
       $ref: ../components/responses/GenericError.yaml

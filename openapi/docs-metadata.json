@@ -59,8 +59,12 @@
       "es": "Crear un cobru"
     },
     "submitPaymentDetails": {
-      "en": "Generate payment details",
-      "es": "Generar detalles de pago"
+      "en": "Submit payment details",
+      "es": "Enviar detalles de pago"
+    },
+    "confirmDaviplataPayment": {
+      "en": "Confirm Daviplata OTP",
+      "es": "Confirmar OTP de Daviplata"
     },
     "consultCobru": {
       "en": "Consult a cobru",

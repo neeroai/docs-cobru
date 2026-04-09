@@ -1,0 +1,8 @@
+allOf:
+  - $ref: ./PaymentDetailsBase.yaml
+  - type: object
+    properties:
+      payment:
+        type: string
+        const: bancolombia_transfer
+        example: bancolombia_transfer

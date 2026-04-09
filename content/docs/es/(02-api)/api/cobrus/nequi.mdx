@@ -1,0 +1,29 @@
+---
+title: Nequi
+description: Envía detalles de pago Nequi y, opcionalmente, dispara el push a la app del pagador.
+icon: Smartphone
+---
+
+## Endpoint
+
+`POST /{url}`
+
+## Request
+
+```json
+{
+  "name": "Test Gómez",
+  "payment": "NEQUI",
+  "cc": "1082626262",
+  "email": "test@cobru.co",
+  "phone": "307654332",
+  "document_type": "CC",
+  "phone_nequi": "307654332",
+  "push": true
+}
+```
+
+## Comportamiento de `push`
+
+- `push: true` envía un push a la app Nequi del pagador
+- `push: false` evita el push y Spotlight dice que la respuesta incluye la data necesaria para una experiencia tipo QR, incluido `ref`

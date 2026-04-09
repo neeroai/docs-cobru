@@ -1,0 +1,15 @@
+type: object
+required:
+  - cell_provider
+  - code_provider
+  - phone
+properties:
+  cell_provider:
+    type: string
+    example: claro
+  code_provider:
+    type: string
+    example: paquete_20gb
+  phone:
+    type: string
+    example: "3001234567"

@@ -1,0 +1,18 @@
+allOf:
+  - $ref: ./PaymentDetailsBase.yaml
+  - type: object
+    required:
+      - bank
+      - address
+    properties:
+      payment:
+        type: string
+        const: pse
+        example: pse
+      bank:
+        type: string
+        description: Numeric bank code obtained from `GET /get_banks/1/`
+        example: '1040'
+      address:
+        type: string
+        example: Bogotá, Colombia

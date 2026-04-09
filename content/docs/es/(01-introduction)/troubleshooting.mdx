@@ -1,0 +1,79 @@
+---
+title: Troubleshooting
+description: Guía rápida de diagnóstico para los fallos más comunes en integraciones Cobru.
+icon: Wrench
+---
+
+Usa esta página cuando la integración esté fallando y necesites una ruta concreta de
+diagnóstico, no solo guía general de API.
+
+## Orden de triage rápido
+
+1. Confirma ambiente y base URL.
+2. Confirma que las credenciales requeridas estén presentes.
+3. Inspecciona el JSON exacto enviado a Cobru.
+4. Inspecciona la respuesta raw de Cobru.
+5. Verifica si la URL hosted se construyó desde `url`.
+6. Verifica si los callbacks están llegando y deduplicándose.
+
+## Mapa de fallos comunes
+
+| Síntoma | Primera cosa que debes revisar |
+|---------|--------------------------------|
+| `403` al crear pago | validación del request, no solo auth |
+| `400` al crear pago | serialización de `payment_method_enabled` |
+| la página de pago no abre | la URL hosted se construyó con `pk` en lugar de `url` |
+| llega callback pero la orden no cambia | persistencia del webhook y procesamiento asíncrono |
+| acciones de negocio duplicadas | falta de idempotencia en el handler del webhook |
+| flujo de payouts poco claro | valida el nivel de confianza del endpoint antes de implementarlo |
+
+## Triage de creación de pago
+
+<Accordions>
+  <Accordion title="403 aunque las credenciales parecen correctas">
+    Revisa `callback`, `payer_redirect_url`, content type y la forma de
+    `payment_method_enabled`. Cobru puede surfacer fallas de validación como `403`.
+  </Accordion>
+
+  <Accordion title="400 con error sobre payment_method_enabled">
+    Envía `payment_method_enabled` como string JSON, no como objeto anidado.
+  </Accordion>
+
+  <Accordion title="La página hosted no carga">
+    Construye la URL como `{COBRU_BASE_URL}/{response.url}`. No uses `/pay/{pk}`.
+  </Accordion>
+</Accordions>
+
+## Triage de webhooks
+
+<Accordions>
+  <Accordion title="El handler corre dos veces">
+    Añade deduplicación usando `orderId`, `url` o tu propia referencia interna. Trata entregas
+    duplicadas como normales hasta que Cobru documente garantías más fuertes.
+  </Accordion>
+
+  <Accordion title="El payload del webhook no se puede tratar como verdad absoluta">
+    Reconcília el pago antes de despachar bienes o marcar éxito irreversible.
+  </Accordion>
+</Accordions>
+
+## Lo que soporte siempre debe tener a mano
+
+- order ID interno
+- slug `url` de Cobru
+- timestamp de creación del pago
+- body raw del error Cobru cuando falle la creación
+- payload raw del webhook cuando exista callback
+
+## Cuándo escalar a Cobru
+
+- cuando sandbox y producción difieran de forma no documentada
+- cuando un endpoint documentado como legacy se comporte distinto a la documentación publicada
+- cuando veas fallas sostenidas de proveedor sin detalles de error accionables
+
+## Páginas relacionadas
+
+- `/docs/testing`
+- `/docs/webhooks`
+- `/docs/errors`
+- `/docs/api/reference`

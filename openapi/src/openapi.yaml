@@ -76,6 +76,8 @@ paths:
     $ref: paths/cobru_.yaml
   /{url}:
     $ref: paths/{url}.yaml
+  /cobru/confirm_daviplata/:
+    $ref: paths/cobru_confirm_daviplata_.yaml
   /cobru_detail/{url}:
     $ref: paths/cobru_detail_{url}.yaml
   /get_banks/1/:
