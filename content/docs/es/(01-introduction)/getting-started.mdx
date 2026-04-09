@@ -7,7 +7,7 @@ icon: Rocket
 ## Prerrequisitos
 
 - Cuenta Cobru con credenciales desde [panel.cobru.co](https://panel.cobru.co)
-- Tres valores de credenciales: `Api-Token`, `Api-Secret-Key`, `refresh_token`
+- Dos credenciales del dashboard: `x-api-key`, `refresh_token`
 - URL base sandbox: `https://dev.cobru.co`
 
 <Callout type="info">
@@ -18,8 +18,7 @@ icon: Rocket
 
 ```bash
 curl -X POST https://dev.cobru.co/token/refresh/ \
-  -H "Api-Token: $COBRU_API_TOKEN" \
-  -H "Api-Secret-Key: $COBRU_API_SECRET" \
+  -H "x-api-key: $COBRU_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"refresh":"'"$COBRU_REFRESH_TOKEN"'"}'
 ```
@@ -39,8 +38,7 @@ El token `access` tiene un TTL de ~60 minutos. Guárdalo en caché máximo 50 mi
 
 ```bash
 curl -X POST https://dev.cobru.co/cobru/ \
-  -H "Api-Token: $COBRU_API_TOKEN" \
-  -H "Api-Secret-Key: $COBRU_API_SECRET" \
+  -H "x-api-key: $COBRU_API_KEY" \
   -H "Authorization: Bearer $COBRU_ACCESS_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -115,8 +113,7 @@ export async function POST(request: Request) {
 
 ```bash
 COBRU_BASE_URL=https://dev.cobru.co   # sandbox
-COBRU_API_TOKEN=tu_api_token
-COBRU_API_SECRET=tu_api_secret_key
+COBRU_API_KEY=tu_api_key
 COBRU_REFRESH_TOKEN=tu_refresh_token
 NEXT_PUBLIC_APP_URL=https://tuapp.com
 ```

@@ -29,8 +29,7 @@ To authenticate with the Cobru API, you first need to get an access token by ref
 **Endpoint:** `POST /token/refresh/`
 
 **Headers:**
-- `Api-Token`: Your publishable API key
-- `Api-Secret-Key`: Your private API key
+- `x-api-key`: Your integration API key
 
 **Request Body:**
 ```json
@@ -54,8 +53,7 @@ To authenticate with the Cobru API, you first need to get an access token by ref
 ### Using the Access Token
 
 Include these headers in all subsequent API calls:
-- `Api-Token`: Your publishable key
-- `Api-Secret-Key`: Your private key
+- `x-api-key`: Your integration key
 - `Authorization: Bearer {access}`: The access token from refresh
 - `Accept: application/json`
 - `Content-Type: application/json`
@@ -265,4 +263,3 @@ When a payment status changes, Cobru sends a POST request to your callback URL:
 - **Email:** support@cobru.co
 - **Panel:** panel.cobru.co
 - **API Docs:** https://cobru.stoplight.io/
-

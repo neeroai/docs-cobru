@@ -31,8 +31,7 @@ Debes enviar un solo filtro por request.
   <Tab value="cURL">
     ```bash
     curl -G https://dev.cobru.co/movements/movements_by_types/ \
-      -H "Api-Token: $COBRU_API_TOKEN" \
-      -H "Api-Secret-Key: $COBRU_API_SECRET" \
+      -H "x-api-key: $COBRU_API_KEY" \
       -H "Authorization: Bearer $COBRU_ACCESS_TOKEN" \
       --data-urlencode "by_cobrus=true" \
       --data-urlencode "per_page=10" \
@@ -48,8 +47,7 @@ Debes enviar un solo filtro por request.
 
     const response = await fetch(url, {
       headers: {
-        'Api-Token': process.env.COBRU_API_TOKEN!,
-        'Api-Secret-Key': process.env.COBRU_API_SECRET!,
+        'x-api-key': process.env.COBRU_API_KEY!,
         Authorization: `Bearer ${accessToken}`,
       },
     });
@@ -65,8 +63,7 @@ Debes enviar un solo filtro por request.
     response = requests.get(
         "https://dev.cobru.co/movements/movements_by_types/",
         headers={
-            "Api-Token": COBRU_API_TOKEN,
-            "Api-Secret-Key": COBRU_API_SECRET,
+            "x-api-key": COBRU_API_KEY,
             "Authorization": f"Bearer {access_token}",
         },
         params={
@@ -87,8 +84,7 @@ Debes enviar un solo filtro por request.
     $client = new Client();
     $response = $client->request('GET', 'https://dev.cobru.co/movements/movements_by_types/', [
         'headers' => [
-            'Api-Token' => getenv('COBRU_API_TOKEN'),
-            'Api-Secret-Key' => getenv('COBRU_API_SECRET'),
+            'x-api-key' => getenv('COBRU_API_KEY'),
             'Authorization' => 'Bearer ' . $accessToken,
         ],
         'query' => [

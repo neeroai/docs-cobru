@@ -51,7 +51,7 @@ Cobru's Spotlight exports suggest the tokenization endpoints are authenticated u
 
 - standard Cobru auth headers still apply
 - requests must originate from trusted backend or PCI-scoped services
-- `Api-Secret-Key` never belongs in public frontend code
+- `x-api-key` never belongs in public frontend code
 
 ## Example: fetch the public key
 
@@ -59,8 +59,7 @@ Cobru's Spotlight exports suggest the tokenization endpoints are authenticated u
   <Tab value="cURL">
     ```bash
     curl -X GET https://dev.cobru.co/base/get_constants_key_public/ \
-      -H "Api-Token: $COBRU_API_TOKEN" \
-      -H "Api-Secret-Key: $COBRU_API_SECRET" \
+      -H "x-api-key: $COBRU_API_KEY" \
       -H "Authorization: Bearer $COBRU_ACCESS_TOKEN"
     ```
   </Tab>
@@ -69,8 +68,7 @@ Cobru's Spotlight exports suggest the tokenization endpoints are authenticated u
     const response = await fetch('https://dev.cobru.co/base/get_constants_key_public/', {
       method: 'GET',
       headers: {
-        'Api-Token': process.env.COBRU_API_TOKEN!,
-        'Api-Secret-Key': process.env.COBRU_API_SECRET!,
+        'x-api-key': process.env.COBRU_API_KEY!,
         Authorization: `Bearer ${accessToken}`,
       },
     });
@@ -86,8 +84,7 @@ Cobru's Spotlight exports suggest the tokenization endpoints are authenticated u
     response = requests.get(
         "https://dev.cobru.co/base/get_constants_key_public/",
         headers={
-            "Api-Token": COBRU_API_TOKEN,
-            "Api-Secret-Key": COBRU_API_SECRET,
+            "x-api-key": COBRU_API_KEY,
             "Authorization": f"Bearer {access_token}",
         },
     )
@@ -103,8 +100,7 @@ Cobru's Spotlight exports suggest the tokenization endpoints are authenticated u
     $client = new Client();
     $response = $client->request('GET', 'https://dev.cobru.co/base/get_constants_key_public/', [
         'headers' => [
-            'Api-Token' => getenv('COBRU_API_TOKEN'),
-            'Api-Secret-Key' => getenv('COBRU_API_SECRET'),
+            'x-api-key' => getenv('COBRU_API_KEY'),
             'Authorization' => 'Bearer ' . $accessToken,
         ],
     ]);

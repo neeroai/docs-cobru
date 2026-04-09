@@ -57,8 +57,7 @@ Usuario WhatsApp                migue.ai                 Cobru API         api.q
 ```
 POST {COBRU_BASE_URL}/token/refresh/
 Headers:
-  Api-Token: {COBRU_API_TOKEN}
-  Api-Secret-Key: {COBRU_API_SECRET}
+  x-api-key: {COBRU_API_KEY}
   Content-Type: application/json
 Body:
   { "refresh": "{COBRU_REFRESH_TOKEN}" }   ← campo se llama "refresh", NO "refresh_token"
@@ -73,8 +72,7 @@ Cache en-memory: 14 min TTL (Cobru expira en 60 min).
 ```
 POST {COBRU_BASE_URL}/cobru/
 Headers:
-  Api-Token: {COBRU_API_TOKEN}
-  Api-Secret-Key: {COBRU_API_SECRET}
+  x-api-key: {COBRU_API_KEY}
   Authorization: Bearer {access}
   Content-Type: application/json
 Body:
@@ -202,8 +200,7 @@ Validaciones: monto entre $1.000 y $50.000.000 COP.
 | Variable | Descripción | Ambiente |
 |----------|-------------|----------|
 | `COBRU_BASE_URL` | `https://dev.cobru.co` | Sandbox |
-| `COBRU_API_TOKEN` | publishable_key del dashboard | Ambos |
-| `COBRU_API_SECRET` | private_key del dashboard | Ambos |
+| `COBRU_API_KEY` | api_key del dashboard | Ambos |
 | `COBRU_REFRESH_TOKEN` | refresh_token del dashboard | Ambos |
 | `NEXT_PUBLIC_APP_URL` | URL pública del app (para callback) | Ambos |
 

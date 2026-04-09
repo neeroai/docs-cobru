@@ -34,8 +34,7 @@ Para checkout estándar, PSE, BRE-B o QR, empieza por Cobrus.
   <Tab value="cURL">
     ```bash
     curl -X GET https://dev.cobru.co/celo/ \
-      -H "Api-Token: $COBRU_API_TOKEN" \
-      -H "Api-Secret-Key: $COBRU_API_SECRET" \
+      -H "x-api-key: $COBRU_API_KEY" \
       -H "Authorization: Bearer $COBRU_ACCESS_TOKEN"
     ```
   </Tab>
@@ -44,8 +43,7 @@ Para checkout estándar, PSE, BRE-B o QR, empieza por Cobrus.
     const response = await fetch('https://dev.cobru.co/celo/', {
       method: 'GET',
       headers: {
-        'Api-Token': process.env.COBRU_API_TOKEN!,
-        'Api-Secret-Key': process.env.COBRU_API_SECRET!,
+        'x-api-key': process.env.COBRU_API_KEY!,
         Authorization: `Bearer ${accessToken}`,
       },
     });
@@ -61,8 +59,7 @@ Para checkout estándar, PSE, BRE-B o QR, empieza por Cobrus.
     response = requests.get(
         "https://dev.cobru.co/celo/",
         headers={
-            "Api-Token": COBRU_API_TOKEN,
-            "Api-Secret-Key": COBRU_API_SECRET,
+            "x-api-key": COBRU_API_KEY,
             "Authorization": f"Bearer {access_token}",
         },
     )
@@ -78,8 +75,7 @@ Para checkout estándar, PSE, BRE-B o QR, empieza por Cobrus.
     $client = new Client();
     $response = $client->request('GET', 'https://dev.cobru.co/celo/', [
         'headers' => [
-            'Api-Token' => getenv('COBRU_API_TOKEN'),
-            'Api-Secret-Key' => getenv('COBRU_API_SECRET'),
+            'x-api-key' => getenv('COBRU_API_KEY'),
             'Authorization' => 'Bearer ' . $accessToken,
         ],
     ]);

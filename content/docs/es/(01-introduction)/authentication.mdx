@@ -6,13 +6,12 @@ icon: ShieldCheck
 
 Cobru usa un modelo de autenticación por capas:
 
-- `Api-Token`: tu key de integración publicable
-- `Api-Secret-Key`: tu key privada de backend
+- `x-api-key`: tu llave de integración
 - `Authorization: Bearer {access}`: token de acceso de corta duración obtenido desde `/token/refresh/`
 
 ## Empieza aquí
 
-1. Guarda `Api-Token`, `Api-Secret-Key` y el token `refresh` solo en almacenamiento secreto backend.
+1. Guarda `x-api-key` y el token `refresh` solo en almacenamiento secreto backend.
 2. Emite un access token desde `/token/refresh/`.
 3. Cachea ese access token de forma centralizada antes de hacer llamadas rutinarias.
 4. Reúsalo hasta que toque refrescarlo en lugar de emitirlo en cada request.
@@ -21,8 +20,7 @@ Cobru usa un modelo de autenticación por capas:
 
 | Credencial | Dónde usarla | Notas |
 |------------|--------------|-------|
-| `Api-Token` | requests backend | Trátala como credencial de integración, no como key segura para navegador hasta que Cobru publique un modelo de confianza más estricto |
-| `Api-Secret-Key` | solo backend | Nunca la expongas en frontend, apps móviles o bundles client-side |
+| `x-api-key` | requests backend | Trátala como credencial de integración y mantenla fuera de bundles frontend |
 | token `refresh` | solo almacenamiento secreto backend | Se usa únicamente para emitir access tokens temporales |
 | token `access` | requests backend | Cachearlo agresivamente y rotarlo con frecuencia |
 
@@ -30,8 +28,7 @@ Cobru usa un modelo de autenticación por capas:
 
 ```bash
 curl -X POST https://dev.cobru.co/token/refresh/ \
-  -H "Api-Token: $COBRU_API_TOKEN" \
-  -H "Api-Secret-Key: $COBRU_API_SECRET" \
+  -H "x-api-key: $COBRU_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"refresh":"'"$COBRU_REFRESH_TOKEN"'"}'
 ```
@@ -49,8 +46,7 @@ curl -X POST https://dev.cobru.co/token/refresh/ \
 ## Headers requeridos para requests API
 
 ```http
-Api-Token: {tu_api_token}
-Api-Secret-Key: {tu_api_secret}
+x-api-key: {tu_api_key}
 Authorization: Bearer {access}
 Accept: application/json
 Content-Type: application/json
@@ -69,15 +65,14 @@ Content-Type: application/json
 
 ```bash
 COBRU_BASE_URL=https://dev.cobru.co
-COBRU_API_TOKEN=...
-COBRU_API_SECRET=...
+COBRU_API_KEY=...
 COBRU_REFRESH_TOKEN=...
 ```
 
 ## Checklist de seguridad
 
 - Mantén todas las credenciales Cobru solo en variables de entorno del servidor.
-- Nunca envíes `Api-Secret-Key` al navegador ni a clientes móviles.
+- Nunca envíes `x-api-key` al navegador ni a clientes móviles.
 - Refresca el access token desde el servidor, no desde el frontend.
 - Rota credenciales cuando cambie el equipo con acceso.
 - Usa URLs `callback` con HTTPS en producción.

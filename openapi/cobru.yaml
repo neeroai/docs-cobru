@@ -24,8 +24,7 @@ servers:
   - url: https://dev.cobru.co
     description: Sandbox
 security:
-  - ApiToken: []
-    ApiSecretKey: []
+  - ApiKey: []
     BearerAuth: []
 tags:
   - name: Authentication
@@ -52,8 +51,7 @@ paths:
         Exchange a Cobru refresh token for a short-lived access token.
         The request body field is `refresh`, not `refresh_token`.
       security:
-        - ApiToken: []
-          ApiSecretKey: []
+        - ApiKey: []
       requestBody:
         required: true
         content:
@@ -1614,14 +1612,10 @@ webhooks:
           description: Callback received successfully
 components:
   securitySchemes:
-    ApiToken:
+    ApiKey:
       type: apiKey
       in: header
-      name: Api-Token
-    ApiSecretKey:
-      type: apiKey
-      in: header
-      name: Api-Secret-Key
+      name: x-api-key
     BearerAuth:
       type: http
       scheme: bearer

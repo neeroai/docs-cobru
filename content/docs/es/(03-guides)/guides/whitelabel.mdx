@@ -66,8 +66,7 @@ Cobru puede sentirse integrado en tu producto incluso cuando el checkout o ciert
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Api-Token': process.env.COBRU_API_TOKEN!,
-        'Api-Secret-Key': process.env.COBRU_API_SECRET!,
+        'x-api-key': process.env.COBRU_API_KEY!,
       },
       body: JSON.stringify(userPayload),
     });
@@ -83,8 +82,7 @@ Cobru puede sentirse integrado en tu producto incluso cuando el checkout o ciert
     response = requests.post(
         "https://dev.cobru.co/user/",
         headers={
-            "Api-Token": COBRU_API_TOKEN,
-            "Api-Secret-Key": COBRU_API_SECRET,
+            "x-api-key": COBRU_API_KEY,
             "Content-Type": "application/json",
         },
         json=user_payload,
@@ -101,8 +99,7 @@ Cobru puede sentirse integrado en tu producto incluso cuando el checkout o ciert
     $client = new Client();
     $response = $client->request('POST', 'https://dev.cobru.co/user/', [
         'headers' => [
-            'Api-Token' => getenv('COBRU_API_TOKEN'),
-            'Api-Secret-Key' => getenv('COBRU_API_SECRET'),
+            'x-api-key' => getenv('COBRU_API_KEY'),
             'Content-Type' => 'application/json',
         ],
         'json' => $userPayload,

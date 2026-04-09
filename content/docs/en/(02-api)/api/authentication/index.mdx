@@ -6,8 +6,7 @@ icon: ShieldCheck
 
 The Cobru API currently uses a layered model:
 
-- `Api-Token`
-- `Api-Secret-Key`
+- `x-api-key`
 - `Authorization: Bearer {access}`
 
 ## Available endpoint
@@ -19,7 +18,7 @@ The Cobru API currently uses a layered model:
 ## Notes for implementers
 
 - The body field is `refresh`, not `refresh_token`.
-- Keep all three credentials server-side.
+- Keep the API key, refresh token, and access token server-side.
 - Cache the access token for no more than 50 minutes.
 
 Continue with the `Refresh token` page for request and response details.

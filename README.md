@@ -30,8 +30,7 @@ Spanish documentation is also available at:
 
 Cobru currently uses:
 
-- `Api-Token`
-- `Api-Secret-Key`
+- `x-api-key`
 - `Authorization: Bearer {access}`
 
 Your first integration usually looks like this:

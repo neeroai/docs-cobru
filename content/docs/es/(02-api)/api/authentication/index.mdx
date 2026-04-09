@@ -6,8 +6,7 @@ icon: ShieldCheck
 
 La API de Cobru usa un modelo por capas:
 
-- `Api-Token`
-- `Api-Secret-Key`
+- `x-api-key`
 - `Authorization: Bearer {access}`
 
 ## Endpoint disponible
@@ -19,7 +18,7 @@ La API de Cobru usa un modelo por capas:
 ## Notas para implementadores
 
 - El campo del body es `refresh`, no `refresh_token`.
-- Mantén las tres credenciales del lado del servidor.
+- Mantén la API key, el refresh token y el access token del lado del servidor.
 - Cachea el access token máximo 50 minutos.
 
 Continúa con `Refresh token` para el detalle completo del request y response.

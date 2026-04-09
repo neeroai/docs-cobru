@@ -72,8 +72,7 @@ icon: PlusCircle
 
 ```bash
 curl -X POST https://dev.cobru.co/cobru/ \
-  -H "Api-Token: $COBRU_API_TOKEN" \
-  -H "Api-Secret-Key: $COBRU_API_SECRET" \
+  -H "x-api-key: $COBRU_API_KEY" \
   -H "Authorization: Bearer $COBRU_ACCESS_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{

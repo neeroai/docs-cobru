@@ -58,8 +58,7 @@ To authenticate with the Cobru API, you first need to get an access token by ref
 **Endpoint:** \`POST /token/refresh/\`
 
 **Headers:**
-- \`Api-Token\`: Your publishable API key
-- \`Api-Secret-Key\`: Your private API key
+- \`x-api-key\`: Your integration API key
 
 **Request Body:**
 \`\`\`json
@@ -83,8 +82,7 @@ To authenticate with the Cobru API, you first need to get an access token by ref
 ### Using the Access Token
 
 Include these headers in all subsequent API calls:
-- \`Api-Token\`: Your publishable key
-- \`Api-Secret-Key\`: Your private key
+- \`x-api-key\`: Your integration key
 - \`Authorization: Bearer {access}\`: The access token from refresh
 - \`Accept: application/json\`
 - \`Content-Type: application/json\`
@@ -329,8 +327,7 @@ Para autenticarse con la API de Cobru, primero debes obtener un token de acceso 
 **Endpoint:** \`POST /token/refresh/\`
 
 **Headers:**
-- \`Api-Token\`: Tu API key pública
-- \`Api-Secret-Key\`: Tu API key privada
+- \`x-api-key\`: Tu API key de integración
 
 **Cuerpo de la Solicitud:**
 \`\`\`json
@@ -354,8 +351,7 @@ Para autenticarse con la API de Cobru, primero debes obtener un token de acceso 
 ### Usar el Token de Acceso
 
 Incluye estos headers en todas las llamadas API posteriores:
-- \`Api-Token\`: Tu API key pública
-- \`Api-Secret-Key\`: Tu API key privada
+- \`x-api-key\`: Tu API key de integración
 - \`Authorization: Bearer {access}\`: El token de acceso obtenido
 - \`Accept: application/json\`
 - \`Content-Type: application/json\`

@@ -50,19 +50,14 @@ tags:
   - name: Whitelabel
   - name: Webhooks
 security:
-  - ApiToken: []
-    ApiSecretKey: []
+  - ApiKey: []
     BearerAuth: []
 components:
   securitySchemes:
-    ApiToken:
+    ApiKey:
       type: apiKey
       in: header
-      name: Api-Token
-    ApiSecretKey:
-      type: apiKey
-      in: header
-      name: Api-Secret-Key
+      name: x-api-key
     BearerAuth:
       type: http
       scheme: bearer

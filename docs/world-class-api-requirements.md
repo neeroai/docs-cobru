@@ -118,7 +118,7 @@ Long-term roadmap items. Not required to compete regionally.
 
 ### 3.1 Authentication
 
-**Current state:** 3-header scheme (Api-Token + Api-Secret-Key + Bearer token).
+**Current state:** 2-header scheme (`x-api-key` + Bearer token).
 **Target state:** Document current + plan OAuth 2.1 migration.
 
 #### Token refresh flow (verified):
@@ -126,8 +126,7 @@ Long-term roadmap items. Not required to compete regionally.
 ```bash
 # Step 1: Get access token
 curl -X POST https://dev.cobru.co/token/refresh/ \
-  -H "Api-Token: YOUR_API_TOKEN" \
-  -H "Api-Secret-Key: YOUR_API_SECRET" \
+  -H "x-api-key: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"refresh": "YOUR_REFRESH_TOKEN"}'
 
@@ -140,9 +139,8 @@ curl -X POST https://dev.cobru.co/token/refresh/ \
 ```javascript
 // Node.js — token manager with 50-min cache
 class CobruTokenManager {
-  constructor(apiToken, apiSecret, refreshToken) {
-    this.apiToken = apiToken;
-    this.apiSecret = apiSecret;
+  constructor(apiKey, refreshToken) {
+    this.apiKey = apiKey;
     this.refreshToken = refreshToken;
     this.accessToken = null;
     this.expiresAt = 0;
@@ -157,8 +155,7 @@ class CobruTokenManager {
     const res = await fetch("https://dev.cobru.co/token/refresh/", {
       method: "POST",
       headers: {
-        "Api-Token": this.apiToken,
-        "Api-Secret-Key": this.apiSecret,
+        "x-api-key": this.apiKey,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ refresh: this.refreshToken }),
@@ -178,9 +175,8 @@ import time
 import requests
 
 class CobruTokenManager:
-    def __init__(self, api_token, api_secret, refresh_token):
-        self.api_token = api_token
-        self.api_secret = api_secret
+    def __init__(self, api_key, refresh_token):
+        self.api_key = api_key
         self.refresh_token = refresh_token
         self._access_token = None
         self._expires_at = 0
@@ -192,8 +188,7 @@ class CobruTokenManager:
         resp = requests.post(
             'https://dev.cobru.co/token/refresh/',
             headers={
-                'Api-Token': self.api_token,
-                'Api-Secret-Key': self.api_secret,
+                'x-api-key': self.api_key,
             },
             json={'refresh': self.refresh_token}
         )
@@ -206,8 +201,7 @@ class CobruTokenManager:
 #### Required headers for every API call:
 
 ```
-Api-Token: {publishable_key}
-Api-Secret-Key: {private_key}        ← NEVER in frontend code
+x-api-key: {api_key}        ← NEVER in frontend code
 Authorization: Bearer {access_token}
 Accept: application/json
 Content-Type: application/json
@@ -217,11 +211,11 @@ Content-Type: application/json
 
 | Requirement          | Action                                                              |
 | -------------------- | ------------------------------------------------------------------- |
-| Store Api-Secret-Key | Environment variable only. Never in code or git.                    |
+| Store x-api-key      | Environment variable only. Never in code or git.                    |
 | Token caching        | Cache with 50-min TTL. Don't call /token/refresh/ on every request. |
 | HTTPS                | All API calls must use HTTPS. HTTP is rejected.                     |
-| Key rotation         | Rotate Api-Secret-Key every 90 days.                                |
-| Frontend safety      | Api-Secret-Key is backend-only. Api-Token is publishable.           |
+| Key rotation         | Rotate x-api-key every 90 days.                                     |
+| Frontend safety      | x-api-key is backend-only.                                          |
 
 ---
 
@@ -286,8 +280,7 @@ async function createPayment(tokenManager, orderData) {
   const response = await fetch("https://dev.cobru.co/cobru/", {
     method: "POST",
     headers: {
-      "Api-Token": process.env.COBRU_API_TOKEN,
-      "Api-Secret-Key": process.env.COBRU_API_SECRET,
+      "x-api-key": process.env.COBRU_API_KEY,
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
       Accept: "application/json",
@@ -515,7 +508,7 @@ async function createPaymentWithCheck(orderData, description) {
 | Category       | HTTP  | Error Code                | Cause                                       |
 | -------------- | ----- | ------------------------- | ------------------------------------------- |
 | Authentication | 401   | `token_expired`           | Access token expired, call /token/refresh/  |
-| Authentication | 403   | `authentication_failed`   | Invalid Api-Token or Api-Secret-Key         |
+| Authentication | 403   | `authentication_failed`   | Invalid x-api-key                           |
 | Validation     | 400   | `payment_method_invalid`  | payment_method_enabled is not a JSON string |
 | Validation     | 403\* | `missing_required_fields` | payer_redirect_url or callback missing      |
 | Validation     | 422   | `amount_invalid`          | Amount out of range or wrong type           |
@@ -648,8 +641,7 @@ async function fetchWithRetry(url, options, maxRetries = 5) {
 import Cobru from '@cobru/sdk';
 
 const cobru = new Cobru({
-  apiToken: process.env.COBRU_API_TOKEN!,
-  apiSecret: process.env.COBRU_API_SECRET!,
+  apiKey: process.env.COBRU_API_KEY!,
   refreshToken: process.env.COBRU_REFRESH_TOKEN!,
   environment: 'sandbox', // 'production'
 });
@@ -819,7 +811,7 @@ Documentation Cobru must provide to developers:
 | Never log card numbers   | Use card_fingerprint or last 4 only                                            | `/docs/compliance/pci-dss.mdx` |
 | TLS 1.2+ required        | All API calls HTTPS                                                            | `/docs/authentication.mdx`     |
 | API key storage          | Environment variables + secret managers (AWS Secrets Manager, HashiCorp Vault) | `/docs/authentication.mdx`     |
-| Key rotation             | Rotate Api-Secret-Key every 90 days                                            | `/docs/authentication.mdx`     |
+| Key rotation             | Rotate x-api-key every 90 days                                                 | `/docs/authentication.mdx`     |
 | MFA for admin            | Required for dashboard access (PCI 4.0 mandate)                                | `/docs/compliance/pci-dss.mdx` |
 | Webhook log sanitization | Don't log full webhook payloads                                                | `/docs/webhooks/index.mdx`     |
 | Scope minimization       | [PLANNED] OAuth 2.1 scopes                                                     | `/docs/compliance/pci-dss.mdx` |
@@ -1016,8 +1008,7 @@ components:
     CreatePaymentResponse:
     # ... all schemas
   securitySchemes:
-    ApiToken: { type: apiKey, in: header, name: Api-Token }
-    ApiSecretKey: { type: apiKey, in: header, name: Api-Secret-Key }
+    ApiKey: { type: apiKey, in: header, name: x-api-key }
     BearerAuth: { type: http, scheme: bearer }
 ```
 
