@@ -6,7 +6,40 @@ icon: Wallet
 
 A "cobru" is Cobru's hosted payment object. It combines amount, description, enabled payment methods, expiration, redirect URLs, and the callback that reports payment state changes.
 
-## Endpoints in this section
+## Start here
+
+<Cards>
+  <Card
+    title="Create a cobru"
+    href="/en/docs/api/cobrus/create"
+    description="Create the hosted payment object and get the `url` slug that powers the checkout handoff."
+  />
+  <Card
+    title="Submit payment details"
+    href="/en/docs/api/cobrus/payment-details"
+    description="Handle method-specific payloads such as Bre-B, PSE, Nequi, and other payment detail flows."
+  />
+  <Card
+    title="Consult a cobru"
+    href="/en/docs/api/cobrus/consult"
+    description="Retrieve payment state and detail when your system needs reconciliation or support visibility."
+  />
+  <Card
+    title="Quote or edit"
+    href="/en/docs/api/cobrus/quote"
+    description="Price a payment before creation or update a live hosted cobru when the contract allows it."
+  />
+</Cards>
+
+## Recommended reading order
+
+1. [Create a cobru](/en/docs/api/cobrus/create)
+2. [Submit payment details](/en/docs/api/cobrus/payment-details)
+3. Method-specific pages such as [Bre-B](/en/docs/api/cobrus/breb), [PSE](/en/docs/api/cobrus/pse), and [Nequi](/en/docs/api/cobrus/nequi)
+4. [Consult a cobru](/en/docs/api/cobrus/consult)
+5. [Quote a cobru](/en/docs/api/cobrus/quote) or [Edit a cobru](/en/docs/api/cobrus/edit) only if your product needs those flows
+
+## Endpoint map
 
 | Endpoint family | Method | Verification status |
 |-----------------|--------|---------------------|
@@ -27,3 +60,9 @@ A "cobru" is Cobru's hosted payment object. It combines amount, description, ena
 | `3` | Paid |
 | `4` | Refunded |
 | `5` | Expired |
+
+## Operational notes
+
+- Treat payment creation and final payment state as separate moments in your system.
+- Store Cobru's `url`, `pk`, and your own internal order identifier together from the first write.
+- If a method-specific flow is not freshly verified, keep it behind an explicit operational review before broad rollout.

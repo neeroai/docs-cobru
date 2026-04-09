@@ -15,7 +15,7 @@ The flow has two parts:
 
 <Callout type="warn">
   Public copy uses <strong>Bre-B</strong>, but request payloads keep the backend literal exactly as shown in the
-  original materials: `payment: "breb"` and `"Bre-B": true` inside `payment_method_enabled`.
+  request contract: `payment: "breb"` and `"breb": true` inside `payment_method_enabled`.
 </Callout>
 
 ## Bre-B output modes
@@ -38,7 +38,7 @@ If your goal is specifically to generate a **Bre-B QR without the payment link**
   "expiration_days": 1,
   "client_assume_costs": false,
   "iva": 0,
-  "payment_method_enabled": "{\"Bre-B\":true}",
+  "payment_method_enabled": "{\"breb\":true}",
   "payer_redirect_url": "https://yourapp.com/payment/success",
   "callback": "https://yourapp.com/api/cobru/webhook"
 }
@@ -48,7 +48,7 @@ Spotlight and later integration learnings agree on one critical quirk: `payment_
 
 ## Step 1.5 — Enable the right Bre-B capability
 
-Spotlight explicitly documents the create step with `"Bre-B": true` inside `payment_method_enabled`.
+The create step must enable Bre-B with `"breb": true` inside `payment_method_enabled`.
 
 Later deep research also found a second checkout literal, `breb_qr`, used by Cobru's hosted checkout internals.
 
@@ -56,7 +56,7 @@ For documentation purposes, treat them like this:
 
 | Capability | Where it comes from | What it means |
 |------------|---------------------|---------------|
-| `"Bre-B": true` in `payment_method_enabled` | Spotlight | Bre-B should be offered on the cobru |
+| `"breb": true` in `payment_method_enabled` | request payload | Bre-B should be offered on the cobru |
 | `payment: "breb"` | Spotlight | direct Bre-B payment-details request |
 | `payment: "breb_qr"` | deep research | QR-focused Bre-B variant seen in later checkout analysis |
 

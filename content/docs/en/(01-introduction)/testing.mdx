@@ -4,6 +4,14 @@ description: Sandbox usage, webhook testing, and production-readiness checks for
 icon: FlaskConical
 ---
 
+## Start here
+
+1. Refresh an access token in sandbox.
+2. Create a real payment from your backend.
+3. Open the hosted payment URL built from the returned `url` slug.
+4. Confirm redirect handling and callback handling in your own system.
+5. Record enough evidence to debug the run later.
+
 ## Sandbox environment
 
 | Property | Value |
@@ -90,9 +98,9 @@ Use the generated HTTPS URL as your `callback` field in the payment creation req
 - your logs include enough information to debug a failed payment without guessing
 - your credentials are not hardcoded anywhere outside secure environment storage
 
-## Related pages
+## Read next
 
-- `/docs/webhooks`
-- `/docs/errors`
 - `/docs/production-readiness`
+- `/docs/webhooks`
 - `/docs/troubleshooting`
+- `/docs/errors`

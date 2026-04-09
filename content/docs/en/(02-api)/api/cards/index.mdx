@@ -13,6 +13,31 @@ icon: CreditCard
 Cobru's API menu includes a `Tarjetas` section, indicating a broader programmable cards
 capability layered on top of the wallet and balance infrastructure.
 
+## Choose a card workflow
+
+<Cards>
+  <Card
+    title="Create or top up"
+    href="/en/docs/api/cards/create"
+    description="Issue a virtual card or add balance using the combined create-and-reload surface."
+  />
+  <Card
+    title="Inspect cards"
+    href="/en/docs/api/cards/details"
+    description="Retrieve card metadata and existing cards when support or operations need visibility."
+  />
+  <Card
+    title="Review movements"
+    href="/en/docs/api/cards/movements"
+    description="Inspect transactions for reconciliation, risk review, and support investigation."
+  />
+  <Card
+    title="Freeze card"
+    href="/en/docs/api/cards/freeze"
+    description="Stop or resume card usage as part of operational controls."
+  />
+</Cards>
+
 ## Visible operations
 
 | Operation | Method | Path | Confidence |
@@ -23,9 +48,8 @@ capability layered on top of the wallet and balance infrastructure.
 | Movements | `GET` | `/cobru/debit/get_transactions/` | legacy-doc |
 | Freeze card | `POST` | `/cobru/debit/freeze_card/` | legacy-doc |
 
-## What this family enables
+## Launch constraints
 
-- issue virtual cards
-- add balance to an existing card
-- retrieve card metadata and transaction history
-- freeze or unfreeze a card as part of risk or support workflows
+- confirm issuer SLA and operational ownership before enabling cards for customers
+- map PCI, PII, and support access rules before exposing card data in internal tooling
+- treat freeze and unfreeze as high-sensitivity actions with audit logs

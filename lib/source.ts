@@ -249,6 +249,7 @@ export function getDocsPageTree(locale: string): Root {
     testing: locale === 'es' ? 'Pruebas' : 'Testing',
     productionReadiness: locale === 'es' ? 'Preparación para producción' : 'Production Readiness',
     troubleshooting: locale === 'es' ? 'Resolución de problemas' : 'Troubleshooting',
+    buildWithAi: locale === 'es' ? 'Build with AI' : 'Build with AI',
     balances: 'Balances',
     movements: locale === 'es' ? 'Movimientos' : 'Movements',
     whitelabel: locale === 'es' ? 'Marca blanca' : 'White-label',
@@ -283,6 +284,41 @@ export function getDocsPageTree(locale: string): Root {
           getPage(`${docsBase}/api/cobrus/edit`),
         ],
       }),
+      createFolderNode({
+        name: labels.cardsServices,
+        icon: getIcon('CreditCard'),
+        id: `capability:${locale}:payments:cards-services`,
+        defaultOpen: false,
+        children: [
+          createFolderNode({
+            name: labels.cards,
+            icon: getIcon('CreditCard'),
+            id: `capability:${locale}:payments:cards-services:cards`,
+            index: getPage(`${docsBase}/api/cards`),
+            children: [
+              getPage(`${docsBase}/api/cards/create`),
+              getPage(`${docsBase}/api/cards/topup`),
+              getPage(`${docsBase}/api/cards/details`),
+              getPage(`${docsBase}/api/cards/movements`),
+              getPage(`${docsBase}/api/cards/freeze`),
+            ],
+          }),
+          createFolderNode({
+            name: labels.services,
+            icon: getIcon('Smartphone'),
+            id: `capability:${locale}:payments:cards-services:services`,
+            index: getPage(`${docsBase}/api/services`),
+            children: [
+              getPage(`${docsBase}/api/services/cell-recharge`),
+              getPage(`${docsBase}/api/services/pins-list`),
+              getPage(`${docsBase}/api/services/pins-buy`),
+            ],
+          }),
+          getPage(`${docsBase}/api/tokenization`, labels.tokenization),
+          getPage(`${docsBase}/api/celo`, 'Celo'),
+          getPage(`${docsBase}/guides/whitelabel`, labels.whitelabel),
+        ],
+      }),
       getPage(`${docsBase}/guides/qr-breb`, labels.brebGuide),
     ],
   });
@@ -291,6 +327,7 @@ export function getDocsPageTree(locale: string): Root {
     name: labels.payouts,
     icon: getIcon('ArrowLeftRight'),
     id: `capability:${locale}:payouts`,
+    defaultOpen: false,
     index: getPage(`${docsBase}/payouts`),
     children: [
       createFolderNode({
@@ -337,6 +374,7 @@ export function getDocsPageTree(locale: string): Root {
     name: labels.platform,
     icon: getIcon('ShieldCheck'),
     id: `capability:${locale}:platform`,
+    defaultOpen: false,
     index: getPage(`${docsBase}/platform`),
     children: [
       getPage(`${docsBase}/authentication`, labels.authentication),
@@ -345,6 +383,7 @@ export function getDocsPageTree(locale: string): Root {
       getPage(`${docsBase}/testing`, labels.testing),
       getPage(`${docsBase}/production-readiness`, labels.productionReadiness),
       getPage(`${docsBase}/troubleshooting`, labels.troubleshooting),
+      getPage(`${docsBase}/build-with-ai`, labels.buildWithAi),
       {
         ...cloneTreeNode(referenceFolder),
         name: locale === 'es' ? 'Referencia API' : 'API Reference',
@@ -356,49 +395,13 @@ export function getDocsPageTree(locale: string): Root {
     ],
   });
 
-  const cardsServicesFolder = createFolderNode({
-    name: labels.cardsServices,
-    icon: getIcon('CreditCard'),
-    id: `capability:${locale}:cards-services`,
-    defaultOpen: false,
-    children: [
-      createFolderNode({
-        name: labels.cards,
-        icon: getIcon('CreditCard'),
-        id: `capability:${locale}:cards-services:cards`,
-        index: getPage(`${docsBase}/api/cards`),
-        children: [
-          getPage(`${docsBase}/api/cards/create`),
-          getPage(`${docsBase}/api/cards/topup`),
-          getPage(`${docsBase}/api/cards/details`),
-          getPage(`${docsBase}/api/cards/movements`),
-          getPage(`${docsBase}/api/cards/freeze`),
-        ],
-      }),
-      createFolderNode({
-        name: labels.services,
-        icon: getIcon('Smartphone'),
-        id: `capability:${locale}:cards-services:services`,
-        index: getPage(`${docsBase}/api/services`),
-        children: [
-          getPage(`${docsBase}/api/services/cell-recharge`),
-          getPage(`${docsBase}/api/services/pins-list`),
-          getPage(`${docsBase}/api/services/pins-buy`),
-        ],
-      }),
-      getPage(`${docsBase}/api/tokenization`, labels.tokenization),
-      getPage(`${docsBase}/api/celo`, 'Celo'),
-      getPage(`${docsBase}/guides/whitelabel`, labels.whitelabel),
-    ],
-  });
-
   return {
     ...tree,
     children: [
       paymentsFolder,
       payoutsFolder,
       platformFolder,
-      cardsServicesFolder,
+      getPage(`${docsBase}/changelog`, labels.changelog),
     ] as Root['children'],
   };
 }

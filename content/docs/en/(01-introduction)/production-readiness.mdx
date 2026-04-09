@@ -4,9 +4,14 @@ description: Operational checklist for taking a Cobru integration from sandbox t
 icon: ShieldCheck
 ---
 
-Going live with Cobru is not just a credential switch. You should treat production readiness as
-an operational milestone with explicit checks across auth, payment creation, callbacks,
-observability, and support workflows.
+Going live with Cobru is not just a credential switch. Treat production readiness as an operational milestone with explicit checks across auth, payment creation, callbacks, observability, and support workflows.
+
+## Start here
+
+1. Confirm your production credentials, callback URL, and logging strategy.
+2. Rehearse one payment end to end with manual reconciliation.
+3. Verify support can trace a payment from your internal order ID to Cobru objects.
+4. Define rollback criteria before turning on broad traffic.
 
 ## Go-live checklist
 
@@ -77,7 +82,7 @@ Pause or limit live traffic if:
 - you cannot match Cobru payments to internal orders reliably
 - support cannot diagnose failures from available logs
 
-## Related pages
+## Read next
 
 - `/docs/testing`
 - `/docs/webhooks`

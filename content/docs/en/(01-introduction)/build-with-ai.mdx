@@ -1,0 +1,53 @@
+---
+title: Build with AI
+description: Give coding agents and internal copilots a stable, truthful way to consume Cobru documentation.
+icon: Bot
+---
+
+Cobru Docs is designed to work for developers reading in the browser and for AI systems that need stable markdown and canonical URLs.
+
+## What AI tools can use today
+
+<Cards>
+  <Card
+    title="llms.txt"
+    href="/llms.txt"
+    description="Compact bilingual index for tools that need route discovery."
+  />
+  <Card
+    title="llms-full.txt"
+    href="/llms-full.txt"
+    description="Expanded text stream of the public docs for deep retrieval and offline context."
+  />
+  <Card
+    title="Copy page"
+    href="/en/docs/getting-started"
+    description="Narrative pages expose markdown-friendly output so agents can work from the exact page context."
+  />
+  <Card
+    title="API reference"
+    href="/en/docs/api/reference"
+    description="Use the repo-owned OpenAPI surface when an agent needs request and response shape accuracy."
+  />
+</Cards>
+
+## Recommended workflow for coding agents
+
+1. Start with `/llms.txt` to discover the smallest relevant path.
+2. Pull the narrative page markdown before generating code from memory.
+3. Move to `/docs/api/reference` for exact request and response shape checks.
+4. Treat pages marked with verification caveats as lower-confidence sources.
+
+## Truth model
+
+- Public docs document only current Cobru behavior or clearly labeled legacy/menu-derived contracts.
+- `verified`, `legacy-doc`, and `menu-only` remain meaningful distinctions in the OpenAPI source.
+- Webhooks are not currently signed publicly, so agents should not model them as cryptographically trusted inputs.
+
+## Best pages to pair with AI
+
+- [Quickstart](/en/docs/getting-started)
+- [Authentication](/en/docs/authentication)
+- [Webhooks](/en/docs/webhooks)
+- [Production readiness](/en/docs/production-readiness)
+- [API Reference](/en/docs/api/reference)

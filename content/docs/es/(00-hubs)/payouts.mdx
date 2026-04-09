@@ -43,3 +43,9 @@ La superficie de payouts de Cobru cubre envíos entre usuarios Cobru, retiros en
 2. Usa [Retiros en efectivo](/es/docs/api/cash-withdrawals) para operaciones payout-to-cash.
 3. Usa [Retiros bancarios](/es/docs/api/bank-withdrawals) para settlement bancario y flujos de transferencia Bre-B.
 4. Cierra con [Balances](/es/docs/guides/balances) y [Movimientos](/es/docs/guides/movements) para endurecer conciliación.
+
+## Musts operativos
+
+- Trata las operaciones de payout como asíncronas hasta que tu propio sistema confirme el estado final.
+- Conserva juntos los identificadores de Cobru y tus propias llaves de conciliación desde la primera escritura.
+- Usa las notificaciones webhook como triggers y tu lógica de consulta como fuente de verdad para movimientos de dinero sensibles.

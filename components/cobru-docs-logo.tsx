@@ -14,7 +14,7 @@ export function CobruDocsLogo({ href, className }: CobruDocsLogoProps) {
       aria-label="Cobru Docs"
     >
       <Image
-        src="/logo-cobru-white.svg"
+        src="/logo-cobru.svg"
         alt="Cobru"
         width={132}
         height={39}

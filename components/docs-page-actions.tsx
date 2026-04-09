@@ -9,6 +9,7 @@ import { usePathname } from 'next/navigation';
 interface DocsPageActionsProps {
   githubUrl: string;
   markdownUrl: string;
+  pageUrl: string;
 }
 
 interface ViewOption {
@@ -49,11 +50,10 @@ function GitHubLogo() {
   );
 }
 
-function OpenOptionsPopover({ githubUrl, markdownUrl }: DocsPageActionsProps) {
+function OpenOptionsPopover({ githubUrl, markdownUrl, pageUrl }: DocsPageActionsProps) {
   const pathname = usePathname();
-  const pageUrl =
-    typeof window === 'undefined' ? pathname : new URL(pathname, window.location.origin).toString();
-  const q = `Read ${pageUrl}, I want to ask questions about it.`;
+  const canonicalPageUrl = pageUrl || pathname;
+  const q = `Read ${canonicalPageUrl}, I want to ask questions about it.`;
 
   const items: ViewOption[] = [
     {
@@ -88,7 +88,7 @@ function OpenOptionsPopover({ githubUrl, markdownUrl }: DocsPageActionsProps) {
       <PopoverTrigger
         className={`${buttonVariants({ color: 'secondary', size: 'sm' })} gap-2 data-[state=open]:bg-fd-accent data-[state=open]:text-fd-accent-foreground`}
       >
-        Open
+        More actions
         <ChevronDown className="size-3.5 text-fd-muted-foreground" />
       </PopoverTrigger>
       <PopoverContent className="flex flex-col">
@@ -110,11 +110,11 @@ function OpenOptionsPopover({ githubUrl, markdownUrl }: DocsPageActionsProps) {
   );
 }
 
-export function DocsPageActions({ githubUrl, markdownUrl }: DocsPageActionsProps) {
+export function DocsPageActions({ githubUrl, markdownUrl, pageUrl }: DocsPageActionsProps) {
   return (
-    <div className="not-prose mb-6 flex flex-wrap gap-2">
-      <MarkdownCopyButton markdownUrl={markdownUrl}>Copy Markdown</MarkdownCopyButton>
-      <OpenOptionsPopover githubUrl={githubUrl} markdownUrl={markdownUrl} />
+    <div data-page-actions className="not-prose mb-6 flex flex-wrap gap-2">
+      <MarkdownCopyButton markdownUrl={markdownUrl}>Copy page</MarkdownCopyButton>
+      <OpenOptionsPopover githubUrl={githubUrl} markdownUrl={markdownUrl} pageUrl={pageUrl} />
     </div>
   );
 }

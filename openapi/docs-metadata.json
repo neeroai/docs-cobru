@@ -86,6 +86,10 @@
       "en": "Send balance to another user",
       "es": "Enviar saldo a otro usuario"
     },
+    "listTransfers": {
+      "en": "List transfers",
+      "es": "Listar envíos"
+    },
     "getBalance": {
       "en": "Get balance",
       "es": "Obtener balance"

@@ -43,3 +43,9 @@ Cobru's payout surface covers transfers between Cobru users, cash withdrawal flo
 2. Use [Cash withdrawals](/en/docs/api/cash-withdrawals) for payout-to-cash operations.
 3. Use [Bank withdrawals](/en/docs/api/bank-withdrawals) for bank settlement and Bre-B transfer flows.
 4. Finish with [Balances](/en/docs/guides/balances) and [Movements](/en/docs/guides/movements) to harden reconciliation.
+
+## Operational musts
+
+- Treat payout operations as asynchronous until your own system confirms final state.
+- Keep Cobru identifiers and your own reconciliation keys together from the first write.
+- Use webhook notifications as triggers and your own retrieval logic as the source of truth for sensitive money movement.

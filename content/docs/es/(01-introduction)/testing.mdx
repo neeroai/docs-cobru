@@ -1,98 +1,102 @@
 ---
 title: Pruebas
-description: Uso de sandbox, pruebas de webhooks y checklist de salida a producción para integraciones Cobru.
+description: Uso de sandbox, pruebas de webhooks y checks de salida a producción para integraciones Cobru.
 icon: FlaskConical
 ---
+
+## Empieza aquí
+
+1. Emite un access token en sandbox.
+2. Crea un pago real desde tu backend.
+3. Abre la URL hosted construida desde el `url` slug devuelto.
+4. Confirma redirects y callback handling en tu propio sistema.
+5. Registra suficiente evidencia para poder depurar la corrida después.
 
 ## Ambiente sandbox
 
 | Propiedad | Valor |
-|-----------|-------|
-| URL base | `https://dev.cobru.co` |
-| Propósito | desarrollo, QA y debugging de integración |
+|----------|-------|
+| Base URL | `https://dev.cobru.co` |
+| Propósito | desarrollo, QA, depuración de integración |
 | Credenciales | separadas de producción |
-| Fees | no representan la economía real de producción |
-| Uso recomendado | validación de auth, creación de pagos, checkout hosted, manejo de callbacks y pruebas de QR/BRE-B |
+| Fees | no representan economía real de producción |
+| Uso recomendado | validación de auth, creación de pagos, checkout hosted, manejo de webhooks, pruebas QR/BRE-B |
 
 <Callout type="info">
-  Trata sandbox como un ambiente para validar comportamiento, no como fuente de verdad para
-  economía de producción, tiempos de settlement o procedimientos de soporte.
+  Trata sandbox como un ambiente de validación de comportamiento, no como fuente de verdad para economía de producción, tiempos de settlement o procedimientos de soporte.
 </Callout>
 
-## Flujo recomendado de prueba
+## Flujo de prueba recomendado
 
-1. Refresca un access token.
+1. Emite un access token.
 2. Crea un pago en sandbox.
-3. Construye la URL hosted usando el slug `url` retornado.
-4. Completa el flujo manualmente desde la página de Cobru.
+3. Construye la URL hosted usando el `url` slug devuelto.
+4. Completa el flujo manualmente en la página de Cobru.
 5. Confirma que tu webhook recibe el cambio de estado esperado.
 
 ## Matriz mínima de pruebas
 
-| Escenario | Qué debes verificar |
-|-----------|---------------------|
-| refresh del token | `POST /token/refresh/` funciona con tu estrategia de almacenamiento y caché |
+| Escenario | Qué verificar |
+|----------|----------------|
+| refresh del token | `POST /token/refresh/` funciona con tu estrategia de credenciales y caché |
 | creación de pago | tu backend envía `payment_method_enabled` como string JSON y recibe `201` |
 | URL hosted | tu app usa `response.url`, no `response.pk`, para construir el checkout |
-| redirect final | `payer_redirect_url` resuelve correctamente después del pago |
-| callback | tu endpoint persiste, deduplica y responde rápido a callbacks |
-| lookup o conciliación | tu sistema puede reconciliar el pago después de un callback o una acción manual de soporte |
+| redirects | `payer_redirect_url` resuelve correctamente después del pago |
+| callback handling | tu endpoint persiste, deduplica y responde rápido a callbacks |
+| consulta/reconciliación | tu sistema puede reconciliar el pago después de callback o soporte manual |
 
-## Fixtures recomendados
+## Fixtures y cuentas recomendadas
 
 - una orden de bajo valor para smoke tests
 - una orden con BRE-B habilitado
 - una orden con múltiples métodos de pago habilitados
-- un payload inválido para confirmar normalización de errores
-- un fixture de replay de webhook para probar idempotencia
+- un fixture de payload inválido para confirmar normalización de errores
+- un fixture de replay de webhook para verificar idempotencia
 
-## Pruebas locales de webhook
+## Pruebas locales de webhooks
 
 ```bash
 ngrok http 3000
 ```
 
-Usa la URL HTTPS generada como campo `callback` en la request de creación del pago.
+Usa la URL HTTPS generada como tu campo `callback` en la request de creación de pago.
 
-## Qué conviene registrar en cada prueba
+## Qué registrar en cada corrida
 
-- body enviado a Cobru
-- body raw de la respuesta de Cobru
+- request body enviado a Cobru
+- response body raw de Cobru
 - URL de pago generada
-- cada payload de webhook
-- tu propio resultado de reconciliación
+- todos los payloads webhook
+- tu propio resultado de conciliación
 - el order ID interno o referencia de pago que mapeaste con Cobru
 
-## Errores comunes en sandbox
+## Errores comunes de sandbox
 
 <Accordions>
-  <Accordion title="La URL de pago abre pero el flujo no coincide">
-    Confirma que estás construyendo la URL hosted como `{COBRU_BASE_URL}/{url}`. Patrones viejos
-    usando `/pay/{pk}` no coinciden con el comportamiento actual.
+  <Accordion title="La URL de pago abre pero el flujo se ve mal">
+    Confirma que construyes la URL hosted como `{COBRU_BASE_URL}/{url}`. Los patrones antiguos con `/pay/{pk}` ya no reflejan el comportamiento actual.
   </Accordion>
 
   <Accordion title="La creación del pago devuelve 403 aunque auth parece correcta">
-    Revisa primero validación del body. Faltantes de `callback`, `payer_redirect_url` o enviar
-    `payment_method_enabled` como objeto pueden aparecer como `403` engañosos.
+    Revisa primero validación del body. Falta de `callback`, falta de `payer_redirect_url` o enviar `payment_method_enabled` como objeto pueden aparecer como `403` engañosos.
   </Accordion>
 
-  <Accordion title="Llega el webhook pero no lo puedes tratar como verdad absoluta">
-    Eso es esperado. Trata el callback como notificación y vuelve a reconciliar el pago antes de
-    liberar valor de alto riesgo.
+  <Accordion title="El webhook llega pero no puedes confiar en él">
+    Es lo esperado. Trata los callbacks como notificaciones y vuelve a verificar detalle de pago o estado interno antes de liberar valor de alto riesgo.
   </Accordion>
 </Accordions>
 
-## Criterios de salida a producción
+## Criterios de salida antes de producción
 
 - puedes crear y completar un pago end to end desde tu app
 - puedes persistir y deduplicar callbacks
-- puedes reconciliar manualmente un pago con datos de Cobru y tu estado interno
-- tus logs incluyen suficiente contexto para depurar un fallo sin adivinar
-- tus credenciales no están hardcodeadas fuera de almacenamiento seguro
+- puedes reconciliar manualmente un pago con datos Cobru y tu propio estado de orden
+- tus logs incluyen suficiente información para depurar un pago fallido sin adivinar
+- tus credenciales no están hardcodeadas fuera del almacenamiento seguro del servidor
 
-## Páginas relacionadas
+## Sigue con
 
-- `/docs/webhooks`
-- `/docs/errors`
 - `/docs/production-readiness`
+- `/docs/webhooks`
 - `/docs/troubleshooting`
+- `/docs/errors`

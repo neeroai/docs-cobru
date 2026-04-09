@@ -6,6 +6,14 @@ icon: Webhook
 
 Cobru envía un `POST` a la URL `callback` que incluyes al crear un pago. Hoy esta es la vía principal para reaccionar a actualizaciones de pago desde tu propio backend.
 
+## Empieza aquí
+
+1. Trata el callback como notificación, no como fuente de verdad.
+2. Persiste el evento raw inmediatamente.
+3. Responde HTTP `200` rápido.
+4. Deduplica por identificadores Cobru o por tu propia referencia de pago.
+5. Reconcilia antes de liberar valor irreversible.
+
 ## Modelo de confianza actual
 
 <Callout type="warn">
@@ -117,9 +125,8 @@ Luego usa esa URL pública HTTPS como tu valor `callback` en sandbox.
 | paso de reconciliación | evita falsos positivos cuando el callback es incompleto o falso |
 | alertas sobre fallas de procesamiento | reduce errores silenciosos en pagos |
 
-## Páginas relacionadas
+## Sigue con
 
-- `/docs/errors`
 - `/docs/testing`
 - `/docs/production-readiness`
 - `/docs/troubleshooting`

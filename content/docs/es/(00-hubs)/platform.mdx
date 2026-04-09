@@ -1,39 +1,39 @@
 ---
 title: Platform
-description: Autenticación, webhooks, testing, troubleshooting y la referencia API necesaria para operar Cobru de forma segura en producción.
+description: Autenticación, webhooks, testing, workflows asistidos con IA, troubleshooting y la referencia API necesaria para operar Cobru de forma segura en producción.
 icon: ShieldCheck
 ---
 
-import { Activity, Bug, Braces, ShieldCheck, TestTube, Webhook } from "lucide-react";
+import { Bot, Bug, Braces, ShieldCheck, TestTube, Webhook } from "lucide-react";
 
-Usa la capa de plataforma para iniciar integraciones, verificar contratos y endurecer el comportamiento operativo antes de depender de Cobru en producción.
+Usa la capa de plataforma para iniciar integraciones, verificar contratos, endurecer el comportamiento operativo y dar a los agentes de IA una manera confiable de consumir la documentación de Cobru.
 
-## Superficies de plataforma
+## Elige una ruta de plataforma
 
 <Cards>
   <Card
     icon={<ShieldCheck />}
     title="Autenticación"
     href="/es/docs/authentication"
-    description="Obtén, refresca y administra las credenciales necesarias para llamar endpoints de Cobru."
+    description="Obtén, refresca y gobierna las credenciales necesarias para llamar endpoints de Cobru."
   />
   <Card
     icon={<Webhook />}
     title="Webhooks"
     href="/es/docs/webhooks"
-    description="Procesa cambios de estado asíncronos y eventos salientes con consumidores resilientes."
+    description="Procesa cambios de estado asíncronos, retries y límites de confianza con consumidores resilientes."
   />
   <Card
     icon={<TestTube />}
     title="Pruebas"
     href="/es/docs/testing"
-    description="Usa sandbox, fuentes de verificación y checklists de go-live antes de salir a producción."
+    description="Usa sandbox, fuentes de verificación y checklists de salida a producción antes del go-live."
   />
   <Card
     icon={<Braces />}
     title="Referencia API"
     href="/es/docs/api/reference"
-    description="Explora operaciones OpenAPI agrupadas, request shapes y ejemplos de respuesta."
+    description="Explora operaciones OpenAPI agrupadas, request shapes y ejemplos de respuesta desde el contrato repo-owned."
   />
   <Card
     icon={<Bug />}
@@ -42,9 +42,17 @@ Usa la capa de plataforma para iniciar integraciones, verificar contratos y endu
     description="Diagnostica más rápido problemas de auth, webhooks, payouts y payment flows."
   />
   <Card
-    icon={<Activity />}
-    title="Changelog"
-    href="/es/docs/changelog"
-    description="Sigue los hitos de documentación y mejoras públicas de contrato en este repo."
+    icon={<Bot />}
+    title="Build with AI"
+    href="/es/docs/build-with-ai"
+    description="Alimenta agentes de código con salidas llms públicas, exports markdown y URLs de página estables."
   />
 </Cards>
+
+## Checklist de plataforma
+
+1. Empieza por [Autenticación](/es/docs/authentication) para estabilizar emisión y caché de tokens.
+2. Sigue con [Webhooks](/es/docs/webhooks) antes de tratar el estado de pagos como production-ready.
+3. Usa [Pruebas](/es/docs/testing) y [Preparación para producción](/es/docs/production-readiness) para cerrar gaps operativos.
+4. Usa [Build with AI](/es/docs/build-with-ai) si tu equipo depende de coding agents o copilots internos.
+5. Abre la [Referencia API](/es/docs/api/reference) cuando necesites detalle exacto del contrato.

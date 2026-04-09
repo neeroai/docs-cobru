@@ -1,39 +1,39 @@
 ---
 title: Platform
-description: Authentication, webhooks, testing, troubleshooting, and the API reference required to operate Cobru safely in production.
+description: Authentication, webhooks, testing, AI-assisted workflows, troubleshooting, and the API reference required to operate Cobru safely in production.
 icon: ShieldCheck
 ---
 
-import { Activity, Bug, Braces, ShieldCheck, TestTube, Webhook } from "lucide-react";
+import { Bot, Bug, Braces, ShieldCheck, TestTube, Webhook } from "lucide-react";
 
-Use the platform layer to bootstrap integrations, verify contracts, and harden operational behavior before relying on Cobru in production.
+Use the platform layer to bootstrap integrations, verify contracts, harden operational behavior, and give AI agents a trustworthy way to consume Cobru docs.
 
-## Platform surfaces
+## Choose a platform path
 
 <Cards>
   <Card
     icon={<ShieldCheck />}
     title="Authentication"
     href="/en/docs/authentication"
-    description="Get, refresh, and manage the access credentials required by Cobru endpoints."
+    description="Get, refresh, and govern the access credentials required by Cobru endpoints."
   />
   <Card
     icon={<Webhook />}
     title="Webhooks"
     href="/en/docs/webhooks"
-    description="Handle asynchronous payment state updates and outbound events with resilient consumers."
+    description="Handle asynchronous payment state updates, retries, and trust boundaries with resilient consumers."
   />
   <Card
     icon={<TestTube />}
     title="Testing"
     href="/en/docs/testing"
-    description="Use sandbox, verification sources, and production-readiness checklists before going live."
+    description="Use sandbox, verification sources, and production-readiness checklists before go-live."
   />
   <Card
     icon={<Braces />}
     title="API reference"
     href="/en/docs/api/reference"
-    description="Browse grouped OpenAPI operations, request shapes, and response examples."
+    description="Browse grouped OpenAPI operations, request shapes, and response examples from the repo-owned contract."
   />
   <Card
     icon={<Bug />}
@@ -42,9 +42,17 @@ Use the platform layer to bootstrap integrations, verify contracts, and harden o
     description="Diagnose auth, webhook, payout, and payment-flow issues faster."
   />
   <Card
-    icon={<Activity />}
-    title="Changelog"
-    href="/en/docs/changelog"
-    description="Track documentation milestones and public contract improvements in this repo."
+    icon={<Bot />}
+    title="Build with AI"
+    href="/en/docs/build-with-ai"
+    description="Feed Cobru docs into coding agents with public llms outputs, markdown exports, and stable page URLs."
   />
 </Cards>
+
+## Platform checklist
+
+1. Start with [Authentication](/en/docs/authentication) to stabilize token issuance and caching.
+2. Continue with [Webhooks](/en/docs/webhooks) before treating payment state as production-ready.
+3. Use [Testing](/en/docs/testing) and [Production readiness](/en/docs/production-readiness) to close operational gaps.
+4. Use [Build with AI](/en/docs/build-with-ai) when your team relies on coding agents or internal copilots.
+5. Open the [API reference](/en/docs/api/reference) when you need exact contract detail.

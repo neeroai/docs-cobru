@@ -21,7 +21,7 @@ icon: PlusCircle
   "expiration_days": 1,
   "client_assume_costs": false,
   "iva": 0,
-  "payment_method_enabled": "{\"Bre-B\":true,\"pse\":true,\"NEQUI\":true}",
+  "payment_method_enabled": "{\"breb\":true,\"pse\":true,\"NEQUI\":true}",
   "payer_redirect_url": "https://tuapp.com/pago-exitoso",
   "callback": "https://tuapp.com/api/cobru/webhook"
 }
@@ -82,7 +82,7 @@ curl -X POST https://dev.cobru.co/cobru/ \
     "expiration_days": 1,
     "client_assume_costs": false,
     "iva": 0,
-    "payment_method_enabled": "{\"Bre-B\":true,\"pse\":true}",
+    "payment_method_enabled": "{\"breb\":true,\"pse\":true}",
     "payer_redirect_url": "https://tuapp.com/pago-exitoso",
     "callback": "https://tuapp.com/api/cobru/webhook"
   }'

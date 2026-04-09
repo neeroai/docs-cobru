@@ -1,14 +1,14 @@
 ---
-title: Introducción
-description: Cobru para developers. Construye flujos de pago para Colombia con PSE, Nequi, BRE-B, tarjetas, envíos y APIs operativas.
+title: Payments
+description: Construye flujos de pago de Cobru con una experiencia documental optimizada para integradores productivos y developers asistidos con IA.
 icon: Sparkles
 ---
 
-import { ArrowLeftRight, CreditCard, Rocket, Webhook } from "lucide-react";
+import { ArrowLeftRight, Bot, CreditCard, Rocket, Webhook } from "lucide-react";
 
-Cobru es una plataforma de pagos colombiana para equipos que necesitan crear links de pago, aceptar métodos locales, automatizar cobranzas y operar flujos de movimiento de dinero desde una sola API.
+Cobru es una plataforma de pagos colombiana para equipos que necesitan lanzar links de pago hosted, soportar métodos locales, automatizar cobranzas y operar movimiento de dinero desde una sola API.
 
-Esta documentación se está reconstruyendo a partir de learnings verificados en sandbox, materiales técnicos históricos de Cobru y la superficie visible en sus propias referencias API. Cuando un contrato aún no está verificado contra una integración real, la página lo indica explícitamente.
+Esta documentación está organizada para llevarte por el camino más corto hacia una salida a producción segura. Cada ruta crítica está pensada para humanos leyendo linealmente y para agentes de IA consumiendo páginas, markdown y salidas `llms.txt`.
 
 ## Elige un camino
 
@@ -17,19 +17,19 @@ Esta documentación se está reconstruyendo a partir de learnings verificados en
     icon={<Rocket />}
     title="Aceptar pagos"
     href="/es/docs/getting-started"
-    description="Obtén un access token, crea tu primer pago y comparte la URL hosted de Cobru."
+    description="Obtén un access token, crea tu primer pago y comparte una URL de pago de Cobru."
   />
   <Card
     icon={<Webhook />}
-    title="Procesar webhooks"
+    title="Procesar webhooks y estado"
     href="/es/docs/webhooks"
-    description="Recibe cambios de estado de pago y diseña handlers idempotentes y seguros."
+    description="Diseña consumidores resilientes para cambios asíncronos de pago, retries y conciliación."
   />
   <Card
     icon={<ArrowLeftRight />}
-    title="Enviar y retirar"
-    href="/es/docs/api/envios"
-    description="Explora envíos, retiros en efectivo, retiros bancarios y flujos de transferencia BRE-B."
+    title="Operar payouts"
+    href="/es/docs/payouts"
+    description="Mueve saldo, ejecuta retiros y endurece operaciones de settlement saliente."
   />
   <Card
     icon={<CreditCard />}
@@ -37,23 +37,30 @@ Esta documentación se está reconstruyendo a partir de learnings verificados en
     href="/es/docs/api/cards"
     description="Entiende la superficie de tarjetas virtuales y servicios digitales expuesta en el menú API."
   />
+  <Card
+    icon={<Bot />}
+    title="Build with AI"
+    href="/es/docs/build-with-ai"
+    description="Usa llms.txt, llms-full.txt, exports markdown y acciones canónicas de página para coding agents."
+  />
 </Cards>
 
-## Qué cubre Cobru
+## Qué leer primero
 
-La superficie pública para developers va más allá de crear pagos. El menú API capturado desde las referencias de Cobru incluye pagos, envíos, retiros en efectivo, retiros bancarios, servicios digitales y tarjetas virtuales.
+1. [Inicio rápido](/es/docs/getting-started) para crear el primer payment link.
+2. [Autenticación](/es/docs/authentication) para endurecer el manejo de tokens.
+3. [Webhooks](/es/docs/webhooks) para modelar estado asíncrono de forma segura.
+4. [Platform](/es/docs/platform) para validar testing, troubleshooting y workflows asistidos con IA.
+5. [Referencia API](/es/docs/api/reference) cuando necesites request y response shapes exactos.
 
-### Áreas de producto
+## Superficie de producto
 
 | Área | Para qué la usa un developer |
 |------|------------------------------|
-| Cobrus | Crear links de pago hosted, calcular fees, inspeccionar detalles y editar cobros existentes |
-| Webhooks | Recibir cambios de estado de pago en tu propio backend |
-| Envíos | Mover saldo entre usuarios Cobru |
-| Retiros en efectivo | Enviar fondos a flujos de retiro tipo Efecty |
-| Retiros bancarios | Enviar fondos a bancos en Colombia y otros países soportados |
-| Servicios | Vender productos digitales como recargas y PINes |
-| Tarjetas | Crear y operar tarjetas virtuales desde tus propios workflows |
+| Payments | Crear Cobrus hosted, calcular fees, inspeccionar detalles de pago y manejar métodos locales |
+| Payouts | Mover saldo, ejecutar retiros en efectivo, retiros bancarios y flujos de settlement BRE-B |
+| Platform | Autenticar de forma segura, consumir webhooks, probar antes del go-live, diagnosticar incidentes y navegar el contrato |
+| Cards & Services | Operar tarjetas, tokenización, recargas, PINes y otras APIs visibles del producto |
 
 ### Ambientes
 
@@ -62,15 +69,14 @@ La superficie pública para developers va más allá de crear pagos. El menú AP
 | Sandbox | `https://dev.cobru.co` |
 | Producción | `https://prod.cobru.co` |
 
-## Soporte
+## Modelo documental AI-first
 
-1. [Quickstart](/es/docs/getting-started)
-2. [Autenticación](/es/docs/authentication)
-3. [Webhooks](/es/docs/webhooks)
-4. [Referencia API](/es/docs/api/reference)
-5. [Guía BRE-B + QR](/es/docs/guides/qr-breb)
+- Cada página narrativa expone una salida markdown reusable.
+- `llms.txt` y `llms-full.txt` se mantienen públicos y crawlables.
+- La guía específica para IA vive en [Build with AI](/es/docs/build-with-ai).
+- Las páginas con verificación incompleta siguen etiquetadas explícitamente en vez de maquillarse como certeza.
 
-## Calidad de fuentes y soporte
+## Verificación y soporte
 
 | Fuente | Rol |
 |--------|-----|

@@ -50,12 +50,19 @@ export default async function Page({ params }: Props) {
   const markdownSlug = slug && slug.length > 0 ? `/${slug.join('/')}` : '';
   const markdownUrl = `/${locale}/docs-mdx${markdownSlug}`;
   const githubUrl = `https://github.com/neeroai/docs-cobru/blob/main/content/docs/${page.path}`;
+  const canonicalPageUrl = getLocaleUrl(locale, docPathFromSlug(slug));
 
   return (
     <DocsPage toc={narrativeData.toc} full={narrativeData.full}>
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
-      {!isApiReference ? <DocsPageActions githubUrl={githubUrl} markdownUrl={markdownUrl} /> : null}
+      {!isApiReference ? (
+        <DocsPageActions
+          githubUrl={githubUrl}
+          markdownUrl={markdownUrl}
+          pageUrl={canonicalPageUrl}
+        />
+      ) : null}
       <DocsBody>
         <MDX
           components={getMDXComponents({
@@ -79,7 +86,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = source.getPage(slug, locale);
   if (!page) notFound();
 
-  const docPath = slug && slug.length > 0 ? `/docs/${slug.join('/')}` : '/docs';
+  const docPath = docPathFromSlug(slug);
   const languages = getLocalizedAlternates(docPath);
 
   return {
@@ -96,4 +103,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale: locale === routing.defaultLocale ? 'en_US' : 'es_CO',
     },
   };
+}
+
+function docPathFromSlug(slug?: string[]) {
+  return slug && slug.length > 0 ? `/docs/${slug.join('/')}` : '/docs';
 }

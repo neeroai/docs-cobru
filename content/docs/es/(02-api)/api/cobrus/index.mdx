@@ -6,7 +6,40 @@ icon: Wallet
 
 Un "cobru" es el objeto de pago hosted de Cobru. Combina monto, descripción, métodos habilitados, expiración, URLs de retorno y el callback que reporta cambios de estado.
 
-## Endpoints de esta sección
+## Empieza aquí
+
+<Cards>
+  <Card
+    title="Crear un cobru"
+    href="/es/docs/api/cobrus/create"
+    description="Crea el objeto de pago hosted y obtén el `url` slug que alimenta el handoff al checkout."
+  />
+  <Card
+    title="Enviar detalles de pago"
+    href="/es/docs/api/cobrus/payment-details"
+    description="Maneja payloads específicos por método como Bre-B, PSE, Nequi y otros flujos de detalle de pago."
+  />
+  <Card
+    title="Consultar un cobru"
+    href="/es/docs/api/cobrus/consult"
+    description="Recupera estado y detalle del pago cuando tu sistema necesita conciliación o visibilidad de soporte."
+  />
+  <Card
+    title="Cotizar o editar"
+    href="/es/docs/api/cobrus/quote"
+    description="Cotiza un pago antes de crearlo o actualiza un cobru hosted vivo cuando el contrato lo permite."
+  />
+</Cards>
+
+## Orden recomendado
+
+1. [Crear un cobru](/es/docs/api/cobrus/create)
+2. [Enviar detalles de pago](/es/docs/api/cobrus/payment-details)
+3. Páginas específicas por método como [Bre-B](/es/docs/api/cobrus/breb), [PSE](/es/docs/api/cobrus/pse) y [Nequi](/es/docs/api/cobrus/nequi)
+4. [Consultar un cobru](/es/docs/api/cobrus/consult)
+5. [Cotizar un cobru](/es/docs/api/cobrus/quote) o [Editar un cobru](/es/docs/api/cobrus/edit) solo si tu producto realmente necesita esos flujos
+
+## Mapa de endpoints
 
 | Familia de endpoint | Método | Estado de verificación |
 |---------------------|--------|------------------------|
@@ -27,3 +60,9 @@ Un "cobru" es el objeto de pago hosted de Cobru. Combina monto, descripción, m�
 | `3` | Pagado |
 | `4` | Reembolsado |
 | `5` | Expirado |
+
+## Notas operativas
+
+- Trata la creación del pago y el estado final del pago como momentos separados dentro de tu sistema.
+- Guarda juntos `url`, `pk` y tu identificador interno de orden desde la primera escritura.
+- Si un flujo específico por método no está recién verificado, mantenlo detrás de una revisión operativa explícita antes del rollout amplio.

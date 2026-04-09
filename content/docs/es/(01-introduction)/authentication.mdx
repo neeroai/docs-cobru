@@ -10,6 +10,13 @@ Cobru usa un modelo de autenticación por capas:
 - `Api-Secret-Key`: tu key privada de backend
 - `Authorization: Bearer {access}`: token de acceso de corta duración obtenido desde `/token/refresh/`
 
+## Empieza aquí
+
+1. Guarda `Api-Token`, `Api-Secret-Key` y el token `refresh` solo en almacenamiento secreto backend.
+2. Emite un access token desde `/token/refresh/`.
+3. Cachea ese access token de forma centralizada antes de hacer llamadas rutinarias.
+4. Reúsalo hasta que toque refrescarlo en lugar de emitirlo en cada request.
+
 ## Rol de cada credencial
 
 | Credencial | Dónde usarla | Notas |
@@ -75,7 +82,7 @@ COBRU_REFRESH_TOKEN=...
 - Rota credenciales cuando cambie el equipo con acceso.
 - Usa URLs `callback` con HTTPS en producción.
 
-## Siguiente lectura
+## Sigue con
 
 - `/docs/getting-started`
 - `/docs/webhooks`

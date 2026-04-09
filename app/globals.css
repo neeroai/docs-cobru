@@ -66,7 +66,14 @@ body {
   color: var(--color-text-primary);
 }
 
+#nd-page {
+  background:
+    radial-gradient(circle at top, color-mix(in oklab, var(--fd-primary) 10%, transparent), transparent 28%),
+    var(--color-bg-base);
+}
+
 #nd-subnav [data-header-body] {
+  min-height: 3rem;
   padding-inline: 1.1rem;
 }
 
@@ -75,8 +82,30 @@ body {
   color: var(--color-text-primary);
 }
 
+#nd-subnav {
+  border-bottom: 1px solid color-mix(in oklab, var(--fd-border) 94%, transparent);
+  background-color: color-mix(in oklab, var(--color-bg-base) 88%, black 12%);
+  backdrop-filter: blur(16px);
+}
+
+#nd-subnav [data-search-full] {
+  max-width: 17rem;
+}
+
+#nd-subnav button,
+#nd-subnav a {
+  font-size: 0.95rem;
+}
+
+#nd-subnav [data-search-full] kbd {
+  border-color: color-mix(in oklab, var(--fd-border) 88%, transparent);
+  background-color: color-mix(in oklab, var(--fd-card) 84%, transparent);
+  color: var(--color-text-tertiary);
+}
+
 #nd-sidebar {
   background-color: var(--fd-card);
+  border-inline-end: 1px solid color-mix(in oklab, var(--fd-border) 94%, transparent);
 }
 
 #nd-sidebar [data-active='true'] {
@@ -100,13 +129,51 @@ body {
   color: var(--color-text-primary);
 }
 
+#nd-sidebar > div:first-child {
+  padding-bottom: 0.4rem;
+}
+
 #nd-sidebar [data-active='true']:hover {
   background-color: color-mix(in oklab, var(--fd-primary) 16%, var(--fd-card));
+}
+
+#nd-sidebar [data-sidebar-item],
+#nd-sidebar button {
+  border-radius: 0.7rem;
+}
+
+#nd-sidebar [data-sidebar-group] {
+  margin-bottom: 0.8rem;
+}
+
+#nd-sidebar .border-t {
+  border-color: color-mix(in oklab, var(--fd-border) 94%, transparent);
+}
+
+#nd-sidebar [data-sidebar-folder] > button,
+#nd-sidebar [data-sidebar-page] {
+  min-height: 2.15rem;
+}
+
+#nd-sidebar a[href*='github.com'],
+#nd-sidebar a[href*='build-with-ai'],
+#nd-sidebar a[href^='mailto:'],
+#nd-sidebar a[href*='panel.cobru.co'] {
+  font-size: 0.92rem;
 }
 
 #nd-toc a[aria-current='true'],
 #nd-toc [data-active='true'] {
   color: var(--fd-primary);
+}
+
+#nd-toc {
+  border-inline-start: 1px solid color-mix(in oklab, var(--fd-border) 88%, transparent);
+  padding-inline-start: 1rem;
+}
+
+#nd-toc [data-toc] {
+  gap: 0.5rem;
 }
 
 :focus-visible {
@@ -125,10 +192,27 @@ body {
 
 .prose {
   color: var(--color-text-secondary);
+  max-width: 46rem;
 }
 
 .prose :where(h1, h2, h3, h4) {
   color: var(--color-text-primary);
+}
+
+.prose h1 {
+  letter-spacing: -0.04em;
+  font-size: clamp(2.25rem, 3vw, 3rem);
+  margin-bottom: 0.7rem;
+}
+
+.prose h2 {
+  letter-spacing: -0.03em;
+  margin-top: 2.7rem;
+}
+
+.prose h1 + p:first-of-type,
+.prose [data-page-description] {
+  max-width: 38rem;
 }
 
 .prose p,
@@ -179,17 +263,19 @@ body {
 .prose .grid > a {
   border-color: var(--fd-border);
   background-color: var(--fd-card);
-  box-shadow: var(--shadow-xs);
+  box-shadow: none;
+  border-radius: 1rem;
 }
 
 .prose .grid > a:hover {
   border-color: color-mix(in oklab, var(--brand-500) 30%, var(--fd-border));
-  background-color: color-mix(in oklab, var(--fd-card) 94%, var(--brand-50));
+  background-color: color-mix(in oklab, var(--fd-card) 96%, var(--brand-50));
 }
 
 .prose [data-card] {
   border-color: color-mix(in oklab, var(--fd-border) 92%, transparent);
-  box-shadow: 0 1px 2px rgb(15 23 42 / 0.03);
+  background-color: color-mix(in oklab, var(--fd-card) 98%, transparent);
+  box-shadow: none;
 }
 
 .prose [data-card] h3 {
@@ -210,11 +296,20 @@ body {
 }
 
 .dark .prose [data-card] {
-  background-color: color-mix(in oklab, var(--fd-card) 94%, white 2%);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.02);
+  background-color: color-mix(in oklab, var(--fd-card) 96%, white 1%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.03);
 }
 
 .dark .prose [data-card] > .not-prose:first-child {
   background-color: color-mix(in oklab, var(--fd-primary) 15%, var(--fd-card));
   box-shadow: 0 6px 14px rgb(0 0 0 / 0.22);
+}
+
+[data-page-actions] {
+  margin-bottom: 1.5rem;
+  justify-content: flex-end;
+}
+
+[data-page-actions] :where(button, a) {
+  border-radius: 999px;
 }

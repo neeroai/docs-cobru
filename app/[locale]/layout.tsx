@@ -69,10 +69,14 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning className={dmSans.variable}>
+    <html lang={locale} suppressHydrationWarning className={`${dmSans.variable} dark`}>
       <body className="flex min-h-screen flex-col">
         <NextIntlClientProvider messages={messages}>
           <RootProvider
+            theme={{
+              defaultTheme: 'dark',
+              enableSystem: false,
+            }}
             search={{
               options: {
                 type: 'fetch',

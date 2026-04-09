@@ -15,7 +15,7 @@ El flujo tiene dos partes:
 
 <Callout type="warn">
   En narrativa pública usamos <strong>Bre-B</strong>, pero los payloads conservan el literal exacto del backend tal
-  como aparece en los materiales originales: `payment: "breb"` y `"Bre-B": true` dentro de `payment_method_enabled`.
+  como aparece en el contrato del request: `payment: "breb"` y `"breb": true` dentro de `payment_method_enabled`.
 </Callout>
 
 ## Modos de salida de Bre-B
@@ -38,7 +38,7 @@ Si tu objetivo es específicamente generar un **QR Bre-B sin el link de pago**, 
   "expiration_days": 1,
   "client_assume_costs": false,
   "iva": 0,
-  "payment_method_enabled": "{\"Bre-B\":true}",
+  "payment_method_enabled": "{\"breb\":true}",
   "payer_redirect_url": "https://tuapp.com/pago/exitoso",
   "callback": "https://tuapp.com/api/cobru/webhook"
 }
@@ -48,7 +48,7 @@ Spotlight y los learnings posteriores coinciden en un quirk crítico: `payment_m
 
 ## Paso 1.5 — Habilitar la capacidad correcta de Bre-B
 
-Spotlight documenta explícitamente el paso de creación con `"Bre-B": true` dentro de `payment_method_enabled`.
+El paso de creación debe habilitar Bre-B con `"breb": true` dentro de `payment_method_enabled`.
 
 El research profundo posterior también encontró un segundo literal de checkout, `breb_qr`, usado por los internos del checkout hosted de Cobru.
 
@@ -56,7 +56,7 @@ Para fines de documentación, trátalos así:
 
 | Capacidad | De dónde sale | Qué significa |
 |-----------|---------------|---------------|
-| `"Bre-B": true` en `payment_method_enabled` | Spotlight | el cobru debe ofrecer Bre-B |
+| `"breb": true` en `payment_method_enabled` | payload del request | el cobru debe ofrecer Bre-B |
 | `payment: "breb"` | Spotlight | request directo de detalles de pago Bre-B |
 | `payment: "breb_qr"` | research profundo | variante Bre-B enfocada en QR vista en análisis posteriores del checkout |
 

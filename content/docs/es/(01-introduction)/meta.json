@@ -5,6 +5,7 @@
   "pages": [
     "index",
     "getting-started",
+    "build-with-ai",
     "authentication",
     "webhooks",
     "errors",

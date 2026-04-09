@@ -1,0 +1,53 @@
+---
+title: Build with AI
+description: Da a coding agents y copilots internos una forma estable y veraz de consumir la documentación de Cobru.
+icon: Bot
+---
+
+Cobru Docs está diseñada para funcionar tanto para developers leyendo en el navegador como para sistemas de IA que necesitan markdown estable y URLs canónicas.
+
+## Qué pueden usar hoy las herramientas de IA
+
+<Cards>
+  <Card
+    title="llms.txt"
+    href="/llms.txt"
+    description="Índice bilingüe compacto para herramientas que necesitan descubrir rutas."
+  />
+  <Card
+    title="llms-full.txt"
+    href="/llms-full.txt"
+    description="Stream expandido del texto público de la docs para retrieval profundo y contexto offline."
+  />
+  <Card
+    title="Copy page"
+    href="/es/docs/getting-started"
+    description="Las páginas narrativas exponen salidas amigables a markdown para que los agentes trabajen sobre el contexto exacto."
+  />
+  <Card
+    title="API reference"
+    href="/es/docs/api/reference"
+    description="Usa la superficie OpenAPI repo-owned cuando un agente necesite máxima precisión en requests y responses."
+  />
+</Cards>
+
+## Workflow recomendado para coding agents
+
+1. Empieza por `/llms.txt` para descubrir el camino relevante más corto.
+2. Extrae el markdown narrativo antes de generar código desde memoria.
+3. Pasa a `/docs/api/reference` para validar request y response shapes exactos.
+4. Trata las páginas marcadas con caveats de verificación como fuentes de menor confianza.
+
+## Modelo de verdad
+
+- La docs pública documenta solo comportamiento actual de Cobru o contratos legacy/menu-derived etiquetados explícitamente.
+- `verified`, `legacy-doc` y `menu-only` siguen siendo distinciones reales dentro del source OpenAPI.
+- Los webhooks no tienen hoy una firma pública documentada, así que los agentes no deben modelarlos como entradas criptográficamente confiables.
+
+## Mejores páginas para combinar con IA
+
+- [Inicio rápido](/es/docs/getting-started)
+- [Autenticación](/es/docs/authentication)
+- [Webhooks](/es/docs/webhooks)
+- [Preparación para producción](/es/docs/production-readiness)
+- [Referencia API](/es/docs/api/reference)

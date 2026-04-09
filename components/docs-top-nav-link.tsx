@@ -24,7 +24,7 @@ export function DocsTopNavLink({ href, label, exact = [], prefixes = [] }: DocsT
       href={href}
       data-top-nav="true"
       data-active={active}
-      className="relative inline-flex h-14 items-center border-b-2 border-transparent px-1 text-[1.025rem] font-medium tracking-[-0.015em] text-fd-muted-foreground transition-colors hover:text-fd-foreground data-[active=true]:border-fd-primary data-[active=true]:text-fd-foreground"
+      className="relative inline-flex h-12 items-center border-b-2 border-transparent px-1 text-[0.95rem] font-medium tracking-[-0.01em] text-fd-muted-foreground transition-colors hover:text-fd-foreground data-[active=true]:border-fd-primary data-[active=true]:text-fd-foreground"
     >
       {label}
     </Link>

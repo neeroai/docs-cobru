@@ -1,33 +1,35 @@
 ---
 title: Preparación para producción
-description: Checklist operativo para llevar una integración Cobru de sandbox a tráfico real.
+description: Checklist operativo para llevar una integración Cobru desde sandbox a tráfico real.
 icon: ShieldCheck
 ---
 
-Salir a producción con Cobru no es solo cambiar credenciales. Conviene tratar production
-readiness como un hito operativo con checks explícitos sobre auth, creación de pagos,
-callbacks, observabilidad y soporte.
+Salir a producción con Cobru no es solo cambiar credenciales. Trata la preparación para producción como un hito operativo con checks explícitos sobre auth, creación de pagos, callbacks, observabilidad y soporte.
 
-## Checklist de salida a producción
+## Empieza aquí
+
+1. Confirma credenciales de producción, callback URL y estrategia de logging.
+2. Ensaya un pago end to end con conciliación manual.
+3. Verifica que soporte pueda rastrear un pago desde tu order ID interno hasta los objetos Cobru.
+4. Define criterios de rollback antes de abrir tráfico amplio.
+
+## Checklist de go-live
 
 <Steps>
   <Step>
-    Confirma que las credenciales productivas viven solo en configuración segura de ambiente y
-    no están compartidas con código frontend.
+    Confirma que las credenciales de producción se guardan solo en configuración segura del servidor y no se comparten con frontend.
   </Step>
   <Step>
-    Cambia la base URL a `https://prod.cobru.co` solo cuando los flujos en sandbox sean
-    consistentemente exitosos.
+    Cambia la base URL a `https://prod.cobru.co` solo después de pasar flujos consistentes en sandbox.
   </Step>
   <Step>
-    Verifica que tu URL `callback` sea pública, HTTPS, monitoreada e idempotente.
+    Confirma que tu `callback` URL es pública, HTTPS, monitoreada e idempotente.
   </Step>
   <Step>
-    Valida que tu equipo pueda reconciliar manualmente un pago desde el request hasta el
-    callback y el estado interno de la orden.
+    Valida que el equipo puede reconciliar manualmente un pago desde request hasta callback y estado interno.
   </Step>
   <Step>
-    Asegúrate de que soporte pueda ubicar pagos por order ID interno y por slug `url` de Cobru.
+    Asegura que soporte puede ubicar pagos por order ID interno y por slug `url` de Cobru.
   </Step>
 </Steps>
 
@@ -36,48 +38,45 @@ callbacks, observabilidad y soporte.
 | Área | Requisito |
 |------|-----------|
 | Auth | caché de access token y almacenamiento seguro de secretos |
-| Pagos | serialización correcta de `payment_method_enabled` y redirect URLs confiables |
-| Webhooks | respuesta rápida `200`, persistencia, deduplicación y reconciliación |
-| Logging | request IDs, respuestas raw de Cobru y event logs de webhook |
-| Soporte | capacidad de trazar un pago desde la orden interna hasta el objeto de Cobru |
-| Monitoreo | alertas sobre fallas de creación de pago y de procesamiento de callbacks |
+| Payments | serialización segura de `payment_method_enabled` y redirects confiables |
+| Webhooks | respuesta `200` rápida, persistencia, deduplicación y reconciliación |
+| Logging | request IDs, responses raw de Cobru y logs de eventos webhook |
+| Support | capacidad de trazar un pago desde la orden interna hasta el objeto Cobru |
+| Monitoring | alertas sobre fallas al crear pagos y al procesar webhooks |
 
 ## Estrategia recomendada de lanzamiento
 
 - empieza con tráfico interno o de bajo riesgo
-- mantén conciliación manual activa durante los primeros días productivos
-- evita comunicación masiva a clientes hasta confirmar estabilidad del manejo de callbacks
-- documenta quién es owner de incident response durante la semana de lanzamiento
+- mantén conciliación manual durante los primeros días
+- evita comunicación amplia a clientes hasta confirmar estabilidad de callbacks
+- documenta ownership de incident response para la semana de lanzamiento
 
 ## Áreas sensibles en producción
 
 <Accordions>
   <Accordion title="Errores de validación engañosos">
-    Algunos requests mal formados siguen apareciendo como `403` en lugar de un status de
-    validación limpio. Tu monitoreo debe conservar las respuestas raw de Cobru para diagnóstico.
+    Algunas requests malformadas de creación de pago todavía pueden aparecer como `403` en vez de un status limpio de validación. Tu monitoreo debe preservar las responses raw de Cobru.
   </Accordion>
 
   <Accordion title="Webhooks sin firma">
-    Como los callbacks de Cobru no están firmados hoy, tu sistema productivo debe tratarlos como
-    notificaciones y volver a reconciliar el pago antes de acciones irreversibles.
+    Como los callbacks de Cobru no están firmados hoy, tu sistema de producción debe tratarlos como notificaciones y volver a validar estado antes de acciones irreversibles.
   </Accordion>
 
   <Accordion title="Construcción de la URL hosted">
-    Construye siempre la URL hosted desde el slug `url` retornado por Cobru, no desde `pk` ni
-    desde patrones antiguos de plugins.
+    Construye siempre la URL hosted a partir del slug `url` devuelto por Cobru, no desde `pk` ni desde patrones antiguos de plugins.
   </Accordion>
 </Accordions>
 
-## Criterios de rollback el día de lanzamiento
+## Criterios de rollback del día de salida
 
 Pausa o limita tráfico real si:
 
-- cae de forma inesperada la tasa de éxito de creación de pagos
-- dejan de llegar callbacks o no pueden reconciliarse
-- no puedes mapear pagos Cobru a órdenes internas de forma confiable
-- soporte no puede diagnosticar fallas con los logs disponibles
+- cae inesperadamente el success rate de creación de pagos
+- dejan de llegar callbacks o no puedes reconciliarlos
+- no puedes empatar pagos Cobru con órdenes internas de forma confiable
+- soporte no puede diagnosticar fallas con la información disponible
 
-## Páginas relacionadas
+## Sigue con
 
 - `/docs/testing`
 - `/docs/webhooks`

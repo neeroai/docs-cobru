@@ -10,6 +10,13 @@ Cobru uses a layered authentication model:
 - `Api-Secret-Key`: your private backend key
 - `Authorization: Bearer {access}`: a short-lived access token from `/token/refresh/`
 
+## Start here
+
+1. Store `Api-Token`, `Api-Secret-Key`, and `refresh` token only in backend secret storage.
+2. Mint an access token from `/token/refresh/`.
+3. Cache the access token centrally before making routine API calls.
+4. Reuse the token until refresh is needed instead of minting on every request.
+
 ## Credential roles
 
 | Credential | Where to use it | Notes |
@@ -75,7 +82,7 @@ COBRU_REFRESH_TOKEN=...
 - Rotate credentials when team membership changes.
 - Use HTTPS-only callback URLs in production.
 
-## Next reading
+## Read next
 
 - `/docs/getting-started`
 - `/docs/webhooks`

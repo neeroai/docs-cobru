@@ -13,6 +13,31 @@ icon: CreditCard
 El menú API de Cobru incluye una sección `Tarjetas`, lo que sugiere una capacidad más amplia
 de tarjetas programables montada sobre la infraestructura de wallet y saldo.
 
+## Elige un workflow de tarjetas
+
+<Cards>
+  <Card
+    title="Crear o recargar"
+    href="/es/docs/api/cards/create"
+    description="Emite una tarjeta virtual o agrega saldo usando la superficie combinada de creación y recarga."
+  />
+  <Card
+    title="Inspeccionar tarjetas"
+    href="/es/docs/api/cards/details"
+    description="Recupera metadata y tarjetas existentes cuando soporte u operaciones necesitan visibilidad."
+  />
+  <Card
+    title="Revisar movimientos"
+    href="/es/docs/api/cards/movements"
+    description="Inspecciona transacciones para conciliación, riesgo e investigación de soporte."
+  />
+  <Card
+    title="Congelar tarjeta"
+    href="/es/docs/api/cards/freeze"
+    description="Detén o reanuda el uso de la tarjeta como parte de controles operativos."
+  />
+</Cards>
+
 ## Operaciones visibles
 
 | Operación | Método | Path | Confianza |
@@ -23,9 +48,8 @@ de tarjetas programables montada sobre la infraestructura de wallet y saldo.
 | movimientos | `GET` | `/cobru/debit/get_transactions/` | legacy-doc |
 | congelar tarjeta | `POST` | `/cobru/debit/freeze_card/` | legacy-doc |
 
-## Lo que habilita esta familia
+## Restricciones de lanzamiento
 
-- emitir tarjetas virtuales
-- agregar saldo a una tarjeta existente
-- recuperar metadata e historial de transacciones
-- congelar o descongelar una tarjeta dentro de flujos de riesgo o soporte
+- confirma SLA del emisor y ownership operativo antes de habilitar tarjetas para clientes
+- mapea reglas de acceso PCI, PII y soporte antes de exponer datos de tarjeta en tooling interno
+- trata freeze y unfreeze como acciones de alta sensibilidad con audit logs
