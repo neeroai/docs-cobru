@@ -11,10 +11,18 @@ const routes = [
   '/en/docs/api/reference/cobrus/estimateCobru',
   '/en/docs/api/reference/services/rechargeCellPhone',
   '/en/docs/api/reference/cards/getDebitCard',
+  '/en/docs/api/cobrus/payment-details',
+  '/en/docs/api/cobrus/pse',
+  '/en/docs/api/cobrus/daviplata',
+  '/en/docs/guides/qr-breb',
   '/es/docs/api/reference',
   '/es/docs/api/reference/authentication/refreshToken',
   '/es/docs/api/reference/cobrus/createCobru',
   '/es/docs/api/reference/cobrus/estimateCobru',
+  '/es/docs/api/cobrus/payment-details',
+  '/es/docs/api/cobrus/pse',
+  '/es/docs/api/cobrus/daviplata',
+  '/es/docs/guides/qr-breb',
 ];
 
 function sleep(ms) {
