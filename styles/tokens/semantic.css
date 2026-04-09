@@ -80,9 +80,9 @@
   --fd-primary-foreground: var(--neutral-950);
   --fd-secondary: var(--neutral-50);
   --fd-secondary-foreground: var(--neutral-950);
-  --fd-accent: color-mix(in oklab, var(--brand-100) 60%, white);
+  --fd-accent: color-mix(in oklab, var(--brand-500) 14%, white);
   --fd-accent-foreground: var(--brand-700);
-  --fd-ring: var(--brand-400);
+  --fd-ring: var(--brand-500);
 }
 
 /* ── DARK THEME ── */
@@ -152,11 +152,11 @@
   --fd-card: var(--color-bg-shell-elevated);
   --fd-card-foreground: var(--neutral-50);
   --fd-border: oklch(0.25 0.02 220);
-  --fd-primary: var(--brand-400);
+  --fd-primary: var(--brand-500);
   --fd-primary-foreground: var(--neutral-950);
   --fd-secondary: var(--neutral-900);
   --fd-secondary-foreground: var(--neutral-50);
-  --fd-accent: color-mix(in oklab, var(--brand-950) 82%, var(--brand-500));
+  --fd-accent: color-mix(in oklab, var(--brand-500) 18%, var(--neutral-900));
   --fd-accent-foreground: var(--brand-300);
   --fd-ring: var(--brand-500);
 }

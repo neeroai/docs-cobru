@@ -1,0 +1,39 @@
+---
+title: Changelog
+description: Track major documentation, API reference, and information architecture changes published in this repo.
+icon: History
+---
+
+## 2026-04-09
+
+### Navigation and brand refresh
+
+- Replaced the old `Docs / API / Guides` tabs with a product-oriented top navbar.
+- Reorganized the sidebar around `Payments`, `Payouts`, `Platform`, and `Cards & Services`.
+- Increased the presence of Cobru green in active states, icons, and section accents.
+
+### New hub pages
+
+- Added dedicated public landing pages for `Payouts`, `Platform`, and `Changelog`.
+- Kept Notebook Layout and Fumadocs primitives as the shell baseline.
+
+## 2026-04-08
+
+### Checkout method documentation
+
+- Rewrote Bre-B and `submitPaymentDetails` from Spotlight exports.
+- Added method-specific pages for PSE, Nequi, dale!, Daviplata, credit card, cash payments, and Bancolombia button.
+- Added `confirmDaviplataPayment` to the OpenAPI source.
+
+### API reference stabilization
+
+- Fixed the production runtime issue affecting `/docs/api/reference/**`.
+- Added smoke coverage for API reference and critical Cobrus narrative routes.
+
+## 2026-04-07
+
+### Repo-first docs platform
+
+- Migrated the OpenAPI contract to a repo-owned multi-file source under `openapi/src/**`.
+- Added governance checks for localization sync, OpenAPI validation, and critical route smoke tests.
+- Expanded the bilingual docs surface for payouts, services, cards, tokenization, and Celo.

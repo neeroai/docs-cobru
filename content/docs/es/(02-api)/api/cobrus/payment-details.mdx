@@ -9,8 +9,23 @@ icon: ReceiptText
 `POST /{url}`
 
 <Callout type="warn">
-  Este contrato viene principalmente de los materiales originales de Spotlight de Cobru. Revalida el comportamiento exacto en sandbox antes de depender de métodos menos frecuentes en producción.
+  Este contrato viene principalmente de los materiales originales de Spotlight de
+  Cobru, notas internas compiladas de API y research posterior del checkout. Cobru
+  todavía no ha reejecutado todas las variantes de método de punta a punta dentro
+  de la evidencia de sandbox publicada por este repo, así que este endpoint sigue
+  en la categoría `legacy-doc` para planeación de producción.
 </Callout>
+
+## Confianza por método
+
+| Método | Confianza | Motivo |
+|--------|-----------|--------|
+| `pse` | más alta | varias fuentes coinciden en `bank` y en la dependencia de `GET /get_banks/1/` |
+| `NEQUI` | media | la forma del request es consistente entre Spotlight y el research posterior, pero el runtime sigue variando según los datos del pagador |
+| `daviplata` | media | Spotlight y el research posterior documentan el paso de OTP, pero Cobru no ha publicado todavía una repetición completa confirmada en este repo |
+| `credit_card` | media | Spotlight trae un payload claro y tarjetas de prueba, pero la paridad productiva aún requiere revalidación |
+| `breb` | media-baja | Spotlight documenta `payment: "breb"` directo, pero el research posterior en sandbox lo observó como deshabilitado o restringido comercialmente |
+| métodos en efectivo y corresponsales | media-baja | los payloads están documentados, pero el detalle de las respuestas sigue viniendo sobre todo de material legacy |
 
 ## Propósito
 
@@ -102,6 +117,13 @@ Spotlight muestra una respuesta que incluye:
 
 Los materiales originales también indican que `qr_value` y `key_value` viven 5 minutos.
 
+<Callout type="warn">
+  El research posterior en sandbox observó `payment: "breb"` directo como
+  deshabilitado o restringido comercialmente en algunos entornos. Toma la forma del
+  request como documentada, pero no asumas disponibilidad directa de Bre-B sin tu
+  propia confirmación en sandbox.
+</Callout>
+
 ## PSE
 
 PSE requiere dos campos extra:
@@ -126,6 +148,12 @@ PSE requiere dos campos extra:
 
 <Callout type="info">
   Antes de enviar `payment: "pse"`, consulta `GET /get_banks/1/` y envía en `bank` el `bankCode` elegido.
+</Callout>
+
+<Callout type="info">
+  Dentro de las variantes legacy de checkout, PSE es una de las mejor corroboradas
+  en los materiales de Cobru porque la dependencia de bancos, los campos del request
+  y el patrón de redirección coinciden entre varias fuentes.
 </Callout>
 
 Si el request es exitoso, Cobru retorna la URL de PSE a la que tu frontend debe redirigir al usuario.
@@ -222,6 +250,12 @@ Campos del body:
 | `OTP` | OTP recibido por el pagador |
 
 El éxito se describe como `result == "OK"`.
+
+<Callout type="warn">
+  Cobru todavía no ha publicado una repetición completa del OTP de Daviplata dentro
+  de la evidencia de sandbox de este repo. Usa este contrato como una referencia
+  legacy fuerte, no como un flujo verificado recientemente.
+</Callout>
 
 ## Tarjeta de crédito
 

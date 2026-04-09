@@ -5,6 +5,10 @@ const DEFAULT_PORT = '3000';
 const START_TIMEOUT_MS = 30_000;
 
 const routes = [
+  '/en/docs',
+  '/en/docs/payouts',
+  '/en/docs/platform',
+  '/en/docs/changelog',
   '/en/docs/api/reference',
   '/en/docs/api/reference/authentication/refreshToken',
   '/en/docs/api/reference/cobrus/createCobru',
@@ -15,6 +19,10 @@ const routes = [
   '/en/docs/api/cobrus/pse',
   '/en/docs/api/cobrus/daviplata',
   '/en/docs/guides/qr-breb',
+  '/es/docs',
+  '/es/docs/payouts',
+  '/es/docs/platform',
+  '/es/docs/changelog',
   '/es/docs/api/reference',
   '/es/docs/api/reference/authentication/refreshToken',
   '/es/docs/api/reference/cobrus/createCobru',

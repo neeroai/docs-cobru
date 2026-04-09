@@ -1,0 +1,45 @@
+---
+title: Payouts
+description: Move balance with transfers, cash withdrawals, bank payouts, and reconciliation flows exposed by Cobru.
+icon: ArrowLeftRight
+---
+
+import { ArrowLeftRight, Banknote, Building2, Scale } from "lucide-react";
+
+Cobru's payout surface covers transfers between Cobru users, cash withdrawal flows, bank withdrawals, and the operational visibility teams need to reconcile outbound money movement.
+
+## Choose a payout flow
+
+<Cards>
+  <Card
+    icon={<ArrowLeftRight />}
+    title="Transfers"
+    href="/en/docs/api/envios"
+    description="Send balance between Cobru users and inspect outbound transfer history."
+  />
+  <Card
+    icon={<Banknote />}
+    title="Cash withdrawals"
+    href="/en/docs/api/cash-withdrawals"
+    description="Create cash pickup withdrawals, inspect details, and cancel pending withdrawals."
+  />
+  <Card
+    icon={<Building2 />}
+    title="Bank withdrawals"
+    href="/en/docs/api/bank-withdrawals"
+    description="Route payouts to banks in Colombia and other supported corridors, including Bre-B transfers."
+  />
+  <Card
+    icon={<Scale />}
+    title="Balances and movements"
+    href="/en/docs/guides/balances"
+    description="Use reconciliation guides to reason about balance, movement history, and payout monitoring."
+  />
+</Cards>
+
+## Recommended order
+
+1. Review [Transfers](/en/docs/api/envios) if funds stay inside the Cobru ecosystem.
+2. Use [Cash withdrawals](/en/docs/api/cash-withdrawals) for payout-to-cash operations.
+3. Use [Bank withdrawals](/en/docs/api/bank-withdrawals) for bank settlement and Bre-B transfer flows.
+4. Finish with [Balances](/en/docs/guides/balances) and [Movements](/en/docs/guides/movements) to harden reconciliation.

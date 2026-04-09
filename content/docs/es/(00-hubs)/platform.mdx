@@ -1,0 +1,50 @@
+---
+title: Platform
+description: Autenticación, webhooks, testing, troubleshooting y la referencia API necesaria para operar Cobru de forma segura en producción.
+icon: ShieldCheck
+---
+
+import { Activity, Bug, Braces, ShieldCheck, TestTube, Webhook } from "lucide-react";
+
+Usa la capa de plataforma para iniciar integraciones, verificar contratos y endurecer el comportamiento operativo antes de depender de Cobru en producción.
+
+## Superficies de plataforma
+
+<Cards>
+  <Card
+    icon={<ShieldCheck />}
+    title="Autenticación"
+    href="/es/docs/authentication"
+    description="Obtén, refresca y administra las credenciales necesarias para llamar endpoints de Cobru."
+  />
+  <Card
+    icon={<Webhook />}
+    title="Webhooks"
+    href="/es/docs/webhooks"
+    description="Procesa cambios de estado asíncronos y eventos salientes con consumidores resilientes."
+  />
+  <Card
+    icon={<TestTube />}
+    title="Pruebas"
+    href="/es/docs/testing"
+    description="Usa sandbox, fuentes de verificación y checklists de go-live antes de salir a producción."
+  />
+  <Card
+    icon={<Braces />}
+    title="Referencia API"
+    href="/es/docs/api/reference"
+    description="Explora operaciones OpenAPI agrupadas, request shapes y ejemplos de respuesta."
+  />
+  <Card
+    icon={<Bug />}
+    title="Resolución de problemas"
+    href="/es/docs/troubleshooting"
+    description="Diagnostica más rápido problemas de auth, webhooks, payouts y payment flows."
+  />
+  <Card
+    icon={<Activity />}
+    title="Changelog"
+    href="/es/docs/changelog"
+    description="Sigue los hitos de documentación y mejoras públicas de contrato en este repo."
+  />
+</Cards>

@@ -119,6 +119,22 @@ paths:
       x-verification-status: legacy-doc
       description: |
         Submit payer and payment-method-specific details for an existing cobru.
+
+        This operation is still classified as `legacy-doc`. Its field shape is
+        corroborated by Cobru's original Spotlight materials, the compiled internal
+        API notes, and later deep checkout research, but Cobru has not yet replayed
+        every method variant end-to-end in this repo's sandbox evidence set.
+
+        Current confidence breakdown:
+        - High confidence on the selector field name `payment`
+        - High confidence on the PSE prerequisite `GET /get_banks/1/` plus `bankCode`
+          mapped into the `bank` field
+        - Medium confidence on Nequi and Daviplata request shapes
+        - Medium confidence on card and Bancolombia button payload fields
+        - Known sandbox caveat: direct `payment: "breb"` has been observed as
+          commercially gated or disabled in later research, even though Spotlight
+          documents it as a supported method
+
         Spotlight materials describe this endpoint as the checkout hub for Bre-B, PSE,
         Efecty, Corresponsal Bancolombia, Nequi, dale!, Botón Bancolombia, Daviplata,
         and credit-card flows.
@@ -213,7 +229,9 @@ paths:
       x-verification-status: legacy-doc
       description: |
         Confirm a Daviplata payment after the payer receives the OTP.
-        This operation comes from the original Spotlight materials.
+        This operation is documented in the original Spotlight materials and later
+        deep checkout research, but Cobru has not yet replayed a full OTP confirmation
+        cycle in the sandbox evidence published by this repo.
       requestBody:
         required: true
         content:

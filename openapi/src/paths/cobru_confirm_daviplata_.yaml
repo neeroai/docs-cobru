@@ -6,7 +6,9 @@ post:
   x-verification-status: legacy-doc
   description: |
     Confirm a Daviplata payment after the payer receives the OTP.
-    This operation comes from the original Spotlight materials.
+    This operation is documented in the original Spotlight materials and later
+    deep checkout research, but Cobru has not yet replayed a full OTP confirmation
+    cycle in the sandbox evidence published by this repo.
   requestBody:
     required: true
     content:

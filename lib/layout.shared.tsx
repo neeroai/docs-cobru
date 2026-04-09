@@ -1,47 +1,94 @@
+import { CobruDocsLogo } from '@/components/cobru-docs-logo';
+import { DocsTopNavLink } from '@/components/docs-top-nav-link';
 import type { DocsLayoutProps } from 'fumadocs-ui/layouts/notebook';
-import { BookOpen, Braces, Waypoints } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 export function getDocsLayoutOptions(locale: string): Omit<DocsLayoutProps, 'tree' | 'children'> {
   const docsBase = `/${locale}/docs`;
 
   return {
     nav: {
-      title: 'Cobru Docs',
+      title: <CobruDocsLogo href={docsBase} />,
       url: docsBase,
       mode: 'top',
     },
-    links: [],
-    githubUrl: 'https://github.com/neeroai/docs-cobru',
-    tabs: [
+    links: [
       {
-        title: 'Docs',
-        url: docsBase,
-        description:
-          locale === 'es'
-            ? 'Introducción, setup y conceptos base de Cobru.'
-            : 'Introduction, setup, and core Cobru concepts.',
-        icon: <BookOpen />,
+        type: 'custom',
+        on: 'nav',
+        children: (
+          <DocsTopNavLink
+            href={docsBase}
+            label="Payments"
+            exact={[docsBase]}
+            prefixes={[
+              `${docsBase}/api/cobrus`,
+              `${docsBase}/guides/qr-breb`,
+              `${docsBase}/getting-started`,
+            ]}
+          />
+        ),
       },
       {
-        title: 'API',
-        url: `${docsBase}/api/reference`,
-        description:
-          locale === 'es'
-            ? 'Referencia interactiva, auth y payloads de la API.'
-            : 'Interactive reference, auth headers, and payloads.',
-        icon: <Braces />,
+        type: 'custom',
+        on: 'nav',
+        children: (
+          <DocsTopNavLink
+            href={`${docsBase}/payouts`}
+            label="Payouts"
+            exact={[`${docsBase}/payouts`]}
+            prefixes={[
+              `${docsBase}/api/envios`,
+              `${docsBase}/api/cash-withdrawals`,
+              `${docsBase}/api/bank-withdrawals`,
+              `${docsBase}/guides/balances`,
+              `${docsBase}/guides/movements`,
+            ]}
+          />
+        ),
       },
       {
-        title: locale === 'es' ? 'Guías' : 'Guides',
-        url: `${docsBase}/guides/qr-breb`,
-        description:
-          locale === 'es'
-            ? 'Playbooks de integración y flujos de pago locales.'
-            : 'Integration playbooks and local payment workflows.',
-        icon: <Waypoints />,
+        type: 'custom',
+        on: 'nav',
+        children: (
+          <DocsTopNavLink
+            href={`${docsBase}/platform`}
+            label="Platform"
+            exact={[`${docsBase}/platform`]}
+            prefixes={[
+              `${docsBase}/authentication`,
+              `${docsBase}/webhooks`,
+              `${docsBase}/errors`,
+              `${docsBase}/testing`,
+              `${docsBase}/production-readiness`,
+              `${docsBase}/troubleshooting`,
+              `${docsBase}/api/reference`,
+            ]}
+          />
+        ),
+      },
+      {
+        type: 'custom',
+        on: 'nav',
+        children: (
+          <DocsTopNavLink
+            href={`${docsBase}/changelog`}
+            label="Changelog"
+            exact={[`${docsBase}/changelog`]}
+          />
+        ),
+      },
+      {
+        text: 'GitHub',
+        url: 'https://github.com/neeroai/docs-cobru',
+        icon: <ArrowUpRight />,
+        external: true,
+        active: 'none',
+        on: 'menu',
       },
     ],
-    tabMode: 'navbar',
+    githubUrl: 'https://github.com/neeroai/docs-cobru',
+    tabs: false,
     i18n: true,
   };
 }
