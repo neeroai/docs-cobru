@@ -1,15 +1,12 @@
-import Link from 'fumadocs-core/link';
 import Image from 'next/image';
 
 interface CobruDocsLogoProps {
-  href: string;
   className?: string;
 }
 
-export function CobruDocsLogo({ href, className }: CobruDocsLogoProps) {
+export function CobruDocsLogo({ className }: CobruDocsLogoProps) {
   return (
-    <Link
-      href={href}
+    <span
       className={['inline-flex items-center', className].filter(Boolean).join(' ')}
       aria-label="Cobru Docs"
     >
@@ -29,6 +26,6 @@ export function CobruDocsLogo({ href, className }: CobruDocsLogoProps) {
         className="hidden h-7 w-auto dark:block"
         priority
       />
-    </Link>
+    </span>
   );
 }

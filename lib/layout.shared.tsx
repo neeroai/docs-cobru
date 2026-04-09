@@ -8,7 +8,7 @@ export function getDocsLayoutOptions(locale: string): Omit<DocsLayoutProps, 'tre
 
   return {
     nav: {
-      title: <CobruDocsLogo href={docsBase} />,
+      title: <CobruDocsLogo />,
       url: docsBase,
       mode: 'top',
       transparentMode: 'none',
