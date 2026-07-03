@@ -44,3 +44,17 @@ next-env.d.ts
 .idea/
 *.swp
 *.swo
+
+# Deploy hygiene (Neero std 2026-07)
+*.pdf
+*.tmp
+*.temp
+*.zip
+*.tar
+*.tar.gz
+*.mp4
+*.mov
+# ad-hoc screenshots (no assets fuente)
+qa-*.png
+checkpoint-*.png
+screenshots/
