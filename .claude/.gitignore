@@ -1,0 +1,13 @@
+# Efímeros — nunca en git
+screenshots/
+worktrees/
+plans/
+tasks/
+memory/
+# macOS
+.DS_Store
+# Permisos personales (por colaborador)
+settings.local.json
+# Artefactos de sesión
+*.tmp
+session.log
